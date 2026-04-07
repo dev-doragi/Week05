@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 730923153514011468}
   - component: {fileID: 5812337687125042214}
   m_Layer: 5
-  m_Name: UI_I_ComponentBase
+  m_Name: UI_InspectorComponentBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 1}
+  m_Color: {r: 0.17254902, g: 0.3647059, b: 0.5294118, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
