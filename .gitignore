@@ -99,3 +99,11 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# 외부 애셋 제외
+Assets/Plugins/vHierarchy/
+Assets/Plugins/vHierarchy.meta
+Assets/Plugins/vInspector/
+Assets/Plugins/vInspector.meta
+Assets/Plugins/Wingman/
+Assets/Plugins/Wingman.meta
