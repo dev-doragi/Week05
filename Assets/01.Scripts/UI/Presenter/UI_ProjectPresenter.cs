@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProjectPresenter : MonoBehaviour
+public class UI_ProjectPresenter : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
