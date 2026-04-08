@@ -6,17 +6,19 @@ public class BombTalpinoGame : MiniGame
     [Header("References")]
     public Transform player;
     public BombTalpinoBomb bomb;
-    public BombTalpinoWall[] walls;
     public BombTalpinoTarget target;
 
     [Header("Settings")]
     public float throwForce = 10f;
 
-    void OnEnable()
+    BombTalpinoWall[] _walls;
+
+    void Awake()
     {
-        BombTalpinoTarget.OnDestroyed += HandleTargetDestroyed;
+        _walls = GetComponentsInChildren<BombTalpinoWall>(true);
     }
 
+    void OnEnable() => BombTalpinoTarget.OnDestroyed += HandleTargetDestroyed;
     void OnDisable()
     {
         BombTalpinoTarget.OnDestroyed -= HandleTargetDestroyed;
@@ -28,7 +30,7 @@ public class BombTalpinoGame : MiniGame
         bomb.gameObject.SetActive(false);
         target.gameObject.SetActive(true);
 
-        foreach (BombTalpinoWall wall in walls)
+        foreach (BombTalpinoWall wall in _walls)
             wall.gameObject.SetActive(true);
     }
 
@@ -41,6 +43,7 @@ public class BombTalpinoGame : MiniGame
         screenPos.z = -Camera.main.transform.position.z;
         Vector2 mouseWorld = Camera.main.ScreenToWorldPoint(screenPos);
         Vector2 dir = (mouseWorld - (Vector2)player.position).normalized;
+
         bomb.transform.position = player.position;
         bomb.Fire(dir, throwForce);
     }
