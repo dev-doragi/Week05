@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public class Test_DebugGame1 : MonoBehaviour
+public class Test_DebugGame1 : MiniGame
 {
+    protected override void OnStart()
+    {
+       
+    }
+
     public void PressButtonGame()
     {
-        GameFlowManager.Instance.NotifyDebugCleared();
+        Clear();
     }
 }
