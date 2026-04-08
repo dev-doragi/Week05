@@ -112,6 +112,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
 
+        UIManager.Instance.NoiseActive(false);
+
         if (playIngame)
         {
             State = FlowState.Ingame;
@@ -128,6 +130,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         else
         {
             poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
+            Debug.LogError("노이즈 비활성화");
+
             EndTurn();
         }
     }
@@ -144,6 +148,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         State = FlowState.Clear;
         //인게임 클리어
         UIManager.Instance.NoiseActive(false);
+        Debug.LogError("노이즈 비활성화");
+
         waitingChoice = false;
         currentIssue = null;
         activeDebugMiniGame = null;
@@ -194,6 +200,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
         //경고
         UIManager.Instance.SetUnityAlert(true);
+        Debug.LogError("노이즈 활성화");
         UIManager.Instance.NoiseActive(true);
         //디버그 미니게임 시작
 

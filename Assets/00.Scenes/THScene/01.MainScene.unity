@@ -3525,6 +3525,7 @@ MonoBehaviour:
   AlertMessage: {fileID: 1812761915}
   FirstMessageTransform: {fileID: 281464839}
   ChangeMessageTransform: {fileID: 1141280959}
+  NoiseScreen: {fileID: 1521000993}
 --- !u!1001 &637254569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8208,7 +8209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1417179961
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8686,6 +8687,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ba343fd634c564b9738e07a16ff97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RGBMatchGame
+--- !u!1 &1521000993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3375173106735083043, guid: be5449e14a0a77c40aa2ecb0fbdf45e8, type: 3}
+  m_PrefabInstance: {fileID: 1888370028488357938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1523469831
 GameObject:
   m_ObjectHideFlags: 0
