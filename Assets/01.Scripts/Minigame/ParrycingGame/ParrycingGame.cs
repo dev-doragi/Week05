@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
+using UnityEngine.UI;
 
 public class ParrycingGame : MiniGame
 {
     [Header("References")]
     public Rigidbody2D player;
     public ParrycingObstacleMover obstacle;
-    public TextMeshProUGUI countText;
+    public Text countText;
 
     [Header("Settings")]
     public int totalObstacles = 10;
