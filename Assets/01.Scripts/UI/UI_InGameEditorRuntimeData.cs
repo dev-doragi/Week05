@@ -35,7 +35,9 @@ public class UI_RuntimeReferenceData
     public string Label;
 
     public string ExpectedTargetId;
+    public string ExpectedTargetDisplayName;
     public string CurrentTargetId;
+    public string CurrentTargetDisplayName;
 
     public bool CanSpawnError;
     public bool IsRequired;
@@ -104,5 +106,6 @@ public class UI_ValidationSummary
 public class UI_RuntimeReferenceKey
 {
     public string OwnerId;
+    public InspectorComponent InspectorComponent;
     public string SlotId;
 }

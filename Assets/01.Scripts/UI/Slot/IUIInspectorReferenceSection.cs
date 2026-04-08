@@ -2,5 +2,5 @@ using System;
 
 public interface IUIInspectorReferenceSection : IUIInspectorSection
 {
-    event Action<string, string, string> ReferenceDropped;
+    event Action<string, InspectorComponent, string, string> ReferenceDropped;
 }
