@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6815028152202991884
+--- !u!1001 &2960941720351657502
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3208307435796286587, guid: 8198f54c5500e3248a223cac18572d54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.07259
       objectReference: {fileID: 0}
     - target: {fileID: 3208307435796286587, guid: 8198f54c5500e3248a223cac18572d54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0033
+      value: -2.00896
       objectReference: {fileID: 0}
     - target: {fileID: 3208307435796286587, guid: 8198f54c5500e3248a223cac18572d54, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51,10 +51,10 @@ PrefabInstance:
     - target: {fileID: 4852287780352930035, guid: 8198f54c5500e3248a223cac18572d54, type: 3}
       propertyPath: issue
       value: 
-      objectReference: {fileID: 11400000, guid: bab317e85e92a854294976e196ea2a12, type: 2}
+      objectReference: {fileID: 11400000, guid: 382f4f7e82d2bb3459b7ad2850883f8f, type: 2}
     - target: {fileID: 8690330444066930268, guid: 8198f54c5500e3248a223cac18572d54, type: 3}
       propertyPath: m_Name
-      value: 04.DentureCollectGame Variant
+      value: 05.DentureCollectGame Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

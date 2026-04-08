@@ -890,7 +890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1119780716632979536
 Transform:
   m_ObjectHideFlags: 0
@@ -1947,7 +1947,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       propertyPath: m_Name
-      value: ParrycingGame Variant
+      value: ParrycingGame
       objectReference: {fileID: 0}
     - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       propertyPath: m_LocalPosition.x
