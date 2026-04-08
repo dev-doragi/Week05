@@ -2763,8 +2763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61757fde56259e94ea23bf7a02ee5ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoachMovementController
-  _timeToRoomChange: 8
-  _timerVariability: 2
+  _timeToRoomChange: 9
+  _timerVariability: 3
   _transitionDuration: 2
   _playOnStart: 1
   _currentRoomId: 0
@@ -4113,19 +4113,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraNoiseOverlay
   _targetImage: {fileID: 1828449731}
-  _ambientNoiseSprites: []
-  _playAmbientRandomly: 0
-  _ambientShowDuration: 0.08
-  _ambientVisibleAlpha: 0.2
-  _ambientMinRandomDelay: 0.8
-  _ambientMaxRandomDelay: 2.5
+  _ambientNoiseSprites:
+  - {fileID: 21300000, guid: 34c49793bda464445868dc675723c21b, type: 3}
+  - {fileID: 21300000, guid: 6ccc2a44185fcff46b48a7a61c803c78, type: 3}
+  - {fileID: 21300000, guid: 0f02ac09254fbff4c88aa713c84c4750, type: 3}
+  - {fileID: 21300000, guid: 370272e2f657c3f4ebed233303389a79, type: 3}
+  _playAmbientRandomly: 1
+  _ambientVisibleAlpha: 0.02
+  _ambientMinFrameDelay: 0.04
+  _ambientMaxFrameDelay: 0.1
   _switchNoiseSprites:
   - {fileID: 21300000, guid: 34c49793bda464445868dc675723c21b, type: 3}
   - {fileID: 21300000, guid: 6ccc2a44185fcff46b48a7a61c803c78, type: 3}
   - {fileID: 21300000, guid: 0f02ac09254fbff4c88aa713c84c4750, type: 3}
   - {fileID: 21300000, guid: 370272e2f657c3f4ebed233303389a79, type: 3}
   _switchShowDuration: 0.25
-  _switchVisibleAlpha: 0.8
+  _switchVisibleAlpha: 0.85
 --- !u!114 &1828449731
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,10 +10,9 @@ public class CameraNoiseOverlay : MonoBehaviour
     [Header("Ambient Noise")]
     [SerializeField] private Sprite[] _ambientNoiseSprites;
     [SerializeField] private bool _playAmbientRandomly = true;
-    [SerializeField] private float _ambientShowDuration = 0.08f;
-    [SerializeField] private float _ambientVisibleAlpha = 0.2f;
-    [SerializeField] private float _ambientMinRandomDelay = 0.8f;
-    [SerializeField] private float _ambientMaxRandomDelay = 2.5f;
+    [SerializeField] private float _ambientVisibleAlpha = 0.08f;
+    [SerializeField] private float _ambientMinFrameDelay = 0.04f;
+    [SerializeField] private float _ambientMaxFrameDelay = 0.1f;
 
     [Header("Switch Noise")]
     [SerializeField] private Sprite[] _switchNoiseSprites;
@@ -22,11 +21,11 @@ public class CameraNoiseOverlay : MonoBehaviour
 
     private Coroutine _ambientRoutine;
     private Coroutine _playRoutine;
+    private Coroutine _forcedNoiseRoutine;
+
     private int _lastAmbientSpriteIndex = -1;
     private int _lastSwitchSpriteIndex = -1;
     private bool _isPlayingSwitchNoise;
-
-    private Coroutine _forcedNoiseRoutine;
 
     private void Awake()
     {
@@ -38,13 +37,15 @@ public class CameraNoiseOverlay : MonoBehaviour
         if (initialSprite != null)
             _targetImage.sprite = initialSprite;
 
-        SetAlpha(0f);
+        ApplyAmbientState();
     }
 
     private void OnEnable()
     {
         if (_playAmbientRandomly)
             StartAmbientNoise();
+        else
+            ApplyHiddenState();
     }
 
     private void OnDisable()
@@ -74,6 +75,7 @@ public class CameraNoiseOverlay : MonoBehaviour
         if (_ambientRoutine != null)
             StopCoroutine(_ambientRoutine);
 
+        ApplyAmbientState();
         _ambientRoutine = StartCoroutine(Co_AmbientNoiseLoop());
     }
 
@@ -86,7 +88,7 @@ public class CameraNoiseOverlay : MonoBehaviour
         }
 
         if (!_isPlayingSwitchNoise)
-            SetAlpha(0f);
+            ApplyHiddenState();
     }
 
     public void StopAllNoise()
@@ -103,17 +105,29 @@ public class CameraNoiseOverlay : MonoBehaviour
             _playRoutine = null;
         }
 
+        if (_forcedNoiseRoutine != null)
+        {
+            StopCoroutine(_forcedNoiseRoutine);
+            _forcedNoiseRoutine = null;
+        }
+
         _isPlayingSwitchNoise = false;
-        SetAlpha(0f);
+        ApplyHiddenState();
     }
 
     public void ShowForcedNoise(float duration)
     {
-        if (_targetImage == null)
+        if (_targetImage == null || _switchNoiseSprites == null || _switchNoiseSprites.Length == 0)
             return;
 
         if (_forcedNoiseRoutine != null)
             StopCoroutine(_forcedNoiseRoutine);
+
+        if (_playRoutine != null)
+        {
+            StopCoroutine(_playRoutine);
+            _playRoutine = null;
+        }
 
         _forcedNoiseRoutine = StartCoroutine(Co_ShowForcedNoise(duration));
     }
@@ -122,24 +136,18 @@ public class CameraNoiseOverlay : MonoBehaviour
     {
         while (true)
         {
-            float delay = Random.Range(_ambientMinRandomDelay, _ambientMaxRandomDelay);
-            yield return new WaitForSecondsRealtime(delay);
-
-            if (_isPlayingSwitchNoise)
-                continue;
-
-            Sprite ambientSprite = GetRandomAmbientSprite();
-
-            if (ambientSprite == null)
-                continue;
-
-            _targetImage.sprite = ambientSprite;
-            SetAlpha(_ambientVisibleAlpha);
-
-            yield return new WaitForSecondsRealtime(_ambientShowDuration);
-
             if (!_isPlayingSwitchNoise)
-                SetAlpha(0f);
+            {
+                Sprite ambientSprite = GetRandomAmbientSprite();
+
+                if (ambientSprite != null)
+                    _targetImage.sprite = ambientSprite;
+
+                SetAlpha(_ambientVisibleAlpha);
+            }
+
+            float delay = Random.Range(_ambientMinFrameDelay, _ambientMaxFrameDelay);
+            yield return new WaitForSecondsRealtime(delay);
         }
     }
 
@@ -157,8 +165,49 @@ public class CameraNoiseOverlay : MonoBehaviour
         yield return new WaitForSecondsRealtime(_switchShowDuration);
 
         _isPlayingSwitchNoise = false;
-        SetAlpha(0f);
         _playRoutine = null;
+
+        ApplyAmbientState();
+    }
+
+    private IEnumerator Co_ShowForcedNoise(float duration)
+    {
+        _isPlayingSwitchNoise = true;
+
+        Sprite forcedSprite = GetRandomSwitchSprite();
+
+        if (forcedSprite != null)
+            _targetImage.sprite = forcedSprite;
+
+        SetAlpha(_switchVisibleAlpha);
+
+        yield return new WaitForSecondsRealtime(duration);
+
+        _isPlayingSwitchNoise = false;
+        _forcedNoiseRoutine = null;
+
+        ApplyAmbientState();
+    }
+
+    private void ApplyAmbientState()
+    {
+        if (_targetImage == null)
+            return;
+
+        Sprite ambientSprite = GetRandomAmbientSprite();
+
+        if (ambientSprite != null)
+            _targetImage.sprite = ambientSprite;
+
+        if (_playAmbientRandomly && _ambientNoiseSprites != null && _ambientNoiseSprites.Length > 0)
+            SetAlpha(_ambientVisibleAlpha);
+        else
+            ApplyHiddenState();
+    }
+
+    private void ApplyHiddenState()
+    {
+        SetAlpha(0f);
     }
 
     private void SetAlpha(float alpha)
@@ -214,29 +263,5 @@ public class CameraNoiseOverlay : MonoBehaviour
 
         _lastSwitchSpriteIndex = index;
         return _switchNoiseSprites[index];
-    }
-
-    private IEnumerator Co_ShowForcedNoise(float duration)
-    {
-        if (_playRoutine != null)
-        {
-            StopCoroutine(_playRoutine);
-            _playRoutine = null;
-        }
-
-        _isPlayingSwitchNoise = true;
-
-        Sprite forcedSprite = GetRandomSwitchSprite();
-
-        if (forcedSprite != null)
-            _targetImage.sprite = forcedSprite;
-
-        SetAlpha(_switchVisibleAlpha);
-
-        yield return new WaitForSecondsRealtime(duration);
-
-        _isPlayingSwitchNoise = false;
-        SetAlpha(0f);
-        _forcedNoiseRoutine = null;
     }
 }

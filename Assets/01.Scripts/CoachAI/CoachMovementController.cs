@@ -149,44 +149,66 @@ public class CoachMovementController : MonoBehaviour
     {
         switch (currentRoomId)
         {
-            case RoomID.CoachingRoom:
-                return RoomID.Elevator_B;
-
             case RoomID.Cafeteria:
-                return UnityEngine.Random.value < 0.5f ? RoomID.Lobby : RoomID.Elevator_B;
+                return UnityEngine.Random.value < 0.6f ? RoomID.JungleStep : RoomID.Elevator_B;
 
-            case RoomID.Lounge:
-                return UnityEngine.Random.value < 0.5f ? RoomID.Stair_B : RoomID.Lobby;
+            case RoomID.JungleStep:
+                return UnityEngine.Random.value < 0.65f ? RoomID.Lobby : RoomID.Cafeteria;
 
             case RoomID.Lobby:
                 return UnityEngine.Random.value < 0.5f ? RoomID.Stair_A : RoomID.Stair_B;
 
-            case RoomID.JungleStep:
-                return UnityEngine.Random.value < 0.5f ? RoomID.Stair_A : RoomID.Lobby;
-
-            case RoomID.Elevator_B:
-                return UnityEngine.Random.value < 0.5f ? RoomID.Lounge : RoomID.Lobby;
-
-            case RoomID.Elevator_A:
+            case RoomID.Stair_A:
                 return UnityEngine.Random.value < 0.5f ? RoomID.LeftHallwayNearOffice : RoomID.RightHallwayNearOffice;
 
             case RoomID.Stair_B:
                 return UnityEngine.Random.value < 0.5f ? RoomID.LeftHallwayNearOffice : RoomID.RightHallwayNearOffice;
 
-            case RoomID.Stair_A:
-                return UnityEngine.Random.value < 0.5f ? RoomID.LeftHallwayNearOffice : RoomID.RightHallwayNearOffice;
+            case RoomID.Lounge:
+                {
+                    float roll = UnityEngine.Random.value;
+                    if (roll < 0.4f) return RoomID.LeftHallwayNearOffice;
+                    if (roll < 0.8f) return RoomID.RightHallwayNearOffice;
+                    return UnityEngine.Random.value < 0.5f ? RoomID.Elevator_A : RoomID.Elevator_B;
+                }
+
+            case RoomID.Elevator_A:
+                {
+                    float roll = UnityEngine.Random.value;
+                    if (roll < 0.4f) return RoomID.Lounge;
+                    if (roll < 0.7f) return RoomID.LeftHallwayNearOffice;
+                    return RoomID.RightHallwayNearOffice;
+                }
+
+            case RoomID.Elevator_B:
+                {
+                    float roll = UnityEngine.Random.value;
+                    if (roll < 0.3f) return RoomID.Cafeteria;
+                    if (roll < 0.6f) return RoomID.Lounge;
+                    if (roll < 0.8f) return RoomID.LeftHallwayNearOffice;
+                    return RoomID.RightHallwayNearOffice;
+                }
 
             case RoomID.LeftHallwayNearOffice:
-                return UnityEngine.Random.value < 0.7f ? RoomID.Office : RoomID.RightHallwayNearOffice;
+                {
+                    float roll = UnityEngine.Random.value;
+                    if (roll < 0.65f) return RoomID.Office;
+                    if (roll < 0.85f) return RoomID.RightHallwayNearOffice;
+                    return RoomID.Lounge;
+                }
 
             case RoomID.RightHallwayNearOffice:
-                return UnityEngine.Random.value < 0.7f ? RoomID.Office : RoomID.LeftHallwayNearOffice;
+                {
+                    float roll = UnityEngine.Random.value;
+                    if (roll < 0.65f) return RoomID.Office;
+                    if (roll < 0.85f) return RoomID.LeftHallwayNearOffice;
+                    return RoomID.Lounge;
+                }
 
             case RoomID.Office:
                 return RoomID.Office;
-
-            default:
-                return currentRoomId;
         }
+
+        return RoomID.Office;
     }
 }
