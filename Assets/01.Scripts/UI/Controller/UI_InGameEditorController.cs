@@ -13,6 +13,8 @@ public class InGameEditorController : MonoBehaviour
 
     private UI_InGameEditorRuntimeState _runtimeState;
 
+    public UI_InGameEditorRuntimeState EditorRuntimeState => _runtimeState;
+
     private void Awake()
     {
         _consolePresenter ??= FindFirstObjectByType<UI_ConsolePresenter>();
