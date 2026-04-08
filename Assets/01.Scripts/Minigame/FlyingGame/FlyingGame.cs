@@ -1,14 +1,18 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class FlyingGame : MiniGame
 {
-    public static event Action<Vector2>  OnFlyingGameStart;
-    
+    public static event Action<Vector2, int>  OnFlyingGameStart;
+
+    [Header("Game Settings")]
+    [SerializeField] private TextMeshPro _countDownText;
+    [SerializeField] private int _countDownCount;
+
     [Header("Player Settings")]
     public Vector2 startPos;
-    //public Vector2 gameSize = new Vector2(12, 6);
-    //public float offset = 1f;
 
 
     [Header("Pillar Settings")]
@@ -27,10 +31,40 @@ public class FlyingGame : MiniGame
 
     protected override void OnStart()
     {
-        Debug.Log("[Flying Game] Game Start");
-
         PillarSetting();
-        OnFlyingGameStart?.Invoke(startPos);
+        _countDownText.gameObject.SetActive(false);
+        Vector3 worldStartPos = transform.TransformPoint(startPos);
+        OnFlyingGameStart?.Invoke(worldStartPos, _countDownCount);
+
+        StartCoroutine(Co_CountdownRoutine());
+    }
+
+    private IEnumerator Co_CountdownRoutine()
+    {
+        _countDownText.gameObject.SetActive(true);
+
+        for (int i = 3; i > 0; i--)
+        {
+            _countDownText.text = i.ToString();
+            _countDownText.transform.localScale = Vector3.one;
+
+            float timer = 0f;
+            while (timer < 1f) 
+            {
+                timer += Time.deltaTime;
+                _countDownText.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.3f, timer);
+
+                yield return null;
+            }
+        }
+
+        _countDownText.gameObject.SetActive(false);
+        StartFlyingGame();
+    }
+
+    private void StartFlyingGame()
+    {
+        Debug.Log("[Flying Game] Game Start");
     }
 
     private void PillarSetting()
@@ -57,36 +91,7 @@ public class FlyingGame : MiniGame
 
     private void OnDrawGizmos()
     {
-        /*
-        // 1. 전체 게임 영역 (검은색 외곽선)
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(transform.position, new Vector3(gameSize.x, gameSize.y, 0));
-
-        // 내부 영역 계산
-        float innerWidth = gameSize.x - (offset * 2);
-        float innerHeight = gameSize.y - (offset * 2);
-        Vector3 center = transform.position;
-
-        // 2. 여백(Offset) 라인 (회색)
-        Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-        Gizmos.DrawWireCube(center, new Vector3(innerWidth, innerHeight, 0));
-
-        // 3. 구역 분할 계산
-        float genZoneWidth = innerWidth * pillarZoneRatio;
-        float goalZoneWidth = innerWidth * (1 - pillarZoneRatio);
-
-        // 기둥 생성 존 위치 (초록색)
-        Vector3 genZonePos = center + new Vector3(-innerWidth / 2 + genZoneWidth / 2, 0, 0);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(genZonePos, new Vector3(genZoneWidth, innerHeight, 0));
-
-        // 골인 존 위치 (노란색)
-        Vector3 goalZonePos = center + new Vector3(innerWidth / 2 - goalZoneWidth / 2, 0, 0);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(goalZonePos, new Vector3(goalZoneWidth, innerHeight, 0));
-        */
-
-        // 4. 플레이어 시작 위치 표시 (하늘색 구체)
+        // 플레이어 시작 위치 표시
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(startPos, 0.3f);
     }

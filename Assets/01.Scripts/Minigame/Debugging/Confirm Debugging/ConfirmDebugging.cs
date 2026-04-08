@@ -17,11 +17,13 @@ public class ConfirmDebugging : MiniGame
     private int _remainningErrors;
     private List<GameObject> _spawnedWindows = new List<GameObject>();
 
+
     protected override void OnStart()
     {
         _spawnedWindows.Clear();
         _remainningErrors = Random.Range(minErrors, maxErrors + 1);
 
+        if (canvasRect == null) canvasRect = FindFirstObjectByType<Canvas>().GetComponent<RectTransform>();
         for (int i = 0; i < _remainningErrors; i++) SpawnErrorWindow();
 
         Debug.Log("[Confirm Debugging] Confirm Debug Start, Required: " + _remainningErrors);

@@ -41,8 +41,8 @@ public class PlaceDebugging : MiniGame
             targets[i].OnMatch += HandleMatch;
 
             // 배치
-            objects[i].transform.position = GetRandomPosition();
-            targets[i].transform.position = GetRandomPosition();
+            objects[i].transform.localPosition = GetRandomPosition();
+            targets[i].transform.localPosition = GetRandomPosition();
         }
 
         Debug.Log("[Place Debugging] Place Debug Start Required: " + _requireMatchCount);
@@ -78,9 +78,10 @@ public class PlaceDebugging : MiniGame
     {
         Gizmos.color = Color.green;
 
-        Vector3 center = new Vector3(placeArea.x + placeArea.width / 2, placeArea.y + placeArea.height / 2, 0);
+        Vector3 localCenter = new Vector3(placeArea.x + placeArea.width / 2, placeArea.y + placeArea.height / 2, 0);
+        Vector3 worldCenter = transform.TransformPoint(localCenter);
         Vector3 size = new Vector3(placeArea.width, placeArea.height);
 
-        Gizmos.DrawWireCube(center, size);
+        Gizmos.DrawWireCube(worldCenter, size);
     }
 }

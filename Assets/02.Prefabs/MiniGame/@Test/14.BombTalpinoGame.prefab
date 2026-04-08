@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5973351266446140852
+--- !u!1001 &3568472139467367007
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3345208242447603451, guid: 9bb62f79f63cbcd4e9f9e7d0b275d4cc, type: 3}
       propertyPath: m_Name
-      value: 14.BombTalpinoGame Variant
+      value: 14.BombTalpinoGame
       objectReference: {fileID: 0}
     - target: {fileID: 3416480843113748257, guid: 9bb62f79f63cbcd4e9f9e7d0b275d4cc, type: 3}
       propertyPath: issue
       value: 
-      objectReference: {fileID: 11400000, guid: 4b8c64a96b8243d4689f555c56312c72, type: 2}
+      objectReference: {fileID: 11400000, guid: ce4946a160c9bde4a989897abfaabde9, type: 2}
     - target: {fileID: 8822801051749098716, guid: 9bb62f79f63cbcd4e9f9e7d0b275d4cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 960.5683
       objectReference: {fileID: 0}
     - target: {fileID: 8822801051749098716, guid: 9bb62f79f63cbcd4e9f9e7d0b275d4cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 539.60455
       objectReference: {fileID: 0}
     - target: {fileID: 8822801051749098716, guid: 9bb62f79f63cbcd4e9f9e7d0b275d4cc, type: 3}
       propertyPath: m_LocalPosition.z
