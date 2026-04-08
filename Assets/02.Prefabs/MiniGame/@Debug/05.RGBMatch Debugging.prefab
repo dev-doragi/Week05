@@ -372,8 +372,8 @@ Transform:
   m_GameObject: {fileID: 2068992164719264949}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalPosition: {x: -2, y: 1, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6721647132504522528}
@@ -427,7 +427,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 13ec1a85b32952245990217cbd6a9d45, type: 3}
+  m_Sprite: {fileID: 1432403550, guid: 79627582d7c05a343889818a2c015d31, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1184,8 +1184,8 @@ Transform:
   m_GameObject: {fileID: 5325759203040961358}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalPosition: {x: 2, y: 1, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6721647132504522528}
@@ -1239,8 +1239,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 13ec1a85b32952245990217cbd6a9d45, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 1432403550, guid: 79627582d7c05a343889818a2c015d31, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1658,7 +1658,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       propertyPath: m_Name
-      value: RGBMatchGame Variant
+      value: 05.RGBMatch Debugging
       objectReference: {fileID: 0}
     - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1734,14 +1734,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ba343fd634c564b9738e07a16ff97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RGBMatchGame
-  issue: {fileID: 0}
+  issue: {fileID: 11400000, guid: 382f4f7e82d2bb3459b7ad2850883f8f, type: 2}
   sampleRect: {fileID: 8395166408042197079}
   playerRect: {fileID: 3898440660441088766}
   sliderR: {fileID: 6986489480379989320}
   sliderG: {fileID: 7774025458111941312}
   sliderB: {fileID: 1603839329914227977}
   submitButton: {fileID: 5893151986827250395}
-  clearThreshold: 0.05
+  clearThreshold: 0.1
 --- !u!4 &6721647132504522528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
