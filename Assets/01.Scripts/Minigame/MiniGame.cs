@@ -8,6 +8,7 @@ public abstract class MiniGame : MonoBehaviour
     public IssueDefinition Issue => issue;
     public void StartGame()
     {
+        Debug.Log(Issue.IssueId);
         gameObject.SetActive(true);
         OnStart();
     }
