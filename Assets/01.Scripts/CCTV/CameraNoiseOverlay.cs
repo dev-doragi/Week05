@@ -26,6 +26,8 @@ public class CameraNoiseOverlay : MonoBehaviour
     private int _lastSwitchSpriteIndex = -1;
     private bool _isPlayingSwitchNoise;
 
+    private Coroutine _forcedNoiseRoutine;
+
     private void Awake()
     {
         if (_targetImage == null)
@@ -103,6 +105,17 @@ public class CameraNoiseOverlay : MonoBehaviour
 
         _isPlayingSwitchNoise = false;
         SetAlpha(0f);
+    }
+
+    public void ShowForcedNoise(float duration)
+    {
+        if (_targetImage == null)
+            return;
+
+        if (_forcedNoiseRoutine != null)
+            StopCoroutine(_forcedNoiseRoutine);
+
+        _forcedNoiseRoutine = StartCoroutine(Co_ShowForcedNoise(duration));
     }
 
     private IEnumerator Co_AmbientNoiseLoop()
@@ -201,5 +214,29 @@ public class CameraNoiseOverlay : MonoBehaviour
 
         _lastSwitchSpriteIndex = index;
         return _switchNoiseSprites[index];
+    }
+
+    private IEnumerator Co_ShowForcedNoise(float duration)
+    {
+        if (_playRoutine != null)
+        {
+            StopCoroutine(_playRoutine);
+            _playRoutine = null;
+        }
+
+        _isPlayingSwitchNoise = true;
+
+        Sprite forcedSprite = GetRandomSwitchSprite();
+
+        if (forcedSprite != null)
+            _targetImage.sprite = forcedSprite;
+
+        SetAlpha(_switchVisibleAlpha);
+
+        yield return new WaitForSecondsRealtime(duration);
+
+        _isPlayingSwitchNoise = false;
+        SetAlpha(0f);
+        _forcedNoiseRoutine = null;
     }
 }
