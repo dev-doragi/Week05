@@ -53,7 +53,6 @@ public class ParrycingGame : MiniGame
     void HandleDodged()
     {
         _dodged++;
-        Debug.Log($"[ParrycingGame] {_dodged} / {totalObstacles}");
         UpdateUI();
 
         if (_dodged >= totalObstacles)
@@ -65,9 +64,8 @@ public class ParrycingGame : MiniGame
 
     void HandleHitPlayer()
     {
-        Debug.Log("[ParrycingGame] 피격 - 재시작");
         StopAllCoroutines();
-        _dodged = 0;
+        //_dodged = 0;
         UpdateUI();
         StartCoroutine(SpawnRoutine());
     }
