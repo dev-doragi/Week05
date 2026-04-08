@@ -6,6 +6,7 @@ public class DentureCollectDenture : MonoBehaviour
     // 뭐에 닿든 무조건 소멸
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.GetComponent<DentureCollectDenture>() != null) return;
         Destroy(gameObject);
     }
 }

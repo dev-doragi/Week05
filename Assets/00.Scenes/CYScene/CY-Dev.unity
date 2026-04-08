@@ -43753,8 +43753,8 @@ MonoBehaviour:
   leftBoundary: {fileID: 406292268}
   rightBoundary: {fileID: 1387055870}
   countText: {fileID: 1003014996}
-  targetCount: 10
-  spawnInterval: 1
+  targetCount: 40
+  spawnInterval: 0.1
 --- !u!212 &6812877538627374337
 SpriteRenderer:
   serializedVersion: 2
