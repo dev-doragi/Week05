@@ -3267,6 +3267,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2795613185551055650, guid: 3bbeae66d1f2e104aa851ba0eb206c7e, type: 3}
   m_PrefabInstance: {fileID: 531420779}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &531420781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 975949268849715118, guid: 3bbeae66d1f2e104aa851ba0eb206c7e, type: 3}
+  m_PrefabInstance: {fileID: 531420779}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d792f2779245b4fa124364ee31bfe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatorConnectGame
 --- !u!1 &544693639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,6 +3334,16 @@ MonoBehaviour:
   - {fileID: 573429927}
   - {fileID: 2119646238}
   - {fileID: 1614844020}
+  - {fileID: 531420781}
+  - {fileID: 1768150753}
+  - {fileID: 2147000531}
+  - {fileID: 1797428780}
+  - {fileID: 1945381059}
+  - {fileID: 958211799}
+  - {fileID: 998905859}
+  - {fileID: 1573910501}
+  - {fileID: 1584492989}
+  - {fileID: 1431166880}
   InGameMiniGames:
   - {fileID: 1235619249}
   - {fileID: 481150621}
@@ -7013,6 +7034,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540ee16cdf85ab747bcf0b293fb24cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaceDebugging
+--- !u!114 &958211799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5828805038546834187, guid: d96bdaea1a0c7e64282c24a97b2c6b04, type: 3}
+  m_PrefabInstance: {fileID: 836895216}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1e2be6051ed9c46b8730014dc57955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConfirmDebugging
 --- !u!1001 &980881271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7494,6 +7526,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1878229068754814676, guid: add66e26c16d9454385100425a6a0c9f, type: 3}
   m_PrefabInstance: {fileID: 998905857}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &998905859 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4583757015889456232, guid: add66e26c16d9454385100425a6a0c9f, type: 3}
+  m_PrefabInstance: {fileID: 998905857}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1e2be6051ed9c46b8730014dc57955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConfirmDebugging
 --- !u!1 &1016155489
 GameObject:
   m_ObjectHideFlags: 0
@@ -9698,6 +9741,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1424516677}
   m_CullTransparentMesh: 1
+--- !u!114 &1431166880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8932802700573914670, guid: e518c00b15932a441b03ada0dc07a492, type: 3}
+  m_PrefabInstance: {fileID: 109153388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1e2be6051ed9c46b8730014dc57955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConfirmDebugging
 --- !u!1 &1432742642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10370,6 +10424,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559505514}
   m_CullTransparentMesh: 1
+--- !u!114 &1573910501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4662133252261280650, guid: f3fb3e1727aabc943b9c4a1a5706db6c, type: 3}
+  m_PrefabInstance: {fileID: 248526547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1e2be6051ed9c46b8730014dc57955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConfirmDebugging
 --- !u!1001 &1584492987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10436,6 +10501,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 627103362487859272, guid: 9209617340355074db61d2ddfc5b43ed, type: 3}
   m_PrefabInstance: {fileID: 1584492987}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1584492989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3260574196525208308, guid: 9209617340355074db61d2ddfc5b43ed, type: 3}
+  m_PrefabInstance: {fileID: 1584492987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1e2be6051ed9c46b8730014dc57955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConfirmDebugging
 --- !u!1001 &1608388944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11518,6 +11594,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750402901}
   m_CullTransparentMesh: 1
+--- !u!114 &1768150753 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8959227791440332621, guid: 733d71755f8b2374d9f8474aaabfff81, type: 3}
+  m_PrefabInstance: {fileID: 558873918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d792f2779245b4fa124364ee31bfe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatorConnectGame
 --- !u!1 &1769431289
 GameObject:
   m_ObjectHideFlags: 0
@@ -11765,6 +11852,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6146473872189707685, guid: 7a98ec1f9bdebaa4798cecc5f9c28f56, type: 3}
   m_PrefabInstance: {fileID: 1797428778}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1797428780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9082615559571081513, guid: 7a98ec1f9bdebaa4798cecc5f9c28f56, type: 3}
+  m_PrefabInstance: {fileID: 1797428778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d792f2779245b4fa124364ee31bfe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatorConnectGame
 --- !u!1 &1801289396
 GameObject:
   m_ObjectHideFlags: 0
@@ -12717,6 +12815,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16de7722ca4a00642a095ae393e13713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReflectGame
+--- !u!114 &1945381059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8230251710136293786, guid: e55586dfc46f6fb4e8048795ab177cb8, type: 3}
+  m_PrefabInstance: {fileID: 1682658014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1e2be6051ed9c46b8730014dc57955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConfirmDebugging
 --- !u!1001 &1952350336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14579,6 +14688,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ba343fd634c564b9738e07a16ff97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RGBMatchGame
+--- !u!114 &2147000531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7402821046987186270, guid: c374d7745bb0de14f891afa12c46ebb5, type: 3}
+  m_PrefabInstance: {fileID: 8634719}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d792f2779245b4fa124364ee31bfe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatorConnectGame
 --- !u!114 &1237630493483244577 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5297913919228396878, guid: be5449e14a0a77c40aa2ecb0fbdf45e8, type: 3}
