@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Rendering.ShadowCascadeGUI;
 
 public class FlyPlayer : MonoBehaviour
 {
@@ -45,14 +43,14 @@ public class FlyPlayer : MonoBehaviour
         _rigid.linearVelocityX = moveSpeed;
     }
 
-    public void Init(Vector2 pos)
+    public void Init(Vector2 pos, int count)
     {
         Debug.Log("[Flying Game] Player Init");
         transform.position = pos;
         _rigid.linearVelocity = Vector2.zero;
         Stop();
 
-        Invoke("Play", 3f);
+        Invoke("Play", count);
     }
 
     public void Play()
@@ -75,10 +73,10 @@ public class FlyPlayer : MonoBehaviour
         isActive = false;
     }
 
-    private void HandleStart(Vector2 pos)
+    private void HandleStart(Vector2 pos, int count)
     {
         _cachedStartPos = pos;
-        Init(pos);
+        Init(pos, count);
     }
 
     private void HandleCollision(Collider2D collider)
