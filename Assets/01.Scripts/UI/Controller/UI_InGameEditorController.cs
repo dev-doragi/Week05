@@ -6,16 +6,14 @@ public class InGameEditorController : MonoBehaviour
     [SerializeField] private SO_InGameEditorInitialPlacementData _initialPlacementData;
 
     [Header("Presenter")]
-    [SerializeField] private UI_ConsolePresenter _consolePresenter;
     [SerializeField] private UI_ProjectPresenter _projectPresenter;
     [SerializeField] private UI_HierarchyPresenter _hierarchyPresenter;
     [SerializeField] private UI_InspectorPresenter _inspectorPresenter;
 
-    private UI_InGameEditorRuntimeState _runtimeState;
+    public static UI_InGameEditorRuntimeState EditorRuntimeState { get; private set; }
 
     private void Awake()
     {
-        _consolePresenter ??= FindFirstObjectByType<UI_ConsolePresenter>();
         _projectPresenter ??= FindFirstObjectByType<UI_ProjectPresenter>();
         _hierarchyPresenter ??= FindFirstObjectByType<UI_HierarchyPresenter>();
         _inspectorPresenter ??= FindFirstObjectByType<UI_InspectorPresenter>();
@@ -46,8 +44,8 @@ public class InGameEditorController : MonoBehaviour
 
     public void Init()
     {
-        _runtimeState = new UI_InGameEditorRuntimeState();
-        _runtimeState.Init(_initialPlacementData);
+        EditorRuntimeState = new UI_InGameEditorRuntimeState();
+        EditorRuntimeState.Init(_initialPlacementData);
 
         RefreshProject();
         RefreshHierarchy();
@@ -57,10 +55,10 @@ public class InGameEditorController : MonoBehaviour
     [ContextMenu("Start Quiz")]
     public void StartQuiz()
     {
-        if (_runtimeState == null)
+        if (EditorRuntimeState == null)
             return;
 
-        if (_runtimeState.TryBreakRandomReference(out var brokenKey))
+        if (EditorRuntimeState.TryBreakRandomReference(out var brokenKey))
         {
             Debug.Log($"[Quiz] Reference broken: owner={brokenKey.OwnerId}, slot={brokenKey.SlotId}");
         }
@@ -70,7 +68,7 @@ public class InGameEditorController : MonoBehaviour
         }
 
         RefreshInspector();
-        LogValidationSummary(_runtimeState.ValidateAll());
+        LogValidationSummary(EditorRuntimeState.ValidateAll());
     }
 
     private void RefreshProject()
@@ -78,8 +76,8 @@ public class InGameEditorController : MonoBehaviour
         if (_projectPresenter == null)
             return;
 
-        var items = _runtimeState.GetProjectItems();
-        _projectPresenter.Render(items, _runtimeState.SelectedProjectComponentId);
+        var items = EditorRuntimeState.GetProjectItems();
+        _projectPresenter.Render(items, EditorRuntimeState.SelectedProjectComponentId);
     }
 
     private void RefreshHierarchy()
@@ -87,8 +85,8 @@ public class InGameEditorController : MonoBehaviour
         if (_hierarchyPresenter == null)
             return;
 
-        var items = _runtimeState.GetHierarchyItems();
-        _hierarchyPresenter.Render(items, _runtimeState.SelectedHierarchyComponentId);
+        var items = EditorRuntimeState.GetHierarchyItems();
+        _hierarchyPresenter.Render(items, EditorRuntimeState.SelectedHierarchyComponentId);
     }
 
     private void RefreshInspector()
@@ -96,7 +94,7 @@ public class InGameEditorController : MonoBehaviour
         if (_inspectorPresenter == null)
             return;
 
-        var selectedData = _runtimeState.GetSelectedRuntimeData();
+        var selectedData = EditorRuntimeState.GetSelectedRuntimeData();
 
         if (selectedData == null)
         {
@@ -109,7 +107,7 @@ public class InGameEditorController : MonoBehaviour
 
     private void HandleProjectItemClicked(string componentId)
     {
-        _runtimeState.SelectFromProject(componentId);
+        EditorRuntimeState.SelectFromProject(componentId);
 
         RefreshProject();
         RefreshHierarchy();
@@ -118,7 +116,7 @@ public class InGameEditorController : MonoBehaviour
 
     private void HandleHierarchyItemClicked(string componentId)
     {
-        _runtimeState.SelectFromHierarchy(componentId);
+        EditorRuntimeState.SelectFromHierarchy(componentId);
 
         RefreshProject();
         RefreshHierarchy();
@@ -127,7 +125,7 @@ public class InGameEditorController : MonoBehaviour
 
     private void HandleReferenceDropped(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
     {
-        bool assigned = _runtimeState.TryAssignReference(ownerId, inspectorComponent, slotId, targetId);
+        bool assigned = EditorRuntimeState.TryAssignReference(ownerId, inspectorComponent, slotId, targetId);
 
         if (assigned == false)
         {
@@ -136,7 +134,7 @@ public class InGameEditorController : MonoBehaviour
         }
 
         RefreshInspector();
-        LogValidationSummary(_runtimeState.ValidateAll());
+        LogValidationSummary(EditorRuntimeState.ValidateAll());
     }
 
     private void LogValidationSummary(UI_ValidationSummary summary)

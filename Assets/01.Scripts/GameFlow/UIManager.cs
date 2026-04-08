@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 public class UIManager : Singleton<UIManager>
 {
+    [SerializeField] private Canvas rootCanvas;
     public GameObject IngamePlayButton;
     public GameObject IngameSkipButton;
 
@@ -27,6 +28,10 @@ public class UIManager : Singleton<UIManager>
     public GameObject BGAlert_CCTV;
     public GameObject BarAlert_CCTV;
 
+    [Header("LogMessage")]
+
+    public GameObject LogMessage;
+
     [Header("Message States")]
 
     public GameObject AlertMessage;
@@ -41,6 +46,8 @@ public class UIManager : Singleton<UIManager>
     private bool unitySelected = true;
     private bool cctvSelected = false;
 
+    public GameObject NoiseScreen;
+
     private Sequence _alertMessageSeq;
 
 
@@ -50,6 +57,7 @@ public class UIManager : Singleton<UIManager>
         IngamePlayButton.SetActive(false);
         IngameSkipButton.SetActive(false);
         DebugGamePannel.SetActive(false);
+        LogMessageActive(false);
         EditorPannelPopDown();
 
         unityHover = false;
@@ -59,6 +67,7 @@ public class UIManager : Singleton<UIManager>
         unitySelected = false;
         cctvSelected = true;
         AlertMessage.transform.position = FirstMessageTransform.position;
+        NoiseScreen.SetActive(false);
 
         RefreshIconUI();
     }
@@ -68,7 +77,10 @@ public class UIManager : Singleton<UIManager>
         IngamePlayButton.SetActive(choice);
         IngameSkipButton.SetActive(choice);
     }
-
+    public void LogMessageActive(bool choice)
+    {
+        LogMessage.SetActive(choice);
+    }
     public void DebugGamePannelActive(bool choice)
     {
         DebugGamePannel.SetActive(choice);
@@ -76,12 +88,14 @@ public class UIManager : Singleton<UIManager>
 
     public void EditorPannelPopup()
     {
+        rootCanvas.GetComponent<Canvas>().sortingOrder = 0;
         EditorPannel.transform.SetAsLastSibling();
         SettingPannel.transform.SetAsLastSibling();        
     }
 
     public void EditorPannelPopDown()
     {
+        rootCanvas.GetComponent<Canvas>().sortingOrder = 10;
         EditorPannel.transform.SetAsFirstSibling();        
     }
 
@@ -103,8 +117,7 @@ public class UIManager : Singleton<UIManager>
         cctvSelected = false;
         unityAlert = false;
 
-        EditorPannel.transform.SetAsLastSibling();
-        SettingPannel.transform.SetAsLastSibling();
+        EditorPannelPopup();
         
 
 
@@ -117,10 +130,8 @@ public class UIManager : Singleton<UIManager>
         unitySelected = false;
         cctvAlert = false;
 
-        if (CCTVPannel != null) CCTVPannel.transform.SetAsLastSibling();
-
-        if (SettingPannel != null) SettingPannel.transform.SetAsLastSibling();
-
+        EditorPannelPopDown();
+        
         RefreshIconUI();
     }
 
@@ -136,6 +147,11 @@ public class UIManager : Singleton<UIManager>
     {
         cctvAlert = on;
         RefreshIconUI();
+    }
+
+    public void NoiseActive(bool on)
+    {
+        NoiseScreen.SetActive(on);
     }
 
     private void RefreshIconUI()
@@ -184,6 +200,8 @@ public class UIManager : Singleton<UIManager>
         if (_alertMessageSeq != null && _alertMessageSeq.IsActive())
             _alertMessageSeq.Kill();
     }
+
+    
 
 
 
