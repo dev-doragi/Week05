@@ -1,43 +1,88 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraAreaController : MonoBehaviour
 {
-    public Texture roomBackgroundSprite;
-    public Image cameraUIBackground;
-    public Color normalColor = Color.black;
-    public Color blinkColor = Color.white;
-    public float blinkInterval = 0.5f;
-    private Coroutine blinkCoroutine;
+    [Header("Camera Data")]
+    [SerializeField] private Texture _roomBackgroundTexture;
+    [SerializeField] private Texture _roomBackgroundWithCoachTexture;
+    [SerializeField] private bool _hasCoach;
+
+    [Header("UI")]
+    [SerializeField] private CameraManager _cameraManager;
+    [SerializeField] private Image _cameraUiBackground;
+    [SerializeField] private Color _normalColor = Color.black;
+    [SerializeField] private Color _blinkColor = Color.white;
+    [SerializeField] private float _blinkInterval = 0.5f;
+
+    private Coroutine _blinkCoroutine;
+
+    private void OnValidate()
+    {
+        if (_cameraManager != null)
+            _cameraManager.RefreshSelectedCamera();
+    }
+
+    public Texture CurrentBackgroundTexture
+    {
+        get
+        {
+            if (_hasCoach && _roomBackgroundWithCoachTexture != null)
+                return _roomBackgroundWithCoachTexture;
+
+            return _roomBackgroundTexture;
+        }
+    }
+
+    public bool HasCoach => _hasCoach;
+
+    public void OnClickCameraArea()
+    {
+        if (_cameraManager == null)
+            return;
+
+        _cameraManager.SelectCamera(this);
+    }
+
+    public void SetCoachPresence(bool hasCoach)
+    {
+        _hasCoach = hasCoach;
+
+        if (_cameraManager != null)
+            _cameraManager.RefreshSelectedCamera();
+    }
+
     public void StartBlinking()
     {
         StopBlinking();
-        blinkCoroutine = StartCoroutine(BlinkLoop());
+        _blinkCoroutine = StartCoroutine(BlinkLoop());
     }
 
     public void StopBlinking()
     {
-        if (blinkCoroutine != null)
+        if (_blinkCoroutine != null)
         {
-            StopCoroutine(blinkCoroutine);
-            blinkCoroutine = null;
+            StopCoroutine(_blinkCoroutine);
+            _blinkCoroutine = null;
         }
 
-        if (cameraUIBackground != null)
-            cameraUIBackground.color = normalColor;
+        if (_cameraUiBackground != null)
+            _cameraUiBackground.color = _normalColor;
     }
 
     private IEnumerator BlinkLoop()
     {
-        bool toggle = false;
+        if (_cameraUiBackground == null)
+            yield break;
+
+        bool isBlinkColor = false;
 
         while (true)
         {
-            cameraUIBackground.color = toggle ? blinkColor : normalColor;
-            toggle = !toggle;
-            yield return new WaitForSeconds(blinkInterval);
+            _cameraUiBackground.color = isBlinkColor ? _blinkColor : _normalColor;
+            isBlinkColor = !isBlinkColor;
+            yield return new WaitForSeconds(_blinkInterval);
         }
     }
 }

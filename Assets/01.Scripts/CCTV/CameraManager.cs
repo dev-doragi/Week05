@@ -1,26 +1,70 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class CameraManager : MonoBehaviour
 {
-    public RawImage background;
-    private Material backgroundMaterial;
-    private CameraAreaController lastSelected;
+    private static readonly int BackgroundPropertyId = Shader.PropertyToID("_background");
 
-    public void Start()
+    [SerializeField] private RawImage _background;
+    [SerializeField] private CameraNoiseOverlay _cameraNoiseOverlay;
+
+    private Material _backgroundMaterial;
+    private CameraAreaController _lastSelected;
+
+    private void Awake()
     {
-        backgroundMaterial = background.material;
+        if (_background == null)
+            return;
+
+        if (_background.material != null)
+        {
+            _backgroundMaterial = Instantiate(_background.material);
+            _background.material = _backgroundMaterial;
+        }
     }
 
-    public void SelectCamera(CameraAreaController selected)
+    private void Start()
     {
-        backgroundMaterial.SetTexture("_background", selected.roomBackgroundSprite);
+        if (_lastSelected != null)
+            ApplyCameraTexture(_lastSelected);
+    }
 
-        if (lastSelected != null && lastSelected != selected)
-            lastSelected.StopBlinking();
+    public void SelectCamera(CameraAreaController selectedArea)
+    {
+        if (selectedArea == null)
+            return;
 
-        selected.StartBlinking();
-        lastSelected = selected;
+        ApplyCameraTexture(selectedArea);
+
+        if (_lastSelected != null && _lastSelected != selectedArea)
+            _lastSelected.StopBlinking();
+
+        selectedArea.StartBlinking();
+        _lastSelected = selectedArea;
+
+        if (_cameraNoiseOverlay != null)
+            _cameraNoiseOverlay.PlaySwitchNoiseOnce();
+    }
+
+    public void RefreshSelectedCamera()
+    {
+        if (_lastSelected == null)
+            return;
+
+        ApplyCameraTexture(_lastSelected);
+    }
+
+    private void ApplyCameraTexture(CameraAreaController selectedArea)
+    {
+        Texture targetTexture = selectedArea.CurrentBackgroundTexture;
+
+        if (_backgroundMaterial != null)
+        {
+            _backgroundMaterial.SetTexture(BackgroundPropertyId, targetTexture);
+            return;
+        }
+
+        if (_background != null)
+            _background.texture = targetTexture;
     }
 }
