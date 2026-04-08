@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1486222115921508460, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1486222115921508460, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1486222115921508460, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1486222115921508460, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 3898440660441088766, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 48bf3d0c0d7df2c489d78c585910e23d, type: 3}
+      objectReference: {fileID: 21300000, guid: 27e5500d8e978fa46921040bb02edd2a, type: 3}
     - target: {fileID: 3898440660441088766, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -74,15 +74,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5225637296397752096, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5225637296397752096, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5225637296397752096, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5225637296397752096, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 8395166408042197079, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 48bf3d0c0d7df2c489d78c585910e23d, type: 3}
+      objectReference: {fileID: 21300000, guid: 27e5500d8e978fa46921040bb02edd2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
