@@ -9,19 +9,22 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
     [SerializeField] private TMP_Text _labelText;
     [SerializeField] private TMP_Text _valueText;
     [SerializeField] private Image _highlightImage;
+    [SerializeField] [Range(0f, 1f)] private float _idleHighlightAlpha = 0.2f;
+    [SerializeField] [Range(0f, 1f)] private float _hoverHighlightAlpha = 0.5f;
 
     private string _ownerId;
+    private InspectorComponent _inspectorComponent;
     private string _slotId;
 
-    public event Action<string, string, string> Dropped;
+    public event Action<string, InspectorComponent, string, string> Dropped;
 
-    public void Bind(string ownerId, UI_RuntimeReferenceData referenceData)
+    public void Bind(string ownerId, InspectorComponent inspectorComponent, UI_RuntimeReferenceData referenceData)
     {
         _ownerId = ownerId;
+        _inspectorComponent = inspectorComponent;
         _slotId = referenceData != null ? referenceData.SlotId : null;
 
-        if (_highlightImage != null)
-            _highlightImage.enabled = false;
+        SetHighlightAlpha(_idleHighlightAlpha);
 
         if (referenceData == null)
         {
@@ -38,27 +41,25 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
             _labelText.text = referenceData.Label;
 
         if (_valueText != null)
-            _valueText.text = string.IsNullOrEmpty(referenceData.CurrentTargetId)
+            _valueText.text = string.IsNullOrEmpty(referenceData.CurrentTargetDisplayName)
                 ? "Empty"
-                : referenceData.CurrentTargetId;
+                : referenceData.CurrentTargetDisplayName;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_highlightImage != null && UI_DragContext.IsDragging)
-            _highlightImage.enabled = true;
+        if (UI_DragContext.IsDragging)
+            SetHighlightAlpha(_hoverHighlightAlpha);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_highlightImage != null)
-            _highlightImage.enabled = false;
+        SetHighlightAlpha(_idleHighlightAlpha);
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (_highlightImage != null)
-            _highlightImage.enabled = false;
+        SetHighlightAlpha(_idleHighlightAlpha);
 
         if (UI_DragContext.IsDragging == false)
             return;
@@ -69,6 +70,18 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
         if (string.IsNullOrEmpty(UI_DragContext.DraggedComponentId))
             return;
 
-        Dropped?.Invoke(_ownerId, _slotId, UI_DragContext.DraggedComponentId);
+        Dropped?.Invoke(_ownerId, _inspectorComponent, _slotId, UI_DragContext.DraggedComponentId);
+    }
+
+    private void SetHighlightAlpha(float alpha)
+    {
+        if (_highlightImage == null)
+            return;
+
+        _highlightImage.enabled = true;
+
+        var color = _highlightImage.color;
+        color.a = alpha;
+        _highlightImage.color = color;
     }
 }
