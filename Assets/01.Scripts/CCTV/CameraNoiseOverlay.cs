@@ -76,6 +76,7 @@ public class CameraNoiseOverlay : MonoBehaviour
             StopCoroutine(_ambientRoutine);
 
         ApplyAmbientState();
+
         _ambientRoutine = StartCoroutine(Co_AmbientNoiseLoop());
     }
 
@@ -117,7 +118,16 @@ public class CameraNoiseOverlay : MonoBehaviour
 
     public void ShowForcedNoise(float duration)
     {
-        if (_targetImage == null || _switchNoiseSprites == null || _switchNoiseSprites.Length == 0)
+        if (_targetImage == null)
+            return;
+
+        if (!gameObject.activeInHierarchy || !isActiveAndEnabled)
+            return;
+
+        if (!_targetImage.gameObject.activeInHierarchy)
+            return;
+
+        if (_switchNoiseSprites == null || _switchNoiseSprites.Length == 0)
             return;
 
         if (_forcedNoiseRoutine != null)
@@ -172,6 +182,12 @@ public class CameraNoiseOverlay : MonoBehaviour
 
     private IEnumerator Co_ShowForcedNoise(float duration)
     {
+        if (_targetImage == null || !gameObject.activeInHierarchy || !isActiveAndEnabled)
+        {
+            _forcedNoiseRoutine = null;
+            yield break;
+        }
+
         _isPlayingSwitchNoise = true;
 
         Sprite forcedSprite = GetRandomSwitchSprite();
@@ -183,9 +199,15 @@ public class CameraNoiseOverlay : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(duration);
 
+        if (_targetImage == null || !gameObject.activeInHierarchy || !isActiveAndEnabled)
+        {
+            _isPlayingSwitchNoise = false;
+            _forcedNoiseRoutine = null;
+            yield break;
+        }
+
         _isPlayingSwitchNoise = false;
         _forcedNoiseRoutine = null;
-
         ApplyAmbientState();
     }
 

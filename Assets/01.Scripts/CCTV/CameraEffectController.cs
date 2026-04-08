@@ -33,6 +33,11 @@ public class CameraEffectController : MonoBehaviour
         StartAngleMotion();
     }
 
+    private void OnEnable()
+    {
+        StartAngleMotion();
+    }
+
     private void OnDisable()
     {
         StopAngleMotion();

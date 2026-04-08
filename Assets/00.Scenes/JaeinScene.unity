@@ -851,7 +851,7 @@ GameObject:
   - component: {fileID: 266443248}
   - component: {fileID: 266443252}
   m_Layer: 5
-  m_Name: Cam6_1F_Stair
+  m_Name: Cam6_1F_Stair_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1217,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &521201870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2313,7 +2313,7 @@ GameObject:
   - component: {fileID: 1022142933}
   - component: {fileID: 1022142937}
   m_Layer: 5
-  m_Name: Cam4_3F_Stair
+  m_Name: Cam4_3F_Stair_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
