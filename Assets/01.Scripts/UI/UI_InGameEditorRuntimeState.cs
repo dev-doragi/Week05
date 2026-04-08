@@ -5,6 +5,7 @@ using UnityEngine;
 // 프로젝트 창, 하이라키 창의 목록과 인스펙터의 참조 상태를 동기화합니다.
 public class UI_InGameEditorRuntimeState
 {
+    public event System.Action<UI_RuntimeReferenceKey> ReferenceSolved;
     // ID를 키로 하여 모든 런타임 데이터를 저장하는 캐시 저장소
     private readonly Dictionary<string, UI_InGameEditorRuntimeData> _componentById = new();
 
@@ -178,8 +179,20 @@ public class UI_InGameEditorRuntimeState
         var reference = FindReference(ownerId, inspectorComponent, slotId);
         if (reference == null) return false;
 
+        bool hadError = reference.HasError();
         reference.CurrentTargetId = targetId;
         reference.CurrentTargetDisplayName = ResolveDisplayName(targetId);
+
+        if (hadError && reference.IsCorrect())
+        {
+            ReferenceSolved?.Invoke(new UI_RuntimeReferenceKey
+            {
+                OwnerId = ownerId,
+                InspectorComponent = inspectorComponent,
+                SlotId = slotId
+            });
+        }
+
         return true;
     }
 

@@ -32,7 +32,7 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
                 _labelText.text = string.Empty;
 
             if (_valueText != null)
-                _valueText.text = "Empty";
+                _valueText.text = "None";
 
             return;
         }
@@ -42,7 +42,7 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
 
         if (_valueText != null)
             _valueText.text = string.IsNullOrEmpty(referenceData.CurrentTargetDisplayName)
-                ? "Empty"
+                ? "None"
                 : referenceData.CurrentTargetDisplayName;
     }
 
