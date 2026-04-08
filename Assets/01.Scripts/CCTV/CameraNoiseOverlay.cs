@@ -26,26 +26,20 @@ public class CameraNoiseOverlay : MonoBehaviour
     private int _lastAmbientSpriteIndex = -1;
     private int _lastSwitchSpriteIndex = -1;
     private bool _isPlayingSwitchNoise;
+    private float _forcedNoiseEndTime;
 
     private void Awake()
     {
-        if (_targetImage == null)
-            return;
-
+        if (_targetImage == null) return;
         Sprite initialSprite = GetInitialSprite();
-
-        if (initialSprite != null)
-            _targetImage.sprite = initialSprite;
-
+        if (initialSprite != null) _targetImage.sprite = initialSprite;
         ApplyAmbientState();
     }
 
     private void OnEnable()
     {
-        if (_playAmbientRandomly)
-            StartAmbientNoise();
-        else
-            ApplyHiddenState();
+        if (_playAmbientRandomly) StartAmbientNoise();
+        else ApplyHiddenState();
     }
 
     private void OnDisable()
@@ -55,28 +49,18 @@ public class CameraNoiseOverlay : MonoBehaviour
 
     public void PlaySwitchNoiseOnce()
     {
-        if (_targetImage == null || _switchNoiseSprites == null || _switchNoiseSprites.Length == 0)
-            return;
-
-        if (_playRoutine != null)
-            StopCoroutine(_playRoutine);
-
+        if (Time.time < _forcedNoiseEndTime) return;
+        if (_targetImage == null || _switchNoiseSprites == null || _switchNoiseSprites.Length == 0) return;
+        if (_playRoutine != null) StopCoroutine(_playRoutine);
         _playRoutine = StartCoroutine(Co_PlaySwitchNoiseOnce());
     }
 
     public void StartAmbientNoise()
     {
-        if (!_playAmbientRandomly)
-            return;
-
-        if (_ambientNoiseSprites == null || _ambientNoiseSprites.Length == 0)
-            return;
-
-        if (_ambientRoutine != null)
-            StopCoroutine(_ambientRoutine);
-
+        if (!_playAmbientRandomly) return;
+        if (_ambientNoiseSprites == null || _ambientNoiseSprites.Length == 0) return;
+        if (_ambientRoutine != null) StopCoroutine(_ambientRoutine);
         ApplyAmbientState();
-
         _ambientRoutine = StartCoroutine(Co_AmbientNoiseLoop());
     }
 
@@ -87,57 +71,30 @@ public class CameraNoiseOverlay : MonoBehaviour
             StopCoroutine(_ambientRoutine);
             _ambientRoutine = null;
         }
-
-        if (!_isPlayingSwitchNoise)
-            ApplyHiddenState();
+        if (!_isPlayingSwitchNoise) ApplyHiddenState();
     }
 
     public void StopAllNoise()
     {
-        if (_ambientRoutine != null)
-        {
-            StopCoroutine(_ambientRoutine);
-            _ambientRoutine = null;
-        }
-
-        if (_playRoutine != null)
-        {
-            StopCoroutine(_playRoutine);
-            _playRoutine = null;
-        }
-
-        if (_forcedNoiseRoutine != null)
-        {
-            StopCoroutine(_forcedNoiseRoutine);
-            _forcedNoiseRoutine = null;
-        }
-
+        if (_ambientRoutine != null) { StopCoroutine(_ambientRoutine); _ambientRoutine = null; }
+        if (_playRoutine != null) { StopCoroutine(_playRoutine); _playRoutine = null; }
+        if (_forcedNoiseRoutine != null) { StopCoroutine(_forcedNoiseRoutine); _forcedNoiseRoutine = null; }
         _isPlayingSwitchNoise = false;
+        _forcedNoiseEndTime = 0f;
         ApplyHiddenState();
     }
 
     public void ShowForcedNoise(float duration)
     {
-        if (_targetImage == null)
-            return;
+        if (_targetImage == null || _switchNoiseSprites == null || _switchNoiseSprites.Length == 0) return;
 
-        if (!gameObject.activeInHierarchy || !isActiveAndEnabled)
-            return;
+        float newEndTime = Time.time + duration;
+        if (newEndTime <= _forcedNoiseEndTime) return;
 
-        if (!_targetImage.gameObject.activeInHierarchy)
-            return;
+        _forcedNoiseEndTime = newEndTime;
 
-        if (_switchNoiseSprites == null || _switchNoiseSprites.Length == 0)
-            return;
-
-        if (_forcedNoiseRoutine != null)
-            StopCoroutine(_forcedNoiseRoutine);
-
-        if (_playRoutine != null)
-        {
-            StopCoroutine(_playRoutine);
-            _playRoutine = null;
-        }
+        if (_forcedNoiseRoutine != null) StopCoroutine(_forcedNoiseRoutine);
+        if (_playRoutine != null) { StopCoroutine(_playRoutine); _playRoutine = null; }
 
         _forcedNoiseRoutine = StartCoroutine(Co_ShowForcedNoise(duration));
     }
@@ -149,15 +106,10 @@ public class CameraNoiseOverlay : MonoBehaviour
             if (!_isPlayingSwitchNoise)
             {
                 Sprite ambientSprite = GetRandomAmbientSprite();
-
-                if (ambientSprite != null)
-                    _targetImage.sprite = ambientSprite;
-
+                if (ambientSprite != null) _targetImage.sprite = ambientSprite;
                 SetAlpha(_ambientVisibleAlpha);
             }
-
-            float delay = Random.Range(_ambientMinFrameDelay, _ambientMaxFrameDelay);
-            yield return new WaitForSecondsRealtime(delay);
+            yield return new WaitForSecondsRealtime(Random.Range(_ambientMinFrameDelay, _ambientMaxFrameDelay));
         }
     }
 
@@ -165,78 +117,61 @@ public class CameraNoiseOverlay : MonoBehaviour
     {
         _isPlayingSwitchNoise = true;
 
-        Sprite switchSprite = GetRandomSwitchSprite();
+        float elapsed = 0f;
+        while (elapsed < _switchShowDuration)
+        {
+            Sprite switchSprite = GetRandomSwitchSprite();
+            if (switchSprite != null) _targetImage.sprite = switchSprite;
+            SetAlpha(_switchVisibleAlpha);
 
-        if (switchSprite != null)
-            _targetImage.sprite = switchSprite;
-
-        SetAlpha(_switchVisibleAlpha);
-
-        yield return new WaitForSecondsRealtime(_switchShowDuration);
+            float frameDelay = Random.Range(_ambientMinFrameDelay, _ambientMaxFrameDelay);
+            elapsed += frameDelay;
+            yield return new WaitForSecondsRealtime(frameDelay);
+        }
 
         _isPlayingSwitchNoise = false;
         _playRoutine = null;
-
         ApplyAmbientState();
     }
 
     private IEnumerator Co_ShowForcedNoise(float duration)
     {
-        if (_targetImage == null || !gameObject.activeInHierarchy || !isActiveAndEnabled)
-        {
-            _forcedNoiseRoutine = null;
-            yield break;
-        }
-
         _isPlayingSwitchNoise = true;
 
-        Sprite forcedSprite = GetRandomSwitchSprite();
-
-        if (forcedSprite != null)
-            _targetImage.sprite = forcedSprite;
-
-        SetAlpha(_switchVisibleAlpha);
-
-        yield return new WaitForSecondsRealtime(duration);
-
-        if (_targetImage == null || !gameObject.activeInHierarchy || !isActiveAndEnabled)
+        float elapsed = 0f;
+        while (elapsed < duration)
         {
-            _isPlayingSwitchNoise = false;
-            _forcedNoiseRoutine = null;
-            yield break;
+            Sprite forcedSprite = GetRandomSwitchSprite();
+            if (forcedSprite != null) _targetImage.sprite = forcedSprite;
+            SetAlpha(_switchVisibleAlpha);
+
+            float frameDelay = Random.Range(_ambientMinFrameDelay, _ambientMaxFrameDelay);
+            elapsed += frameDelay;
+            yield return new WaitForSecondsRealtime(frameDelay);
         }
 
         _isPlayingSwitchNoise = false;
         _forcedNoiseRoutine = null;
+        _forcedNoiseEndTime = 0f;
         ApplyAmbientState();
     }
 
     private void ApplyAmbientState()
     {
-        if (_targetImage == null)
-            return;
-
+        if (_targetImage == null) return;
         Sprite ambientSprite = GetRandomAmbientSprite();
-
-        if (ambientSprite != null)
-            _targetImage.sprite = ambientSprite;
-
+        if (ambientSprite != null) _targetImage.sprite = ambientSprite;
         if (_playAmbientRandomly && _ambientNoiseSprites != null && _ambientNoiseSprites.Length > 0)
             SetAlpha(_ambientVisibleAlpha);
         else
             ApplyHiddenState();
     }
 
-    private void ApplyHiddenState()
-    {
-        SetAlpha(0f);
-    }
+    private void ApplyHiddenState() => SetAlpha(0f);
 
     private void SetAlpha(float alpha)
     {
-        if (_targetImage == null)
-            return;
-
+        if (_targetImage == null) return;
         Color color = _targetImage.color;
         color.a = alpha;
         _targetImage.color = color;
@@ -244,45 +179,25 @@ public class CameraNoiseOverlay : MonoBehaviour
 
     private Sprite GetInitialSprite()
     {
-        if (_ambientNoiseSprites != null && _ambientNoiseSprites.Length > 0)
-            return _ambientNoiseSprites[0];
-
-        if (_switchNoiseSprites != null && _switchNoiseSprites.Length > 0)
-            return _switchNoiseSprites[0];
-
+        if (_ambientNoiseSprites != null && _ambientNoiseSprites.Length > 0) return _ambientNoiseSprites[0];
+        if (_switchNoiseSprites != null && _switchNoiseSprites.Length > 0) return _switchNoiseSprites[0];
         return null;
     }
 
     private Sprite GetRandomAmbientSprite()
     {
-        if (_ambientNoiseSprites == null || _ambientNoiseSprites.Length == 0)
-            return null;
-
-        if (_ambientNoiseSprites.Length == 1)
-            return _ambientNoiseSprites[0];
-
+        if (_ambientNoiseSprites == null || _ambientNoiseSprites.Length <= 1) return _ambientNoiseSprites?[0];
         int index = Random.Range(0, _ambientNoiseSprites.Length);
-
-        if (index == _lastAmbientSpriteIndex)
-            index = (index + 1) % _ambientNoiseSprites.Length;
-
+        if (index == _lastAmbientSpriteIndex) index = (index + 1) % _ambientNoiseSprites.Length;
         _lastAmbientSpriteIndex = index;
         return _ambientNoiseSprites[index];
     }
 
     private Sprite GetRandomSwitchSprite()
     {
-        if (_switchNoiseSprites == null || _switchNoiseSprites.Length == 0)
-            return null;
-
-        if (_switchNoiseSprites.Length == 1)
-            return _switchNoiseSprites[0];
-
+        if (_switchNoiseSprites == null || _switchNoiseSprites.Length <= 1) return _switchNoiseSprites?[0];
         int index = Random.Range(0, _switchNoiseSprites.Length);
-
-        if (index == _lastSwitchSpriteIndex)
-            index = (index + 1) % _switchNoiseSprites.Length;
-
+        if (index == _lastSwitchSpriteIndex) index = (index + 1) % _switchNoiseSprites.Length;
         _lastSwitchSpriteIndex = index;
         return _switchNoiseSprites[index];
     }

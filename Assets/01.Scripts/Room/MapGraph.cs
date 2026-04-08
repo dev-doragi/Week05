@@ -17,74 +17,82 @@ public class MapGraph
 
     private void InitializeGraph()
     {
-        // 모든 RoomID에 대해 컬렉션 초기화
         foreach (RoomID room in System.Enum.GetValues(typeof(RoomID)))
         {
             if (room == RoomID.None) continue;
-
             _adjList[room] = new List<RoomID>();
             _baseWeights[room] = new Dictionary<RoomID, float>();
         }
 
-        // 기존 확률을 100분율 가중치(BaseWeight)로 변환하여 연결
-        // 예: roll < 0.65f -> 65f, 나머지 -> 35f
+        // --- B1층 (지하 구역) ---
+        // 카페테리아: 정글스텝(메인), 엘리베이터B(전진), 로비(새 연결)
+        SetEdge(RoomID.Cafeteria, RoomID.JungleStep, 50f);
+        SetEdge(RoomID.Cafeteria, RoomID.Elevator_B, 30f);
+        SetEdge(RoomID.Cafeteria, RoomID.Lobby, 20f);
 
-        // Cam 8 (b1층 카페테리아)
-        SetEdge(RoomID.Cafeteria, RoomID.JungleStep, 65f);
-        SetEdge(RoomID.Cafeteria, RoomID.Elevator_B, 35f);
-
-        // Cam 7 (정글 스텝)
-        SetEdge(RoomID.JungleStep, RoomID.Cafeteria, 70f);
+        // 정글 스텝: 카페테리아(후퇴), 로비(전진), 엘리베이터B(전진), 계단B(전진)
+        SetEdge(RoomID.JungleStep, RoomID.Cafeteria, 30f);
         SetEdge(RoomID.JungleStep, RoomID.Lobby, 30f);
         SetEdge(RoomID.JungleStep, RoomID.Elevator_B, 20f);
+        SetEdge(RoomID.JungleStep, RoomID.Stair_B, 20f);
 
-
-        // Cam 5 (1층 로비)
-        SetEdge(RoomID.Lobby, RoomID.JungleStep, 45f);
-        SetEdge(RoomID.Lobby, RoomID.Stair_B, 35f); // 0.8 - 0.45 = 0.35
+        // --- 1층 (중간 구역) ---
+        // 로비: 정글스텝(후퇴), 계단B(전진), 엘리베이터B(전진), 카페테리아(후퇴)
+        SetEdge(RoomID.Lobby, RoomID.JungleStep, 30f);
+        SetEdge(RoomID.Lobby, RoomID.Stair_B, 30f);
         SetEdge(RoomID.Lobby, RoomID.Elevator_B, 20f);
+        SetEdge(RoomID.Lobby, RoomID.Cafeteria, 20f);
 
-        // Cam 4 (3층 계단)
-        SetEdge(RoomID.Stair_A, RoomID.Lounge, 60f);
-        SetEdge(RoomID.Stair_A, RoomID.Elevator_A, 40f);
-        SetEdge(RoomID.Stair_B, RoomID.Stair_A, 15f);
-
-        // Cam 6 (1층 계단)
-        SetEdge(RoomID.Stair_B, RoomID.JungleStep, 40f);
-        SetEdge(RoomID.Stair_B, RoomID.Lobby, 35f); // 0.75 - 0.4 = 0.35
-        SetEdge(RoomID.Stair_B, RoomID.Stair_A, 25f);
-
-        // Cam 3 (라운지)
-        SetEdge(RoomID.Lounge, RoomID.CoachingRoom, 35f);
-        SetEdge(RoomID.Lounge, RoomID.Stair_A, 35f); // 0.7 - 0.35 = 0.35
-        SetEdge(RoomID.Lounge, RoomID.LeftHallwayNearOffice, 15f); // 0.85 - 0.7 = 0.15
-        //SetEdge(RoomID.Lounge, RoomID.RightHallwayNearOffice, 15f);
-
-        // Cam 1 (코칭룸)
-        SetEdge(RoomID.CoachingRoom, RoomID.Lounge, 65f); // 원래 50% + 15% 중복 할당되어 있던 것 합산
-        SetEdge(RoomID.CoachingRoom, RoomID.LeftHallwayNearOffice, 20f); // 0.7 - 0.5 = 0.2
-        SetEdge(RoomID.CoachingRoom, RoomID.Elevator_A, 15f);
-
-        // Cam 2 (3층 엘리베이터 앞)
-        SetEdge(RoomID.Elevator_A, RoomID.Stair_A, 50f);
-        SetEdge(RoomID.Elevator_A, RoomID.RightHallwayNearOffice, 20f); // 0.7 - 0.5 = 0.2
-        SetEdge(RoomID.Elevator_A, RoomID.Lounge, 15f); // 0.85 - 0.7 = 0.15
-        SetEdge(RoomID.Elevator_A, RoomID.Elevator_B, 15f);
-
-        // Cam 9 (b1층 엘리베이터)
-        SetEdge(RoomID.Elevator_B, RoomID.Cafeteria, 60f);
-        SetEdge(RoomID.Elevator_B, RoomID.Elevator_A, 20f); // 0.8 - 0.6 = 0.2
+        // 엘리베이터 B (B1~1층 연결부): 카페테리아, 로비, 계단B, 엘리베이터A(3층행)
+        SetEdge(RoomID.Elevator_B, RoomID.Cafeteria, 30f);
+        SetEdge(RoomID.Elevator_B, RoomID.Lobby, 30f);
         SetEdge(RoomID.Elevator_B, RoomID.Stair_B, 20f);
+        SetEdge(RoomID.Elevator_B, RoomID.Elevator_A, 20f);
 
-        // Cam 1A (오피스 왼쪽 복도)
-        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.Office, 65f);
-        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.RightHallwayNearOffice, 20f); // 0.85 - 0.65 = 0.2
-        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.Lounge, 15f);
+        // 계단 B (1층 계단): 정글스텝, 로비, 엘리베이터B, 계단A(3층행)
+        SetEdge(RoomID.Stair_B, RoomID.JungleStep, 25f);
+        SetEdge(RoomID.Stair_B, RoomID.Lobby, 25f);
+        SetEdge(RoomID.Stair_B, RoomID.Elevator_B, 20f);
+        SetEdge(RoomID.Stair_B, RoomID.Stair_A, 30f);
 
-        // Cam 2A (오피스 오른쪽 복도)
-        SetEdge(RoomID.RightHallwayNearOffice, RoomID.Office, 65f);
-        SetEdge(RoomID.RightHallwayNearOffice, RoomID.LeftHallwayNearOffice, 20f); // 0.85 - 0.65 = 0.2
-        SetEdge(RoomID.RightHallwayNearOffice, RoomID.Lounge, 15f);
+        // --- 3층 (상층 구역 - 오피스 인접) ---
+        // 계단 A (3층 계단): 라운지, 엘리베이터A, 계단B(후퇴), 코칭룸(직통)
+        SetEdge(RoomID.Stair_A, RoomID.Lounge, 40f);
+        SetEdge(RoomID.Stair_A, RoomID.Elevator_A, 30f);
+        SetEdge(RoomID.Stair_A, RoomID.Stair_B, 15f);
+        SetEdge(RoomID.Stair_A, RoomID.CoachingRoom, 15f);
+
+        // 엘리베이터 A (3층 엘리베이터): 계단A, 오른쪽 복도, 라운지, 엘리베이터B(후퇴)
+        SetEdge(RoomID.Elevator_A, RoomID.Stair_A, 30f);
+        SetEdge(RoomID.Elevator_A, RoomID.RightHallwayNearOffice, 30f);
+        SetEdge(RoomID.Elevator_A, RoomID.Lounge, 20f);
+        SetEdge(RoomID.Elevator_A, RoomID.Elevator_B, 20f);
+
+        // 라운지 (허브): 코칭룸, 계단A, 왼쪽복도, 오른쪽복도, 엘리베이터A
+        SetEdge(RoomID.Lounge, RoomID.CoachingRoom, 25f);
+        SetEdge(RoomID.Lounge, RoomID.Stair_A, 25f);
+        SetEdge(RoomID.Lounge, RoomID.LeftHallwayNearOffice, 20f);
+        SetEdge(RoomID.Lounge, RoomID.RightHallwayNearOffice, 20f);
+        SetEdge(RoomID.Lounge, RoomID.Elevator_A, 10f);
+
+        // 코칭룸: 라운지, 왼쪽복도, 엘리베이터A, 계단A
+        SetEdge(RoomID.CoachingRoom, RoomID.Lounge, 40f);
+        SetEdge(RoomID.CoachingRoom, RoomID.LeftHallwayNearOffice, 30f);
+        SetEdge(RoomID.CoachingRoom, RoomID.Elevator_A, 15f);
+        SetEdge(RoomID.CoachingRoom, RoomID.Stair_A, 15f);
+
+        // --- 오피스 경계 구역 ---
+        // 왼쪽 복도: 오피스(최종), 오른쪽 복도(횡이동), 라운지(후퇴), 코칭룸(후퇴)
+        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.Office, 50f);
+        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.RightHallwayNearOffice, 20f);
+        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.Lounge, 10f);
+        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.CoachingRoom, 20f);
+
+        // 오른쪽 복도: 오피스(최종), 왼쪽 복도(횡이동), 라운지(후퇴), 엘리베이터A(후퇴)
+        SetEdge(RoomID.RightHallwayNearOffice, RoomID.Office, 50f);
+        SetEdge(RoomID.RightHallwayNearOffice, RoomID.LeftHallwayNearOffice, 20f);
+        SetEdge(RoomID.RightHallwayNearOffice, RoomID.Lounge, 10f);
+        SetEdge(RoomID.RightHallwayNearOffice, RoomID.Elevator_A, 20f);
     }
 
     private void SetEdge(RoomID from, RoomID to, float baseWeight)
