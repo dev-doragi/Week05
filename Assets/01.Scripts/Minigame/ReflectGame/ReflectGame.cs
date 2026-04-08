@@ -19,9 +19,23 @@ public class ReflectGame : MiniGame
     public int flashCount = 4;
 
     int _currentHp;
+    bool _isParried;
 
-    void OnEnable() => CollisionReporter.OnEnter2D += HandleCollision;
-    void OnDisable() => CollisionReporter.OnEnter2D -= HandleCollision;
+    void OnEnable()
+    {
+        CollisionReporter.OnEnter2D += HandleCollision;
+        monsterSprite.enabled = true;
+        playerSprite.enabled = true;
+    }
+
+    void OnDisable()
+    {
+        CollisionReporter.OnEnter2D -= HandleCollision;
+        StopAllCoroutines();
+        CancelInvoke();
+        monsterSprite.enabled = true;
+        playerSprite.enabled = true;
+    }
 
     protected override void OnStart()
     {
@@ -37,6 +51,7 @@ public class ReflectGame : MiniGame
         float dist = Vector2.Distance(bullet.transform.position, player.position);
         if (dist > reflectRange) return;
 
+        _isParried = true;
         Vector2 dir = (monster.position - bullet.transform.position).normalized;
         bullet.Launch(dir);
     }
@@ -47,9 +62,10 @@ public class ReflectGame : MiniGame
 
         if (other.transform == monster)
         {
+            if (!_isParried) return;
+
             StartCoroutine(Flash(monsterSprite));
             _currentHp--;
-            Debug.Log($"[ReflectGame] 몬스터 HP: {_currentHp}");
 
             if (_currentHp <= 0)
             {
@@ -69,6 +85,7 @@ public class ReflectGame : MiniGame
 
     void FireFromMonster()
     {
+        _isParried = false;
         bullet.transform.position = monster.position;
         Vector2 dir = (player.position - monster.position).normalized;
         bullet.Launch(dir);
