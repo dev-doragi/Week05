@@ -1,8 +1,7 @@
 ﻿public enum MEventType
 {
 
-    Stageactivated,
-    BigTurnStarted
-
+    IssueDrawn,
+    IssueReturned 
 
 }
