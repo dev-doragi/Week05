@@ -35,7 +35,9 @@ public class UI_RuntimeReferenceData
     public string Label;
 
     public string ExpectedTargetId;
+    public string ExpectedTargetDisplayName;
     public string CurrentTargetId;
+    public string CurrentTargetDisplayName;
 
     public bool CanSpawnError;
     public bool IsRequired;

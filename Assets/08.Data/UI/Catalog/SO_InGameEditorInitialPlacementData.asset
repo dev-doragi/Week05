@@ -13,12 +13,76 @@ MonoBehaviour:
   m_Name: SO_InGameEditorInitialPlacementData
   m_EditorClassIdentifier: Assembly-CSharp::SO_InGameEditorInitialPlacementData
   _objects:
+  - _objectId: SpriteRend
+    _componentData: {fileID: 11400000, guid: a4e26c03600fe9640aad50fa34ee0c59, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Enem
+    _componentData: {fileID: 11400000, guid: 7332415da678f15498c0baa0745f1624, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 11
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: Rb2D
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: SpriteRend
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference03
+      _label: Target
+      _normalTargetId: Player
+      _canSpawnError: 1
+      _isRequired: 1
   - _objectId: Camera
     _componentData: {fileID: 11400000, guid: 33fe908011089944a83364ce75019034, type: 2}
     _scene: 0
     _references: []
+  - _objectId: Rigidbody
+    _componentData: {fileID: 11400000, guid: e585135a1fab87e4c8fa5d3c208faf95, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Rigid2D
+    _componentData: {fileID: 11400000, guid: 5685eceaedcc83345ba595fd43672355, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Ene
+    _componentData: {fileID: 11400000, guid: 73b5f5eb7a693dc4688c112fa88787a2, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 11
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: R2D
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: Sprite
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference03
+      _label: Target
+      _normalTargetId: Play
+      _canSpawnError: 1
+      _isRequired: 1
+  - _objectId: SpriteRenderer
+    _componentData: {fileID: 11400000, guid: e20f0dbda34c2e04cab212433e05f9ad, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: CCCamera
     _componentData: {fileID: 11400000, guid: bfa7aaaec00046343a3a26d89fdb28a7, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Rb
+    _componentData: {fileID: 11400000, guid: 1537db75282b5514a9d9058a7743d66f, type: 2}
     _scene: 0
     _references: []
   - _objectId: MainCamera
@@ -33,62 +97,234 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: 2a4f7ea5b122e9e48bc2e4bfb737217b, type: 2}
     _scene: 0
     _references: []
+  - _objectId: DirectionalLights
+    _componentData: {fileID: 11400000, guid: 6d7b7f1d0de84f5e9af3a2b7c1d4e6f8, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: DL
     _componentData: {fileID: 11400000, guid: 38c3a85f5589bd3439622e97c68a7fa4, type: 2}
     _scene: 0
     _references: []
+  - _objectId: GM
+    _componentData: {fileID: 11400000, guid: 62ee218a76d75464d9258e7b8a14b4d6, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 12
+      _slotId: reference01
+      _label: Player
+      _normalTargetId: Play
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference02
+      _label: Enemy
+      _normalTargetId: Ene
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference03
+      _label: Camera
+      _normalTargetId: CCCamera
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference04
+      _label: Light
+      _normalTargetId: DL
+      _canSpawnError: 1
+      _isRequired: 1
   - _objectId: Sprite
     _componentData: {fileID: 11400000, guid: 39ce33db118b70c4088169fccc40c3bb, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: SpriteRend
-    _componentData: {fileID: 11400000, guid: a4e26c03600fe9640aad50fa34ee0c59, type: 2}
     _scene: 0
     _references: []
   - _objectId: SpriteRendeee
     _componentData: {fileID: 11400000, guid: 00724aafd4c7d2f44ad218bf38162f83, type: 2}
     _scene: 0
     _references: []
-  - _objectId: SpriteRenderer
-    _componentData: {fileID: 11400000, guid: e20f0dbda34c2e04cab212433e05f9ad, type: 2}
+  - _objectId: Script_PlayerV
+    _componentData: {fileID: 11400000, guid: 59e7b10e7020e6449a846a8b8e8d96b8, type: 2}
     _scene: 0
     _references: []
-  - _objectId: Rb
-    _componentData: {fileID: 11400000, guid: 1537db75282b5514a9d9058a7743d66f, type: 2}
+  - _objectId: GameManagers
+    _componentData: {fileID: 11400000, guid: 79a37a3a03183304c90642e856672980, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 12
+      _slotId: reference01
+      _label: Player
+      _normalTargetId: Players
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference02
+      _label: Enemy
+      _normalTargetId: Enemys
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference03
+      _label: Camera
+      _normalTargetId: MainCameras
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference04
+      _label: Light
+      _normalTargetId: DirectionalLights
+      _canSpawnError: 1
+      _isRequired: 1
+  - _objectId: SpriteRenderers
+    _componentData: {fileID: 11400000, guid: 9b3e1a4c7d2f4e5a8c1b6d7e2f3a4c5d, type: 2}
     _scene: 0
     _references: []
+  - _objectId: Script_PlayerController
+    _componentData: {fileID: 11400000, guid: 245ef21dd0a39e54abf2d578690bd7cd, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Playerrr
+    _componentData: {fileID: 11400000, guid: aedfe1fb124e48a448045c8b680a3eba, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 8
+      _slotId: reference01
+      _label: Movement
+      _normalTargetId: Script_PlayerMove
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 8
+      _slotId: reference02
+      _label: Visual
+      _normalTargetId: Script_PlayerVisu
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerControll
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference02
+      _label: Rigidbody
+      _normalTargetId: Rigid
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerControll
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: SpriteRendeee
+      _canSpawnError: 1
+      _isRequired: 1
   - _objectId: Rigid
     _componentData: {fileID: 11400000, guid: 6ad1a122a7999d448bf1c15969e65390, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: Rigidbody
-    _componentData: {fileID: 11400000, guid: e585135a1fab87e4c8fa5d3c208faf95, type: 2}
     _scene: 0
     _references: []
   - _objectId: Rigidbodys
     _componentData: {fileID: 11400000, guid: 38eb30e3a639dd64dbe736a9ec961ed2, type: 2}
     _scene: 0
     _references: []
-  - _objectId: R2D
-    _componentData: {fileID: 11400000, guid: 395c020a4461596458d55aa6eeb4c102, type: 2}
+  - _objectId: Play
+    _componentData: {fileID: 11400000, guid: ceb423898e61f904ebbe0ecefba4c7c5, type: 2}
     _scene: 0
-    _references: []
+    _references:
+    - _inspectorComponent: 8
+      _slotId: reference01
+      _label: Movement
+      _normalTargetId: Script_PlayerM
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 8
+      _slotId: reference02
+      _label: Visual
+      _normalTargetId: Script_PlayerV
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerC
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference02
+      _label: Rigidbody
+      _normalTargetId: Rb
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerC
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: Sprite
+      _canSpawnError: 1
+      _isRequired: 1
   - _objectId: Rb2D
     _componentData: {fileID: 11400000, guid: 9c3c7ffe99da0d44f9f66289f7afd980, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: Rigid2D
-    _componentData: {fileID: 11400000, guid: 5685eceaedcc83345ba595fd43672355, type: 2}
     _scene: 0
     _references: []
   - _objectId: Rigidbody2D
     _componentData: {fileID: 11400000, guid: 010337ec10b5a634cac0967449ce6ee5, type: 2}
     _scene: 0
     _references: []
+  - _objectId: Rigidbody2Ds
+    _componentData: {fileID: 11400000, guid: 4f8c2d1a7b3e4c5d9a6f1b2c3d4e5f6a, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: Collider
     _componentData: {fileID: 11400000, guid: 24070e0b186abf1429a22fdef680dd7a, type: 2}
     _scene: 0
     _references: []
+  - _objectId: Player
+    _componentData: {fileID: 11400000, guid: da8218ce356bb3843baae4890e743171, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 8
+      _slotId: reference01
+      _label: Movement
+      _normalTargetId: Script_PlayerMovement
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 8
+      _slotId: reference02
+      _label: Visual
+      _normalTargetId: Script_PlayerVisual
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerController
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference02
+      _label: Rigidbody
+      _normalTargetId: Rigidbody
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerController
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: SpriteRenderer
+      _canSpawnError: 1
+      _isRequired: 1
   - _objectId: Collider2D
     _componentData: {fileID: 11400000, guid: 7673a3288fda29f4ebd2d97b57789940, type: 2}
     _scene: 0
@@ -101,10 +337,6 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: 806ac406c7d1da14e8b2387af45c760e, type: 2}
     _scene: 0
     _references: []
-  - _objectId: Script_PlayerController
-    _componentData: {fileID: 11400000, guid: 245ef21dd0a39e54abf2d578690bd7cd, type: 2}
-    _scene: 0
-    _references: []
   - _objectId: Script_PlayerControllers
     _componentData: {fileID: 11400000, guid: 314fb282dbc93254887050ef766ddd4b, type: 2}
     _scene: 0
@@ -113,20 +345,154 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: 422713c82a78f6d44ba1821ca6b8fdfd, type: 2}
     _scene: 0
     _references: []
+  - _objectId: Enemys
+    _componentData: {fileID: 11400000, guid: b96e0cfaced0a684a83f24f813f4c9dd, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 11
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: Rigidbody2Ds
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: SpriteRenderers
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference03
+      _label: Target
+      _normalTargetId: Players
+      _canSpawnError: 1
+      _isRequired: 1
+  - _objectId: R2D
+    _componentData: {fileID: 11400000, guid: 395c020a4461596458d55aa6eeb4c102, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Players
+    _componentData: {fileID: 11400000, guid: 59b7f2ef490b7b54ebd9b972e379dbe4, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 8
+      _slotId: reference01
+      _label: Movement
+      _normalTargetId: Script_PlayerMovements
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 8
+      _slotId: reference02
+      _label: Visual
+      _normalTargetId: Script_PlayerVisuals
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerControllers
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference02
+      _label: Rigidbody
+      _normalTargetId: Rigidbodys
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference01
+      _label: Controller
+      _normalTargetId: Script_PlayerControllers
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 10
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: SpriteRenderers
+      _canSpawnError: 1
+      _isRequired: 1
+  - _objectId: Enemyyy
+    _componentData: {fileID: 11400000, guid: 95141f8ddf468c144a51c063840f5291, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 11
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: Rigid2D
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: SpriteRendeee
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference03
+      _label: Target
+      _normalTargetId: Playerrr
+      _canSpawnError: 1
+      _isRequired: 1
   - _objectId: Script_PlayerMove
     _componentData: {fileID: 11400000, guid: 5731cbf12bc722140a61024a4950efc3, type: 2}
     _scene: 0
     _references: []
+  - _objectId: GameManager
+    _componentData: {fileID: 11400000, guid: c6b3bfe1a0dfb164cb4ee812aa516b5f, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 12
+      _slotId: reference01
+      _label: Player
+      _normalTargetId: Player
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference02
+      _label: Enemy
+      _normalTargetId: Enemy
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference03
+      _label: Camera
+      _normalTargetId: MainCamera
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 12
+      _slotId: reference04
+      _label: Light
+      _normalTargetId: DirectionalLight
+      _canSpawnError: 1
+      _isRequired: 1
+  - _objectId: Enemy
+    _componentData: {fileID: 11400000, guid: cd400462b4324bf45882a3ea8fa50526, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 11
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: Rigidbody2D
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference02
+      _label: Sprite
+      _normalTargetId: SpriteRenderer
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 11
+      _slotId: reference03
+      _label: Target
+      _normalTargetId: Player
+      _canSpawnError: 1
+      _isRequired: 1
   - _objectId: Script_PlayerMovement
     _componentData: {fileID: 11400000, guid: b501228d12e4b674bacfb866d43c398a, type: 2}
     _scene: 0
     _references: []
   - _objectId: Script_PlayerMovements
     _componentData: {fileID: 11400000, guid: c9a3ea30c985b614da011235be03464f, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: Script_PlayerV
-    _componentData: {fileID: 11400000, guid: 59e7b10e7020e6449a846a8b8e8d96b8, type: 2}
     _scene: 0
     _references: []
   - _objectId: Script_PlayerVisu
@@ -173,357 +539,3 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: 5e6686fc70a87a5489318feb8d1e1537, type: 2}
     _scene: 0
     _references: []
-  - _objectId: Play
-    _componentData: {fileID: 11400000, guid: ceb423898e61f904ebbe0ecefba4c7c5, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 8
-      _slotId: reference01
-      _label: Movement
-      _normalTargetId: Script_PlayerM
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 8
-      _slotId: reference02
-      _label: Visual
-      _normalTargetId: Script_PlayerV
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerC
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference02
-      _label: Rigidbody
-      _normalTargetId: Rb
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerC
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: Sprite
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Player
-    _componentData: {fileID: 11400000, guid: da8218ce356bb3843baae4890e743171, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 8
-      _slotId: reference01
-      _label: Movement
-      _normalTargetId: Script_PlayerMovement
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 8
-      _slotId: reference02
-      _label: Visual
-      _normalTargetId: Script_PlayerVisual
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerController
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference02
-      _label: Rigidbody
-      _normalTargetId: Rigidbody
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerController
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: SpriteRenderer
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Playerrr
-    _componentData: {fileID: 11400000, guid: aedfe1fb124e48a448045c8b680a3eba, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 8
-      _slotId: reference01
-      _label: Movement
-      _normalTargetId: Script_PlayerMove
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 8
-      _slotId: reference02
-      _label: Visual
-      _normalTargetId: Script_PlayerVisu
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerControll
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference02
-      _label: Rigidbody
-      _normalTargetId: Rigid
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerControll
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: SpriteRendeee
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Players
-    _componentData: {fileID: 11400000, guid: 59b7f2ef490b7b54ebd9b972e379dbe4, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 8
-      _slotId: reference01
-      _label: Movement
-      _normalTargetId: Script_PlayerMovements
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 8
-      _slotId: reference02
-      _label: Visual
-      _normalTargetId: Script_PlayerVisuals
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerControllers
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 9
-      _slotId: reference02
-      _label: Rigidbody
-      _normalTargetId: Rigidbodys
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference01
-      _label: Controller
-      _normalTargetId: Script_PlayerControllers
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 10
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: SpriteRend
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Ene
-    _componentData: {fileID: 11400000, guid: 73b5f5eb7a693dc4688c112fa88787a2, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 11
-      _slotId: reference01
-      _label: Rigidbody
-      _normalTargetId: R2D
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: Sprite
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference03
-      _label: Target
-      _normalTargetId: Play
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Enem
-    _componentData: {fileID: 11400000, guid: 7332415da678f15498c0baa0745f1624, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 11
-      _slotId: reference01
-      _label: Rigidbody
-      _normalTargetId: Rb2D
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: SpriteRend
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference03
-      _label: Target
-      _normalTargetId: Player
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Enemy
-    _componentData: {fileID: 11400000, guid: cd400462b4324bf45882a3ea8fa50526, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 11
-      _slotId: reference01
-      _label: Rigidbody
-      _normalTargetId: Rigidbody2D
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: SpriteRenderer
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference03
-      _label: Target
-      _normalTargetId: Player
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Enemys
-    _componentData: {fileID: 11400000, guid: b96e0cfaced0a684a83f24f813f4c9dd, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 11
-      _slotId: reference01
-      _label: Rigidbody
-      _normalTargetId: Rigid2D
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: SpriteRendeee
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference03
-      _label: Target
-      _normalTargetId: Players
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: Enemyyy
-    _componentData: {fileID: 11400000, guid: 95141f8ddf468c144a51c063840f5291, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 11
-      _slotId: reference01
-      _label: Rigidbody
-      _normalTargetId: Rigidbody2D
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference02
-      _label: Sprite
-      _normalTargetId: SpriteRenderer
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 11
-      _slotId: reference03
-      _label: Target
-      _normalTargetId: Playerrr
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: GM
-    _componentData: {fileID: 11400000, guid: 62ee218a76d75464d9258e7b8a14b4d6, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 12
-      _slotId: reference01
-      _label: Player
-      _normalTargetId: Play
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference02
-      _label: Enemy
-      _normalTargetId: Ene
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference03
-      _label: Camera
-      _normalTargetId: CCCamera
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference04
-      _label: Light
-      _normalTargetId: DL
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: GameManager
-    _componentData: {fileID: 11400000, guid: c6b3bfe1a0dfb164cb4ee812aa516b5f, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 12
-      _slotId: reference01
-      _label: Player
-      _normalTargetId: Player
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference02
-      _label: Enemy
-      _normalTargetId: Enemy
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference03
-      _label: Camera
-      _normalTargetId: MainCamera
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference04
-      _label: Light
-      _normalTargetId: DirectionalLight
-      _canSpawnError: 1
-      _isRequired: 1
-  - _objectId: GameManagers
-    _componentData: {fileID: 11400000, guid: 79a37a3a03183304c90642e856672980, type: 2}
-    _scene: 0
-    _references:
-    - _inspectorComponent: 12
-      _slotId: reference01
-      _label: Player
-      _normalTargetId: Players
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference02
-      _label: Enemy
-      _normalTargetId: Enemys
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference03
-      _label: Camera
-      _normalTargetId: MainCameras
-      _canSpawnError: 1
-      _isRequired: 1
-    - _inspectorComponent: 12
-      _slotId: reference04
-      _label: Light
-      _normalTargetId: DL
-      _canSpawnError: 1
-      _isRequired: 1
