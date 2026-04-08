@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class UI_InspectorPlayerControllerSection : MonoBehaviour
+public class UI_InspectorPlayerControllerSection : MonoBehaviour, IUIInspectorSection
 {
     [SerializeField] private TMP_Text _titleText;
 

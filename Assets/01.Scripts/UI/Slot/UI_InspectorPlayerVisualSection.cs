@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorSection
+public class UI_InspectorPlayerVisualSection : MonoBehaviour, IUIInspectorSection
 {
     [SerializeField] private TMP_Text _titleText;
 
@@ -35,7 +35,7 @@ public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorSect
     public void Bind(string ownerId, UI_RuntimeInspectorSectionData sectionData)
     {
         if (_titleText != null)
-            _titleText.text = "Player Movement";
+            _titleText.text = "Player Visual";
 
         if (_firstReferenceSlot != null)
             _firstReferenceSlot.Bind(ownerId, FindReference(sectionData, _firstSlotId));

@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class CameraAreaController : MonoBehaviour
 {
-    [Header("Camera Data")]
+    [Header("Room Data")]
+    [SerializeField] private RoomID _roomId = RoomID.None;
     [SerializeField] private Texture _roomBackgroundTexture;
     [SerializeField] private Texture _roomBackgroundWithCoachTexture;
-    [SerializeField] private bool _hasCoach;
 
     [Header("UI")]
     [SerializeField] private CameraManager _cameraManager;
@@ -18,24 +18,15 @@ public class CameraAreaController : MonoBehaviour
 
     private Coroutine _blinkCoroutine;
 
-    private void OnValidate()
+    public RoomID RoomId => _roomId;
+
+    public Texture GetBackgroundTexture(bool hasCoach)
     {
-        if (_cameraManager != null)
-            _cameraManager.RefreshSelectedCamera();
+        if (hasCoach && _roomBackgroundWithCoachTexture != null)
+            return _roomBackgroundWithCoachTexture;
+
+        return _roomBackgroundTexture;
     }
-
-    public Texture CurrentBackgroundTexture
-    {
-        get
-        {
-            if (_hasCoach && _roomBackgroundWithCoachTexture != null)
-                return _roomBackgroundWithCoachTexture;
-
-            return _roomBackgroundTexture;
-        }
-    }
-
-    public bool HasCoach => _hasCoach;
 
     public void OnClickCameraArea()
     {
@@ -43,14 +34,6 @@ public class CameraAreaController : MonoBehaviour
             return;
 
         _cameraManager.SelectCamera(this);
-    }
-
-    public void SetCoachPresence(bool hasCoach)
-    {
-        _hasCoach = hasCoach;
-
-        if (_cameraManager != null)
-            _cameraManager.RefreshSelectedCamera();
     }
 
     public void StartBlinking()
