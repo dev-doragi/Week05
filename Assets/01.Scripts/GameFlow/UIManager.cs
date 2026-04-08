@@ -46,6 +46,8 @@ public class UIManager : Singleton<UIManager>
     private bool unitySelected = true;
     private bool cctvSelected = false;
 
+    public GameObject NoiseScreen;
+
     private Sequence _alertMessageSeq;
 
 
@@ -65,6 +67,7 @@ public class UIManager : Singleton<UIManager>
         unitySelected = false;
         cctvSelected = true;
         AlertMessage.transform.position = FirstMessageTransform.position;
+        NoiseScreen.SetActive(false);
 
         RefreshIconUI();
     }
@@ -146,6 +149,11 @@ public class UIManager : Singleton<UIManager>
         RefreshIconUI();
     }
 
+    public void NoiseActive(bool on)
+    {
+        NoiseScreen.SetActive(on);
+    }
+
     private void RefreshIconUI()
     {
         bool unityBaseBgOn = (unityHover || unitySelected) && !unityAlert;
@@ -192,6 +200,8 @@ public class UIManager : Singleton<UIManager>
         if (_alertMessageSeq != null && _alertMessageSeq.IsActive())
             _alertMessageSeq.Kill();
     }
+
+    
 
 
 

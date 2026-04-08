@@ -142,6 +142,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         StopFlowInternal();
         State = FlowState.Clear;
+        //인게임 클리어
+        UIManager.Instance.NoiseActive(false);
         waitingChoice = false;
         currentIssue = null;
         activeDebugMiniGame = null;
@@ -192,6 +194,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
         //경고
         UIManager.Instance.SetUnityAlert(true);
+        UIManager.Instance.NoiseActive(true);
         //디버그 미니게임 시작
 
         UIManager.Instance.DebugGamePannelActive(true);
