@@ -2,24 +2,36 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 코치의 이동 실행과 타이머를 제어합니다. 초기 지연 후 스폰 로직이 포함되어 있습니다.
+/// </summary>
 public class CoachMovementController : MonoBehaviour
 {
     [Header("Timing")]
+    [SerializeField] private float _initialSpawnDelay = 5f;
     [SerializeField] private float _timeToRoomChange = 8f;
     [SerializeField] private float _timerVariability = 2f;
     [SerializeField] private float _transitionDuration = 2f;
     [SerializeField] private bool _playOnStart = true;
 
+    [Header("Dependencies")]
+    [SerializeField] private GimmickManager _gimmickManager;
+    [SerializeField] private CoachBrain _coachBrain;
+
     [Header("Debug")]
     [SerializeField] private RoomID _currentRoomId = RoomID.None;
 
     private bool _isTransitioning;
+    private bool _isSpawnDelayed = true;
     private float _moveTimer;
     private RoomID _nextRoomId = RoomID.None;
     private Coroutine _moveRoutine;
+    private MapGraph _mapGraph;
 
     public RoomID CurrentRoomId => _currentRoomId;
     public RoomID NextRoomId => _nextRoomId;
+
+    public MapGraph MapGraph => _mapGraph;
     public bool IsTransitioning => _isTransitioning;
     public float TransitionDuration => _transitionDuration;
 
@@ -27,65 +39,78 @@ public class CoachMovementController : MonoBehaviour
     public event Action<RoomID, RoomID> OnCoachPreparingToMove;
     public event Action OnCoachReachedOffice;
 
+    public float CurrentAggro => _coachBrain != null ? _coachBrain.CurrentAggro : 0f;
+
     private void Awake()
     {
-        if (_currentRoomId == RoomID.None)
-            _currentRoomId = GetRandomSpawnRoom();
+        _mapGraph = new MapGraph();
+        if (_gimmickManager == null)
+            _gimmickManager = FindAnyObjectByType<GimmickManager>();
 
-        ResetMoveTimer();
+        _coachBrain.Initialize(_mapGraph, _gimmickManager);
+
+        // 초기에는 None 상태로 시작 (CCTV에 보이지 않음)
+        _currentRoomId = RoomID.None;
+        _isSpawnDelayed = true;
     }
 
     private void Start()
     {
-        if (!_playOnStart)
-            return;
-
-        StartMovement();
+        if (!_playOnStart) return;
+        StartCoroutine(Co_InitialDelay());
     }
 
     private void Update()
     {
-        if (!_playOnStart)
-            return;
-
-        if (_isTransitioning)
-            return;
-
-        if (_currentRoomId == RoomID.Office)
+        if (!_playOnStart || _isTransitioning || _isSpawnDelayed || _currentRoomId == RoomID.Office)
             return;
 
         _moveTimer -= Time.deltaTime;
-
-        if (_moveTimer > 0f)
-            return;
-
-        TryMoveNext();
+        if (_moveTimer <= 0f)
+            TryMoveNext();
     }
 
     public bool IsCoachInRoom(RoomID roomId)
     {
-        if (_isTransitioning)
-            return false;
-
+        if (_isTransitioning || _currentRoomId == RoomID.None) return false;
         return _currentRoomId == roomId;
+    }
+
+    /// <summary>
+    /// 지정된 지연 시간 이후 첫 스폰 위치를 결정하고 활동을 시작합니다.
+    /// </summary>
+    private IEnumerator Co_InitialDelay()
+    {
+        yield return new WaitForSeconds(_initialSpawnDelay);
+
+        _currentRoomId = GetRandomSpawnRoom();
+        _isSpawnDelayed = false;
+        ResetMoveTimer();
+
+        OnCoachMoved?.Invoke(RoomID.None, _currentRoomId);
     }
 
     public void StartMovement()
     {
         _playOnStart = true;
+        if (_currentRoomId == RoomID.None)
+        {
+            StopAllCoroutines();
+            _currentRoomId = GetRandomSpawnRoom();
+            OnCoachMoved?.Invoke(RoomID.None, _currentRoomId);
+        }
+        _isSpawnDelayed = false;
         ResetMoveTimer();
     }
 
     public void StopMovement()
     {
         _playOnStart = false;
-
         if (_moveRoutine != null)
         {
             StopCoroutine(_moveRoutine);
             _moveRoutine = null;
         }
-
         _isTransitioning = false;
         _nextRoomId = RoomID.None;
     }
@@ -112,7 +137,7 @@ public class CoachMovementController : MonoBehaviour
 
     private void TryMoveNext()
     {
-        RoomID nextRoomId = GetNextRoom(_currentRoomId);
+        RoomID nextRoomId = _coachBrain.GetNextRoom(_currentRoomId);
 
         if (nextRoomId == _currentRoomId || nextRoomId == RoomID.None)
         {
@@ -140,6 +165,7 @@ public class CoachMovementController : MonoBehaviour
         _isTransitioning = false;
         _moveRoutine = null;
 
+        _coachBrain.IncreaseAggroOnMove();
         ResetMoveTimer();
         OnCoachMoved?.Invoke(previousRoomId, _currentRoomId);
 
@@ -154,121 +180,7 @@ public class CoachMovementController : MonoBehaviour
 
     private RoomID GetRandomSpawnRoom()
     {
-        RoomID[] spawnRooms =
-        {
-            RoomID.Cafeteria,
-            RoomID.Elevator_B,
-            RoomID.Stair_B
-        };
-
-        int index = UnityEngine.Random.Range(0, spawnRooms.Length);
-        return spawnRooms[index];
-    }
-
-    private RoomID GetNextRoom(RoomID currentRoomId)
-    {
-        switch (currentRoomId)
-        {
-            case RoomID.Cafeteria:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.65f) return RoomID.JungleStep;
-                    return RoomID.Elevator_B;
-                }
-
-            case RoomID.JungleStep:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.7f) return RoomID.Cafeteria;
-                    return RoomID.Lobby;
-                }
-
-            case RoomID.Lobby:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.45f) return RoomID.JungleStep;
-                    if (roll < 0.8f) return RoomID.Stair_B;
-                    return RoomID.Elevator_B;
-                }
-
-            // Stair_A(3층 계단) -> 라운지 or 엘리베이터
-            case RoomID.Stair_A:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.6f) return RoomID.Lounge;
-                    return RoomID.Elevator_A;
-                }
-
-            // Stair_B(1층 계단) -> 정글 스텝 or 로비 or 3층 계단
-            case RoomID.Stair_B:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.4f) return RoomID.JungleStep;
-                    if (roll < 0.75f) return RoomID.Lobby;
-                    return RoomID.Stair_A;
-                }
-
-            // 라운지 -> 코칭룸 or 3층 계단, 낮은 확률로 니어오피스로
-            case RoomID.Lounge:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.35f) return RoomID.CoachingRoom;
-                    if (roll < 0.7f) return RoomID.Stair_A;
-                    if (roll < 0.85f) return RoomID.LeftHallwayNearOffice;
-                    return RoomID.RightHallwayNearOffice;
-                }
-
-            // 코칭룸 -> 라운지 or 3층 엘베
-            case RoomID.CoachingRoom:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.5f) return RoomID.Lounge;
-                    if (roll < 0.7f) return RoomID.LeftHallwayNearOffice;
-                    if (roll < 0.85f) return RoomID.Lounge;
-                    return RoomID.Elevator_A;
-                }
-
-            // 3층 엘베 -> 낮은 확률로 b1f 엘베 or 오른쪽 복도, 낮은 확률로 라운지
-            case RoomID.Elevator_A:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.5f) return RoomID.Stair_A;
-                    if (roll < 0.7f) return RoomID.RightHallwayNearOffice;
-                    if (roll < 0.85f) return RoomID.Lounge;
-                    return RoomID.Elevator_B;
-                }
-
-            // b1f 엘베 -> 낮은 확률로 3층 엘베 or 카페테리아 or 낮은 확률로 1층 계단
-            case RoomID.Elevator_B:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.6f) return RoomID.Cafeteria;
-                    if (roll < 0.8f) return RoomID.Elevator_A;
-                    return RoomID.Stair_B;
-                }
-
-            // 왼쪽 오른쪽 왔다갔다 + 안막으면 결국 오피스 들어옴 + 낮은 확률로 라운지
-            case RoomID.LeftHallwayNearOffice:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.65f) return RoomID.Office;
-                    if (roll < 0.85f) return RoomID.RightHallwayNearOffice;
-                    return RoomID.Lounge;
-                }
-
-            // 왼쪽 오른쪽 왔다갔다 + 안막으면 결국 오피스 들어옴 + 낮은 확률로 라운지
-            case RoomID.RightHallwayNearOffice:
-                {
-                    float roll = UnityEngine.Random.value;
-                    if (roll < 0.65f) return RoomID.Office;
-                    if (roll < 0.85f) return RoomID.LeftHallwayNearOffice;
-                    return RoomID.Lounge;
-                }
-
-            case RoomID.Office:
-                return RoomID.Office;
-        }
-
-        return RoomID.Office;
+        RoomID[] spawnRooms = { RoomID.Cafeteria, RoomID.Elevator_B, RoomID.Stair_B };
+        return spawnRooms[UnityEngine.Random.Range(0, spawnRooms.Length)];
     }
 }

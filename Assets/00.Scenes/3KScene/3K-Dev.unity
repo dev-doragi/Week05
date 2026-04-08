@@ -1720,7 +1720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameTester
   miniGames:
-  - {fileID: 207020889}
+  - {fileID: 0}
   - {fileID: 8055885493174484353}
 --- !u!4 &222519571
 Transform:
@@ -11683,6 +11683,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Place Debugging
       objectReference: {fileID: 0}
+    - target: {fileID: 1283668781165202287, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5029661064550332744, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11726,10 +11730,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5860803744097292554, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
 --- !u!114 &8055885493174484353 stripped
 MonoBehaviour:
