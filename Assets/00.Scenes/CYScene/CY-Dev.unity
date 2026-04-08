@@ -43733,7 +43733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6810990952746301455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43753,7 +43753,7 @@ MonoBehaviour:
   leftBoundary: {fileID: 406292268}
   rightBoundary: {fileID: 1387055870}
   countText: {fileID: 1003014996}
-  targetCount: 40
+  targetCount: 20
   spawnInterval: 0.1
 --- !u!212 &6812877538627374337
 SpriteRenderer:
