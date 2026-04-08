@@ -1,21 +1,21 @@
 using System.Collections;
 using UnityEngine;
 
+public enum FlowState
+{
+    Ready,
+    Standby,
+    Debug,
+    Ingame,
+    Clear
+}
+
 public class GameFlowManager : Singleton<GameFlowManager>
 {
-    public enum FlowState
-    {
-        Ready,
-        Standby,
-        Debug,
-        Ingame,
-        Clear
-    }
-
     [Header("Refs")]
     [SerializeField] private ETypePoolManager poolManager;
-    [SerializeField] private GameObject game1DebugRoot;
-    [SerializeField] private GameObject game1IngameRoot;
+    public MiniGame[] DebugMiniGames;
+    public MiniGame[] InGameMiniGames;
 
     [Header("Flow")]
     [SerializeField] private float standbySeconds = 10f;
@@ -30,13 +30,48 @@ public class GameFlowManager : Singleton<GameFlowManager>
     private IssueDefinition currentIssue;
     private Coroutine standbyRoutine;
 
+    private MiniGame activeDebugMiniGame;
+    private MiniGame activeIngameMiniGame;
+
     protected override void Init()
     {
         State = FlowState.Ready;
-        SetMiniGamesActive(false, false);
+        SetAllMiniGamesActive(false);
+    }
+    private void OnEnable()
+    {
+        MiniGame.OnCleared += HandleMiniGameCleared;
     }
 
-    // Build 버튼 시점에 호출
+    private void OnDisable()
+    {
+        MiniGame.OnCleared -= HandleMiniGameCleared;
+    }
+
+    private void HandleMiniGameCleared(MiniGame cleared)
+    {
+        if (!flowRunning || cleared == null) return;
+
+        if (State == FlowState.Debug && IsInList(DebugMiniGames, cleared))
+        {
+            NotifyDebugCleared();
+            return;
+        }
+
+        if (State == FlowState.Ingame && IsInList(InGameMiniGames, cleared))
+        {
+            NotifyIngameCleared();
+        }
+    }
+
+    private bool IsInList(MiniGame[] list, MiniGame target)
+    {
+        if (list == null) return false;
+        for (int i = 0; i < list.Length; i++)
+            if (list[i] == target) return true;
+        return false;
+    }
+
     public void BeginFlow()
     {
         if (poolManager == null)
@@ -46,57 +81,62 @@ public class GameFlowManager : Singleton<GameFlowManager>
         }
 
         StopFlowInternal();
-
         poolManager.ResetPool();
+
         flowRunning = true;
         waitingChoice = false;
         currentIssue = null;
-        SetMiniGamesActive(false, false);
+        activeDebugMiniGame = null;
+        activeIngameMiniGame = null;
+
+        SetAllMiniGamesActive(false);
+        UIManager.Instance?.InGameChoiceButtonActive(false);
+        UIManager.Instance?.DebugGamePannelActive(false);
 
         EnterStandby();
     }
 
-    // Debug 미니게임 클리어 트리거
     public void NotifyDebugCleared()
     {
         if (!flowRunning || State != FlowState.Debug) return;
-        if (game1DebugRoot != null && game1DebugRoot.activeSelf) game1DebugRoot.SetActive(false);
 
-        waitingChoice = true; 
-        UIManager.Instance.InGameChoiceButtonActive(true);
-
+        waitingChoice = true;
+        UIManager.Instance?.InGameChoiceButtonActive(true);
     }
-
 
     public void ResolveDebugChoice(bool playIngame)
     {
         if (!flowRunning || State != FlowState.Debug || !waitingChoice) return;
 
         waitingChoice = false;
-        UIManager.Instance.InGameChoiceButtonActive(false);
-        UIManager.Instance.DebugGamePannelActive(false);
-
+        UIManager.Instance?.InGameChoiceButtonActive(false);
+        UIManager.Instance?.DebugGamePannelActive(false);
 
         if (playIngame)
         {
             State = FlowState.Ingame;
-            if (game1IngameRoot != null) game1IngameRoot.SetActive(true);
-            Debug.Log("[GameFlow] Choice=Play -> Ingame");
+            activeIngameMiniGame = FindMiniGameByIssue(InGameMiniGames, currentIssue);
+
+            if (activeIngameMiniGame == null)
+            {
+                Debug.LogError($"[GameFlow] Ingame key not found: {currentIssue.IngameMiniGameKey}");
+                EndTurn();
+                return;
+            }
+
+            activeIngameMiniGame.StartGame();
+            Debug.Log($"[GameFlow] Ingame Start: {activeIngameMiniGame.name}");
         }
         else
         {
-            bool returned = poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
-
+            poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
             EndTurn();
         }
     }
 
-    // Ingame 미니게임 클리어 트리거
     public void NotifyIngameCleared()
     {
         if (!flowRunning || State != FlowState.Ingame) return;
-        if (game1IngameRoot != null && game1IngameRoot.activeSelf) game1IngameRoot.SetActive(false);
-
         EndTurn();
     }
 
@@ -106,14 +146,22 @@ public class GameFlowManager : Singleton<GameFlowManager>
         State = FlowState.Clear;
         waitingChoice = false;
         currentIssue = null;
-        SetMiniGamesActive(false, false);
+        activeDebugMiniGame = null;
+        activeIngameMiniGame = null;
+
+        SetAllMiniGamesActive(false);
+        UIManager.Instance?.InGameChoiceButtonActive(false);
+        UIManager.Instance?.DebugGamePannelActive(false);
     }
 
     private void EnterStandby()
     {
         State = FlowState.Standby;
         waitingChoice = false;
-        SetMiniGamesActive(false, false);
+        SetAllMiniGamesActive(false);
+
+        UIManager.Instance?.InGameChoiceButtonActive(false);
+        UIManager.Instance?.DebugGamePannelActive(false);
 
         if (standbyRoutine != null) StopCoroutine(standbyRoutine);
         standbyRoutine = StartCoroutine(CoStandbyThenDraw());
@@ -121,33 +169,70 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
     private IEnumerator CoStandbyThenDraw()
     {
-
         if (!flowRunning) yield break;
-        
+
         yield return new WaitForSeconds(standbySeconds);
+
         if (!poolManager.TryDrawRandomIssue(out currentIssue))
         {
             GameClear();
             yield break;
         }
+
         State = FlowState.Debug;
-        if (game1DebugRoot != null) game1DebugRoot.SetActive(true);
-        UIManager.Instance.DebugGamePannelActive(true);
+        activeDebugMiniGame = FindMiniGameByIssue(DebugMiniGames, currentIssue);
 
+        if (activeDebugMiniGame == null)
+        {
+            Debug.LogError($"[GameFlow] Debug key not found: {currentIssue.DebugMiniGameKey}");
+            EndTurn();
+            yield break;
+        }
 
-        Debug.Log($"Debug Game Start: {currentIssue.IssueId}");
+        UIManager.Instance?.DebugGamePannelActive(true);
+        activeDebugMiniGame.StartGame();
+
+        Debug.Log($"Debug Game Start: {currentIssue.IssueId} / {activeDebugMiniGame.name}");
     }
 
     private void EndTurn()
     {
         currentIssue = null;
+        activeDebugMiniGame = null;
+        activeIngameMiniGame = null;
         EnterStandby();
     }
 
-    private void SetMiniGamesActive(bool debugActive, bool ingameActive)
+    private MiniGame FindMiniGameByIssue(MiniGame[] list, IssueDefinition issue)
     {
-        if (game1DebugRoot != null) game1DebugRoot.SetActive(debugActive);
-        if (game1IngameRoot != null) game1IngameRoot.SetActive(ingameActive);
+        if (list == null || issue == null) return null;
+
+        for (int i = 0; i < list.Length; i++)
+        {
+            MiniGame mg = list[i];
+            if (mg != null && mg.Issue == issue)
+                return mg;
+        }
+
+        return null;
+    }
+
+
+    private void SetAllMiniGamesActive(bool active)
+    {
+        SetArrayActive(DebugMiniGames, active);
+        SetArrayActive(InGameMiniGames, active);
+    }
+
+    private void SetArrayActive(MiniGame[] list, bool active)
+    {
+        if (list == null) return;
+
+        for (int i = 0; i < list.Length; i++)
+        {
+            if (list[i] != null)
+                list[i].gameObject.SetActive(active);
+        }
     }
 
     private void StopFlowInternal()
