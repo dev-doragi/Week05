@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using DG.Tweening;
 public class UIManager : Singleton<UIManager>
 {
     public GameObject IngamePlayButton;
@@ -14,17 +15,24 @@ public class UIManager : Singleton<UIManager>
     public GameObject CCTVIconImage;
     public GameObject UnityIconImage;
 
-    [Header("Unity Icon States")]
+    [Header("Unity Icon")]
     public GameObject BGBase_Unity;
     public GameObject BarBase_Unity;
     public GameObject BGAlert_Unity;
     public GameObject BarAlert_Unity;
 
-    [Header("CCTV Icon States")]
+    [Header("CCTV Icon")]
     public GameObject BGBase_CCTV;
     public GameObject BarBase_CCTV;
     public GameObject BGAlert_CCTV;
     public GameObject BarAlert_CCTV;
+
+    [Header("Message States")]
+
+    public GameObject AlertMessage;
+    public Transform FirstMessageTransform;
+    public Transform ChangeMessageTransform;
+
 
     private bool unityHover;
     private bool cctvHover;
@@ -32,6 +40,10 @@ public class UIManager : Singleton<UIManager>
     private bool cctvAlert;
     private bool unitySelected = true;
     private bool cctvSelected = false;
+
+    private Sequence _alertMessageSeq;
+
+
 
     protected override void Init()
     {
@@ -44,8 +56,8 @@ public class UIManager : Singleton<UIManager>
         cctvHover = false;
         unityAlert = false;
         cctvAlert = false;
-        unitySelected = true;
-        cctvSelected = false;
+        unitySelected = false;
+        cctvSelected = true;
         RefreshIconUI();
     }
 
@@ -89,8 +101,10 @@ public class UIManager : Singleton<UIManager>
         cctvSelected = false;
         unityAlert = false;
 
-        if (EditorPannel != null) EditorPannel.transform.SetAsLastSibling();
-        if (SettingPannel != null) SettingPannel.transform.SetAsLastSibling();
+        EditorPannel.transform.SetAsLastSibling();
+        SettingPannel.transform.SetAsLastSibling();
+        
+
 
         RefreshIconUI();
     }
@@ -102,6 +116,7 @@ public class UIManager : Singleton<UIManager>
         cctvAlert = false;
 
         if (CCTVPannel != null) CCTVPannel.transform.SetAsLastSibling();
+
         if (SettingPannel != null) SettingPannel.transform.SetAsLastSibling();
 
         RefreshIconUI();
@@ -110,6 +125,7 @@ public class UIManager : Singleton<UIManager>
     // 알림 판정시
     public void SetUnityAlert(bool on)
     {
+        PlayAlertMessageTween();
         unityAlert = on;
         RefreshIconUI();
     }
@@ -144,4 +160,30 @@ public class UIManager : Singleton<UIManager>
         if (go != null && go.activeSelf != active)
             go.SetActive(active);
     }
+    public void PlayAlertMessageTween()
+    {
+
+        if (_alertMessageSeq != null && _alertMessageSeq.IsActive())
+            _alertMessageSeq.Kill();
+
+        AlertMessage.SetActive(true);
+
+        Transform msg = AlertMessage.transform;
+        msg.localPosition = FirstMessageTransform.localPosition;
+
+        _alertMessageSeq = DOTween.Sequence();
+        _alertMessageSeq.Append(msg.DOLocalMove(ChangeMessageTransform.localPosition, 0.4f).SetEase(Ease.OutCubic));
+        _alertMessageSeq.AppendInterval(0.5f);
+        _alertMessageSeq.Append(msg.DOLocalMove(FirstMessageTransform.localPosition, 0.3f).SetEase(Ease.InCubic));
+        _alertMessageSeq.OnComplete(() => { AlertMessage.SetActive(false); });
+    }
+    private void OnDisable()
+    {
+        if (_alertMessageSeq != null && _alertMessageSeq.IsActive())
+            _alertMessageSeq.Kill();
+    }
+
+
+
+
 }

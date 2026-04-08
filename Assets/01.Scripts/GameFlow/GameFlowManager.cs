@@ -33,6 +33,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
     private MiniGame activeDebugMiniGame;
     private MiniGame activeIngameMiniGame;
 
+    
+
     protected override void Init()
     {
         State = FlowState.Ready;
@@ -155,7 +157,9 @@ public class GameFlowManager : Singleton<GameFlowManager>
         State = FlowState.Standby;
         waitingChoice = false;
         SetAllMiniGamesActive(false);
-        UIManager.Instance.EditorPannelPopDown();
+        //경고
+        UIManager.Instance.SetUnityAlert(true);
+
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
 
