@@ -24112,6 +24112,7 @@ GameObject:
   - component: {fileID: 1217884035}
   - component: {fileID: 1217884038}
   - component: {fileID: 1217884039}
+  - component: {fileID: 1217884040}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -24269,6 +24270,22 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1217884040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217884034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.Physics2DRaycaster
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1223273880
 GameObject:
   m_ObjectHideFlags: 0
@@ -31813,8 +31830,8 @@ MonoBehaviour:
   nodeSpacingY: 1.8
   leftX: -3
   rightX: 3
-  startY: 2
-  hitRadius: 40
+  startY: 6.95
+  hitRadius: 1.3
 --- !u!1 &1609166343
 GameObject:
   m_ObjectHideFlags: 0

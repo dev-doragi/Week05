@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AnimatorConnectGame : MiniGame
 {
@@ -15,10 +16,10 @@ public class AnimatorConnectGame : MiniGame
     public float nodeSpacingY = 1.8f;
     public float leftX = -3f;
     public float rightX = 3f;
-    public float startY = 2f;
+    public float startY = 0f;
 
-    [Header("히트 판정 반경 (스크린 픽셀)")]
-    public float hitRadius = 40f;
+    [Header("히트 판정 반경 (월드 유닛)")]
+    public float hitRadius = 0.4f;
 
     private static readonly Color[] ColorPool =
     {
@@ -36,12 +37,61 @@ public class AnimatorConnectGame : MiniGame
     private List<GameObject> _spawnedObjects = new();
     private int _connectedCount;
 
+    private AnimatorConnectPoint _draggingFrom;
+    private ConnectionLine _draggingLine;
+
     // ── MiniGame override ─────────────────────────────────
 
     protected override void OnStart()
     {
         Cleanup();
         SpawnNodes();
+    }
+
+    // ── Update 드래그 처리 ────────────────────────────────
+
+    void Update()
+    {
+        if (!gameObject.activeSelf) return;
+
+        Vector3 mouseWorld = GetMouseWorld();
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            AnimatorConnectPoint clicked = FindLeftPointAt(mouseWorld);
+            if (clicked != null && clicked.linkedPoint == null)
+            {
+                _draggingFrom = clicked;
+                _draggingLine = CreateDraggingLine(clicked, clicked.transform.position);
+            }
+        }
+
+        if (Mouse.current.leftButton.isPressed && _draggingLine != null)
+        {
+            _draggingLine.UpdateEnd(mouseWorld);
+        }
+
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            if (_draggingFrom != null && _draggingLine != null)
+            {
+                AnimatorConnectPoint target = FindRightPointAt(mouseWorld);
+
+                if (target != null
+                    && target.matchColor == _draggingFrom.matchColor
+                    && target.linkedPoint == null)
+                {
+                    Connect(_draggingFrom, target, _draggingLine);
+                }
+                else
+                {
+                    DestroyLine(_draggingLine);
+                }
+            }
+
+            _draggingFrom = null;
+            _draggingLine = null;
+        }
     }
 
     // ── 스폰 ──────────────────────────────────────────────
@@ -76,36 +126,27 @@ public class AnimatorConnectGame : MiniGame
         }
     }
 
-    // ── AnimatorConnectPoint에서 호출 ─────────────────────
+    // ── 내부 유틸 ─────────────────────────────────────────
 
-    public ConnectionLine CreateDraggingLine(AnimatorConnectPoint from, Vector3 worldStart)
+    AnimatorConnectPoint FindLeftPointAt(Vector3 worldPos)
     {
-        var line = Instantiate(linePrefab, transform);
-        line.SetColor(from.matchColor);
-        line.SetStart(worldStart);
-        _lines.Add(line);
-        return line;
+        foreach (var lp in _leftPoints)
+        {
+            if (Vector3.Distance(lp.transform.position, worldPos) < hitRadius)
+                return lp;
+        }
+        return null;
     }
 
-    public void DestroyLine(ConnectionLine line)
-    {
-        if (line == null) return;
-        _lines.Remove(line);
-        Destroy(line.gameObject);
-    }
-
-    public AnimatorConnectPoint FindPointAt(Vector2 screenPos, AnimatorConnectPoint exclude)
+    AnimatorConnectPoint FindRightPointAt(Vector3 worldPos)
     {
         AnimatorConnectPoint best = null;
         float bestDist = float.MaxValue;
 
         foreach (var rp in _rightPoints)
         {
-            if (rp == exclude || rp.linkedPoint != null) continue;
-
-            Vector2 rpScreen = Camera.main.WorldToScreenPoint(rp.transform.position);
-            float dist = Vector2.Distance(rpScreen, screenPos);
-
+            if (rp.linkedPoint != null) continue;
+            float dist = Vector3.Distance(rp.transform.position, worldPos);
             if (dist < hitRadius && dist < bestDist)
             {
                 bestDist = dist;
@@ -115,7 +156,23 @@ public class AnimatorConnectGame : MiniGame
         return best;
     }
 
-    public void Connect(AnimatorConnectPoint left, AnimatorConnectPoint right, ConnectionLine line)
+    ConnectionLine CreateDraggingLine(AnimatorConnectPoint from, Vector3 worldStart)
+    {
+        var line = Instantiate(linePrefab, transform);
+        line.SetColor(from.matchColor);
+        line.SetStart(worldStart);
+        _lines.Add(line);
+        return line;
+    }
+
+    void DestroyLine(ConnectionLine line)
+    {
+        if (line == null) return;
+        _lines.Remove(line);
+        Destroy(line.gameObject);
+    }
+
+    void Connect(AnimatorConnectPoint left, AnimatorConnectPoint right, ConnectionLine line)
     {
         left.linkedPoint = right;
         right.linkedPoint = left;
@@ -129,8 +186,6 @@ public class AnimatorConnectGame : MiniGame
             Clear();
     }
 
-    // ── 정리 ──────────────────────────────────────────────
-
     void Cleanup()
     {
         foreach (var go in _spawnedObjects) if (go) Destroy(go);
@@ -140,9 +195,16 @@ public class AnimatorConnectGame : MiniGame
         _rightPoints.Clear();
         _lines.Clear();
         _connectedCount = 0;
+        _draggingFrom = null;
+        _draggingLine = null;
     }
 
-    // ── 유틸 ──────────────────────────────────────────────
+    Vector3 GetMouseWorld()
+    {
+        Vector2 screenPos = Mouse.current.position.ReadValue();
+        Vector3 m = new Vector3(screenPos.x, screenPos.y, -Camera.main.transform.position.z);
+        return Camera.main.ScreenToWorldPoint(m);
+    }
 
     static int[] ShuffledIndices(int count)
     {
