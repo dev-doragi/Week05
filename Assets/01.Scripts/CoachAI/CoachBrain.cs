@@ -88,13 +88,15 @@ public class CoachBrain
             return score;
         }
 
+        float multiplier = (targetRoom != RoomID.Office) ? 3.0f : 1.0f; // 코칭룸 목표 시 가중치 보너스
+
         if (nextDistance < currentDistance)
         {
-            score += _baseAggroMultiplier * _officeAggro;
+            score += (_baseAggroMultiplier * _officeAggro) * multiplier;
         }
         else if (nextDistance > currentDistance)
         {
-            score -= (_baseAggroMultiplier * 0.8f) * _officeAggro;
+            score -= (_baseAggroMultiplier * 0.8f) * _officeAggro * multiplier;
         }
 
         RoomID activeLureRoom = _gimmickManager.ActiveLureRoom;
