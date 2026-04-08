@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5720ca7b0747f74459f54cf8a6a2a8ae, type: 3}
-  m_Name: SO_001_HTest1
+  m_Name: SO_002_PlayerMovement
   m_EditorClassIdentifier: Assembly-CSharp::SO_ComponentData
-  _componentId: PlayerController
-  _displayName: PlayerController
+  _componentId: PlayerMovement
+  _displayName: PlayerMovement
   _iconSprite: {fileID: 0}
-  _componentWindow: 0
+  _componentWindow: 2
   _projectFileStruct: 0
-  _inspectorComponents: 08000000
+  _inspectorComponents: 0900000000000000
