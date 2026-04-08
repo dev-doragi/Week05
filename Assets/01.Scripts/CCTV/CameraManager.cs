@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class CameraManager : MonoBehaviour
 
     private Material _backgroundMaterial;
     private CameraAreaController _lastSelected;
+
+    public event Action<RoomID> OnCameraSelected;
 
     private void Awake()
     {
@@ -66,6 +69,8 @@ public class CameraManager : MonoBehaviour
 
         if (_cameraNoiseOverlay != null)
             _cameraNoiseOverlay.PlaySwitchNoiseOnce();
+
+        OnCameraSelected?.Invoke(selectedArea.RoomId);
     }
 
     public void RefreshSelectedCamera()
@@ -119,13 +124,15 @@ public class CameraManager : MonoBehaviour
 
     private void HandleCoachPreparingToMove(RoomID previousRoomId, RoomID nextRoomId)
     {
-        if (!IsViewingRoom(previousRoomId))
-            return;
-
-        if (_cameraNoiseOverlay == null || _coachMovementController == null)
-            return;
-
-        _cameraNoiseOverlay.ShowForcedNoise(_coachMovementController.TransitionDuration);
+        // 출발하는 방(이전 방)이거나 도착할 방(다음 방)을 보고 있을 때 모두 노이즈 발생
+        if (IsViewingRoom(previousRoomId) || IsViewingRoom(nextRoomId))
+        {
+            if (_cameraNoiseOverlay != null && _coachMovementController != null)
+            {
+                // 코치가 이동하는 시간(TransitionDuration)만큼 강제 노이즈를 띄움
+                _cameraNoiseOverlay.ShowForcedNoise(_coachMovementController.TransitionDuration);
+            }
+        }
     }
 
     private void ApplyCameraTexture(CameraAreaController selectedArea)
