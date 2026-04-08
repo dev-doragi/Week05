@@ -11,7 +11,7 @@ public class UI_InspectorPresenter : MonoBehaviour
     private readonly List<GameObject> _spawnedSections = new();
     private readonly List<IUIInspectorReferenceSection> _boundReferenceSections = new();
 
-    public event Action<string, string, string> ReferenceDropped;
+    public event Action<string, InspectorComponent, string, string> ReferenceDropped;
 
     public void Render(UI_InGameEditorRuntimeData runtimeData)
     {
@@ -118,8 +118,8 @@ public class UI_InspectorPresenter : MonoBehaviour
         return null;
     }
 
-    private void HandleReferenceDropped(string ownerId, string slotId, string targetId)
+    private void HandleReferenceDropped(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
     {
-        ReferenceDropped?.Invoke(ownerId, slotId, targetId);
+        ReferenceDropped?.Invoke(ownerId, inspectorComponent, slotId, targetId);
     }
 }
