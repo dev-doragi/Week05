@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -10,7 +10,8 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     {
-        GameFlowManager.Instance.BeginFlow();
+
+        GameFlowManager.Instance?.BeginFlow();
     }
 
 
