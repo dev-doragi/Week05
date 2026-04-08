@@ -187,11 +187,15 @@ public class GameFlowManager : Singleton<GameFlowManager>
             EndTurn();
             yield break;
         }
-        UIManager.Instance.DebugGamePannelActive(true);
-        activeDebugMiniGame.StartGame();
+        UIManager.Instance.LogMessageActive(true);
+        LogManager.Instance.UpdateIssueLog(currentIssue);
 
         //경고
         UIManager.Instance.SetUnityAlert(true);
+        //디버그 미니게임 시작
+
+        UIManager.Instance.DebugGamePannelActive(true);
+        activeDebugMiniGame.StartGame();
     }
 
     private void EndTurn()
