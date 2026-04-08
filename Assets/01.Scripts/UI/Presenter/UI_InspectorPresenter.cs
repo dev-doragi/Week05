@@ -9,7 +9,7 @@ public class UI_InspectorPresenter : MonoBehaviour
     [SerializeField] private SO_UIInspectorComponentPrefabCatalog _prefabCatalog;
 
     private readonly List<GameObject> _spawnedSections = new();
-    private readonly List<IUIInspectorSection> _boundSections = new();
+    private readonly List<IUIInspectorReferenceSection> _boundReferenceSections = new();
 
     public event Action<string, string, string> ReferenceDropped;
 
@@ -49,9 +49,13 @@ public class UI_InspectorPresenter : MonoBehaviour
                 continue;
             }
 
-            section.ReferenceDropped += HandleReferenceDropped;
-            _boundSections.Add(section);
             section.Bind(runtimeData.Id, sectionData);
+
+            if (section is IUIInspectorReferenceSection referenceSection)
+            {
+                referenceSection.ReferenceDropped += HandleReferenceDropped;
+                _boundReferenceSections.Add(referenceSection);
+            }
         }
     }
 
@@ -63,10 +67,10 @@ public class UI_InspectorPresenter : MonoBehaviour
 
     private void ClearSections()
     {
-        for (int i = 0; i < _boundSections.Count; i++)
-            _boundSections[i].ReferenceDropped -= HandleReferenceDropped;
+        for (int i = 0; i < _boundReferenceSections.Count; i++)
+            _boundReferenceSections[i].ReferenceDropped -= HandleReferenceDropped;
 
-        _boundSections.Clear();
+        _boundReferenceSections.Clear();
 
         for (int i = 0; i < _spawnedSections.Count; i++)
         {
