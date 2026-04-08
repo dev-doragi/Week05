@@ -4,7 +4,8 @@ using System;
 public abstract class MiniGame : MonoBehaviour
 {
     public static event Action<MiniGame> OnCleared;
-
+    [SerializeField] private IssueDefinition issue;
+    public IssueDefinition Issue => issue;
     public void StartGame()
     {
         gameObject.SetActive(true);
@@ -13,10 +14,13 @@ public abstract class MiniGame : MonoBehaviour
 
     protected void Clear()
     {
-        Debug.Log($"[MiniGame] {gameObject.name} CLEAR");
         OnCleared?.Invoke(this);
         gameObject.SetActive(false);
     }
 
     protected abstract void OnStart();
+    public void CompleteFromChild()
+    {
+        Clear();
+    }
 }
