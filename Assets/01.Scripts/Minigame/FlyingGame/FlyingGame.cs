@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FlyingGame : MiniGame
@@ -30,8 +29,8 @@ public class FlyingGame : MiniGame
     {
         Debug.Log("[Flying Game] Game Start");
 
-        OnFlyingGameStart?.Invoke(startPos);
         PillarSetting();
+        OnFlyingGameStart?.Invoke(startPos);
     }
 
     private void PillarSetting()

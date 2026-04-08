@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 using static UnityEditor.Rendering.ShadowCascadeGUI;
 
 public class FlyPlayer : MonoBehaviour
@@ -46,10 +47,26 @@ public class FlyPlayer : MonoBehaviour
 
     public void Init(Vector2 pos)
     {
+        Debug.Log("[Flying Game] Player Init");
         transform.position = pos;
         _rigid.linearVelocity = Vector2.zero;
+        Stop();
+
+        Invoke("Play", 3f);
+    }
+
+    public void Play()
+    {
         _rigid.simulated = true;
         isActive = true;
+    }
+
+    public void Retry()
+    {
+        Debug.Log("[Flying Game] Player crash Pillar. Retry");
+
+        transform.position = _cachedStartPos;
+        _rigid.linearVelocity = Vector2.zero;
     }
 
     public void Stop()
@@ -68,7 +85,7 @@ public class FlyPlayer : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Pillar"))
         {
-            Init(_cachedStartPos);
+            Retry();
         }
     }
 }
