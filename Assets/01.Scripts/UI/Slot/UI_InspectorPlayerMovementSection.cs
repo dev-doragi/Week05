@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorSection
+public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorReferenceSection
 {
     [SerializeField] private TMP_Text _titleText;
 
@@ -12,7 +12,7 @@ public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorSect
     [SerializeField] private string _secondSlotId = "reference02";
     [SerializeField] private UI_InspectorReferenceDropSlot _secondReferenceSlot;
 
-    public event Action<string, string, string> ReferenceDropped;
+    public event Action<string, InspectorComponent, string, string> ReferenceDropped;
 
     private void Awake()
     {
@@ -38,10 +38,10 @@ public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorSect
             _titleText.text = "Player Movement";
 
         if (_firstReferenceSlot != null)
-            _firstReferenceSlot.Bind(ownerId, FindReference(sectionData, _firstSlotId));
+            _firstReferenceSlot.Bind(ownerId, sectionData.InspectorComponent, FindReference(sectionData, _firstSlotId));
 
         if (_secondReferenceSlot != null)
-            _secondReferenceSlot.Bind(ownerId, FindReference(sectionData, _secondSlotId));
+            _secondReferenceSlot.Bind(ownerId, sectionData.InspectorComponent, FindReference(sectionData, _secondSlotId));
     }
 
     private UI_RuntimeReferenceData FindReference(UI_RuntimeInspectorSectionData sectionData, string slotId)
@@ -58,8 +58,8 @@ public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorSect
         return null;
     }
 
-    private void HandleDropped(string ownerId, string slotId, string targetId)
+    private void HandleDropped(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
     {
-        ReferenceDropped?.Invoke(ownerId, slotId, targetId);
+        ReferenceDropped?.Invoke(ownerId, inspectorComponent, slotId, targetId);
     }
 }
