@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MinigameTester
   miniGames:
   - {fileID: 207020889}
-  - {fileID: 1796854873}
+  - {fileID: 8055885493174484353}
 --- !u!4 &222519571
 Transform:
   m_ObjectHideFlags: 0
@@ -3599,6 +3599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallPopGame
   issue: {fileID: 0}
+  spawnArea: {fileID: 0}
   balls:
   - {fileID: 697617677}
   - {fileID: 243709333}
@@ -3608,6 +3609,7 @@ MonoBehaviour:
   - {fileID: 519343165}
   - {fileID: 1735040423}
   - {fileID: 773073532}
+  ballCount: 5
 --- !u!4 &609639477
 Transform:
   m_ObjectHideFlags: 0
@@ -10162,17 +10164,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1796854873 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7068727620984877096, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
-  m_PrefabInstance: {fileID: 8055885493174484351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540ee16cdf85ab747bcf0b293fb24cb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlaceDebugging
 --- !u!1 &1801289396
 GameObject:
   m_ObjectHideFlags: 0
@@ -11692,10 +11683,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Place Debugging
       objectReference: {fileID: 0}
-    - target: {fileID: 1283668781165202287, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5029661064550332744, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11739,8 +11726,22 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5860803744097292554, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
+--- !u!114 &8055885493174484353 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4469015315961151497, guid: 393d58efce371ef4c8c082944a58e42e, type: 3}
+  m_PrefabInstance: {fileID: 8055885493174484351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 540ee16cdf85ab747bcf0b293fb24cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaceDebugging
 --- !u!1001 &8106828412441453739
 PrefabInstance:
   m_ObjectHideFlags: 0
