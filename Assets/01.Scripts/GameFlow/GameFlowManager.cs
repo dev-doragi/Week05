@@ -19,7 +19,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
     [Header("Flow")]
     [SerializeField] private float standbySeconds = 10f;
-    [SerializeField, Range(0f, 1f)] private float skipReturnChance = 0.45f;
+    [SerializeField] private float skipReturnChance = 0.45f;
 
     public FlowState State { get; private set; } = FlowState.Ready;
     public bool IsWaitingChoice => waitingChoice;
@@ -56,23 +56,26 @@ public class GameFlowManager : Singleton<GameFlowManager>
         EnterStandby();
     }
 
-    // Debug 미니게임 클리어 트리거에서 호출
+    // Debug 미니게임 클리어 트리거
     public void NotifyDebugCleared()
     {
         if (!flowRunning || State != FlowState.Debug) return;
         if (game1DebugRoot != null && game1DebugRoot.activeSelf) game1DebugRoot.SetActive(false);
 
-        waitingChoice = true; // UI Manager가 이 값 보고 Play/Skip 표시
-        Debug.Log("디버그 게임 클리어후, Play 인지 Skip 인지 선택해야하는 상태");
+        waitingChoice = true; 
+        UIManager.Instance.InGameChoiceButtonActive(true);
+
     }
 
-    // UI Manager가 Play/Skip 선택 시 호출
-    // playIngame = true -> Play, false -> Skip
+
     public void ResolveDebugChoice(bool playIngame)
     {
         if (!flowRunning || State != FlowState.Debug || !waitingChoice) return;
 
         waitingChoice = false;
+        UIManager.Instance.InGameChoiceButtonActive(false);
+        UIManager.Instance.DebugGamePannelActive(false);
+
 
         if (playIngame)
         {
@@ -88,7 +91,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
         }
     }
 
-    // Ingame 미니게임 클리어 트리거에서 호출
+    // Ingame 미니게임 클리어 트리거
     public void NotifyIngameCleared()
     {
         if (!flowRunning || State != FlowState.Ingame) return;
@@ -120,15 +123,17 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
 
         if (!flowRunning) yield break;
+        
+        yield return new WaitForSeconds(standbySeconds);
         if (!poolManager.TryDrawRandomIssue(out currentIssue))
         {
             GameClear();
             yield break;
         }
-        yield return new WaitForSeconds(standbySeconds);
-        
         State = FlowState.Debug;
         if (game1DebugRoot != null) game1DebugRoot.SetActive(true);
+        UIManager.Instance.DebugGamePannelActive(true);
+
 
         Debug.Log($"Debug Game Start: {currentIssue.IssueId}");
     }

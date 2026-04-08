@@ -5,6 +5,10 @@ public class ETypePoolManager : MonoBehaviour
 {
     [SerializeField] private List<IssueDefinition> seedIssues = new List<IssueDefinition>();
 
+    [SerializeField] private int remainingCountInspector;
+    [SerializeField] private List<IssueDefinition> currentPoolInspector = new List<IssueDefinition>();
+
+
     private readonly List<IssueDefinition> debugPool = new List<IssueDefinition>();
     private readonly HashSet<string> issueKeys = new HashSet<string>();
 
@@ -18,7 +22,9 @@ public class ETypePoolManager : MonoBehaviour
         for (int i = 0; i < seedIssues.Count; i++)
             AddInternal(seedIssues[i]);
 
-        Debug.Log($"[Pool] Reset: {debugPool.Count}");
+        Debug.Log($"Reset: {debugPool.Count}");
+        SyncInspectorView();
+
     }
 
     public bool TryDrawRandomIssue(out IssueDefinition issue)
@@ -33,6 +39,8 @@ public class ETypePoolManager : MonoBehaviour
         issue = debugPool[index];
 
         debugPool.RemoveAt(index);
+        SyncInspectorView();
+
         issueKeys.Remove(GetKey(issue));
 
         EventManager.Instance.PostNotification( MEventType.IssueDrawn, this, new IssueDrawnEventArgs(issue));
@@ -54,8 +62,11 @@ public class ETypePoolManager : MonoBehaviour
             MEventType.IssueReturned,
             this,
             new IssueReturnedEventArgs(issue, returned));
+        
+        SyncInspectorView();
 
         return returned;
+
     }
 
     private void AddInternal(IssueDefinition issue)
@@ -74,5 +85,12 @@ public class ETypePoolManager : MonoBehaviour
         if (issue == null) return string.Empty;
         if (!string.IsNullOrWhiteSpace(issue.IssueId)) return issue.IssueId;
         return issue.GetInstanceID().ToString();
+    }
+
+    private void SyncInspectorView()
+    {
+        remainingCountInspector = debugPool.Count;
+        currentPoolInspector.Clear();
+        currentPoolInspector.AddRange(debugPool);
     }
 }

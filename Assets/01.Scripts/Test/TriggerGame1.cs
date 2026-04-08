@@ -6,7 +6,8 @@ public class TriggerGame1 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hello");
+            GameFlowManager.Instance.NotifyIngameCleared();
+            Debug.Log("인게임클리어");
         }
     }
 }

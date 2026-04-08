@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef002133e1434a4db49374f801fcf02, type: 3}
-  m_Name: Issue_Ingame_01
+  m_Name: Issue_03
   m_EditorClassIdentifier: Assembly-CSharp::IssueDefinition
-  issueId: ISSUE_001
-  issueTitle: Missing Reference
+  issueId: ISSUE_03
+  issueTitle: Special Reference
   consoleWarning: Console Warning
-  debugMiniGameKey: Debug_001
-  ingameMiniGameKey: Ingame_001
+  debugMiniGameKey: Debug_03
+  ingameMiniGameKey: Ingame_03

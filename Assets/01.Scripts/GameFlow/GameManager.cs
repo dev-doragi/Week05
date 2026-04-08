@@ -8,6 +8,10 @@ public class GameManager : Singleton<GameManager>
     {
         
     }
+    void Start()
+    {
+        GameFlowManager.Instance.BeginFlow();
+    }
 
 
 
