@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class UI_InspectorPlayerMovementSection : MonoBehaviour
+public class UI_InspectorPlayerMovementSection : MonoBehaviour, IUIInspectorReferenceSection
 {
     [SerializeField] private TMP_Text _titleText;
 

@@ -9,6 +9,7 @@ public class UI_InspectorPresenter : MonoBehaviour
     [SerializeField] private SO_UIInspectorComponentPrefabCatalog _prefabCatalog;
 
     private readonly List<GameObject> _spawnedSections = new();
+    private readonly List<IUIInspectorReferenceSection> _boundReferenceSections = new();
 
     public event Action<string, string, string> ReferenceDropped;
 
@@ -41,7 +42,20 @@ public class UI_InspectorPresenter : MonoBehaviour
             instance.transform.SetAsFirstSibling();
             _spawnedSections.Add(instance);
 
-            BindSection(instance, runtimeData, inspectorComponent, sectionData);
+            var section = FindSectionComponent(instance);
+            if (section == null)
+            {
+                Debug.LogWarning($"UI_InspectorPresenter: {instance.name}에 IUIInspectorSection 구현체가 없습니다.");
+                continue;
+            }
+
+            section.Bind(runtimeData.Id, sectionData);
+
+            if (section is IUIInspectorReferenceSection referenceSection)
+            {
+                referenceSection.ReferenceDropped += HandleReferenceDropped;
+                _boundReferenceSections.Add(referenceSection);
+            }
         }
     }
 
@@ -53,6 +67,11 @@ public class UI_InspectorPresenter : MonoBehaviour
 
     private void ClearSections()
     {
+        for (int i = 0; i < _boundReferenceSections.Count; i++)
+            _boundReferenceSections[i].ReferenceDropped -= HandleReferenceDropped;
+
+        _boundReferenceSections.Clear();
+
         for (int i = 0; i < _spawnedSections.Count; i++)
         {
             if (_spawnedSections[i] != null)
@@ -86,25 +105,17 @@ public class UI_InspectorPresenter : MonoBehaviour
         return null;
     }
 
-    private void BindSection(
-        GameObject instance,
-        UI_InGameEditorRuntimeData runtimeData,
-        InspectorComponent inspectorComponent,
-        UI_RuntimeInspectorSectionData sectionData)
+    private IUIInspectorSection FindSectionComponent(GameObject instance)
     {
-        switch (inspectorComponent)
+        var behaviours = instance.GetComponents<MonoBehaviour>();
+
+        foreach (var behaviour in behaviours)
         {
-            case InspectorComponent.PlayerController:
-                {
-                    var playerControllerSection = instance.GetComponent<UI_InspectorPlayerControllerSection>();
-                    if (playerControllerSection != null)
-                    {
-                        playerControllerSection.ReferenceDropped += HandleReferenceDropped;
-                        playerControllerSection.Bind(runtimeData.Id, sectionData);
-                    }
-                    break;
-                }
+            if (behaviour is IUIInspectorSection section)
+                return section;
         }
+
+        return null;
     }
 
     private void HandleReferenceDropped(string ownerId, string slotId, string targetId)
