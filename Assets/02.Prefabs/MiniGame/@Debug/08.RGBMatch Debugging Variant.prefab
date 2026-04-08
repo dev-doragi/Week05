@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 672273947052117255, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_Name
-      value: 03.RGBMatch Debugging Variant
+      value: 08.RGBMatch Debugging Variant
       objectReference: {fileID: 0}
     - target: {fileID: 672273947052117255, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_IsActive
@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1621019184074392304, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
+      propertyPath: issue
+      value: 
+      objectReference: {fileID: 11400000, guid: ee9b93640e5d33243b2bf703e6ca5295, type: 2}
     - target: {fileID: 2855835656506509252, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -46,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6721647132504522528, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0033
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6721647132504522528, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalPosition.z
