@@ -19,13 +19,13 @@ MonoBehaviour:
     _references:
     - _inspectorComponent: 8
       _slotId: reference01
-      _label: PlayerMovement
+      _label: Move
       _normalTargetId: PlayerMovement
       _canSpawnError: 0
       _isRequired: 1
     - _inspectorComponent: 8
       _slotId: reference02
-      _label: PlayerVisual
+      _label: V
       _normalTargetId: PlayerVisual
       _canSpawnError: 0
       _isRequired: 1
@@ -35,13 +35,29 @@ MonoBehaviour:
     _references:
     - _inspectorComponent: 9
       _slotId: reference01
-      _label: PlayerController
+      _label: C
       _normalTargetId: PlayerController
       _canSpawnError: 0
       _isRequired: 1
     - _inspectorComponent: 9
       _slotId: reference02
-      _label: PlayerVisual
+      _label: V
       _normalTargetId: PlayerVisual
+      _canSpawnError: 0
+      _isRequired: 1
+  - _objectId: PlayerVisual
+    _componentData: {fileID: 11400000, guid: dcd8cd7369a35dc4e8ad0101737681ec, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 8
+      _slotId: reference01
+      _label: C
+      _normalTargetId: PlayerController
+      _canSpawnError: 0
+      _isRequired: 1
+    - _inspectorComponent: 9
+      _slotId: reference02
+      _label: M
+      _normalTargetId: PlayerMovement
       _canSpawnError: 0
       _isRequired: 1
