@@ -83,14 +83,14 @@ public class MapGraph
 
         // --- 오피스 경계 구역 ---
         // 왼쪽 복도: 오피스(최종), 오른쪽 복도(횡이동), 라운지(후퇴), 코칭룸(후퇴)
-        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.Office, 50f);
+        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.Office, 30f);
         SetEdge(RoomID.LeftHallwayNearOffice, RoomID.RightHallwayNearOffice, 20f);
         SetEdge(RoomID.LeftHallwayNearOffice, RoomID.Lounge, 10f);
-        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.CoachingRoom, 20f);
+        SetEdge(RoomID.LeftHallwayNearOffice, RoomID.CoachingRoom, 25f);
 
         // 오른쪽 복도: 오피스(최종), 왼쪽 복도(횡이동), 라운지(후퇴), 엘리베이터A(후퇴)
-        SetEdge(RoomID.RightHallwayNearOffice, RoomID.Office, 50f);
-        SetEdge(RoomID.RightHallwayNearOffice, RoomID.LeftHallwayNearOffice, 20f);
+        SetEdge(RoomID.RightHallwayNearOffice, RoomID.Office, 30f);
+        SetEdge(RoomID.RightHallwayNearOffice, RoomID.LeftHallwayNearOffice, 25f);
         SetEdge(RoomID.RightHallwayNearOffice, RoomID.Lounge, 10f);
         SetEdge(RoomID.RightHallwayNearOffice, RoomID.Elevator_A, 20f);
     }
