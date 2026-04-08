@@ -11,6 +11,48 @@ public class UI_InGameEditorRuntimeData
     public UI_HierarchyRuntimeData HierarchyData;
 
     public List<UI_RuntimeInspectorSectionData> Sections = new();
+
+    public bool HasReferenceError()
+    {
+        foreach (var section in Sections)
+        {
+            if (section == null)
+                continue;
+
+            foreach (var reference in section.References)
+            {
+                if (reference == null)
+                    continue;
+
+                if (reference.HasError())
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public int GetReferenceErrorCount()
+    {
+        int count = 0;
+
+        foreach (var section in Sections)
+        {
+            if (section == null)
+                continue;
+
+            foreach (var reference in section.References)
+            {
+                if (reference == null)
+                    continue;
+
+                if (reference.HasError())
+                    count++;
+            }
+        }
+
+        return count;
+    }
 }
 
 public class UI_ProjectRuntimeData
@@ -55,12 +97,20 @@ public class UI_RuntimeReferenceData
         return CurrentTargetId != ExpectedTargetId;
     }
 
-    public bool IsCorrect()
+    public UI_ReferenceValidationErrorType GetErrorType()
     {
         if (IsMissing())
-            return false;
+            return UI_ReferenceValidationErrorType.MissingReference;
 
         if (IsWrongReference())
+            return UI_ReferenceValidationErrorType.WrongReference;
+
+        return UI_ReferenceValidationErrorType.None;
+    }
+
+    public bool IsCorrect()
+    {
+        if (GetErrorType() != UI_ReferenceValidationErrorType.None)
             return false;
 
         if (string.IsNullOrEmpty(ExpectedTargetId))
@@ -71,7 +121,7 @@ public class UI_RuntimeReferenceData
 
     public bool HasError()
     {
-        return IsMissing() || IsWrongReference();
+        return GetErrorType() != UI_ReferenceValidationErrorType.None;
     }
 }
 

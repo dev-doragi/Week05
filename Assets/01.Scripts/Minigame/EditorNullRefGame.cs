@@ -3,10 +3,11 @@ using UnityEngine;
 public class EditorNullRefGame : MiniGame
 {
     private UI_RuntimeReferenceKey _targetKey;
+    private InGameEditorController _controller;
 
     protected override void OnStart()
     {
-        var state = InGameEditorController.EditorRuntimeState;
+        var state = GetRuntimeState();
         if (state == null || !state.TryBreakRandomReference(out _targetKey))
         {
             Clear();
@@ -19,7 +20,7 @@ public class EditorNullRefGame : MiniGame
 
     private void OnDisable()
     {
-        var state = InGameEditorController.EditorRuntimeState;
+        var state = GetRuntimeState();
         if (state != null)
             state.ReferenceSolved -= HandleSolved;
     }
@@ -32,5 +33,13 @@ public class EditorNullRefGame : MiniGame
         {
             Clear();
         }
+    }
+
+    private UI_InGameEditorRuntimeState GetRuntimeState()
+    {
+        if (_controller == null)
+            _controller = FindFirstObjectByType<InGameEditorController>();
+
+        return _controller != null ? _controller.EditorRuntimeState : null;
     }
 }

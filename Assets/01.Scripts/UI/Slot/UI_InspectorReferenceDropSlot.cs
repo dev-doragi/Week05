@@ -9,8 +9,13 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
     [SerializeField] private TMP_Text _labelText;
     [SerializeField] private TMP_Text _valueText;
     [SerializeField] private Image _highlightImage;
-    [SerializeField] [Range(0f, 1f)] private float _idleHighlightAlpha = 0.2f;
-    [SerializeField] [Range(0f, 1f)] private float _hoverHighlightAlpha = 0.5f;
+
+    [SerializeField][Range(0f, 1f)] private float _idleHighlightAlpha = 0.2f;
+    [SerializeField][Range(0f, 1f)] private float _hoverHighlightAlpha = 0.5f;
+
+    [SerializeField] private Color _normalLabelColor = Color.white;
+    [SerializeField] private Color _missingLabelColor = new Color(1f, 0.35f, 0.35f, 1f);
+    [SerializeField] private Color _wrongLabelColor = new Color(1f, 0.65f, 0.2f, 1f);
 
     private string _ownerId;
     private InspectorComponent _inspectorComponent;
@@ -32,8 +37,9 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
                 _labelText.text = string.Empty;
 
             if (_valueText != null)
-                _valueText.text = "None";
+                _valueText.text = "Empty";
 
+            ApplyLabelColor(UI_ReferenceValidationErrorType.None);
             return;
         }
 
@@ -42,8 +48,10 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
 
         if (_valueText != null)
             _valueText.text = string.IsNullOrEmpty(referenceData.CurrentTargetDisplayName)
-                ? "None"
+                ? "Empty"
                 : referenceData.CurrentTargetDisplayName;
+
+        ApplyLabelColor(referenceData.GetErrorType());
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -71,6 +79,27 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
             return;
 
         Dropped?.Invoke(_ownerId, _inspectorComponent, _slotId, UI_DragContext.DraggedComponentId);
+    }
+
+    private void ApplyLabelColor(UI_ReferenceValidationErrorType errorType)
+    {
+        if (_labelText == null)
+            return;
+
+        switch (errorType)
+        {
+            case UI_ReferenceValidationErrorType.MissingReference:
+                _labelText.color = _missingLabelColor;
+                break;
+
+            case UI_ReferenceValidationErrorType.WrongReference:
+                _labelText.color = _wrongLabelColor;
+                break;
+
+            default:
+                _labelText.color = _normalLabelColor;
+                break;
+        }
     }
 
     private void SetHighlightAlpha(float alpha)

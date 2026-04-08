@@ -25,12 +25,14 @@ public class UI_HierarchyItemSlot : MonoBehaviour
             _selectable.Clicked -= HandleClicked;
     }
 
-    public void Bind(UI_InGameEditorRuntimeData data, bool isSelected)
+    public void Bind(UI_InGameEditorRuntimeData data, bool isSelected, bool hasReferenceError)
     {
         if (data == null)
             return;
 
         _view.Render(data.DisplayName, data.SourceData.IconSprite);
+        _view.SetErrorBlink(hasReferenceError);
+
         _selectable.Bind(data.Id);
         _selectable.SetSelected(isSelected);
 
