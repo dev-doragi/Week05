@@ -13,6 +13,14 @@ MonoBehaviour:
   m_Name: SO_InGameEditorInitialPlacementData
   m_EditorClassIdentifier: Assembly-CSharp::SO_InGameEditorInitialPlacementData
   _objects:
+  - _objectId: Camera
+    _componentData: {fileID: 11400000, guid: 27f0bf87fa7428042bb4792f76f7bf9d, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Light
+    _componentData: {fileID: 11400000, guid: 6591ba2c3a23a0a419e466c04c7542a6, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: PlayerController
     _componentData: {fileID: 11400000, guid: 239fece3ff288e84db711b0edc091c7c, type: 2}
     _scene: 0
@@ -21,7 +29,7 @@ MonoBehaviour:
       _slotId: reference01
       _label: Move
       _normalTargetId: PlayerMovement
-      _canSpawnError: 0
+      _canSpawnError: 1
       _isRequired: 1
     - _inspectorComponent: 8
       _slotId: reference02
@@ -43,21 +51,21 @@ MonoBehaviour:
       _slotId: reference02
       _label: V
       _normalTargetId: PlayerVisual
-      _canSpawnError: 0
+      _canSpawnError: 1
       _isRequired: 1
   - _objectId: PlayerVisual
     _componentData: {fileID: 11400000, guid: dcd8cd7369a35dc4e8ad0101737681ec, type: 2}
     _scene: 0
     _references:
-    - _inspectorComponent: 8
+    - _inspectorComponent: 10
       _slotId: reference01
       _label: C
       _normalTargetId: PlayerController
-      _canSpawnError: 0
+      _canSpawnError: 1
       _isRequired: 1
-    - _inspectorComponent: 9
+    - _inspectorComponent: 10
       _slotId: reference02
       _label: M
       _normalTargetId: PlayerMovement
-      _canSpawnError: 0
+      _canSpawnError: 1
       _isRequired: 1

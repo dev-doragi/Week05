@@ -54,6 +54,25 @@ public class InGameEditorController : MonoBehaviour
         RefreshInspector();
     }
 
+    [ContextMenu("Start Quiz")]
+    public void StartQuiz()
+    {
+        if (_runtimeState == null)
+            return;
+
+        if (_runtimeState.TryBreakRandomReference(out var brokenKey))
+        {
+            Debug.Log($"[Quiz] Reference broken: owner={brokenKey.OwnerId}, slot={brokenKey.SlotId}");
+        }
+        else
+        {
+            Debug.Log("[Quiz] No breakable reference found.");
+        }
+
+        RefreshInspector();
+        LogValidationSummary(_runtimeState.ValidateAll());
+    }
+
     private void RefreshProject()
     {
         if (_projectPresenter == null)
@@ -108,7 +127,41 @@ public class InGameEditorController : MonoBehaviour
 
     private void HandleReferenceDropped(string ownerId, string slotId, string targetId)
     {
-        _runtimeState.TryAssignReference(ownerId, slotId, targetId);
+        bool assigned = _runtimeState.TryAssignReference(ownerId, slotId, targetId);
+
+        if (assigned == false)
+        {
+            Debug.LogWarning($"[Validation] Assign failed: owner={ownerId}, slot={slotId}, target={targetId}");
+            return;
+        }
+
         RefreshInspector();
+        LogValidationSummary(_runtimeState.ValidateAll());
+    }
+
+    private void LogValidationSummary(UI_ValidationSummary summary)
+    {
+        if (summary == null)
+            return;
+
+        if (summary.IsSolved)
+        {
+            Debug.Log("[Validation] All references are correct.");
+            return;
+        }
+
+        for (int i = 0; i < summary.Errors.Count; i++)
+        {
+            var error = summary.Errors[i];
+            string currentTarget = string.IsNullOrEmpty(error.CurrentTargetId) ? "Empty" : error.CurrentTargetId;
+
+            Debug.Log(
+                $"[Validation][{error.ErrorType}] " +
+                $"owner={error.OwnerDisplayName}({error.OwnerId}), " +
+                $"section={error.InspectorComponent}, " +
+                $"slot={error.SlotLabel}({error.SlotId}), " +
+                $"expected={error.ExpectedTargetId}, " +
+                $"current={currentTarget}");
+        }
     }
 }
