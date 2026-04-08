@@ -5,7 +5,6 @@ public class MinigameTester : MonoBehaviour
     [Header("MiniGames")]
     public MiniGame[] miniGames;
 
-    void Start() => MiniGame.OnCleared += OnMiniGameCleared;
     void OnDestroy() => MiniGame.OnCleared -= OnMiniGameCleared;
 
     [ContextMenu("Play MiniGame 0")]
@@ -16,6 +15,14 @@ public class MinigameTester : MonoBehaviour
 
     [ContextMenu("Play MiniGame 2")]
     void PlayMiniGame2() => PlayAt(2);
+
+    void Start()
+    {
+        MiniGame.OnCleared += OnMiniGameCleared;
+
+        foreach (var miniGame in miniGames)
+            miniGame.gameObject.SetActive(false);
+    }
 
     void PlayAt(int index)
     {
