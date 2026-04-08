@@ -68,17 +68,15 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         if (list == null) return false;
         for (int i = 0; i < list.Length; i++)
+        {
             if (list[i] == target) return true;
+        }
         return false;
     }
 
     public void BeginFlow()
     {
-        if (poolManager == null)
-        {
-            Debug.LogError("[GameFlow] poolManager is null.");
-            return;
-        }
+        if (poolManager == null) return;
 
         StopFlowInternal();
         poolManager.ResetPool();
@@ -90,8 +88,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         activeIngameMiniGame = null;
 
         SetAllMiniGamesActive(false);
-        UIManager.Instance?.InGameChoiceButtonActive(false);
-        UIManager.Instance?.DebugGamePannelActive(false);
+        UIManager.Instance.InGameChoiceButtonActive(false);
+        UIManager.Instance.DebugGamePannelActive(false);
 
         EnterStandby();
     }
@@ -101,7 +99,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
         if (!flowRunning || State != FlowState.Debug) return;
 
         waitingChoice = true;
-        UIManager.Instance?.InGameChoiceButtonActive(true);
+        UIManager.Instance.InGameChoiceButtonActive(true);
     }
 
     public void ResolveDebugChoice(bool playIngame)
@@ -109,8 +107,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         if (!flowRunning || State != FlowState.Debug || !waitingChoice) return;
 
         waitingChoice = false;
-        UIManager.Instance?.InGameChoiceButtonActive(false);
-        UIManager.Instance?.DebugGamePannelActive(false);
+        UIManager.Instance.InGameChoiceButtonActive(false);
+        UIManager.Instance.DebugGamePannelActive(false);
 
         if (playIngame)
         {
@@ -119,13 +117,11 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
             if (activeIngameMiniGame == null)
             {
-                Debug.LogError($"[GameFlow] Ingame key not found: {currentIssue.IngameMiniGameKey}");
                 EndTurn();
                 return;
             }
 
             activeIngameMiniGame.StartGame();
-            Debug.Log($"[GameFlow] Ingame Start: {activeIngameMiniGame.name}");
         }
         else
         {
@@ -150,8 +146,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         activeIngameMiniGame = null;
 
         SetAllMiniGamesActive(false);
-        UIManager.Instance?.InGameChoiceButtonActive(false);
-        UIManager.Instance?.DebugGamePannelActive(false);
+        UIManager.Instance.InGameChoiceButtonActive(false);
+        UIManager.Instance.DebugGamePannelActive(false);
     }
 
     private void EnterStandby()
@@ -159,15 +155,15 @@ public class GameFlowManager : Singleton<GameFlowManager>
         State = FlowState.Standby;
         waitingChoice = false;
         SetAllMiniGamesActive(false);
-
-        UIManager.Instance?.InGameChoiceButtonActive(false);
-        UIManager.Instance?.DebugGamePannelActive(false);
+        UIManager.Instance.EditorPannelPopDown();
+        UIManager.Instance.InGameChoiceButtonActive(false);
+        UIManager.Instance.DebugGamePannelActive(false);
 
         if (standbyRoutine != null) StopCoroutine(standbyRoutine);
-        standbyRoutine = StartCoroutine(CoStandbyThenDraw());
+        standbyRoutine = StartCoroutine(StandbyMiniGame());
     }
 
-    private IEnumerator CoStandbyThenDraw()
+    private IEnumerator StandbyMiniGame()
     {
         if (!flowRunning) yield break;
 
@@ -178,21 +174,18 @@ public class GameFlowManager : Singleton<GameFlowManager>
             GameClear();
             yield break;
         }
+        UIManager.Instance.EditorPannelPopup();
 
         State = FlowState.Debug;
         activeDebugMiniGame = FindMiniGameByIssue(DebugMiniGames, currentIssue);
 
         if (activeDebugMiniGame == null)
         {
-            Debug.LogError($"[GameFlow] Debug key not found: {currentIssue.DebugMiniGameKey}");
             EndTurn();
             yield break;
         }
-
-        UIManager.Instance?.DebugGamePannelActive(true);
+        UIManager.Instance.DebugGamePannelActive(true);
         activeDebugMiniGame.StartGame();
-
-        Debug.Log($"Debug Game Start: {currentIssue.IssueId} / {activeDebugMiniGame.name}");
     }
 
     private void EndTurn()
