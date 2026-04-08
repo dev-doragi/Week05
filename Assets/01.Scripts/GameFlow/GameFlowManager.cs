@@ -157,8 +157,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
         State = FlowState.Standby;
         waitingChoice = false;
         SetAllMiniGamesActive(false);
-        //경고
-        UIManager.Instance.SetUnityAlert(true);
+
 
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
@@ -178,11 +177,11 @@ public class GameFlowManager : Singleton<GameFlowManager>
             GameClear();
             yield break;
         }
-        UIManager.Instance.EditorPannelPopup();
+
 
         State = FlowState.Debug;
         activeDebugMiniGame = FindMiniGameByIssue(DebugMiniGames, currentIssue);
-
+ 
         if (activeDebugMiniGame == null)
         {
             EndTurn();
@@ -190,6 +189,9 @@ public class GameFlowManager : Singleton<GameFlowManager>
         }
         UIManager.Instance.DebugGamePannelActive(true);
         activeDebugMiniGame.StartGame();
+
+        //경고
+        UIManager.Instance.SetUnityAlert(true);
     }
 
     private void EndTurn()

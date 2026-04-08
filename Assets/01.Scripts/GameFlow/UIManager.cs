@@ -58,6 +58,8 @@ public class UIManager : Singleton<UIManager>
         cctvAlert = false;
         unitySelected = false;
         cctvSelected = true;
+        AlertMessage.transform.position = FirstMessageTransform.position;
+
         RefreshIconUI();
     }
 
@@ -173,8 +175,8 @@ public class UIManager : Singleton<UIManager>
 
         _alertMessageSeq = DOTween.Sequence();
         _alertMessageSeq.Append(msg.DOLocalMove(ChangeMessageTransform.localPosition, 0.4f).SetEase(Ease.OutCubic));
-        _alertMessageSeq.AppendInterval(0.5f);
-        _alertMessageSeq.Append(msg.DOLocalMove(FirstMessageTransform.localPosition, 0.3f).SetEase(Ease.InCubic));
+        _alertMessageSeq.AppendInterval(1f);
+        _alertMessageSeq.Append(msg.DOLocalMove(FirstMessageTransform.localPosition, 0.4f).SetEase(Ease.InCubic));
         _alertMessageSeq.OnComplete(() => { AlertMessage.SetActive(false); });
     }
     private void OnDisable()
