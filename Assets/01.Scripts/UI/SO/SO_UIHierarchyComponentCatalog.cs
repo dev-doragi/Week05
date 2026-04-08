@@ -9,9 +9,9 @@ public class SO_UIHierarchyComponentCatalog : ScriptableObject
     public class UIHierarchyComponentCatalog
     {
         [SerializeField] private UIEditorScene _uiEditorScene;
-        [SerializeField] private List<SO_ComponentData> _catalogComponents = new();
+        [SerializeField] private SO_ComponentData _catalogComponent;
         public UIEditorScene UIEditorScene => _uiEditorScene;
-        public List<SO_ComponentData> CatalogComponents => _catalogComponents;
+        public SO_ComponentData CatalogComponents => _catalogComponent;
     }
 
     [SerializeField]
@@ -20,7 +20,3 @@ public class SO_UIHierarchyComponentCatalog : ScriptableObject
     public IReadOnlyList<UIHierarchyComponentCatalog> ComponentCatalogs => _components;
 }
 
-public enum UIEditorScene
-{
-
-}

@@ -1,29 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SO_UIComponentData", menuName = "Scriptable Objects/SO_UIComponentData")]
+[CreateAssetMenu(fileName = "SO_ComponentData", menuName = "Scriptable Objects/SO_ComponentData")]
 public class SO_ComponentData : ScriptableObject
 {
-    /// <summary>
-    /// 모든 에디터 창에서 사용하는 데이터. 이미지는 사용 안할수도있긴함
-    /// </summary>
-    [Header("DisplayData")]
-    [SerializeField] private string _componentName;
-    [SerializeField] private string _imageId;
+    [Header("Identity")]
+    [SerializeField] private string _componentId;
+    [SerializeField] private string _displayName;
+    [SerializeField] private Sprite _iconSprite;
 
-    /// <summary>
-    /// 일치 여부 등을 체크하기 위한 것
-    /// </summary>
-    [Header("ComponentData")]
-    [SerializeField] private int _componentId;
-    [SerializeField] private ComponentType _componentType;
-}
+    [Header("Window")]
+    [SerializeField] private ComponentWindow _componentWindow;
+    [SerializeField] private ProejctFileStruct _projectFileStruct;
 
-public enum ComponentType
-{
-    Prefab,
-    Sprite,
-    Script,
-    Console,
-    Camera,
-    Light,
+    [Header("Inspector")]
+    [SerializeField] private List<InspectorComponent> _inspectorComponents = new();
+
+    public string ComponentId => _componentId;
+    public string DisplayName => _displayName;
+    public Sprite IconSprite => _iconSprite;
+    public ComponentWindow ComponentWindow => _componentWindow;
+    public ProejctFileStruct ProjectFileStruct => _projectFileStruct;
+    public IReadOnlyList<InspectorComponent> InspectorComponents => _inspectorComponents;
 }

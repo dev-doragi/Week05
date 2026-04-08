@@ -521,6 +521,7 @@ MonoBehaviour:
   _consoleLogImage: {fileID: 8692326713294461642}
   _consoleTitleText: {fileID: 7626033202573371199}
   _consoleContextText: {fileID: 8421473541607210557}
+  _componentId: 
 --- !u!114 &3784088842625675058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +555,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}

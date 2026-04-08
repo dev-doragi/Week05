@@ -9,9 +9,9 @@ public class SO_UIProjectComponentCatalog : ScriptableObject
     public class UIProjectComponentCatalog
     {
         [SerializeField] private ProejctFileStruct _projectFileStruct;
-        [SerializeField] private List<SO_ComponentData> _catalogComponents = new();
+        [SerializeField] private SO_ComponentData _catalogComponent;
         public ProejctFileStruct ProjectFileStruct => _projectFileStruct;
-        public List<SO_ComponentData> CatalogComponents => _catalogComponents;
+        public SO_ComponentData CatalogComponent => _catalogComponent;
     }
 
     [SerializeField]
@@ -20,7 +20,3 @@ public class SO_UIProjectComponentCatalog : ScriptableObject
     public IReadOnlyList<UIProjectComponentCatalog> ComponentCatalogs => _components;
 }
 
-public enum ProejctFileStruct
-{
-
-}
