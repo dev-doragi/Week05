@@ -1,23 +1,24 @@
-﻿//using System;
-//using UnityEngine;
+﻿using System;
 
-//[Serializable]
-//public class StageActivatedEventArgs : EventArgs
-//{
-//    public StageContext StageContext;
-//    public StageActivatedEventArgs(StageContext stageContext)
-//    {
-//        StageContext = stageContext;
-//    }
-//}
-//[Serializable]
-//public class BigTurnStartedEventArgs : EventArgs
-//{
-//    public int BigTurn;
-//    public BigTurnStartedEventArgs(int bigTurn)
-//    {
-//        BigTurn = bigTurn;
-//    }
-//}
+[Serializable]
+public class IssueDrawnEventArgs : EventArgs
+{
+    public IssueDefinition Issue;
+    public IssueDrawnEventArgs(IssueDefinition issue)
+    {
+        Issue = issue;
+    }
+}
 
+[Serializable]
+public class IssueReturnedEventArgs : EventArgs
+{
+    public IssueDefinition Issue;
+    public bool Returned;
 
+    public IssueReturnedEventArgs(IssueDefinition issue, bool returned)
+    {
+        Issue = issue;
+        Returned = returned;
+    }
+}
