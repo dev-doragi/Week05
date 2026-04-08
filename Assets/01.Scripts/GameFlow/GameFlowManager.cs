@@ -62,6 +62,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
         if (State == FlowState.Ingame && IsInList(InGameMiniGames, cleared))
         {
+            UIManager.Instance.NoiseActive(false);
             NotifyIngameCleared();
         }
     }
@@ -112,7 +113,6 @@ public class GameFlowManager : Singleton<GameFlowManager>
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
 
-        UIManager.Instance.NoiseActive(false);
 
         if (playIngame)
         {
@@ -129,6 +129,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         }
         else
         {
+            UIManager.Instance.NoiseActive(false);
+
             poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
             Debug.LogError("노이즈 비활성화");
 
