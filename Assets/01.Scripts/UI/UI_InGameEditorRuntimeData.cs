@@ -104,5 +104,6 @@ public class UI_ValidationSummary
 public class UI_RuntimeReferenceKey
 {
     public string OwnerId;
+    public InspectorComponent InspectorComponent;
     public string SlotId;
 }

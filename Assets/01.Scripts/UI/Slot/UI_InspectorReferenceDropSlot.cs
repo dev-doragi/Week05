@@ -11,13 +11,15 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
     [SerializeField] private Image _highlightImage;
 
     private string _ownerId;
+    private InspectorComponent _inspectorComponent;
     private string _slotId;
 
-    public event Action<string, string, string> Dropped;
+    public event Action<string, InspectorComponent, string, string> Dropped;
 
-    public void Bind(string ownerId, UI_RuntimeReferenceData referenceData)
+    public void Bind(string ownerId, InspectorComponent inspectorComponent, UI_RuntimeReferenceData referenceData)
     {
         _ownerId = ownerId;
+        _inspectorComponent = inspectorComponent;
         _slotId = referenceData != null ? referenceData.SlotId : null;
 
         if (_highlightImage != null)
@@ -69,6 +71,6 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
         if (string.IsNullOrEmpty(UI_DragContext.DraggedComponentId))
             return;
 
-        Dropped?.Invoke(_ownerId, _slotId, UI_DragContext.DraggedComponentId);
+        Dropped?.Invoke(_ownerId, _inspectorComponent, _slotId, UI_DragContext.DraggedComponentId);
     }
 }

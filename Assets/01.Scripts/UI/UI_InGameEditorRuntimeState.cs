@@ -148,6 +148,7 @@ public class UI_InGameEditorRuntimeState
                     keys.Add(new UI_RuntimeReferenceKey
                     {
                         OwnerId = runtimeData.Id,
+                        InspectorComponent = section.InspectorComponent,
                         SlotId = reference.SlotId
                     });
                 }
@@ -158,9 +159,9 @@ public class UI_InGameEditorRuntimeState
     }
 
     // 문제 출제용. 특정 참조 연결 끊기
-    public bool TryBreakReference(string ownerId, string slotId)
+    public bool TryBreakReference(string ownerId, InspectorComponent inspectorComponent, string slotId)
     {
-        var reference = FindReference(ownerId, slotId);
+        var reference = FindReference(ownerId, inspectorComponent, slotId);
 
         if (reference == null || reference.CanSpawnError == false)
             return false;
@@ -181,7 +182,7 @@ public class UI_InGameEditorRuntimeState
         int randomIndex = Random.Range(0, candidates.Count);
         var candidate = candidates[randomIndex];
 
-        if (TryBreakReference(candidate.OwnerId, candidate.SlotId) == false)
+        if (TryBreakReference(candidate.OwnerId, candidate.InspectorComponent, candidate.SlotId) == false)
             return false;
 
         brokenKey = candidate;
@@ -189,9 +190,9 @@ public class UI_InGameEditorRuntimeState
     }
 
     // 끊어졌던 참조 슬롯을 원래의 올바른 상태(Expected Target)로 복구
-    public bool TryRestoreReference(string ownerId, string slotId)
+    public bool TryRestoreReference(string ownerId, InspectorComponent inspectorComponent, string slotId)
     {
-        var reference = FindReference(ownerId, slotId);
+        var reference = FindReference(ownerId, inspectorComponent, slotId);
 
         if (reference == null)
             return false;
@@ -201,9 +202,9 @@ public class UI_InGameEditorRuntimeState
     }
 
     // 플레이어가 특정 슬롯에 새로운 타겟 객체를 할당할 때 호출
-    public bool TryAssignReference(string ownerId, string slotId, string targetId)
+    public bool TryAssignReference(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
     {
-        var reference = FindReference(ownerId, slotId);
+        var reference = FindReference(ownerId, inspectorComponent, slotId);
 
         if (reference == null)
             return false;
@@ -344,13 +345,16 @@ public class UI_InGameEditorRuntimeState
     }
 
     // 특정 객체(ownerId)가 가진 인스펙터 컴포넌트들 중에서 특정 슬롯(slotId)을 찾아 반환
-    private UI_RuntimeReferenceData FindReference(string ownerId, string slotId)
+    private UI_RuntimeReferenceData FindReference(string ownerId, InspectorComponent inspectorComponent, string slotId)
     {
         if (_componentById.TryGetValue(ownerId, out var data) == false)
             return null;
 
         foreach (var section in data.Sections)
         {
+            if (section.InspectorComponent != inspectorComponent)
+                continue;
+
             foreach (var reference in section.References)
             {
                 if (reference.SlotId == slotId)

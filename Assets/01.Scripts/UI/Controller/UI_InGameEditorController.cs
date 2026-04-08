@@ -125,13 +125,13 @@ public class InGameEditorController : MonoBehaviour
         RefreshInspector();
     }
 
-    private void HandleReferenceDropped(string ownerId, string slotId, string targetId)
+    private void HandleReferenceDropped(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
     {
-        bool assigned = _runtimeState.TryAssignReference(ownerId, slotId, targetId);
+        bool assigned = _runtimeState.TryAssignReference(ownerId, inspectorComponent, slotId, targetId);
 
         if (assigned == false)
         {
-            Debug.LogWarning($"[Validation] Assign failed: owner={ownerId}, slot={slotId}, target={targetId}");
+            Debug.LogWarning($"[Validation] Assign failed: owner={ownerId}, section={inspectorComponent}, slot={slotId}, target={targetId}");
             return;
         }
 

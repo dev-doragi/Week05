@@ -18,7 +18,7 @@ public class UI_InspectorGameManagerSection : MonoBehaviour, IUIInspectorReferen
     [SerializeField] private string _fourthSlotId = "reference04";
     [SerializeField] private UI_InspectorReferenceDropSlot _fourthReferenceSlot;
 
-    public event Action<string, string, string> ReferenceDropped;
+    public event Action<string, InspectorComponent, string, string> ReferenceDropped;
 
     private void Awake()
     {
@@ -56,16 +56,16 @@ public class UI_InspectorGameManagerSection : MonoBehaviour, IUIInspectorReferen
             _titleText.text = "Game Manager";
 
         if (_firstReferenceSlot != null)
-            _firstReferenceSlot.Bind(ownerId, FindReference(sectionData, _firstSlotId));
+            _firstReferenceSlot.Bind(ownerId, sectionData.InspectorComponent, FindReference(sectionData, _firstSlotId));
 
         if (_secondReferenceSlot != null)
-            _secondReferenceSlot.Bind(ownerId, FindReference(sectionData, _secondSlotId));
+            _secondReferenceSlot.Bind(ownerId, sectionData.InspectorComponent, FindReference(sectionData, _secondSlotId));
 
         if (_thirdReferenceSlot != null)
-            _thirdReferenceSlot.Bind(ownerId, FindReference(sectionData, _thirdSlotId));
+            _thirdReferenceSlot.Bind(ownerId, sectionData.InspectorComponent, FindReference(sectionData, _thirdSlotId));
 
         if (_fourthReferenceSlot != null)
-            _fourthReferenceSlot.Bind(ownerId, FindReference(sectionData, _fourthSlotId));
+            _fourthReferenceSlot.Bind(ownerId, sectionData.InspectorComponent, FindReference(sectionData, _fourthSlotId));
     }
 
     private UI_RuntimeReferenceData FindReference(UI_RuntimeInspectorSectionData sectionData, string slotId)
@@ -82,8 +82,8 @@ public class UI_InspectorGameManagerSection : MonoBehaviour, IUIInspectorReferen
         return null;
     }
 
-    private void HandleDropped(string ownerId, string slotId, string targetId)
+    private void HandleDropped(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
     {
-        ReferenceDropped?.Invoke(ownerId, slotId, targetId);
+        ReferenceDropped?.Invoke(ownerId, inspectorComponent, slotId, targetId);
     }
 }

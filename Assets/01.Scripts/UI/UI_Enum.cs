@@ -13,6 +13,11 @@ public enum InspectorComponent
     PlayerVisual,
     EnemyController,
     GameManager,
+    PlayerController_Script,
+    PlayerMovement_Script,
+    PlayerVisual_Script,
+    EnemyController_Script,
+    GameManager_Script,
 }
 
 public enum ProejctFileStruct
