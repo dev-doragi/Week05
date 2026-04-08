@@ -1741,7 +1741,7 @@ MonoBehaviour:
   sliderG: {fileID: 7774025458111941312}
   sliderB: {fileID: 1603839329914227977}
   submitButton: {fileID: 5893151986827250395}
-  clearThreshold: 0.05
+  clearThreshold: 0.1
 --- !u!4 &6721647132504522528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}

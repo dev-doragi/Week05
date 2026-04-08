@@ -4205,7 +4205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameTester
   miniGames:
-  - {fileID: 0}
+  - {fileID: 1604155609}
 --- !u!4 &222519571
 Transform:
   m_ObjectHideFlags: 0
@@ -14824,6 +14824,66 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &725969276
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_Name
+      value: AnimatorConnectGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1604155609}
+  m_SourcePrefab: {fileID: 100100000, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
 --- !u!1 &732235738
 GameObject:
   m_ObjectHideFlags: 0
@@ -31724,6 +31784,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1604155608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+  m_PrefabInstance: {fileID: 725969276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1604155609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604155608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d792f2779245b4fa124364ee31bfe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatorConnectGame
+  issue: {fileID: 0}
+  leftNodePrefab: {fileID: 6814808294680945071, guid: 564ac7d912a83894d8c5f91946f286f1, type: 3}
+  rightNodePrefab: {fileID: 7123064998759013991, guid: e963cc27728f977419d66990a9257b54, type: 3}
+  linePrefab: {fileID: 8908711445068864499, guid: 19862a458ee2fb047a0c570c75deb329, type: 3}
+  nodeDataSet:
+  - leftText: RUN
+    rightText: isRun
+  - leftText: IDLE
+    rightText: IsIdle
+  nodeSpacingY: 1.8
+  leftX: -3
+  rightX: 3
+  startY: 2
+  hitRadius: 40
 --- !u!1 &1609166343
 GameObject:
   m_ObjectHideFlags: 0
@@ -45366,5 +45457,6 @@ SceneRoots:
   - {fileID: 1229628224}
   - {fileID: 1801289399}
   - {fileID: 1000886784}
-  - {fileID: 222519571}
   - {fileID: 1876325515}
+  - {fileID: 222519571}
+  - {fileID: 725969276}
