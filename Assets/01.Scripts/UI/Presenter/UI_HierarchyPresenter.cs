@@ -55,7 +55,9 @@ public class UI_HierarchyPresenter : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             bool isSelected = items[i].Id == selectedComponentId;
-            _hierarchyItemSlots[i].Bind(items[i], isSelected);
+            bool hasReferenceError = items[i].HasReferenceError();
+
+            _hierarchyItemSlots[i].Bind(items[i], isSelected, hasReferenceError);
         }
     }
 
