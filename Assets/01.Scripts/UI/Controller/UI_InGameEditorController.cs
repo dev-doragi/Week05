@@ -44,12 +44,19 @@ public class InGameEditorController : MonoBehaviour
 
         if (_inspectorPresenter != null)
             _inspectorPresenter.ReferenceDropped -= HandleReferenceDropped;
+
+        if (_runtimeState != null)
+            _runtimeState.ReferencesChanged -= HandleReferencesChanged;
     }
 
     public void Init()
     {
+        if (_runtimeState != null)
+            _runtimeState.ReferencesChanged -= HandleReferencesChanged;
+
         _runtimeState = new UI_InGameEditorRuntimeState();
         _runtimeState.Init(_initialPlacementData);
+        _runtimeState.ReferencesChanged += HandleReferencesChanged;
 
         RefreshProject();
         RefreshHierarchy();
@@ -138,9 +145,13 @@ public class InGameEditorController : MonoBehaviour
             return;
         }
 
+        LogValidationSummary(_runtimeState.ValidateAll());
+    }
+
+    private void HandleReferencesChanged()
+    {
         RefreshHierarchy();
         RefreshInspector();
-        LogValidationSummary(_runtimeState.ValidateAll());
     }
 
     private void LogValidationSummary(UI_ValidationSummary summary)
