@@ -17,6 +17,10 @@ public class GameFlowManager : Singleton<GameFlowManager>
     public MiniGame[] DebugMiniGames;
     public MiniGame[] InGameMiniGames;
 
+    // UI_ButtonHover로 타입 변경 및 참조 복구
+    [Header("UI Feedback")]
+    [SerializeField] private UI_ButtonHover[] choiceButtons;
+
     [Header("Flow")]
     [SerializeField] private float standbySeconds = 10f;
     [SerializeField] private float skipReturnChance = 0.45f;
@@ -104,7 +108,14 @@ public class GameFlowManager : Singleton<GameFlowManager>
         waitingChoice = true;
         UIManager.Instance.InGameChoiceButtonActive(true);
 
-        // 깜빡임 실행(StartBlink) 로직 삭제
+        // 깜빡임 시작 로직 복구
+        if (choiceButtons != null)
+        {
+            foreach (var blinker in choiceButtons)
+            {
+                if (blinker != null) blinker.StartBlink();
+            }
+        }
     }
 
     public void ResolveDebugChoice(bool playIngame)
@@ -113,7 +124,14 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
         waitingChoice = false;
 
-        // 깜빡임 중지(StopBlink) 로직 삭제
+        // 모든 선택 버튼 깜빡임 중지 로직 복구
+        if (choiceButtons != null)
+        {
+            foreach (var blinker in choiceButtons)
+            {
+                if (blinker != null) blinker.StopBlink();
+            }
+        }
 
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
@@ -247,6 +265,15 @@ public class GameFlowManager : Singleton<GameFlowManager>
     private void StopFlowInternal()
     {
         flowRunning = false;
+
+        // 중단 시 깜빡임 중지 로직 복구
+        if (choiceButtons != null)
+        {
+            foreach (var blinker in choiceButtons)
+            {
+                if (blinker != null) blinker.StopBlink();
+            }
+        }
 
         if (standbyRoutine != null)
         {
