@@ -19,10 +19,6 @@ public struct RoomGimmickSetting
 
 public class GimmickController : MonoBehaviour
 {
-    [Header("Dependencies")]
-    [SerializeField] private CameraManager _cameraManager;
-    [SerializeField] private GimmickManager _gimmickManager;
-
     [Header("UI Components")]
     [SerializeField] private Button _interactionButton;
     [SerializeField] private TMP_Text _buttonLabel;
@@ -32,15 +28,26 @@ public class GimmickController : MonoBehaviour
     [SerializeField] private List<RoomGimmickSetting> _settings = new();
     [SerializeField] private float _maxWidth = 1000f;
 
+    // 인스펙터 할당 대신 런타임 동적 할당 사용
+    private CameraManager _cameraManager;
+    private GimmickManager _gimmickManager;
+
     private RoomGimmickSetting? _currentActiveSetting;
     private Dictionary<RoomID, float> _cooldownEndTimeMap = new();
+
+    private void Awake()
+    {
+        _cameraManager = FindAnyObjectByType<CameraManager>();
+        _gimmickManager = FindAnyObjectByType<GimmickManager>();
+    }
 
     private void OnEnable()
     {
         if (_cameraManager != null)
             _cameraManager.OnCameraSelected += UpdateUIByRoom;
 
-        _interactionButton.onClick.AddListener(HandleButtonClick);
+        if (_interactionButton != null)
+            _interactionButton.onClick.AddListener(HandleButtonClick);
     }
 
     private void OnDisable()
@@ -48,7 +55,8 @@ public class GimmickController : MonoBehaviour
         if (_cameraManager != null)
             _cameraManager.OnCameraSelected -= UpdateUIByRoom;
 
-        _interactionButton.onClick.RemoveListener(HandleButtonClick);
+        if (_interactionButton != null)
+            _interactionButton.onClick.RemoveListener(HandleButtonClick);
     }
 
     private void Update()
@@ -85,17 +93,19 @@ public class GimmickController : MonoBehaviour
         switch (data.GimmickType)
         {
             case GimmickType.SoundLure:
-                _gimmickManager.ActivateLure(data.Room, data.Value, data.Duration);
+                if (_gimmickManager != null)
+                    _gimmickManager.ActivateLure(data.Room, data.Value, data.Duration);
                 break;
             case GimmickType.BlockElevator:
-                if (data.Room == RoomID.Elevator_A)
+                if (data.Room == RoomID.Elevator_A && _gimmickManager != null)
                 {
                     _gimmickManager.BlockPath(RoomID.Elevator_B, RoomID.Elevator_A, data.Duration);
                     _gimmickManager.DelayElevator();
                 }
                 break;
             case GimmickType.RequestInterview:
-                _gimmickManager.SetTempTarget(RoomID.CoachingRoom, data.Duration);
+                if (_gimmickManager != null)
+                    _gimmickManager.SetTempTarget(RoomID.CoachingRoom, data.Duration);
                 break;
         }
 
