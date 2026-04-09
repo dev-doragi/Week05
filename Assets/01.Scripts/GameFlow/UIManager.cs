@@ -7,6 +7,10 @@ public class UIManager : Singleton<UIManager>
     public GameObject IngamePlayButton;
     public GameObject IngameSkipButton;
 
+    
+
+
+
     public GameObject DebugGamePannel;
 
     public GameObject CCTVPannel;
