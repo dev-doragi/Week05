@@ -5,24 +5,27 @@ public class EditorNullRefGame : MiniGame
     [SerializeField] private InspectorComponent _targetComponent;
 
     private UI_RuntimeReferenceKey _targetKey;
-    private InGameEditorController _controller;
+    private UI_InGameEditorRuntimeState _runtimeState;
 
+    private void OnEnable()
+    {
+        _runtimeState = InGameEditorController.EditorRuntimeState;
+    }
     protected override void OnStart()
     {
-        var state = GetRuntimeState();
-        if (state == null || !state.TryBreakReferenceByComponent(_targetComponent, out _targetKey))
+        if (_runtimeState == null || !_runtimeState.TryBreakReferenceByComponent(_targetComponent, out _targetKey))
         {
             Clear();
             return;
         }
 
-        state.ReferenceSolved -= HandleSolved;
-        state.ReferenceSolved += HandleSolved;
+        _runtimeState.ReferenceSolved -= HandleSolved;
+        _runtimeState.ReferenceSolved += HandleSolved;
     }
 
     private void OnDisable()
     {
-        var state = GetRuntimeState();
+        var state = InGameEditorController.EditorRuntimeState;
         if (state != null)
             state.ReferenceSolved -= HandleSolved;
     }
@@ -35,13 +38,5 @@ public class EditorNullRefGame : MiniGame
         {
             Clear();
         }
-    }
-
-    private UI_InGameEditorRuntimeState GetRuntimeState()
-    {
-        if (_controller == null)
-            _controller = FindFirstObjectByType<InGameEditorController>();
-
-        return _controller != null ? _controller.EditorRuntimeState : null;
     }
 }
