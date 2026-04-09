@@ -7,6 +7,7 @@ public class UI_InGameEditorRuntimeState
     private readonly List<string> _projectItemIds = new();
     private readonly List<string> _hierarchyItemIds = new();
 
+    public event System.Action ReferencesChanged;
     public event System.Action<UI_RuntimeReferenceKey> ReferenceSolved;
 
     public string SelectedRuntimeComponentId { get; private set; }
@@ -142,8 +143,16 @@ public class UI_InGameEditorRuntimeState
         if (reference == null || !reference.CanSpawnError)
             return false;
 
+        bool changed =
+            !string.IsNullOrEmpty(reference.CurrentTargetId) ||
+            !string.IsNullOrEmpty(reference.CurrentTargetDisplayName);
+
         reference.CurrentTargetId = null;
         reference.CurrentTargetDisplayName = null;
+
+        if (changed)
+            NotifyReferencesChanged();
+
         return true;
     }
 
@@ -209,9 +218,15 @@ public class UI_InGameEditorRuntimeState
             return false;
 
         bool hadError = reference.HasError();
+        bool changed =
+            reference.CurrentTargetId != reference.ExpectedTargetId ||
+            reference.CurrentTargetDisplayName != reference.ExpectedTargetDisplayName;
 
         reference.CurrentTargetId = reference.ExpectedTargetId;
         reference.CurrentTargetDisplayName = reference.ExpectedTargetDisplayName;
+
+        if (changed)
+            NotifyReferencesChanged();
 
         NotifyReferenceSolvedIfNeeded(hadError, ownerId, inspectorComponent, slotId, reference);
         return true;
@@ -224,9 +239,16 @@ public class UI_InGameEditorRuntimeState
             return false;
 
         bool hadError = reference.HasError();
+        string targetDisplayName = ResolveDisplayName(targetId);
+        bool changed =
+            reference.CurrentTargetId != targetId ||
+            reference.CurrentTargetDisplayName != targetDisplayName;
 
         reference.CurrentTargetId = targetId;
-        reference.CurrentTargetDisplayName = ResolveDisplayName(targetId);
+        reference.CurrentTargetDisplayName = targetDisplayName;
+
+        if (changed)
+            NotifyReferencesChanged();
 
         NotifyReferenceSolvedIfNeeded(hadError, ownerId, inspectorComponent, slotId, reference);
         return true;
@@ -396,5 +418,10 @@ public class UI_InGameEditorRuntimeState
             InspectorComponent = inspectorComponent,
             SlotId = slotId
         });
+    }
+
+    private void NotifyReferencesChanged()
+    {
+        ReferencesChanged?.Invoke();
     }
 }
