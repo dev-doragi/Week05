@@ -337,14 +337,6 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 490095535}
-    - target: {fileID: 1282112087972733932, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetHardMode
-      objectReference: {fileID: 0}
-    - target: {fileID: 1282112087972733932, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CameraManager, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 6637246248637749692, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_Name
       value: CCTVPannel_Jaein
@@ -9037,6 +9029,12 @@ MonoBehaviour:
     Duration: 20
     Value: 50
     Cooldown: 40
+  - Room: 2
+    GimmickType: 1
+    ButtonText: "\uBA54\uB274\uD310 \uCD5C\uC2E0\uD654"
+    Duration: 20
+    Value: 50
+    Cooldown: 80
   _maxWidth: 1000
 --- !u!114 &1150576484
 MonoBehaviour:
