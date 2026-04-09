@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using TMPro;
 
 public class DentureCollectGame : MiniGame
 {
@@ -10,7 +10,7 @@ public class DentureCollectGame : MiniGame
     public Transform spawnLine;
     public Transform leftBoundary;
     public Transform rightBoundary;
-    public Text countText;
+    public TextMeshPro countText;
 
     [Header("Settings")]
     public int targetCount = 10;
