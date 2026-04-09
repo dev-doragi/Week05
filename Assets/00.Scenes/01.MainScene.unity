@@ -1426,6 +1426,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8932802700573914670, guid: e518c00b15932a441b03ada0dc07a492, type: 3}
+      propertyPath: maxErrors
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932802700573914670, guid: e518c00b15932a441b03ada0dc07a492, type: 3}
+      propertyPath: minErrors
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932802700573914670, guid: e518c00b15932a441b03ada0dc07a492, type: 3}
+      propertyPath: canvasRect
+      value: 
+      objectReference: {fileID: 790426011}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3036,6 +3048,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4662133252261280650, guid: f3fb3e1727aabc943b9c4a1a5706db6c, type: 3}
+      propertyPath: maxErrors
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662133252261280650, guid: f3fb3e1727aabc943b9c4a1a5706db6c, type: 3}
+      propertyPath: minErrors
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662133252261280650, guid: f3fb3e1727aabc943b9c4a1a5706db6c, type: 3}
+      propertyPath: canvasRect
+      value: 
+      objectReference: {fileID: 790426011}
     - target: {fileID: 7295603413867024694, guid: f3fb3e1727aabc943b9c4a1a5706db6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12270,6 +12294,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5828805038546834187, guid: d96bdaea1a0c7e64282c24a97b2c6b04, type: 3}
+      propertyPath: maxErrors
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828805038546834187, guid: d96bdaea1a0c7e64282c24a97b2c6b04, type: 3}
+      propertyPath: minErrors
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828805038546834187, guid: d96bdaea1a0c7e64282c24a97b2c6b04, type: 3}
+      propertyPath: canvasRect
+      value: 
+      objectReference: {fileID: 790426011}
     - target: {fileID: 8460041138117376439, guid: d96bdaea1a0c7e64282c24a97b2c6b04, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -13958,6 +13994,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4583757015889456232, guid: add66e26c16d9454385100425a6a0c9f, type: 3}
+      propertyPath: maxErrors
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583757015889456232, guid: add66e26c16d9454385100425a6a0c9f, type: 3}
+      propertyPath: minErrors
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583757015889456232, guid: add66e26c16d9454385100425a6a0c9f, type: 3}
+      propertyPath: canvasRect
+      value: 
+      objectReference: {fileID: 790426011}
     - target: {fileID: 5624077294941205747, guid: add66e26c16d9454385100425a6a0c9f, type: 3}
       propertyPath: m_Name
       value: 15.Confirm Debugging
@@ -21020,6 +21068,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3260574196525208308, guid: 9209617340355074db61d2ddfc5b43ed, type: 3}
+      propertyPath: maxErrors
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260574196525208308, guid: 9209617340355074db61d2ddfc5b43ed, type: 3}
+      propertyPath: minErrors
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260574196525208308, guid: 9209617340355074db61d2ddfc5b43ed, type: 3}
+      propertyPath: canvasRect
+      value: 
+      objectReference: {fileID: 790426011}
     - target: {fileID: 6678724774576015983, guid: 9209617340355074db61d2ddfc5b43ed, type: 3}
       propertyPath: m_Name
       value: 17.Confirm Debugging
@@ -21821,6 +21881,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8230251710136293786, guid: e55586dfc46f6fb4e8048795ab177cb8, type: 3}
+      propertyPath: maxErrors
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230251710136293786, guid: e55586dfc46f6fb4e8048795ab177cb8, type: 3}
+      propertyPath: minErrors
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230251710136293786, guid: e55586dfc46f6fb4e8048795ab177cb8, type: 3}
+      propertyPath: canvasRect
+      value: 
+      objectReference: {fileID: 790426011}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
