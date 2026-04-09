@@ -8,6 +8,7 @@ public class UI_InGameEditorRuntimeState
     private readonly List<string> _hierarchyItemIds = new();
 
     public event System.Action ReferencesChanged;
+    public event System.Action<UI_RuntimeReferenceKey> ReferenceBroken;
     public event System.Action<UI_RuntimeReferenceKey> ReferenceSolved;
 
     public string SelectedRuntimeComponentId { get; private set; }
@@ -149,6 +150,9 @@ public class UI_InGameEditorRuntimeState
 
         reference.CurrentTargetId = null;
         reference.CurrentTargetDisplayName = null;
+
+        if (changed)
+            NotifyReferenceBroken(ownerId, inspectorComponent, slotId);
 
         if (changed)
             NotifyReferencesChanged();
@@ -413,6 +417,16 @@ public class UI_InGameEditorRuntimeState
             return;
 
         ReferenceSolved?.Invoke(new UI_RuntimeReferenceKey
+        {
+            OwnerId = ownerId,
+            InspectorComponent = inspectorComponent,
+            SlotId = slotId
+        });
+    }
+
+    private void NotifyReferenceBroken(string ownerId, InspectorComponent inspectorComponent, string slotId)
+    {
+        ReferenceBroken?.Invoke(new UI_RuntimeReferenceKey
         {
             OwnerId = ownerId,
             InspectorComponent = inspectorComponent,

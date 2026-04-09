@@ -8,6 +8,7 @@ public class CoachDebugger : MonoBehaviour
 
     private void OnEnable()
     {
+        
         if (_coach != null)
         {
             _coach.OnCoachPreparingToMove += (from, to) => Debug.Log($"[준비] 코치가 {from}에서 {to}(으)로 갈 준비 중...");

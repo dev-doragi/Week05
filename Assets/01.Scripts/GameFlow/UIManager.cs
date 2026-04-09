@@ -58,14 +58,14 @@ public class UIManager : Singleton<UIManager>
         IngameSkipButton.SetActive(false);
         DebugGamePannel.SetActive(false);
         LogMessageActive(false);
-        EditorPannelPopDown();
-
+        //EditorPannelPopDown();
+        EditorPannelPopup();
         unityHover = false;
         cctvHover = false;
         unityAlert = false;
         cctvAlert = false;
-        unitySelected = false;
-        cctvSelected = true;
+        unitySelected = true;
+        cctvSelected = false;
         AlertMessage.transform.position = FirstMessageTransform.position;
         NoiseScreen.SetActive(false);
 
