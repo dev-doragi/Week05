@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// 코치의 이동 실행과 타이머를 제어합니다. 초기 지연 후 스폰 로직이 포함되어 있습니다.
+/// 코치의 이동 실행과 타이머를 제어합니다. 외부 이벤트 호출을 통해 활성화됩니다.
 /// </summary>
 public class CoachMovementController : MonoBehaviour
 {
@@ -12,7 +12,6 @@ public class CoachMovementController : MonoBehaviour
     [SerializeField] private float _timeToRoomChange = 8f;
     [SerializeField] private float _timerVariability = 2f;
     [SerializeField] private float _transitionDuration = 2f;
-    [SerializeField] private bool _playOnStart = false;
 
     [Header("Dependencies")]
     [SerializeField] private GimmickManager _gimmickManager;
@@ -20,17 +19,18 @@ public class CoachMovementController : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private RoomID _currentRoomId = RoomID.None;
+    [SerializeField] private bool _isActive = false;
 
     private bool _isTransitioning;
     private bool _isSpawnDelayed = true;
     private float _moveTimer;
     private RoomID _nextRoomId = RoomID.None;
     private Coroutine _moveRoutine;
+    private Coroutine _initialDelayRoutine;
     private MapGraph _mapGraph;
 
     public RoomID CurrentRoomId => _currentRoomId;
     public RoomID NextRoomId => _nextRoomId;
-
     public MapGraph MapGraph => _mapGraph;
     public bool IsTransitioning => _isTransitioning;
     public float TransitionDuration => _transitionDuration;
@@ -49,20 +49,24 @@ public class CoachMovementController : MonoBehaviour
 
         _coachBrain.Initialize(_mapGraph, _gimmickManager);
 
-        // 초기에는 None 상태로 시작 (CCTV에 보이지 않음)
         _currentRoomId = RoomID.None;
         _isSpawnDelayed = true;
+        _isActive = false;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (!_playOnStart) return;
-        StartCoroutine(Co_InitialDelay());
+        GameManager.OnGameStart += StartMovement;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStart -= StartMovement;
     }
 
     private void Update()
     {
-        if (!_playOnStart || _isTransitioning || _isSpawnDelayed || _currentRoomId == RoomID.Office)
+        if (!_isActive || _isTransitioning || _isSpawnDelayed || _currentRoomId == RoomID.Office)
             return;
 
         _moveTimer -= Time.deltaTime;
@@ -70,15 +74,37 @@ public class CoachMovementController : MonoBehaviour
             TryMoveNext();
     }
 
-    public bool IsCoachInRoom(RoomID roomId)
+    public void StartMovement()
     {
-        if (_isTransitioning || _currentRoomId == RoomID.None) return false;
-        return _currentRoomId == roomId;
+        if (_isActive) return;
+
+        _isActive = true;
+
+        if (_initialDelayRoutine != null) StopCoroutine(_initialDelayRoutine);
+
+        _initialDelayRoutine = StartCoroutine(Co_InitialDelay());
     }
 
-    /// <summary>
-    /// 지정된 지연 시간 이후 첫 스폰 위치를 결정하고 활동을 시작합니다.
-    /// </summary>
+    public void StopMovement()
+    {
+        _isActive = false;
+
+        if (_initialDelayRoutine != null)
+        {
+            StopCoroutine(_initialDelayRoutine);
+            _initialDelayRoutine = null;
+        }
+
+        if (_moveRoutine != null)
+        {
+            StopCoroutine(_moveRoutine);
+            _moveRoutine = null;
+        }
+
+        _isTransitioning = false;
+        _nextRoomId = RoomID.None;
+    }
+
     private IEnumerator Co_InitialDelay()
     {
         yield return new WaitForSeconds(_initialSpawnDelay);
@@ -88,31 +114,7 @@ public class CoachMovementController : MonoBehaviour
         ResetMoveTimer();
 
         OnCoachMoved?.Invoke(RoomID.None, _currentRoomId);
-    }
-
-    public void StartMovement()
-    {
-        _playOnStart = true;
-        if (_currentRoomId == RoomID.None)
-        {
-            StopAllCoroutines();
-            _currentRoomId = GetRandomSpawnRoom();
-            OnCoachMoved?.Invoke(RoomID.None, _currentRoomId);
-        }
-        _isSpawnDelayed = false;
-        ResetMoveTimer();
-    }
-
-    public void StopMovement()
-    {
-        _playOnStart = false;
-        if (_moveRoutine != null)
-        {
-            StopCoroutine(_moveRoutine);
-            _moveRoutine = null;
-        }
-        _isTransitioning = false;
-        _nextRoomId = RoomID.None;
+        _initialDelayRoutine = null;
     }
 
     public void ForceMoveTo(RoomID targetRoomId)
@@ -127,6 +129,7 @@ public class CoachMovementController : MonoBehaviour
         _currentRoomId = targetRoomId;
         _nextRoomId = RoomID.None;
         _isTransitioning = false;
+        _isSpawnDelayed = false;
 
         ResetMoveTimer();
         OnCoachMoved?.Invoke(previousRoomId, _currentRoomId);
@@ -149,9 +152,7 @@ public class CoachMovementController : MonoBehaviour
         _isTransitioning = true;
         OnCoachPreparingToMove?.Invoke(_currentRoomId, _nextRoomId);
 
-        if (_moveRoutine != null)
-            StopCoroutine(_moveRoutine);
-
+        if (_moveRoutine != null) StopCoroutine(_moveRoutine);
         _moveRoutine = StartCoroutine(Co_MoveAfterDelay());
     }
 
@@ -182,5 +183,11 @@ public class CoachMovementController : MonoBehaviour
     {
         RoomID[] spawnRooms = { RoomID.Cafeteria, RoomID.Elevator_B, RoomID.Stair_B };
         return spawnRooms[UnityEngine.Random.Range(0, spawnRooms.Length)];
+    }
+
+    public bool IsCoachInRoom(RoomID roomId)
+    {
+        if (_isTransitioning || _currentRoomId == RoomID.None) return false;
+        return _currentRoomId == roomId;
     }
 }

@@ -1,57 +1,38 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class CameraAreaController : MonoBehaviour
+public class CameraAreaController : MonoBehaviour, IPointerClickHandler
 {
+    public enum BlinkState
+    {
+        None,
+        Selected,
+        CoachDetected
+    }
+
     [Header("Room Data")]
     [SerializeField] private RoomID _roomId = RoomID.None;
     [SerializeField] private Texture _roomBackgroundTexture;
     [SerializeField] private Texture _roomBackgroundWithCoachTexture;
 
     [Header("UI")]
-    [SerializeField] private CameraManager _cameraManager;
-    [SerializeField] private CoachMovementController _coachMovementController;
     [SerializeField] private Image _cameraUiBackground;
     [SerializeField] private Color _normalColor = Color.black;
-    [SerializeField] private Color _blinkColor = Color.yellow;
-    [SerializeField] private Color _coachDetectionColor = Color.red; // 코치 위치 표시 색상
+    [SerializeField] private Color _selectedBlinkColor = Color.yellow;
+    [SerializeField] private Color _coachDetectedBlinkColor = Color.red;
     [SerializeField] private float _blinkInterval = 0.5f;
 
+    private CameraManager _cameraManager;
     private Coroutine _blinkCoroutine;
-    private bool _isSelected;
-    private static bool _isHardMode; // 하드 모드 상태 (전역)
+    private BlinkState _currentBlinkState = BlinkState.None;
 
     public RoomID RoomId => _roomId;
 
     private void Awake()
     {
-        if (_coachMovementController == null)
-        {
-            _coachMovementController = Object.FindAnyObjectByType<CoachMovementController>();
-        }
-    }
-
-    private void Update()
-    {
-        bool isCoachHere = _coachMovementController != null && _coachMovementController.IsCoachInRoom(_roomId);
-
-        // 로직 변경: (내가 선택되었거나) OR (하드 모드가 아니면서 코치가 이 방에 있거나)
-        bool shouldBlink = _isSelected || (!_isHardMode && isCoachHere);
-
-        if (shouldBlink)
-        {
-            if (_blinkCoroutine == null)
-                _blinkCoroutine = StartCoroutine(BlinkLoop());
-        }
-        else
-        {
-            // 깜빡일 조건이 아니면 루틴 정지 및 색상 초기화
-            if (_blinkCoroutine != null)
-            {
-                StopBlinkingInternal();
-            }
-        }
+        _cameraManager = FindAnyObjectByType<CameraManager>();
     }
 
     public Texture GetBackgroundTexture(bool hasCoach)
@@ -62,7 +43,7 @@ public class CameraAreaController : MonoBehaviour
         return _roomBackgroundTexture;
     }
 
-    public void OnClickCameraArea()
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (_cameraManager == null)
             return;
@@ -70,15 +51,21 @@ public class CameraAreaController : MonoBehaviour
         _cameraManager.SelectCamera(this);
     }
 
-    public void StartBlinking()
+    public void SetBlinkState(BlinkState blinkState)
     {
-        _isSelected = true;
-    }
+        if (_currentBlinkState == blinkState)
+            return;
 
-    public void StopBlinking()
-    {
-        _isSelected = false;
-        StopBlinkingInternal();
+        _currentBlinkState = blinkState;
+
+        if (_currentBlinkState == BlinkState.None)
+        {
+            StopBlinkingInternal();
+            return;
+        }
+
+        if (_blinkCoroutine == null)
+            _blinkCoroutine = StartCoroutine(BlinkLoop());
     }
 
     private void StopBlinkingInternal()
@@ -102,18 +89,19 @@ public class CameraAreaController : MonoBehaviour
 
         while (true)
         {
-            // 우선순위: 선택 상태(노란색) > 코치 탐지 상태(붉은색)
-            Color targetColor = _isSelected ? _blinkColor : _coachDetectionColor;
-
-            _cameraUiBackground.color = isBlinkColor ? targetColor : _normalColor;
+            _cameraUiBackground.color = isBlinkColor ? GetBlinkColor() : _normalColor;
             isBlinkColor = !isBlinkColor;
             yield return new WaitForSeconds(_blinkInterval);
         }
     }
 
-    // 하드 모드 설정 (토글 UI와 연결)
-    public static void SetHardMode(bool active)
+    private Color GetBlinkColor()
     {
-        _isHardMode = active;
+        return _currentBlinkState switch
+        {
+            BlinkState.Selected => _selectedBlinkColor,
+            BlinkState.CoachDetected => _coachDetectedBlinkColor,
+            _ => _normalColor
+        };
     }
 }
