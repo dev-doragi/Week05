@@ -1,8 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems; // IPointerClickHandler 사용을 위해 추가
 
-public class CameraAreaController : MonoBehaviour
+public class CameraAreaController : MonoBehaviour, IPointerClickHandler
 {
     [Header("Room Data")]
     [SerializeField] private RoomID _roomId = RoomID.None;
@@ -10,33 +11,31 @@ public class CameraAreaController : MonoBehaviour
     [SerializeField] private Texture _roomBackgroundWithCoachTexture;
 
     [Header("UI")]
-    [SerializeField] private CameraManager _cameraManager;
-    [SerializeField] private CoachMovementController _coachMovementController;
     [SerializeField] private Image _cameraUiBackground;
     [SerializeField] private Color _normalColor = Color.black;
     [SerializeField] private Color _blinkColor = Color.yellow;
-    [SerializeField] private Color _coachDetectionColor = Color.red; // 코치 위치 표시 색상
+    [SerializeField] private Color _coachDetectionColor = Color.red;
     [SerializeField] private float _blinkInterval = 0.5f;
+
+    private CameraManager _cameraManager;
+    private CoachMovementController _coachMovementController;
 
     private Coroutine _blinkCoroutine;
     private bool _isSelected;
-    private static bool _isHardMode; // 하드 모드 상태 (전역)
+    private static bool _isHardMode;
 
     public RoomID RoomId => _roomId;
 
     private void Awake()
     {
-        if (_coachMovementController == null)
-        {
-            _coachMovementController = Object.FindAnyObjectByType<CoachMovementController>();
-        }
+        _cameraManager = FindAnyObjectByType<CameraManager>();
+        _coachMovementController = FindAnyObjectByType<CoachMovementController>();
     }
 
     private void Update()
     {
         bool isCoachHere = _coachMovementController != null && _coachMovementController.IsCoachInRoom(_roomId);
 
-        // 로직 변경: (내가 선택되었거나) OR (하드 모드가 아니면서 코치가 이 방에 있거나)
         bool shouldBlink = _isSelected || (!_isHardMode && isCoachHere);
 
         if (shouldBlink)
@@ -46,7 +45,6 @@ public class CameraAreaController : MonoBehaviour
         }
         else
         {
-            // 깜빡일 조건이 아니면 루틴 정지 및 색상 초기화
             if (_blinkCoroutine != null)
             {
                 StopBlinkingInternal();
@@ -62,7 +60,8 @@ public class CameraAreaController : MonoBehaviour
         return _roomBackgroundTexture;
     }
 
-    public void OnClickCameraArea()
+    // 이벤트 트리거 -> UI 클릭 인터페이스로 변경; 하나 하나 할당하기 귀찮음
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (_cameraManager == null)
             return;
@@ -102,7 +101,6 @@ public class CameraAreaController : MonoBehaviour
 
         while (true)
         {
-            // 우선순위: 선택 상태(노란색) > 코치 탐지 상태(붉은색)
             Color targetColor = _isSelected ? _blinkColor : _coachDetectionColor;
 
             _cameraUiBackground.color = isBlinkColor ? targetColor : _normalColor;
@@ -111,7 +109,6 @@ public class CameraAreaController : MonoBehaviour
         }
     }
 
-    // 하드 모드 설정 (토글 UI와 연결)
     public static void SetHardMode(bool active)
     {
         _isHardMode = active;
