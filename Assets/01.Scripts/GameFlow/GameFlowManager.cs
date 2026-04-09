@@ -33,13 +33,12 @@ public class GameFlowManager : Singleton<GameFlowManager>
     private MiniGame activeDebugMiniGame;
     private MiniGame activeIngameMiniGame;
 
-    
-
     protected override void Init()
     {
         State = FlowState.Ready;
         SetAllMiniGamesActive(false);
     }
+
     private void OnEnable()
     {
         MiniGame.OnCleared += HandleMiniGameCleared;
@@ -103,6 +102,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
         waitingChoice = true;
         UIManager.Instance.InGameChoiceButtonActive(true);
+
+        // 깜빡임 실행(StartBlink) 로직 삭제
     }
 
     public void ResolveDebugChoice(bool playIngame)
@@ -110,9 +111,11 @@ public class GameFlowManager : Singleton<GameFlowManager>
         if (!flowRunning || State != FlowState.Debug || !waitingChoice) return;
 
         waitingChoice = false;
+
+        // 깜빡임 중지(StopBlink) 로직 삭제
+
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
-
 
         if (playIngame)
         {
@@ -130,9 +133,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
         else
         {
             UIManager.Instance.NoiseActive(false);
-
             poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
-
             EndTurn();
         }
     }
@@ -147,7 +148,6 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         StopFlowInternal();
         State = FlowState.Clear;
-        //인게임 클리어
         UIManager.Instance.NoiseActive(false);
 
         waitingChoice = false;
@@ -165,7 +165,6 @@ public class GameFlowManager : Singleton<GameFlowManager>
         State = FlowState.Standby;
         waitingChoice = false;
         SetAllMiniGamesActive(false);
-
 
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
@@ -186,10 +185,9 @@ public class GameFlowManager : Singleton<GameFlowManager>
             yield break;
         }
 
-
         State = FlowState.Debug;
         activeDebugMiniGame = FindMiniGameByIssue(DebugMiniGames, currentIssue);
- 
+
         if (activeDebugMiniGame == null)
         {
             EndTurn();
@@ -198,10 +196,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         UIManager.Instance.LogMessageActive(true);
         LogManager.Instance.UpdateIssueLog(currentIssue);
 
-        //경고
         UIManager.Instance.SetUnityAlert(true);
         UIManager.Instance.NoiseActive(true);
-        //디버그 미니게임 시작
 
         UIManager.Instance.DebugGamePannelActive(true);
         activeDebugMiniGame.StartGame();
@@ -228,7 +224,6 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
         return null;
     }
-
 
     private void SetAllMiniGamesActive(bool active)
     {
