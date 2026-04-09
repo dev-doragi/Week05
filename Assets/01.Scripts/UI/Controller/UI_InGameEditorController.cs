@@ -6,7 +6,6 @@ public class InGameEditorController : MonoBehaviour
     [SerializeField] private SO_InGameEditorInitialPlacementData _initialPlacementData;
 
     [Header("Presenter")]
-    [SerializeField] private UI_ConsolePresenter _consolePresenter;
     [SerializeField] private UI_ProjectPresenter _projectPresenter;
     [SerializeField] private UI_HierarchyPresenter _hierarchyPresenter;
     [SerializeField] private UI_InspectorPresenter _inspectorPresenter;
@@ -15,7 +14,6 @@ public class InGameEditorController : MonoBehaviour
 
     private void Awake()
     {
-        _consolePresenter ??= FindFirstObjectByType<UI_ConsolePresenter>();
         _projectPresenter ??= FindFirstObjectByType<UI_ProjectPresenter>();
         _hierarchyPresenter ??= FindFirstObjectByType<UI_HierarchyPresenter>();
         _inspectorPresenter ??= FindFirstObjectByType<UI_InspectorPresenter>();
