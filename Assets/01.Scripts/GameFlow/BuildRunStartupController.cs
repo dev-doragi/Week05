@@ -12,18 +12,63 @@ public class BuildRunStartupController : MonoBehaviour
     [SerializeField] private GameObject startupRoot;
     [SerializeField] private TextMeshProUGUI[] messageSlots;
 
+    [Header("Confirm Blink")]
+    [SerializeField] private Image confirmBlinkImage;          
+    [SerializeField, Range(0f, 255f)] private float minAlpha = 0f;
+    [SerializeField, Range(0f, 255f)] private float maxAlpha = 180f;
+    [SerializeField] private float blinkCycleSeconds = 1.2f; 
+
     [Header("Timing")]
     [SerializeField] private float totalSeconds = 8f;
 
     private bool _running;
     private Coroutine _co;
 
+    private bool _confirmBlinkLockedOff;
+
+
     public void OnClickBuildAndRun()
     {
         if (_running) return;
+        _confirmBlinkLockedOff = true;
+        SetConfirmAlpha01(0f);
         _co = StartCoroutine(CoRun());
     }
+    private void Update()
+    {
+        UpdateConfirmBlink();
+    }
+    private void UpdateConfirmBlink()
+    {
+        if (confirmBlinkImage == null) return;
+        if (_confirmBlinkLockedOff)
+        {
+            SetConfirmAlpha01(0f);
+            return;
+        }
 
+        if (!confirmBlinkImage.gameObject.activeInHierarchy)
+        {
+            SetConfirmAlpha01(0f);
+            return;
+        }
+
+        float minA = minAlpha / 255f;
+        float maxA = maxAlpha / 255f;
+        float half = Mathf.Max(0.01f, blinkCycleSeconds * 0.5f);
+
+        float t = Mathf.PingPong(Time.unscaledTime / half, 1f);
+        float a = Mathf.Lerp(minA, maxA, t);
+
+        SetConfirmAlpha01(a);
+    }
+
+    private void SetConfirmAlpha01(float a01)
+    {
+        Color c = confirmBlinkImage.color;
+        c.a = Mathf.Clamp01(a01);
+        confirmBlinkImage.color = c;
+    }
     private IEnumerator CoRun()
     {
         _running = true;
@@ -69,6 +114,7 @@ public class BuildRunStartupController : MonoBehaviour
         if (startupRoot != null)
             startupRoot.SetActive(false);
         GameManager.Instance?.StartGame();
+        UIManager.Instance.SetCCTVAlert(true);
         _running = false;
     }
 
@@ -89,7 +135,8 @@ public class BuildRunStartupController : MonoBehaviour
             if (notifyRoot != null)
                 notifyRoot.gameObject.SetActive(false);
         }
-
+        if (confirmBlinkImage != null)
+        SetConfirmAlpha01(0f);
     }
 
     private void ShowMessage(int index, IssueDefinition issue)
