@@ -18,6 +18,12 @@ public enum InspectorComponent
     PlayerVisual_Script,
     EnemyController_Script,
     GameManager_Script,
+    BallPop,
+    Bomb,
+    DentureCollect,
+    Flying,
+    Parrycing,
+    Reflect
 }
 
 public enum ProejctFileStruct
