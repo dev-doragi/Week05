@@ -5,11 +5,12 @@ using TMPro;
 
 public class FlyingGame : MiniGame
 {
-    public static event Action<Vector2, int>  OnFlyingGameStart;
+    public static event Action<Vector2, float>  OnFlyingGameStart;
 
     [Header("Game Settings")]
     [SerializeField] private TextMeshPro _countDownText;
     [SerializeField] private int _countDownCount;
+    [SerializeField] private float _secondPerCount = 0.6f;
 
     [Header("Player Settings")]
     public Vector2 startPos;
@@ -32,9 +33,12 @@ public class FlyingGame : MiniGame
     protected override void OnStart()
     {
         PillarSetting();
+
         _countDownText.gameObject.SetActive(false);
         Vector3 worldStartPos = transform.TransformPoint(startPos);
-        OnFlyingGameStart?.Invoke(worldStartPos, _countDownCount);
+
+        float totalWaitTime = _countDownCount * _secondPerCount;
+        OnFlyingGameStart?.Invoke(worldStartPos, totalWaitTime);
 
         StartCoroutine(Co_CountdownRoutine());
     }
@@ -43,16 +47,17 @@ public class FlyingGame : MiniGame
     {
         _countDownText.gameObject.SetActive(true);
 
-        for (int i = 3; i > 0; i--)
+        for (int i = _countDownCount; i > 0; i--)
         {
             _countDownText.text = i.ToString();
             _countDownText.transform.localScale = Vector3.one;
 
             float timer = 0f;
-            while (timer < 1f) 
+            while (timer < _secondPerCount) 
             {
                 timer += Time.deltaTime;
-                _countDownText.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.3f, timer);
+                float progress = timer / _secondPerCount;
+                _countDownText.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.3f, progress);
 
                 yield return null;
             }
