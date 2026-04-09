@@ -163,6 +163,45 @@ public class UI_InGameEditorRuntimeState
         return true;
     }
 
+    public bool TryBreakReferenceByComponent(InspectorComponent component, out UI_RuntimeReferenceKey brokenKey)
+    {
+        brokenKey = null;
+
+        string ownerId = component.ToString();
+
+        if (_componentById.TryGetValue(ownerId, out var runtimeData) == false)
+            return false;
+
+        foreach (var section in runtimeData.Sections)
+        {
+            if (section == null || section.InspectorComponent != component)
+                continue;
+
+            foreach (var reference in section.References)
+            {
+                if (reference == null)
+                    continue;
+
+                if (!reference.CanSpawnError || !reference.IsCorrect())
+                    continue;
+
+                if (!TryBreakReference(ownerId, component, reference.SlotId))
+                    return false;
+
+                brokenKey = new UI_RuntimeReferenceKey
+                {
+                    OwnerId = ownerId,
+                    InspectorComponent = component,
+                    SlotId = reference.SlotId
+                };
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public bool TryRestoreReference(string ownerId, InspectorComponent inspectorComponent, string slotId)
     {
         var reference = FindReference(ownerId, inspectorComponent, slotId);

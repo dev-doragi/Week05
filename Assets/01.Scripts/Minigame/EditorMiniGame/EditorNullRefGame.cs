@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class EditorNullRefGame : MiniGame
 {
+    [SerializeField] private InspectorComponent _targetComponent;
+
     private UI_RuntimeReferenceKey _targetKey;
     private InGameEditorController _controller;
 
     protected override void OnStart()
     {
         var state = GetRuntimeState();
-        if (state == null || !state.TryBreakRandomReference(out _targetKey))
+        if (state == null || !state.TryBreakReferenceByComponent(_targetComponent, out _targetKey))
         {
             Clear();
             return;
