@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Issue_00
   m_EditorClassIdentifier: Assembly-CSharp::IssueDefinition
   issueId: ISSUE_00
-  issueTitle: Missing Reference
-  consoleWarning: Console Warning
+  issueTitle: "EnemySpawner: \uC624\uBE0C\uC81D\uD2B8 \uBC30\uCE58 \uC624\uB958"
+  consoleWarning: "NullReferenceException: \uC9C0\uC815\uB41C Transform \uC704\uCE58\uC5D0
+    \uC624\uBE0C\uC81D\uD2B8\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4. EnemySpawner.PlaceEnemy()
+    \uB97C \uD655\uC778\uD558\uC138\uC694. (at Assets/Scripts/EnemySpawner.cs:47)"
   debugMiniGameKey: Debug_00
   ingameMiniGameKey: Ingame_00

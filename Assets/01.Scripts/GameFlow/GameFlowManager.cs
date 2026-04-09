@@ -62,6 +62,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
         if (State == FlowState.Ingame && IsInList(InGameMiniGames, cleared))
         {
             UIManager.Instance.NoiseActive(false);
+            UIManager.Instance.SetCCTVAlert(true);
             NotifyIngameCleared();
         }
     }
@@ -133,6 +134,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
         else
         {
             UIManager.Instance.NoiseActive(false);
+            UIManager.Instance.SetCCTVAlert(true);
             poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
             EndTurn();
         }
