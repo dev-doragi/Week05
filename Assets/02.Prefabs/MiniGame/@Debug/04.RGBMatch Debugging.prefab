@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 672273947052117255, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_Name
-      value: 04.RGBMatch Debugging Variant
+      value: 04.RGBMatch Debugging
       objectReference: {fileID: 0}
     - target: {fileID: 785428475078744573, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_AnchorMax.y
@@ -127,6 +127,10 @@ PrefabInstance:
     - target: {fileID: 6721647132504522528, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434486477560832323, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8395166408042197079, guid: 75fa4316d0f7a014ab73c6ff7a2adfaf, type: 3}
       propertyPath: m_Sprite
