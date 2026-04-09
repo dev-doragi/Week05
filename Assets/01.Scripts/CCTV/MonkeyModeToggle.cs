@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MonkeyModeToggle : MonoBehaviour
 {
     public void OnToggleChanged(bool isOn)
     {
-        CameraAreaController.SetHardMode(isOn);
+        if (CameraManager.Instance != null)
+            CameraManager.Instance.SetHardMode(isOn);
     }
 }

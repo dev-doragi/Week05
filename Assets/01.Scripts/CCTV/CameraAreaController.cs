@@ -1,10 +1,17 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; // IPointerClickHandler 사용을 위해 추가
+using UnityEngine.EventSystems;
 
 public class CameraAreaController : MonoBehaviour, IPointerClickHandler
 {
+    public enum BlinkState
+    {
+        None,
+        Selected,
+        CoachDetected
+    }
+
     [Header("Room Data")]
     [SerializeField] private RoomID _roomId = RoomID.None;
     [SerializeField] private Texture _roomBackgroundTexture;
@@ -13,43 +20,19 @@ public class CameraAreaController : MonoBehaviour, IPointerClickHandler
     [Header("UI")]
     [SerializeField] private Image _cameraUiBackground;
     [SerializeField] private Color _normalColor = Color.black;
-    [SerializeField] private Color _blinkColor = Color.yellow;
-    [SerializeField] private Color _coachDetectionColor = Color.red;
+    [SerializeField] private Color _selectedBlinkColor = Color.yellow;
+    [SerializeField] private Color _coachDetectedBlinkColor = Color.red;
     [SerializeField] private float _blinkInterval = 0.5f;
 
     private CameraManager _cameraManager;
-    private CoachMovementController _coachMovementController;
-
     private Coroutine _blinkCoroutine;
-    private bool _isSelected;
-    private static bool _isHardMode;
+    private BlinkState _currentBlinkState = BlinkState.None;
 
     public RoomID RoomId => _roomId;
 
     private void Awake()
     {
         _cameraManager = FindAnyObjectByType<CameraManager>();
-        _coachMovementController = FindAnyObjectByType<CoachMovementController>();
-    }
-
-    private void Update()
-    {
-        bool isCoachHere = _coachMovementController != null && _coachMovementController.IsCoachInRoom(_roomId);
-
-        bool shouldBlink = _isSelected || (!_isHardMode && isCoachHere);
-
-        if (shouldBlink)
-        {
-            if (_blinkCoroutine == null)
-                _blinkCoroutine = StartCoroutine(BlinkLoop());
-        }
-        else
-        {
-            if (_blinkCoroutine != null)
-            {
-                StopBlinkingInternal();
-            }
-        }
     }
 
     public Texture GetBackgroundTexture(bool hasCoach)
@@ -60,7 +43,6 @@ public class CameraAreaController : MonoBehaviour, IPointerClickHandler
         return _roomBackgroundTexture;
     }
 
-    // 이벤트 트리거 -> UI 클릭 인터페이스로 변경; 하나 하나 할당하기 귀찮음
     public void OnPointerClick(PointerEventData eventData)
     {
         if (_cameraManager == null)
@@ -69,15 +51,21 @@ public class CameraAreaController : MonoBehaviour, IPointerClickHandler
         _cameraManager.SelectCamera(this);
     }
 
-    public void StartBlinking()
+    public void SetBlinkState(BlinkState blinkState)
     {
-        _isSelected = true;
-    }
+        if (_currentBlinkState == blinkState)
+            return;
 
-    public void StopBlinking()
-    {
-        _isSelected = false;
-        StopBlinkingInternal();
+        _currentBlinkState = blinkState;
+
+        if (_currentBlinkState == BlinkState.None)
+        {
+            StopBlinkingInternal();
+            return;
+        }
+
+        if (_blinkCoroutine == null)
+            _blinkCoroutine = StartCoroutine(BlinkLoop());
     }
 
     private void StopBlinkingInternal()
@@ -101,16 +89,19 @@ public class CameraAreaController : MonoBehaviour, IPointerClickHandler
 
         while (true)
         {
-            Color targetColor = _isSelected ? _blinkColor : _coachDetectionColor;
-
-            _cameraUiBackground.color = isBlinkColor ? targetColor : _normalColor;
+            _cameraUiBackground.color = isBlinkColor ? GetBlinkColor() : _normalColor;
             isBlinkColor = !isBlinkColor;
             yield return new WaitForSeconds(_blinkInterval);
         }
     }
 
-    public static void SetHardMode(bool active)
+    private Color GetBlinkColor()
     {
-        _isHardMode = active;
+        return _currentBlinkState switch
+        {
+            BlinkState.Selected => _selectedBlinkColor,
+            BlinkState.CoachDetected => _coachDetectedBlinkColor,
+            _ => _normalColor
+        };
     }
 }
