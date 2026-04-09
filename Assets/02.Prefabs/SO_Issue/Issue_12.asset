@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Issue_12
   m_EditorClassIdentifier: Assembly-CSharp::IssueDefinition
   issueId: ISSUE_12
-  issueTitle: Missing Reference
-  consoleWarning: Console Warning
+  issueTitle: "AnimatorController: \uD2B8\uB79C\uC9C0\uC158 \uC5F0\uACB0 \uB204\uB77D"
+  consoleWarning: "InvalidOperationException: State Machine\uC5D0 \uC5F0\uACB0\uB418\uC9C0
+    \uC54A\uC740 AnimatorState\uAC00 \uAC10\uC9C0\uB418\uC5C8\uC2B5\uB2C8\uB2E4.
+    AnimatorController.BuildGraph() \uB97C \uD655\uC778\uD558\uC138\uC694. (at Assets/Animator/ShotgunController.controller:12)"
   debugMiniGameKey: Debug_12
   ingameMiniGameKey: Ingame_12

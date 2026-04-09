@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Issue_23
   m_EditorClassIdentifier: Assembly-CSharp::IssueDefinition
   issueId: ISSUE_23
-  issueTitle: Missing Reference
-  consoleWarning: Console Warning
+  issueTitle: "Inspector: \uCEF4\uD3EC\uB10C\uD2B8 \uCC38\uC870 \uB204\uB77D"
+  consoleWarning: "MissingReferenceException: \uC624\uBE0C\uC81D\uD2B8\uC758 \uCC38\uC870\uAC00
+    \uD560\uB2F9\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. Inspector\uC5D0\uC11C
+    \uD544\uB4DC\uB97C \uD655\uC778\uD558\uACE0 \uC62C\uBC14\uB978 \uC624\uBE0C\uC81D\uD2B8\uB97C
+    \uD560\uB2F9\uD558\uC138\uC694. (at Assets/Scripts/RingManager.cs:88)"
   debugMiniGameKey: Debug_23
   ingameMiniGameKey: Ingame_23
