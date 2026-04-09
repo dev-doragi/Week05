@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: SO_InGameEditorInitialPlacementData_easy
   m_EditorClassIdentifier: Assembly-CSharp::SO_InGameEditorInitialPlacementData
   _objects:
+  - _objectId: Script_PlayerController
+    _componentData: {fileID: 11400000, guid: 245ef21dd0a39e54abf2d578690bd7cd, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: MainCamera
     _componentData: {fileID: 11400000, guid: d08cf38db4da5bd42bfc9661182c3e22, type: 2}
     _scene: 0
@@ -49,16 +53,16 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: 9c3c7ffe99da0d44f9f66289f7afd980, type: 2}
     _scene: 0
     _references: []
+  - _objectId: Script_GameManage
+    _componentData: {fileID: 11400000, guid: 808cae6de179cbc4ebabaf8ff946e1ba, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: Collider
     _componentData: {fileID: 11400000, guid: 24070e0b186abf1429a22fdef680dd7a, type: 2}
     _scene: 0
     _references: []
   - _objectId: Collider2D
     _componentData: {fileID: 11400000, guid: 7673a3288fda29f4ebd2d97b57789940, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: Script_PlayerController
-    _componentData: {fileID: 11400000, guid: 245ef21dd0a39e54abf2d578690bd7cd, type: 2}
     _scene: 0
     _references: []
   - _objectId: Script_PlayerMovement
@@ -87,14 +91,6 @@ MonoBehaviour:
     _references: []
   - _objectId: Script_EnemyC
     _componentData: {fileID: 11400000, guid: b65cabedb1bca384080d098b4bb41513, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: Script_GameManager
-    _componentData: {fileID: 11400000, guid: 381b9e4564a8ccf479a44abf17a28172, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: Script_GameManage
-    _componentData: {fileID: 11400000, guid: 808cae6de179cbc4ebabaf8ff946e1ba, type: 2}
     _scene: 0
     _references: []
   - _objectId: Player
@@ -249,6 +245,10 @@ MonoBehaviour:
       _normalTargetId: DirectionalLight
       _canSpawnError: 1
       _isRequired: 1
+  - _objectId: Script_GameManager
+    _componentData: {fileID: 11400000, guid: 381b9e4564a8ccf479a44abf17a28172, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: GM
     _componentData: {fileID: 11400000, guid: 62ee218a76d75464d9258e7b8a14b4d6, type: 2}
     _scene: 0
