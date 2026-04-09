@@ -235,8 +235,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 87b97322ae744544d8641ba529c59075, type: 3}
   _cameraUiBackground: {fileID: 3839222336869568540}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &599264345857075030
 MonoBehaviour:
@@ -703,8 +703,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: c63ef9f597a646b479942dca78b41ff1, type: 3}
   _cameraUiBackground: {fileID: 5249433316415390896}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &7919298704405545261
 MonoBehaviour:
@@ -1464,8 +1464,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 324275664261242430}
-        m_TargetAssemblyTypeName: CameraAreaController, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: SetHardMode
         m_Mode: 0
         m_Arguments:
@@ -1817,8 +1817,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: d27d8761cf48ab64ca25d7392ed7a0a1, type: 3}
   _cameraUiBackground: {fileID: 2793060526466462164}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &4382159980300374229
 MonoBehaviour:
@@ -1934,8 +1934,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: f2157b94b5b1aab41b7a773d809c5fec, type: 3}
   _cameraUiBackground: {fileID: 9161725348178543191}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &2596776182998916839
 MonoBehaviour:
@@ -2051,8 +2051,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: b03c7acd6026df346a0c59f50af67e72, type: 3}
   _cameraUiBackground: {fileID: 5632762267699543403}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &8873198849472984681
 MonoBehaviour:
@@ -2880,8 +2880,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: dbfe4317384150b4fb3cc325ce9d86c9, type: 3}
   _cameraUiBackground: {fileID: 4560535742297043726}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &3719151853039549406
 MonoBehaviour:
@@ -3074,8 +3074,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: b38a5b8324d80624f9cf660d2751f39c, type: 3}
   _cameraUiBackground: {fileID: 7314407837996727788}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &1080835711446483675
 MonoBehaviour:
@@ -4340,8 +4340,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 1acf55f3c12e1e24fb59441d9e4617e2, type: 3}
   _cameraUiBackground: {fileID: 6333640132055885048}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &5330660953768138825
 MonoBehaviour:
@@ -4532,8 +4532,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 2fb7d484ba971eb41b51acca7009104b, type: 3}
   _cameraUiBackground: {fileID: 8187997532531396224}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &5556908679403391396
 MonoBehaviour:
@@ -4759,8 +4759,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1ec095ec781a93e488631f0ee250b679, type: 2}
+  m_sharedMaterial: {fileID: -5796130669965295353, guid: 1ec095ec781a93e488631f0ee250b679, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5009,12 +5009,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraAreaController
   _roomId: 2
-  _roomBackgroundTexture: {fileID: 0}
-  _roomBackgroundWithCoachTexture: {fileID: 0}
+  _roomBackgroundTexture: {fileID: 2800000, guid: 3d340e2424b5fd64f86988d3fad1f4f6, type: 3}
+  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 3663b0ee2ec3b7243b6830b75b40d70b, type: 3}
   _cameraUiBackground: {fileID: 229101258892297667}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &8435920965643851286
 MonoBehaviour:
@@ -5485,8 +5485,8 @@ MonoBehaviour:
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 5b6bd63151100264ebd6ea6b2251411f, type: 3}
   _cameraUiBackground: {fileID: 489360330909097672}
   _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _blinkColor: {r: 0.57103217, g: 0.5943396, b: 0, a: 1}
-  _coachDetectionColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
 --- !u!114 &3898404687439119511
 MonoBehaviour:
