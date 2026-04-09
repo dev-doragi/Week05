@@ -68,8 +68,7 @@ public class BuildRunStartupController : MonoBehaviour
 
         if (startupRoot != null)
             startupRoot.SetActive(false);
-        Debug.Log("GameStart");
-        //GameManager.Instance?.GameStart();
+        GameManager.Instance?.StartGame();
         _running = false;
     }
 
