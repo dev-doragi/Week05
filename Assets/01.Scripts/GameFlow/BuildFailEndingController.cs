@@ -28,7 +28,7 @@ public class BuildFailEndingController : MonoBehaviour
         _running = true;
 
         // 게임 진행 정지 + 에디터 패널 강제 앞으로
-        GameFlowManager.Instance?.GameClear();
+        GameFlowManager.Instance?.GameClear(false);
         UIManager.Instance?.EditorPannelPopup();
         UIManager.Instance?.InGameChoiceButtonActive(false);
         UIManager.Instance?.DebugGamePannelActive(false);
