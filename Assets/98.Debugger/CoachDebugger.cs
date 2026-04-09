@@ -5,31 +5,49 @@ public class CoachDebugger : MonoBehaviour
 {
     [SerializeField] private CoachMovementController _coach;
     [SerializeField] private GimmickManager _gimmickManager;
+    [SerializeField] private BuildFailEndingController _endingController;
 
     private void OnEnable()
     {
-        
         if (_coach != null)
         {
-            _coach.OnCoachPreparingToMove += (from, to) => Debug.Log($"[준비] 코치가 {from}에서 {to}(으)로 갈 준비 중...");
-            _coach.OnCoachMoved += (from, to) => Debug.Log($"[이동] 코치가 {from}에서 {to}(으)로 이동 완료. (현재 어그로: {_coach.CurrentAggro})");
-            _coach.OnCoachReachedOffice += () => Debug.Log("GameOver");
+            _coach.OnCoachPreparingToMove += HandleCoachPreparing;
+            _coach.OnCoachMoved += HandleCoachMoved;
+            _coach.OnCoachReachedOffice += HandleCoachReachedOffice;
         }
 
         if (_gimmickManager != null)
-        {
             _gimmickManager.OnLureActivated += LogLureInfluence;
-        }
     }
 
     private void OnDisable()
     {
-        if (_gimmickManager != null)
+        if (_coach != null)
         {
-            _gimmickManager.OnLureActivated -= LogLureInfluence;
+            _coach.OnCoachPreparingToMove -= HandleCoachPreparing;
+            _coach.OnCoachMoved -= HandleCoachMoved;
+            _coach.OnCoachReachedOffice -= HandleCoachReachedOffice;
         }
+
+        if (_gimmickManager != null)
+            _gimmickManager.OnLureActivated -= LogLureInfluence;
     }
 
+    private void HandleCoachPreparing(RoomID from, RoomID to)
+    {
+        Debug.Log($"[준비] 코치가 {from}에서 {to}(으)로 갈 준비 중...");
+    }
+
+    private void HandleCoachMoved(RoomID from, RoomID to)
+    {
+        Debug.Log($"[이동] 코치가 {from}에서 {to}(으)로 이동 완료. (현재 어그로: {_coach.CurrentAggro})");
+    }
+
+    private void HandleCoachReachedOffice()
+    {
+        Debug.Log("GameOver");
+        _endingController?.PlayBuildFailSequence();
+    }
     private void LogLureInfluence(RoomID lureRoom)
     {
         if (_coach == null || _coach.MapGraph == null) return;
@@ -53,4 +71,6 @@ public class CoachDebugger : MonoBehaviour
         Debug.Log($"[사운드 체크] 발생지: {lureRoom} | 코치 위치: {coachRoom} | 주변 경로: [{neighborList.TrimEnd(',', ' ')}]");
         Debug.Log($"[사운드 결과] 코치가 소리를 들을 수 있는가? : {status}");
     }
+
 }
+
