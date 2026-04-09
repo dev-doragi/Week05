@@ -93,4 +93,8 @@ public class ETypePoolManager : MonoBehaviour
         currentPoolInspector.Clear();
         currentPoolInspector.AddRange(debugPool);
     }
+    public List<IssueDefinition> GetSeedIssuesSnapshot()
+    {
+        return new List<IssueDefinition>(seedIssues);
+    }
 }
