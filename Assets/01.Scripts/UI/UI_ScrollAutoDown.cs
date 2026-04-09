@@ -4,45 +4,71 @@ using UnityEngine.UI;
 
 public class UI_ScrollAutoDown : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private ScrollRect _scrollRect;
-    [SerializeField] private RectTransform _content;
+    [SerializeField] private RectTransform _contentRect;
 
-    private Coroutine _watchCoroutine;
-    private int _lastChildCount;
+    private Coroutine _heightWatchRoutine;
+    private float _previousContentPreferredHeight;
 
     private void OnEnable()
     {
-        if (_scrollRect == null || _content == null)
-            return;
-
-        _lastChildCount = _content.childCount;
-        _watchCoroutine = StartCoroutine(CoWatchContent());
+        _previousContentPreferredHeight = GetContentPreferredHeight();
+        _heightWatchRoutine = StartCoroutine(WatchContentHeightAndScrollDown());
     }
 
     private void OnDisable()
     {
-        if (_watchCoroutine != null)
-        {
-            StopCoroutine(_watchCoroutine);
-            _watchCoroutine = null;
-        }
+        StopHeightWatchRoutine();
     }
 
-    private IEnumerator CoWatchContent()
+    private IEnumerator WatchContentHeightAndScrollDown()
     {
         while (true)
         {
-            if (_content.childCount != _lastChildCount)
+            float currentContentPreferredHeight = GetContentPreferredHeight();
+
+            if (HasContentHeightChanged(currentContentPreferredHeight))
             {
-                _lastChildCount = _content.childCount;
+                _previousContentPreferredHeight = currentContentPreferredHeight;
 
                 yield return null;
 
-                LayoutRebuilder.ForceRebuildLayoutImmediate(_content);
-                _scrollRect.verticalNormalizedPosition = 0f;
+                RebuildContentLayout();
+                ScrollToBottom();
             }
 
             yield return null;
         }
+    }
+
+
+    private float GetContentPreferredHeight()
+    {
+        return LayoutUtility.GetPreferredHeight(_contentRect);
+    }
+
+    private bool HasContentHeightChanged(float currentContentPreferredHeight)
+    {
+        return Mathf.Approximately(currentContentPreferredHeight, _previousContentPreferredHeight) == false;
+    }
+
+    private void RebuildContentLayout()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_contentRect);
+    }
+
+    private void ScrollToBottom()
+    {
+        _scrollRect.verticalNormalizedPosition = 0f;
+    }
+
+    private void StopHeightWatchRoutine()
+    {
+        if (_heightWatchRoutine == null)
+            return;
+
+        StopCoroutine(_heightWatchRoutine);
+        _heightWatchRoutine = null;
     }
 }
