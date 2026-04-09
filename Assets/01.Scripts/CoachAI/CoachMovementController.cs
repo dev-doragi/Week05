@@ -12,7 +12,7 @@ public class CoachMovementController : MonoBehaviour
     [SerializeField] private float _timeToRoomChange = 8f;
     [SerializeField] private float _timerVariability = 2f;
     [SerializeField] private float _transitionDuration = 2f;
-    [SerializeField] private bool _playOnStart = true;
+    [SerializeField] private bool _playOnStart = false;
 
     [Header("Dependencies")]
     [SerializeField] private GimmickManager _gimmickManager;
