@@ -1576,6 +1576,7 @@ MonoBehaviour:
   sliderG: {fileID: 1302789716}
   sliderB: {fileID: 1648961353}
   submitButton: {fileID: 150786734}
+  ratioText: {fileID: 0}
   clearThreshold: 0.123
 --- !u!4 &94955710
 Transform:
@@ -3247,6 +3248,91 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &160128277
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 694593738651571352, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 837420282742260000, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148591416479841992, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097341435623884019, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3501202282610385137, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685288595230716939, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_Name
+      value: 04.RGBMatch Debugging Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685288595230716939, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437894415323530796, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8960765188869713135, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
 --- !u!1 &168521296
 GameObject:
   m_ObjectHideFlags: 0
@@ -4205,7 +4291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameTester
   miniGames:
-  - {fileID: 0}
+  - {fileID: 695106704}
 --- !u!4 &222519571
 Transform:
   m_ObjectHideFlags: 0
@@ -14193,6 +14279,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &695106704 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3174940672655752188, guid: 2e2c359e81c1d5d4fae7ab5337ed1227, type: 3}
+  m_PrefabInstance: {fileID: 160128277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ba343fd634c564b9738e07a16ff97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RGBMatchGame
 --- !u!1 &697617677
 GameObject:
   m_ObjectHideFlags: 0
@@ -24052,6 +24149,7 @@ GameObject:
   - component: {fileID: 1217884035}
   - component: {fileID: 1217884038}
   - component: {fileID: 1217884039}
+  - component: {fileID: 1217884040}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -24209,6 +24307,22 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1217884040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217884034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.Physics2DRaycaster
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1223273880
 GameObject:
   m_ObjectHideFlags: 0
@@ -44459,6 +44573,7 @@ MonoBehaviour:
   sliderG: {fileID: 2010039694}
   sliderB: {fileID: 150486020}
   submitButton: {fileID: 1261634075}
+  ratioText: {fileID: 0}
   clearThreshold: 0.1
 --- !u!212 &7344996911399327655
 SpriteRenderer:
@@ -45366,5 +45481,6 @@ SceneRoots:
   - {fileID: 1229628224}
   - {fileID: 1801289399}
   - {fileID: 1000886784}
-  - {fileID: 222519571}
   - {fileID: 1876325515}
+  - {fileID: 222519571}
+  - {fileID: 160128277}

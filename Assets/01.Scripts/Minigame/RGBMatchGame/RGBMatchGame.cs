@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class RGBMatchGame : MiniGame
 {
@@ -10,6 +11,7 @@ public class RGBMatchGame : MiniGame
     public Slider sliderG;
     public Slider sliderB;
     public Button submitButton;
+    public TextMeshPro ratioText;
 
     [Header("Settings")]
     [Range(0f, 1f)]
@@ -33,6 +35,7 @@ public class RGBMatchGame : MiniGame
         sliderR.value = 0f;
         sliderG.value = 0f;
         sliderB.value = 0f;
+        ratioText.text = "0%";
 
         UpdatePlayerColor();
     }
@@ -50,6 +53,8 @@ public class RGBMatchGame : MiniGame
 
         if (diff <= clearThreshold) Clear();
         else Debug.Log("[RGBMatchGame] 아직 멀었다 - 계속 조절");
+        ratioText.text = ((1 - diff) * 100).ToString() + "%";
+
     }
 
     float ColorDifference(Color a, Color b)
