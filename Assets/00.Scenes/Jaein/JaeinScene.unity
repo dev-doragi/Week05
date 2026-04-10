@@ -354,21 +354,21 @@ MonoBehaviour:
   - Room: 5
     GimmickType: 1
     ButtonText: Turn On the Music
-    Duration: 5
-    Value: 50
+    Duration: 15
+    Value: 15
     Cooldown: 40
   - Room: 3
     GimmickType: 1
     ButtonText: Turn On the Music
-    Duration: 20
-    Value: 50
-    Cooldown: 40
+    Duration: 15
+    Value: 15
+    Cooldown: 30
   - Room: 8
     GimmickType: 1
     ButtonText: Turn On the Music
-    Duration: 20
-    Value: 50
-    Cooldown: 40
+    Duration: 15
+    Value: 15
+    Cooldown: 30
   _maxWidth: 1000
 --- !u!1001 &463950445
 PrefabInstance:
@@ -427,6 +427,101 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+--- !u!1 &482575137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482575138}
+  - component: {fileID: 482575140}
+  - component: {fileID: 482575139}
+  - component: {fileID: 482575141}
+  m_Layer: 5
+  m_Name: WarningIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &482575138
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482575137}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1952835856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 877, y: 523}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &482575139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482575137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: dba1037a28bf4ac4491ad851cf1b3c84, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &482575140
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482575137}
+  m_CullTransparentMesh: 1
+--- !u!114 &482575141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482575137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77926dd8f111e3a46be0453de9cbb360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfficeWarningIndicator
+  _coach: {fileID: 1214341818}
+  _warningImage: {fileID: 482575139}
+  _baseNoiseLevel: 0.05
+  _maxDistance: 5
+  _minAlpha: 0.1
+  _maxAlpha: 0.8
+  _tickInterval: 0.02
 --- !u!114 &690169840 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 78801765882680993, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
@@ -575,10 +670,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1952835856}
     m_Modifications:
+    - target: {fileID: 255909648478888153, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 255909648478888153, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 324275664261242430, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 324275664261242430, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 435815257612568094, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 435815257612568094, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 528888700789157049, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 528888700789157049, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 638270824216754091, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 954859626265522434, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam7_Lobby
+      objectReference: {fileID: 0}
     - target: {fileID: 1012851843666936827, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
       value: 
@@ -591,14 +722,42 @@ PrefabInstance:
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 2291380381545128409, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam9_Stair
+      objectReference: {fileID: 0}
     - target: {fileID: 2408980786078255419, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 2494806668959261763, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam1_CoachingRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724443860644299636, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam2_Lounge
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793953843740077625, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 2793953843740077625, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 2930156602204003251, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 3407084905398968094, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 3407084905398968094, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 3501940870295473724, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -607,10 +766,46 @@ PrefabInstance:
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 4468796254842608744, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 4468796254842608744, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 4684825971563122672, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam5_F1Stair
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818169639536432823, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _to
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4818169639536432823, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 5191341743292378590, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 5191341743292378590, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 5234139994967254996, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam6_F1Elevator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308180082813875023, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 5308180082813875023, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 6637246248637749692, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_Name
       value: CCTVPannel_Jaein
@@ -618,6 +813,26 @@ PrefabInstance:
     - target: {fileID: 6637246248637749692, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7110399907047713233, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam10_Cafeteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127388146485887455, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 7127388146485887455, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 7507531277854846223, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam3_Hallway
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725704549192417331, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam11_Cafe
       objectReference: {fileID: 0}
     - target: {fileID: 8199870326173612730, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
@@ -627,14 +842,38 @@ PrefabInstance:
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 8209569060949464347, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 8209569060949464347, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 8210069837094195814, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _sfxPlayer
+      value: 
+      objectReference: {fileID: 1207921499}
+    - target: {fileID: 8210069837094195814, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 8400254499853252959, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420525863159126931, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam8_JungleStepUpper
       objectReference: {fileID: 0}
     - target: {fileID: 8490839963661677703, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 458644773}
+    - target: {fileID: 8778742519256703699, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam12_JungleStepLower
+      objectReference: {fileID: 0}
     - target: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -715,6 +954,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8961550457835510269, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_Name
+      value: Cam4_3FElevator
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -725,6 +968,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
   m_PrefabInstance: {fileID: 1029247264}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1207921498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1207921500}
+  - component: {fileID: 1207921499}
+  m_Layer: 0
+  m_Name: SFXPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1207921499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207921498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6338fedf010b0e48bd20428b52d4fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXPlayer
+  _poolSize: 10
+  sourcePrefab: {fileID: 1306156872802370637, guid: ef121420f7391f943907b1cc273ab07a, type: 3}
+--- !u!4 &1207921500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207921498}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1214341817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minimap
       objectReference: {fileID: 0}
+    - target: {fileID: 5242948718429278772, guid: 343e0774d4fed4c438bab6600be99edc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6549793883351296084, guid: 343e0774d4fed4c438bab6600be99edc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1485,6 +1778,7 @@ RectTransform:
   - {fileID: 1029247265}
   - {fileID: 1814017818}
   - {fileID: 1611920033}
+  - {fileID: 482575138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1641,4 +1935,5 @@ SceneRoots:
   - {fileID: 1214341819}
   - {fileID: 458644774}
   - {fileID: 1305420290}
+  - {fileID: 1207921500}
   - {fileID: 860579493}

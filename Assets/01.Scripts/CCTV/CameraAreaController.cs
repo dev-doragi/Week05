@@ -24,6 +24,10 @@ public class CameraAreaController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Color _coachDetectedBlinkColor = Color.red;
     [SerializeField] private float _blinkInterval = 0.5f;
 
+    [SerializeField] private SO_SFX _cameraClickSfx;
+    [SerializeField] private SFXPlayer _sfxPlayer;
+    [SerializeField] private float _clickVolume = 1f;
+
     private CameraManager _cameraManager;
     private Coroutine _blinkCoroutine;
     private BlinkState _currentBlinkState = BlinkState.None;
@@ -49,6 +53,7 @@ public class CameraAreaController : MonoBehaviour, IPointerClickHandler
             return;
 
         _cameraManager.SelectCamera(this);
+        _sfxPlayer.Play(_cameraClickSfx, _clickVolume);
     }
 
     public void SetBlinkState(BlinkState blinkState)
@@ -103,5 +108,13 @@ public class CameraAreaController : MonoBehaviour, IPointerClickHandler
             BlinkState.CoachDetected => _coachDetectedBlinkColor,
             _ => _normalColor
         };
+    }
+
+    private void PlayCameraClickSfx()
+    {
+        if (_sfxPlayer == null || _cameraClickSfx == null)
+            return;
+
+        _sfxPlayer.Play(_cameraClickSfx, _clickVolume);
     }
 }

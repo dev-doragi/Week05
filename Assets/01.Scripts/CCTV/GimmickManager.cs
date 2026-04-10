@@ -23,6 +23,8 @@ public class GimmickManager : MonoBehaviour
 
     public RoomID ActiveTempTarget => _activeTempTarget;
 
+    public bool IsBlockPathCooldownReady => Time.time >= _nextBlockPathAvailableTime;
+
     public static GimmickManager Instance { get; private set; }
 
     private void Awake()

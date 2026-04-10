@@ -25,7 +25,7 @@ public class BlockPathIndicator : MonoBehaviour
         if (_indicator == null)
             return;
 
-        bool isReady = _gimmickManager.CanUseBlockPath;
+        bool isReady = _gimmickManager.IsBlockPathCooldownReady;
 
         if (!force && _lastState == isReady)
             return;
