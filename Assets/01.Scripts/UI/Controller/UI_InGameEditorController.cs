@@ -148,6 +148,7 @@ public class InGameEditorController : MonoBehaviour
 
         string objectId = CreatePlacedObjectId(recipe.ComponentData);
         GameObject instance = Instantiate(recipe.PlacementPrefab);
+
         instance.name = objectId;
         instance.transform.position = worldPosition;
 
@@ -172,6 +173,7 @@ public class InGameEditorController : MonoBehaviour
         if (scene != UIEditorScene.None)
             EditorRuntimeState.SetCurrentScene(scene);
 
+        StageManager.Instance.Register(instance);
         SelectHierarchyComponent(objectId);
     }
 
