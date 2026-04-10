@@ -14,6 +14,11 @@ public abstract class StageController : MonoBehaviour
 
     void Start()
     {
+    }
+
+
+    public void StartStage()
+    {
         Missions = new StageMission[stageDef.Missions.Length];
         for (int i = 0; i < Missions.Length; i++)
         {
@@ -23,12 +28,12 @@ public abstract class StageController : MonoBehaviour
                 isMissionSuccess = false
             };
         }
+
+        gameObject.SetActive(true);
+        OnStart();
     }
 
-    public void StartGame()
-    {
-        gameObject.SetActive(true);
-    }
+    protected abstract void OnStart();
 
 
     public void ClearMission(int index)
