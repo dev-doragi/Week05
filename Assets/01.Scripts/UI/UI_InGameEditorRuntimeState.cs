@@ -56,6 +56,14 @@ public class UI_InGameEditorRuntimeState
         CurrentScene = scene;
     }
 
+    public bool ContainsRuntimeObject(string objectId)
+    {
+        if (string.IsNullOrEmpty(objectId))
+            return false;
+
+        return _componentById.ContainsKey(objectId);
+    }
+
     public void SelectFromProject(string componentId)
     {
         SelectedRuntimeComponentId = componentId;
@@ -292,6 +300,28 @@ public class UI_InGameEditorRuntimeState
         return summary;
     }
 
+    public bool AddPlacedObject(
+        string objectId,
+        SO_ComponentData componentData,
+        UIEditorScene scene,
+        IReadOnlyList<UI_ReferenceTemplateData> defaultReferences)
+    {
+        if (string.IsNullOrEmpty(objectId) || componentData == null)
+            return false;
+
+        if (_componentById.ContainsKey(objectId))
+            return false;
+
+        var runtimeData = CreatePlacedRuntimeData(objectId, componentData, scene, defaultReferences);
+        _componentById[runtimeData.Id] = runtimeData;
+
+        if (!_hierarchyItemIds.Contains(runtimeData.Id))
+            _hierarchyItemIds.Add(runtimeData.Id);
+
+        RefreshReferenceDisplayNames(runtimeData);
+        return true;
+    }
+
     private UI_InGameEditorRuntimeData CreateRuntimeData(SO_InGameEditorInitialPlacementData.ObjectEntry objectEntry)
     {
         var runtimeData = new UI_InGameEditorRuntimeData
@@ -304,6 +334,24 @@ public class UI_InGameEditorRuntimeState
         BuildWindowData(runtimeData, objectEntry);
         BuildSections(runtimeData, objectEntry);
 
+        return runtimeData;
+    }
+
+    private UI_InGameEditorRuntimeData CreatePlacedRuntimeData(
+        string objectId,
+        SO_ComponentData componentData,
+        UIEditorScene scene,
+        IReadOnlyList<UI_ReferenceTemplateData> defaultReferences)
+    {
+        var runtimeData = new UI_InGameEditorRuntimeData
+        {
+            Id = objectId,
+            DisplayName = componentData.DisplayName,
+            SourceData = componentData,
+            HierarchyData = new UI_HierarchyRuntimeData { Scene = scene }
+        };
+
+        BuildPlacedSections(runtimeData, defaultReferences);
         return runtimeData;
     }
 
@@ -354,6 +402,40 @@ public class UI_InGameEditorRuntimeState
         }
     }
 
+    private void BuildPlacedSections(
+        UI_InGameEditorRuntimeData runtimeData,
+        IReadOnlyList<UI_ReferenceTemplateData> defaultReferences)
+    {
+        if (runtimeData == null || runtimeData.SourceData == null)
+            return;
+
+        foreach (var inspectorComponent in runtimeData.SourceData.InspectorComponents)
+        {
+            var section = new UI_RuntimeInspectorSectionData { InspectorComponent = inspectorComponent };
+
+            if (defaultReferences != null)
+            {
+                foreach (var referenceTemplate in defaultReferences)
+                {
+                    if (referenceTemplate == null || referenceTemplate.InspectorComponent != inspectorComponent)
+                        continue;
+
+                    section.References.Add(new UI_RuntimeReferenceData
+                    {
+                        SlotId = referenceTemplate.SlotId,
+                        Label = referenceTemplate.Label,
+                        ExpectedTargetId = referenceTemplate.DefaultTargetId,
+                        CurrentTargetId = referenceTemplate.DefaultTargetId,
+                        CanSpawnError = referenceTemplate.CanSpawnError,
+                        IsRequired = referenceTemplate.IsRequired
+                    });
+                }
+            }
+
+            runtimeData.Sections.Add(section);
+        }
+    }
+
     private void RegisterWindow(UI_InGameEditorRuntimeData runtimeData)
     {
         if (runtimeData.ProjectData != null && !_projectItemIds.Contains(runtimeData.Id))
@@ -387,13 +469,21 @@ public class UI_InGameEditorRuntimeState
     {
         foreach (var pair in _componentById)
         {
-            foreach (var section in pair.Value.Sections)
+            RefreshReferenceDisplayNames(pair.Value);
+        }
+    }
+
+    private void RefreshReferenceDisplayNames(UI_InGameEditorRuntimeData runtimeData)
+    {
+        if (runtimeData == null)
+            return;
+
+        foreach (var section in runtimeData.Sections)
+        {
+            foreach (var reference in section.References)
             {
-                foreach (var reference in section.References)
-                {
-                    reference.ExpectedTargetDisplayName = ResolveDisplayName(reference.ExpectedTargetId);
-                    reference.CurrentTargetDisplayName = ResolveDisplayName(reference.CurrentTargetId);
-                }
+                reference.ExpectedTargetDisplayName = ResolveDisplayName(reference.ExpectedTargetId);
+                reference.CurrentTargetDisplayName = ResolveDisplayName(reference.CurrentTargetId);
             }
         }
     }

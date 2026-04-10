@@ -43,14 +43,15 @@ public class FlyPlayer : MonoBehaviour
         _rigid.linearVelocityX = moveSpeed;
     }
 
-    public void Init(Vector2 pos, int count)
+    public void Init(Vector2 pos, float time)
     {
         Debug.Log("[Flying Game] Player Init");
         transform.position = pos;
         _rigid.linearVelocity = Vector2.zero;
         Stop();
 
-        Invoke("Play", count);
+        CancelInvoke(nameof(Play));
+        Invoke(nameof(Play), time);
     }
 
     public void Play()
@@ -73,10 +74,10 @@ public class FlyPlayer : MonoBehaviour
         isActive = false;
     }
 
-    private void HandleStart(Vector2 pos, int count)
+    private void HandleStart(Vector2 pos, float totalWaitTime)
     {
         _cachedStartPos = pos;
-        Init(pos, count);
+        Init(pos, totalWaitTime);
     }
 
     private void HandleCollision(Collider2D collider)

@@ -13,6 +13,10 @@ public class SO_ComponentData : ScriptableObject
     [SerializeField] private ComponentWindow _componentWindow;
     [SerializeField] private ProejctFileStruct _projectFileStruct;
 
+    [Header("Project Drag")]
+    [SerializeField] private UIProjectDragType _projectDragType = UIProjectDragType.ReferenceTarget;
+    [SerializeField] private SO_UIPlaceablePrefabRecipe _placeablePrefabRecipe;
+
     [Header("Inspector")]
     [SerializeField] private List<InspectorComponent> _inspectorComponents = new();
 
@@ -21,5 +25,7 @@ public class SO_ComponentData : ScriptableObject
     public Sprite IconSprite => _iconSprite;
     public ComponentWindow ComponentWindow => _componentWindow;
     public ProejctFileStruct ProjectFileStruct => _projectFileStruct;
+    public UIProjectDragType ProjectDragType => _projectDragType;
+    public SO_UIPlaceablePrefabRecipe PlaceablePrefabRecipe => _placeablePrefabRecipe;
     public IReadOnlyList<InspectorComponent> InspectorComponents => _inspectorComponents;
 }

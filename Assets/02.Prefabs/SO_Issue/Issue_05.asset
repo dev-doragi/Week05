@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Issue_05
   m_EditorClassIdentifier: Assembly-CSharp::IssueDefinition
   issueId: ISSUE_05
-  issueTitle: Special Reference
-  consoleWarning: Console Warning
+  issueTitle: "ColorMatcher: \uC0C9\uC0C1 \uAC12 \uBD88\uC77C\uCE58"
+  consoleWarning: "AssertionException: Material\uC758 Color \uAC12\uC774 \uD5C8\uC6A9
+    \uC624\uCC28(threshold: 0.2f)\uB97C \uCD08\uACFC\uD569\uB2C8\uB2E4. ColorMatcher.ValidateColor()
+    \uC5D0\uC11C \uC608\uC678\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4. (at Assets/Scripts/ColorMatcher.cs:83)"
   debugMiniGameKey: Debug_05
   ingameMiniGameKey: Ingame_05

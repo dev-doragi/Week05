@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Issue_16
   m_EditorClassIdentifier: Assembly-CSharp::IssueDefinition
   issueId: ISSUE_16
-  issueTitle: Special Reference
-  consoleWarning: Console Warning
+  issueTitle: "ExceptionHandler: \uCC98\uB9AC\uB418\uC9C0 \uC54A\uC740 \uC608\uC678
+    \uB2E4\uC218 \uBC1C\uC0DD"
+  consoleWarning: "StackOverflowException: \uCC98\uB9AC\uB418\uC9C0 \uC54A\uC740
+    Exception\uC774 \uC5F0\uC18D\uC73C\uB85C \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4.
+    ParryManager.Parry() \uAC00 \uB8E8\uD504 \uC911\uC785\uB2C8\uB2E4. \uC989\uC2DC
+    \uBAA8\uB4E0 \uC624\uB958 \uCC3D\uC744 \uB2EB\uC73C\uC138\uC694. (at Assets/Scripts/ParryManager.cs:201)"
   debugMiniGameKey: Debug_16
   ingameMiniGameKey: Ingame_16

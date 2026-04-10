@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum FlowState
 {
@@ -17,9 +18,24 @@ public class GameFlowManager : Singleton<GameFlowManager>
     public MiniGame[] DebugMiniGames;
     public MiniGame[] InGameMiniGames;
 
+    // UI_ButtonHover로 타입 변경 및 참조 복구
+    [Header("UI Feedback")]
+    [SerializeField] private UI_ButtonHover[] choiceButtons;
+
     [Header("Flow")]
     [SerializeField] private float standbySeconds = 10f;
     [SerializeField] private float skipReturnChance = 0.45f;
+    [SerializeField] private ClearEndingController clearEndingController;
+
+    [SerializeField] private int clearGoalCount = 5; // 5개 깨면 클리어
+    [SerializeField] private int clearedCountInspector; // 디버그용
+    private int clearedCount;
+
+    private readonly List<IssueDefinition> appearedIssues = new List<IssueDefinition>();
+    private readonly HashSet<string> appearedKeys = new HashSet<string>();
+
+    private readonly List<IssueDefinition> solvedIssues = new List<IssueDefinition>();
+    private readonly HashSet<string> solvedKeys = new HashSet<string>();
 
     public FlowState State { get; private set; } = FlowState.Ready;
     public bool IsWaitingChoice => waitingChoice;
@@ -33,13 +49,12 @@ public class GameFlowManager : Singleton<GameFlowManager>
     private MiniGame activeDebugMiniGame;
     private MiniGame activeIngameMiniGame;
 
-    
-
     protected override void Init()
     {
         State = FlowState.Ready;
         SetAllMiniGamesActive(false);
     }
+
     private void OnEnable()
     {
         MiniGame.OnCleared += HandleMiniGameCleared;
@@ -63,6 +78,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
         if (State == FlowState.Ingame && IsInList(InGameMiniGames, cleared))
         {
             UIManager.Instance.NoiseActive(false);
+            UIManager.Instance.SetCCTVAlert(true);
             NotifyIngameCleared();
         }
     }
@@ -79,6 +95,10 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
     public void BeginFlow()
     {
+        appearedIssues.Clear();
+        appearedKeys.Clear();
+        solvedIssues.Clear();
+        solvedKeys.Clear();
         if (poolManager == null) return;
 
         StopFlowInternal();
@@ -90,6 +110,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         activeDebugMiniGame = null;
         activeIngameMiniGame = null;
 
+        clearedCount = 0;
+        clearedCountInspector = 0;
         SetAllMiniGamesActive(false);
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
@@ -103,6 +125,15 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
         waitingChoice = true;
         UIManager.Instance.InGameChoiceButtonActive(true);
+
+        // 깜빡임 시작 로직 복구
+        if (choiceButtons != null)
+        {
+            foreach (var blinker in choiceButtons)
+            {
+                if (blinker != null) blinker.StartBlink();
+            }
+        }
     }
 
     public void ResolveDebugChoice(bool playIngame)
@@ -110,9 +141,18 @@ public class GameFlowManager : Singleton<GameFlowManager>
         if (!flowRunning || State != FlowState.Debug || !waitingChoice) return;
 
         waitingChoice = false;
+
+        // 모든 선택 버튼 깜빡임 중지 로직 복구
+        if (choiceButtons != null)
+        {
+            foreach (var blinker in choiceButtons)
+            {
+                if (blinker != null) blinker.StopBlink();
+            }
+        }
+
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
-
 
         if (playIngame)
         {
@@ -131,8 +171,16 @@ public class GameFlowManager : Singleton<GameFlowManager>
         {
             UIManager.Instance.NoiseActive(false);
 
-            poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
-            Debug.LogError("노이즈 비활성화");
+            bool returned = poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
+            if (!returned) 
+            {
+            TrackSolved(currentIssue);
+            clearedCount++;
+            clearedCountInspector = clearedCount;
+
+            if (TryClearByGoal()) return;
+            }
+            
 
             EndTurn();
         }
@@ -141,16 +189,19 @@ public class GameFlowManager : Singleton<GameFlowManager>
     public void NotifyIngameCleared()
     {
         if (!flowRunning || State != FlowState.Ingame) return;
+
+        clearedCount++;
+        clearedCountInspector = clearedCount;
+        TrackSolved(currentIssue);
+        if (TryClearByGoal()) return;
         EndTurn();
     }
 
-    public void GameClear()
+    public void GameClear(bool showClearPanel = true)
     {
         StopFlowInternal();
         State = FlowState.Clear;
-        //인게임 클리어
         UIManager.Instance.NoiseActive(false);
-        Debug.LogError("노이즈 비활성화");
 
         waitingChoice = false;
         currentIssue = null;
@@ -160,6 +211,9 @@ public class GameFlowManager : Singleton<GameFlowManager>
         SetAllMiniGamesActive(false);
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
+
+        if (showClearPanel)
+            clearEndingController?.PlayClearSequence(solvedIssues);
     }
 
     private void EnterStandby()
@@ -167,7 +221,6 @@ public class GameFlowManager : Singleton<GameFlowManager>
         State = FlowState.Standby;
         waitingChoice = false;
         SetAllMiniGamesActive(false);
-
 
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
@@ -187,11 +240,11 @@ public class GameFlowManager : Singleton<GameFlowManager>
             GameClear();
             yield break;
         }
-
+        TrackAppeared(currentIssue);
 
         State = FlowState.Debug;
         activeDebugMiniGame = FindMiniGameByIssue(DebugMiniGames, currentIssue);
- 
+
         if (activeDebugMiniGame == null)
         {
             EndTurn();
@@ -200,11 +253,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         UIManager.Instance.LogMessageActive(true);
         LogManager.Instance.UpdateIssueLog(currentIssue);
 
-        //경고
         UIManager.Instance.SetUnityAlert(true);
-        Debug.LogError("노이즈 활성화");
         UIManager.Instance.NoiseActive(true);
-        //디버그 미니게임 시작
 
         UIManager.Instance.DebugGamePannelActive(true);
         activeDebugMiniGame.StartGame();
@@ -232,7 +282,6 @@ public class GameFlowManager : Singleton<GameFlowManager>
         return null;
     }
 
-
     private void SetAllMiniGamesActive(bool active)
     {
         SetArrayActive(DebugMiniGames, active);
@@ -254,10 +303,50 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         flowRunning = false;
 
+        // 중단 시 깜빡임 중지 로직 복구
+        if (choiceButtons != null)
+        {
+            foreach (var blinker in choiceButtons)
+            {
+                if (blinker != null) blinker.StopBlink();
+            }
+        }
+
         if (standbyRoutine != null)
         {
             StopCoroutine(standbyRoutine);
             standbyRoutine = null;
         }
     }
+    private void TrackAppeared(IssueDefinition issue)
+    {
+        if (issue == null) return;
+        string key = GetIssueKey(issue);
+        if (appearedKeys.Add(key)) appearedIssues.Add(issue);
+    }
+
+    private void TrackSolved(IssueDefinition issue)
+    {
+        if (issue == null) return;
+        string key = GetIssueKey(issue);
+        if (solvedKeys.Add(key)) solvedIssues.Add(issue);
+    }
+
+    private string GetIssueKey(IssueDefinition issue)
+    {
+        if (issue == null) return string.Empty;
+        if (!string.IsNullOrWhiteSpace(issue.IssueId)) return issue.IssueId;
+        return issue.GetInstanceID().ToString();
+    }
+    private bool TryClearByGoal()
+    {
+        if (clearedCount >= clearGoalCount)
+        {
+            GameClear();
+            return true;
+        }
+        return false;
+    }
+
+
 }
