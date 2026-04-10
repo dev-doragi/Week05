@@ -122,7 +122,23 @@ public class InGameEditorController : MonoBehaviour
         RefreshInspector();
     }
 
+    public void SelectWorldObject(string componentId, UIEditorScene scene)
+    {
+        if (EditorRuntimeState == null || string.IsNullOrEmpty(componentId))
+            return;
+
+        if (scene != UIEditorScene.None)
+            EditorRuntimeState.SetCurrentScene(scene);
+
+        SelectHierarchyComponent(componentId);
+    }
+
     private void HandleHierarchyItemClicked(string componentId)
+    {
+        SelectHierarchyComponent(componentId);
+    }
+
+    private void SelectHierarchyComponent(string componentId)
     {
         EditorRuntimeState.SelectFromHierarchy(componentId);
 
