@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -17,7 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
+    }
 
+    private void OnEnable()
+    {
         StageMove.OnMove += HandleMove;
     }
 
