@@ -8,10 +8,11 @@ public class GimmickManager : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private CoachMovementController _coachController;
 
+    [Header("BlockPathCoolDown")]
+    [SerializeField] private int _blockPathCooldownMoves = 2;
+
     private RoomID _activeTempTarget = RoomID.None;
     private Coroutine _tempTargetRoutine;
-
-    private Dictionary<(RoomID, RoomID), float> _blockedPaths = new();
 
     private RoomID _activeLureRoom = RoomID.None;
     private float _lureValue = 0f;
@@ -22,50 +23,61 @@ public class GimmickManager : MonoBehaviour
     public RoomID ActiveTempTarget => _activeTempTarget;
     public RoomID ActiveLureRoom => _activeLureRoom;
 
-    #region 1. Path Blocking & Elevator Delay
+    #region 1. Path Blocking
 
-    public void BlockPath(RoomID from, RoomID to, float duration)
+    private bool _hasBlockedPath;
+    private RoomID _blockedFrom = RoomID.None;
+    private RoomID _blockedTo = RoomID.None;
+    private int _remainingBlockCooldownMoves = 0;
+
+    public bool HasBlockedPath => _hasBlockedPath;
+    public RoomID BlockedFrom => _blockedFrom;
+    public RoomID BlockedTo => _blockedTo;
+    public bool CanUseBlockPath => _remainingBlockCooldownMoves <= 0;
+
+    // 길 막을 때 호출하는 함수
+    public bool BlockPath(RoomID from, RoomID to)
     {
-        StartCoroutine(Co_BlockPath(from, to, duration));
-        StartCoroutine(Co_BlockPath(to, from, duration));
+        if (CanUseBlockPath == false)
+            return false;
+
+        ClearBlockedPath();
+
+        _hasBlockedPath = true;
+        _blockedFrom = from;
+        _blockedTo = to;
+        _remainingBlockCooldownMoves = _blockPathCooldownMoves;
+
+        return true;
     }
 
-    private IEnumerator Co_BlockPath(RoomID from, RoomID to, float duration)
+    public void ClearBlockedPath()
     {
-        var path = (from, to);
-        _blockedPaths[path] = Time.time + duration;
-        yield return new WaitForSeconds(duration);
-
-        if (_blockedPaths.ContainsKey(path) && _blockedPaths[path] <= Time.time)
-        {
-            _blockedPaths.Remove(path);
-        }
-    }
-
-    public void DelayElevator()
-    {
-        if (_coachController == null) return;
-
-        bool isInsideB1F = _coachController.CurrentRoomId == RoomID.Elevator_B ||
-                          _coachController.CurrentRoomId == RoomID.Cafeteria ||
-                          _coachController.CurrentRoomId == RoomID.Stair_B;
-
-        bool isMovingTo3F = _coachController.IsTransitioning && _coachController.NextRoomId == RoomID.Elevator_A;
-
-        if (isInsideB1F || isMovingTo3F)
-        {
-            _coachController.ForceMoveTo(RoomID.Elevator_B);
-            Debug.Log("[Gimmick] 엘리베이터 지연 발생: 코치를 B1F로 회귀시킵니다.");
-        }
+        _hasBlockedPath = false;
+        _blockedFrom = RoomID.None;
+        _blockedTo = RoomID.None;
     }
 
     public bool IsPathBlocked(RoomID from, RoomID to)
     {
-        if (_blockedPaths.TryGetValue((from, to), out float unlockTime))
+        if (_hasBlockedPath == false)
+            return false;
+
+        return (_blockedFrom == from && _blockedTo == to)
+            || (_blockedFrom == to && _blockedTo == from);
+    }
+
+    public void NotifyCoachMoved()
+    {
+        if (_hasBlockedPath)
         {
-            return Time.time < unlockTime;
+            ClearBlockedPath();
         }
-        return false;
+
+        if (_remainingBlockCooldownMoves > 0)
+        {
+            _remainingBlockCooldownMoves--;
+        }
     }
 
     #endregion

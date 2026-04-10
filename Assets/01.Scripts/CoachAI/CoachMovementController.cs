@@ -114,6 +114,7 @@ public class CoachMovementController : MonoBehaviour
         ResetMoveTimer();
 
         OnCoachMoved?.Invoke(RoomID.None, _currentRoomId);
+        _gimmickManager.NotifyCoachMoved();
         _initialDelayRoutine = null;
     }
 
@@ -181,7 +182,7 @@ public class CoachMovementController : MonoBehaviour
 
     private RoomID GetRandomSpawnRoom()
     {
-        RoomID[] spawnRooms = { RoomID.Cafeteria, RoomID.Elevator_B, RoomID.Stair_B };
+        RoomID[] spawnRooms = { RoomID.B1F_Cafeteria, RoomID.B1F_JungleStepLower, RoomID.B1F_Cafe, };
         return spawnRooms[UnityEngine.Random.Range(0, spawnRooms.Length)];
     }
 
