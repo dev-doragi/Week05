@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum FlowState
 {
@@ -24,6 +25,17 @@ public class GameFlowManager : Singleton<GameFlowManager>
     [Header("Flow")]
     [SerializeField] private float standbySeconds = 10f;
     [SerializeField] private float skipReturnChance = 0.45f;
+    [SerializeField] private ClearEndingController clearEndingController;
+
+    [SerializeField] private int clearGoalCount = 5; // 5개 깨면 클리어
+    [SerializeField] private int clearedCountInspector; // 디버그용
+    private int clearedCount;
+
+    private readonly List<IssueDefinition> appearedIssues = new List<IssueDefinition>();
+    private readonly HashSet<string> appearedKeys = new HashSet<string>();
+
+    private readonly List<IssueDefinition> solvedIssues = new List<IssueDefinition>();
+    private readonly HashSet<string> solvedKeys = new HashSet<string>();
 
     public FlowState State { get; private set; } = FlowState.Ready;
     public bool IsWaitingChoice => waitingChoice;
@@ -83,6 +95,10 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
     public void BeginFlow()
     {
+        appearedIssues.Clear();
+        appearedKeys.Clear();
+        solvedIssues.Clear();
+        solvedKeys.Clear();
         if (poolManager == null) return;
 
         StopFlowInternal();
@@ -94,6 +110,8 @@ public class GameFlowManager : Singleton<GameFlowManager>
         activeDebugMiniGame = null;
         activeIngameMiniGame = null;
 
+        clearedCount = 0;
+        clearedCountInspector = 0;
         SetAllMiniGamesActive(false);
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
@@ -152,8 +170,18 @@ public class GameFlowManager : Singleton<GameFlowManager>
         else
         {
             UIManager.Instance.NoiseActive(false);
-            UIManager.Instance.SetCCTVAlert(true);
-            poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
+
+            bool returned = poolManager.ReturnIssueWithChance(currentIssue, skipReturnChance);
+            if (!returned) 
+            {
+            TrackSolved(currentIssue);
+            clearedCount++;
+            clearedCountInspector = clearedCount;
+
+            if (TryClearByGoal()) return;
+            }
+            
+
             EndTurn();
         }
     }
@@ -161,10 +189,15 @@ public class GameFlowManager : Singleton<GameFlowManager>
     public void NotifyIngameCleared()
     {
         if (!flowRunning || State != FlowState.Ingame) return;
+
+        clearedCount++;
+        clearedCountInspector = clearedCount;
+        TrackSolved(currentIssue);
+        if (TryClearByGoal()) return;
         EndTurn();
     }
 
-    public void GameClear()
+    public void GameClear(bool showClearPanel = true)
     {
         StopFlowInternal();
         State = FlowState.Clear;
@@ -178,6 +211,9 @@ public class GameFlowManager : Singleton<GameFlowManager>
         SetAllMiniGamesActive(false);
         UIManager.Instance.InGameChoiceButtonActive(false);
         UIManager.Instance.DebugGamePannelActive(false);
+
+        if (showClearPanel)
+            clearEndingController?.PlayClearSequence(solvedIssues);
     }
 
     private void EnterStandby()
@@ -204,6 +240,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
             GameClear();
             yield break;
         }
+        TrackAppeared(currentIssue);
 
         State = FlowState.Debug;
         activeDebugMiniGame = FindMiniGameByIssue(DebugMiniGames, currentIssue);
@@ -281,4 +318,35 @@ public class GameFlowManager : Singleton<GameFlowManager>
             standbyRoutine = null;
         }
     }
+    private void TrackAppeared(IssueDefinition issue)
+    {
+        if (issue == null) return;
+        string key = GetIssueKey(issue);
+        if (appearedKeys.Add(key)) appearedIssues.Add(issue);
+    }
+
+    private void TrackSolved(IssueDefinition issue)
+    {
+        if (issue == null) return;
+        string key = GetIssueKey(issue);
+        if (solvedKeys.Add(key)) solvedIssues.Add(issue);
+    }
+
+    private string GetIssueKey(IssueDefinition issue)
+    {
+        if (issue == null) return string.Empty;
+        if (!string.IsNullOrWhiteSpace(issue.IssueId)) return issue.IssueId;
+        return issue.GetInstanceID().ToString();
+    }
+    private bool TryClearByGoal()
+    {
+        if (clearedCount >= clearGoalCount)
+        {
+            GameClear();
+            return true;
+        }
+        return false;
+    }
+
+
 }

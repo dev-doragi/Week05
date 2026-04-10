@@ -71,7 +71,7 @@ public class UIManager : Singleton<UIManager>
         unitySelected = true;
         cctvSelected = false;
         AlertMessage.transform.position = FirstMessageTransform.position;
-        NoiseScreen.SetActive(true);
+        NoiseScreen.SetActive(false);
 
         RefreshIconUI();
     }

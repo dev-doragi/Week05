@@ -16,5 +16,12 @@ MonoBehaviour:
   stageTitle: "\uD50C\uB808\uC774\uC5B4 \uC774\uB3D9 \uBD88\uAC00"
   missions:
   - missionIndex: 0
+<<<<<<< HEAD
     missionTitle: "\uD50C\uB808\uC774\uC5B4\uC5D0\uAC8C Rigidbody\uB97C \uB123\uC5B4\uB77C"
+=======
+    missionTitle: "\uD50C\uB808\uC774\uC5B4\uC5D0\uAC8C \uCF54\uB4DC\uB123\uC5B4\uC918\uB77C"
+    isMissionSuccess: 0
+  - missionIndex: 0
+    missionTitle: "\uD50C\uB808\uC774\uC5B4\uC5D0\uAC8C \uCF54\uB4DC\uB123\uC5B4\uC918\uB77C"
+>>>>>>> feature/ingame
     isMissionSuccess: 0
