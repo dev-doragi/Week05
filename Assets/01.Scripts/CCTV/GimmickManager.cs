@@ -15,14 +15,26 @@ public class GimmickManager : MonoBehaviour
     private RoomID _activeTempTarget = RoomID.None;
     private Coroutine _tempTargetRoutine;
 
-    private RoomID _activeLureRoom = RoomID.None;
-    private float _lureValue = 0f;
-    private Coroutine _lureRoutine;
+    private Coroutine _stayDelayRoutine;
+    private float _activeExtraStayTime = 0f;
+    private float _stayDelayEndTime = 0f;
 
-    public event Action<RoomID> OnLureActivated;
+    public event Action OnStayDelayActivated;
 
     public RoomID ActiveTempTarget => _activeTempTarget;
-    public RoomID ActiveLureRoom => _activeLureRoom;
+
+    public static GimmickManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     #region 1. Path Blocking
 
@@ -33,7 +45,29 @@ public class GimmickManager : MonoBehaviour
     private float _nextBlockPathAvailableTime = 0f;
 
     public bool HasBlockedPath => _hasBlockedPath && Time.time < _blockPathEndTime;
-    public bool CanUseBlockPath => Time.time >= _nextBlockPathAvailableTime;
+
+    public bool CanUseBlockPath
+    {
+        get
+        {
+            if (Time.time < _nextBlockPathAvailableTime)
+                return false;
+
+            if (_coachController.IsTransitioning)
+                return false;
+
+            return true;
+        }
+    }
+
+    public bool TryBlockPath(RoomID from, RoomID to)
+    {
+        if (CanUseBlockPath == false)
+            return false;
+
+        BlockPath(from, to);
+        return true;
+    }
 
     public void BlockPath(RoomID from, RoomID to)
     {
@@ -87,34 +121,38 @@ public class GimmickManager : MonoBehaviour
 
     #endregion
 
-    #region 3. Sound Lure
+    #region 3. Stay Delay (Sound Lure)
 
-    public void ActivateLure(RoomID room, float initialLureValue, float duration)
+    public bool HasActiveStayDelay => Time.time < _stayDelayEndTime;
+    public float ActiveExtraStayTime => HasActiveStayDelay ? _activeExtraStayTime : 0f;
+
+    public void ActivateStayDelay(float extraStayTime, float duration)
     {
-        if (_lureRoutine != null) StopCoroutine(_lureRoutine);
-        _lureRoutine = StartCoroutine(Co_DecayLure(room, initialLureValue, duration));
+        if (_stayDelayRoutine != null)
+            StopCoroutine(_stayDelayRoutine);
 
-        OnLureActivated?.Invoke(room);
+        _stayDelayRoutine = StartCoroutine(Co_StayDelay(extraStayTime, duration));
+        OnStayDelayActivated?.Invoke();
     }
 
-    private IEnumerator Co_DecayLure(RoomID room, float maxValue, float duration)
+    private IEnumerator Co_StayDelay(float extraStayTime, float duration)
     {
-        _activeLureRoom = room;
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            _lureValue = Mathf.Lerp(maxValue, 0f, elapsed / duration);
-            yield return null;
-        }
-        _activeLureRoom = RoomID.None;
-        _lureValue = 0f;
-        _lureRoutine = null;
+        _activeExtraStayTime = extraStayTime;
+        _stayDelayEndTime = Time.time + duration;
+
+        yield return new WaitForSeconds(duration);
+
+        _activeExtraStayTime = 0f;
+        _stayDelayEndTime = 0f;
+        _stayDelayRoutine = null;
     }
 
-    public float GetLureValue(RoomID room)
+    public float GetExtraStayTime()
     {
-        return (room == _activeLureRoom) ? _lureValue : 0f;
+        if (HasActiveStayDelay == false)
+            return 0f;
+
+        return _activeExtraStayTime;
     }
 
     #endregion

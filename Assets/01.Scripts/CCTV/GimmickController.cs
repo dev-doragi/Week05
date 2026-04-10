@@ -94,11 +94,11 @@ public class GimmickController : MonoBehaviour
         {
             case GimmickType.SoundLure:
                 if (_gimmickManager != null)
-                    _gimmickManager.ActivateLure(data.Room, data.Value, data.Duration);
+                    _gimmickManager.ActivateStayDelay(data.Value, data.Duration);
                 break;
             case GimmickType.RequestInterview:
                 if (_gimmickManager != null)
-                    _gimmickManager.SetTempTarget(RoomID.F3_CoachingRoom, data.Duration);
+                    _gimmickManager.SetTempTarget(data.Room, data.Duration);
                 break;
         }
 

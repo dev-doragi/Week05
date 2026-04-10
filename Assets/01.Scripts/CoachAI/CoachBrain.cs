@@ -101,19 +101,6 @@ public class CoachBrain
             score -= (_baseAggroMultiplier * 0.8f) * _officeAggro * multiplier;
         }
 
-        RoomID activeLureRoom = _gimmickManager.ActiveLureRoom;
-        float lureValue = _gimmickManager.GetLureValue(nextRoom);
-
-        if (lureValue > 0f && activeLureRoom != RoomID.None)
-        {
-            int distanceToLure = _mapGraph.GetDistance(currentRoom, activeLureRoom);
-
-            if (distanceToLure <= 1)
-            {
-                score += lureValue / Mathf.Max(1f, _officeAggro * 0.5f);
-            }
-        }
-
         if (nextRoom == _lastRoomId)
         {
             score *= 0.75f;
