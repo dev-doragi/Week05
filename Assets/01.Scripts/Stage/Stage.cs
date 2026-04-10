@@ -56,4 +56,10 @@ public abstract class Stage : MonoBehaviour
             if (!m.isMissionSuccess) return false;
         return true;
     }
+
+    public void InvokeChange()
+    {
+        Debug.Log("Invoke Stage Change");
+        OnStageChanged?.Invoke(this);
+    }
 }
