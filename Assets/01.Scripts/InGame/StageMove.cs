@@ -20,7 +20,7 @@ public class StageMove : MiniGame
 
     private void HandleCanMove(bool active)
     {
-        Debug.Log("[Stage] Component Reference " + active);
+        Debug.Log("[Stage] Component Reference " + !active);
 
         OnMove?.Invoke(!active);
     }
