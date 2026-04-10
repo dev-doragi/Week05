@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 // 뷰(View)와 모델(Controller)의 연결 다리 역할.
@@ -6,7 +6,7 @@ public class UI_ConsolePresenter : MonoBehaviour
 {
     // 인스펙터 할당용 변수. 미할당 시 Awake에서 탐색.
     [SerializeField] private UI_ConsoleComponentView _view;
-    [SerializeField] private StageController _stageController;
+    [SerializeField] private Stage _stage;
 
     // 현재 화면에 그릴 스테이지 데이터.
     private StageDefinition _currentStageDefinition;
@@ -15,13 +15,13 @@ public class UI_ConsolePresenter : MonoBehaviour
     {
         // 컴포넌트 자동 할당. 방어적 코드.
         _view ??= FindFirstObjectByType<UI_ConsoleComponentView>();
-        _stageController ??= FindFirstObjectByType<StageController>();
+        _stage ??= FindFirstObjectByType<Stage>();
     }
 
     private void OnEnable()
     {
         // 이벤트 구독. 스테이지 변경 감지.
-        StageController.OnStageChanged += HandleStageChanged;
+        Stage.OnStageChanged += HandleStageChanged;
 
         // 활성화 시 즉시 화면 갱신.
         RenderCurrentStage();
@@ -30,38 +30,38 @@ public class UI_ConsolePresenter : MonoBehaviour
     private void OnDisable()
     {
         // 이벤트 구독 해제. 메모리 누수 방지.
-        StageController.OnStageChanged -= HandleStageChanged;
+        Stage.OnStageChanged -= HandleStageChanged;
     }
 
     // 현재 할당된 컨트롤러 기준으로 화면 그리기.
     public void RenderCurrentStage()
     {
         // 컨트롤러 누락 시 화면 초기화.
-        if (_stageController == null)
+        if (_stage == null)
         {
             Clear();
             return;
         }
 
-        Render(_stageController);
+        Render(_stage);
     }
 
     // 컨트롤러 데이터를 뷰에 전달. 오버로딩.
-    public void Render(StageController stageController)
+    public void Render(Stage stage)
     {
-        if (stageController == null)
+        if (stage == null)
         {
             Clear();
             return;
         }
 
-        _stageController = stageController;
-        _currentStageDefinition = stageController.StageDef;
+        _stage = stage;
+        _currentStageDefinition = stage.StageSO;
 
         // 1. 스테이지 기본 정보 렌더링.
         Render(_currentStageDefinition);
         // 2. 런타임 미션 달성 상태 덮어쓰기.
-        ApplyMissionState(stageController.Missions);
+        ApplyMissionState(stage.RuntimeMissions);
     }
 
     // 스테이지 정의(데이터)를 뷰에 전달. 오버로딩.
@@ -162,13 +162,13 @@ public class UI_ConsolePresenter : MonoBehaviour
     }
 
     // 스테이지 변경 이벤트 콜백.
-    private void HandleStageChanged(StageController changedStage)
+    private void HandleStageChanged(Stage changedStage)
     {
         if (changedStage == null)
             return;
 
         // 추적 중인 스테이지와 다르면 무시.
-        if (_stageController != null && changedStage != _stageController)
+        if (_stage != null && changedStage != _stage)
             return;
 
         // 새 스테이지 정보로 화면 갱신.
