@@ -5939,6 +5939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 279430224}
   - component: {fileID: 279430225}
+  - component: {fileID: 279430226}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6020,6 +6021,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &279430226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279430223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f398894975192334db48e0dec74e8411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionClearTest
+  stage: {fileID: 1288565764}
+  isMissionClear: 0
+  missionIndex: 0
 --- !u!1 &282744938
 GameObject:
   m_ObjectHideFlags: 0
@@ -23778,6 +23794,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1155857943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+  m_PrefabInstance: {fileID: 1288565762}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1199041376
 GameObject:
   m_ObjectHideFlags: 0
@@ -24809,6 +24830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   isDontDestroyOnLoad: 0
+  _gameStartButton: {fileID: 0}
 --- !u!1 &1229779312
 GameObject:
   m_ObjectHideFlags: 0
@@ -25989,13 +26011,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       insertIndex: -1
       addedObject: {fileID: 912676908}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1288565764}
   m_SourcePrefab: {fileID: 100100000, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
 --- !u!4 &1288565763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
   m_PrefabInstance: {fileID: 1288565762}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1288565764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155857943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba4913eb0e6e904b9a49783d8d1e623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageController
+  stageDef: {fileID: 11400000, guid: 18dbe76f3e836e64d9c3695599f8eb4b, type: 2}
 --- !u!1 &1295705437
 GameObject:
   m_ObjectHideFlags: 0
