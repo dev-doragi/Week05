@@ -34,7 +34,7 @@ public class StageManager : Singleton<StageManager>
     void Start()
     {
         _currStage = Stages[_currentStageIndex];
-        _currStage.gameObject.SetActive(true);
+        _currStage.StartGame();
     }
 
     // Update is called once per frame
@@ -74,9 +74,8 @@ public class StageManager : Singleton<StageManager>
     private void NextStage()
     {
         if (_currentStageIndex >= Stages.Length - 1) return;
-        _currStage.gameObject.SetActive(false);
         _currentStageIndex++;
         _currStage = Stages[_currentStageIndex];
-        _currStage.gameObject.SetActive(true);
+        _currStage.StartGame();
     }
 }

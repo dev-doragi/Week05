@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class StageMove : Stage
@@ -19,7 +19,7 @@ public class StageMove : Stage
     private void Start()
     {
         // 테스트용
-        OnStart();
+        //OnStart();
     }
 
     protected override void OnStart()
