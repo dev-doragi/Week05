@@ -7033,42 +7033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3007537bc6f364f409b7506d13c150ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallPopGame
---- !u!1 &329871817
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 329871818}
-  m_Layer: 5
-  m_Name: MonkeyToggle (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &329871818
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329871817}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6187, y: 1.6187, z: 1.6187}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 422907214}
-  m_Father: {fileID: 2095934600}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45, y: -94}
-  m_SizeDelta: {x: 160, y: 20}
-  m_Pivot: {x: 0, y: 1}
 --- !u!1 &330411438
 GameObject:
   m_ObjectHideFlags: 0
@@ -9043,86 +9007,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416507806}
-  m_CullTransparentMesh: 1
---- !u!1 &422907213
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 422907214}
-  - component: {fileID: 422907216}
-  - component: {fileID: 422907215}
-  m_Layer: 5
-  m_Name: Label
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &422907214
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422907213}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 329871818}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 117.95, y: -9.024414}
-  m_SizeDelta: {x: 257.89, y: 14.05}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &422907215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422907213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 20
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 116
-    m_Alignment: 3
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\uCF54\uCE58\uB2D8\uC744 \uCC3E\uC544 \uD53C\uC5B4\uB9AC\uBDF0 \uC2DC\uAC04\uC744
-    \uC9C0\uC5F0\uC2DC\uD0A4\uC790!"
---- !u!222 &422907216
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422907213}
   m_CullTransparentMesh: 1
 --- !u!1001 &427732867
 PrefabInstance:
@@ -12554,6 +12438,9 @@ MonoBehaviour:
   - {fileID: 1044447922}
   standbySeconds: 10
   skipReturnChance: 1
+  clearEndingController: {fileID: 0}
+  clearGoalCount: 5
+  clearedCountInspector: 0
 --- !u!1 &544714691
 GameObject:
   m_ObjectHideFlags: 0
@@ -16317,6 +16204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoachDebugger
   _coach: {fileID: 778841138}
   _gimmickManager: {fileID: 1150576484}
+  _endingController: {fileID: 0}
 --- !u!4 &778841140
 Transform:
   m_ObjectHideFlags: 0
@@ -25409,8 +25297,8 @@ MonoBehaviour:
     Duration: 20
     Value: 0
     Cooldown: 40
-  - Room: 1
-    GimmickType: 3
+  - Room: 11
+    GimmickType: 2
     ButtonText: "\uCF54\uCE58\uB2D8 \uBA74\uB2F4 \uC2E0\uCCAD\uD558\uAE30"
     Duration: 30
     Value: 0
@@ -25433,7 +25321,7 @@ MonoBehaviour:
     Duration: 20
     Value: 50
     Cooldown: 40
-  - Room: 2
+  - Room: 1
     GimmickType: 1
     ButtonText: "\uBA54\uB274\uD310 \uC5C5\uB370\uC774\uD2B8"
     Duration: 20
@@ -25453,6 +25341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GimmickManager
   _coachController: {fileID: 778841138}
+  _blockPathDuration: 15
+  _blockPathCooldown: 20
 --- !u!4 &1150576485
 Transform:
   m_ObjectHideFlags: 0
@@ -25512,6 +25402,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37321ab3c20311d4c984f710397b194d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildFailEndingController
+  poolManager: {fileID: 0}
+  endingRoot: {fileID: 0}
+  progressSlider: {fileID: 0}
+  messageSlots: []
+  totalSeconds: 8
 --- !u!1 &1168489241
 GameObject:
   m_ObjectHideFlags: 0
@@ -26368,7 +26263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   isDontDestroyOnLoad: 0
-  _gameStartButton: {fileID: 0}
 --- !u!1 &1232992100
 GameObject:
   m_ObjectHideFlags: 0
@@ -30345,6 +30239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ef118d53a03b046b5ca0f3f1e70604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearEndingController
+  endingPannel: {fileID: 0}
+  progressSlider: {fileID: 0}
+  messageSlots: []
+  totalSeconds: 8
 --- !u!114 &1431166880 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8932802700573914670, guid: e518c00b15932a441b03ada0dc07a492, type: 3}
@@ -34631,26 +34529,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CCTVPannel_Jaein
       objectReference: {fileID: 0}
-    - target: {fileID: 8540183759144856971, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6187
-      objectReference: {fileID: 0}
-    - target: {fileID: 8540183759144856971, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6187
-      objectReference: {fileID: 0}
-    - target: {fileID: 8540183759144856971, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.6187
-      objectReference: {fileID: 0}
-    - target: {fileID: 8540183759144856971, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 8540183759144856971, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -30.869751
-      objectReference: {fileID: 0}
     - target: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -34731,20 +34609,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8924768873363487067, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8924768873363487067, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 329871818}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
 --- !u!1001 &1692080217

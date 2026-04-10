@@ -114,7 +114,6 @@ public class CoachMovementController : MonoBehaviour
         ResetMoveTimer();
 
         OnCoachMoved?.Invoke(RoomID.None, _currentRoomId);
-        _gimmickManager.NotifyCoachMoved();
         _initialDelayRoutine = null;
     }
 

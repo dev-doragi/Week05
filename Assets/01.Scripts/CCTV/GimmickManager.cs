@@ -9,7 +9,8 @@ public class GimmickManager : MonoBehaviour
     [SerializeField] private CoachMovementController _coachController;
 
     [Header("BlockPathCoolDown")]
-    [SerializeField] private int _blockPathCooldownMoves = 2;
+    [SerializeField] private float _blockPathDuration = 5f;
+    [SerializeField] private float _blockPathCooldown = 10f;
 
     private RoomID _activeTempTarget = RoomID.None;
     private Coroutine _tempTargetRoutine;
@@ -28,27 +29,19 @@ public class GimmickManager : MonoBehaviour
     private bool _hasBlockedPath;
     private RoomID _blockedFrom = RoomID.None;
     private RoomID _blockedTo = RoomID.None;
-    private int _remainingBlockCooldownMoves = 0;
+    private float _blockPathEndTime = 0f;
+    private float _nextBlockPathAvailableTime = 0f;
 
-    public bool HasBlockedPath => _hasBlockedPath;
-    public RoomID BlockedFrom => _blockedFrom;
-    public RoomID BlockedTo => _blockedTo;
-    public bool CanUseBlockPath => _remainingBlockCooldownMoves <= 0;
+    public bool HasBlockedPath => _hasBlockedPath && Time.time < _blockPathEndTime;
+    public bool CanUseBlockPath => Time.time >= _nextBlockPathAvailableTime;
 
-    // 길 막을 때 호출하는 함수
-    public bool BlockPath(RoomID from, RoomID to)
+    public void BlockPath(RoomID from, RoomID to)
     {
-        if (CanUseBlockPath == false)
-            return false;
-
-        ClearBlockedPath();
-
         _hasBlockedPath = true;
         _blockedFrom = from;
         _blockedTo = to;
-        _remainingBlockCooldownMoves = _blockPathCooldownMoves;
-
-        return true;
+        _blockPathEndTime = Time.time + _blockPathDuration;
+        _nextBlockPathAvailableTime = Time.time + _blockPathCooldown;
     }
 
     public void ClearBlockedPath()
@@ -56,6 +49,7 @@ public class GimmickManager : MonoBehaviour
         _hasBlockedPath = false;
         _blockedFrom = RoomID.None;
         _blockedTo = RoomID.None;
+        _blockPathEndTime = 0f;
     }
 
     public bool IsPathBlocked(RoomID from, RoomID to)
@@ -63,21 +57,14 @@ public class GimmickManager : MonoBehaviour
         if (_hasBlockedPath == false)
             return false;
 
-        return (_blockedFrom == from && _blockedTo == to)
-            || (_blockedFrom == to && _blockedTo == from);
-    }
-
-    public void NotifyCoachMoved()
-    {
-        if (_hasBlockedPath)
+        if (Time.time >= _blockPathEndTime)
         {
             ClearBlockedPath();
+            return false;
         }
 
-        if (_remainingBlockCooldownMoves > 0)
-        {
-            _remainingBlockCooldownMoves--;
-        }
+        return (_blockedFrom == from && _blockedTo == to)
+            || (_blockedFrom == to && _blockedTo == from);
     }
 
     #endregion
