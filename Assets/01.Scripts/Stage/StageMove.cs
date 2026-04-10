@@ -19,7 +19,7 @@ public class StageMove : Stage
     private void Start()
     {
         // 테스트용
-        Start();
+        OnStart();
     }
 
     protected override void OnStart()
