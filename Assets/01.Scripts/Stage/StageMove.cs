@@ -1,13 +1,19 @@
 using System;
 using UnityEngine;
 
-public class StageMove : MiniGame
+public class StageMove : Stage
 {
     public static Action<bool> OnMove;
 
     [SerializeField] private UI_RuntimeReferenceBlocker _runtimeReferenceBlocker;
 
-    private void Awake() => _runtimeReferenceBlocker.GetComponentInChildren<UI_RuntimeReferenceBlocker>();
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _runtimeReferenceBlocker.GetComponentInChildren<UI_RuntimeReferenceBlocker>();
+    }
+        
 
     protected override void OnStart()
     {
@@ -36,9 +42,10 @@ public class StageMove : MiniGame
 
     private void HandleCollision(Collider2D collision)
     {
-        if (collision.GetComponent<ClearTrigger>())
+        MissionClearer clear;
+        if (clear = collision.GetComponent<MissionClearer>())
         {
-            Clear();
+            clear.ClearMission();
         }
     }
 }
