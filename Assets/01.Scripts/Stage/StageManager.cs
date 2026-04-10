@@ -78,4 +78,9 @@ public class StageManager : Singleton<StageManager>
         _currStage = Stages[_currentStageIndex];
         _currStage.StartGame();
     }
+
+    private void ClearRegistry()
+    {
+        _registry.Clear();
+    }
 }
