@@ -10,6 +10,8 @@ public class InGameEditorController : MonoBehaviour
     [SerializeField] private UI_HierarchyPresenter _hierarchyPresenter;
     [SerializeField] private UI_InspectorPresenter _inspectorPresenter;
 
+    private int _nextPlacedObjectIndex = 1;
+
     public static UI_InGameEditorRuntimeState EditorRuntimeState;
 
     private void Awake()
@@ -53,6 +55,7 @@ public class InGameEditorController : MonoBehaviour
         EditorRuntimeState = new UI_InGameEditorRuntimeState();
         EditorRuntimeState.Init(_initialPlacementData);
         EditorRuntimeState.ReferencesChanged += HandleReferencesChanged;
+        _nextPlacedObjectIndex = 1;
 
         RefreshProject();
         RefreshHierarchy();
@@ -133,6 +136,44 @@ public class InGameEditorController : MonoBehaviour
         SelectHierarchyComponent(componentId);
     }
 
+    public void PlaceDraggedPrefab(SO_UIPlaceablePrefabRecipe recipe, Vector3 worldPosition)
+    {
+        if (EditorRuntimeState == null || recipe == null || recipe.ComponentData == null || recipe.PlacementPrefab == null)
+            return;
+
+        UIEditorScene scene = recipe.DefaultScene != UIEditorScene.None
+            ? recipe.DefaultScene
+            : EditorRuntimeState.CurrentScene;
+
+        string objectId = CreatePlacedObjectId(recipe.ComponentData);
+        GameObject instance = Instantiate(recipe.PlacementPrefab);
+        instance.name = objectId;
+        instance.transform.position = worldPosition;
+
+        var selectable = instance.GetComponent<GameObjectSelectable>();
+        if (selectable == null)
+            selectable = instance.AddComponent<GameObjectSelectable>();
+
+        selectable.Bind(objectId, scene);
+
+        bool added = EditorRuntimeState.AddPlacedObject(
+            objectId,
+            recipe.ComponentData,
+            scene,
+            recipe.DefaultReferences);
+
+        if (added == false)
+        {
+            Destroy(instance);
+            return;
+        }
+
+        if (scene != UIEditorScene.None)
+            EditorRuntimeState.SetCurrentScene(scene);
+
+        SelectHierarchyComponent(objectId);
+    }
+
     private void HandleHierarchyItemClicked(string componentId)
     {
         SelectHierarchyComponent(componentId);
@@ -145,6 +186,21 @@ public class InGameEditorController : MonoBehaviour
         RefreshProject();
         RefreshHierarchy();
         RefreshInspector();
+    }
+
+    private string CreatePlacedObjectId(SO_ComponentData componentData)
+    {
+        string baseId = componentData != null && string.IsNullOrEmpty(componentData.ComponentId) == false
+            ? componentData.ComponentId
+            : "PlacedObject";
+
+        while (true)
+        {
+            string objectId = $"{baseId}_Instance_{_nextPlacedObjectIndex++:000}";
+
+            if (EditorRuntimeState.ContainsRuntimeObject(objectId) == false)
+                return objectId;
+        }
     }
 
     private void HandleReferenceDropped(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
 public class GameObjectSelectable : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private string _componentId;
@@ -17,6 +16,7 @@ public class GameObjectSelectable : MonoBehaviour, IPointerDownHandler
     {
         if (string.IsNullOrEmpty(_componentId))
             return;
+
         _controller?.SelectWorldObject(_componentId, _scene);
     }
 
