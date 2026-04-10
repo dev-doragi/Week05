@@ -1,23 +1,37 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_ConsoleComponentView : MonoBehaviour
 {
-    [SerializeField] private Image _consoleLogImage;
-    [SerializeField] private TMP_Text _consoleTitleText;
-    [SerializeField] private TMP_Text _consoleContextText;
-    [SerializeField] private string _componentId;
+    [SerializeField] private Image _consoleLogImage_Fail;
+    [SerializeField] private Image _consoleLogImage_Success;
+    [SerializeField] private TMP_Text _consoleStageIdText;
+    [SerializeField] private TMP_Text _consoleStageTitleText;
+    [SerializeField] private List<UI_ConsoleMissionView> _missionViews;
 
-    public string ComponentId => _componentId;
 
-
-    public void Render(Image logImage, string title, string context, string id)
+    public void Init(string stageId, string stageTitle, List<(int missionIndex, string missionTitle)> missions)
     {
-        _consoleLogImage = logImage;
-        _consoleTitleText.text = title;
-        _consoleContextText.text = context;
-        _componentId = id;
+        _consoleStageIdText.text = stageId;
+        _consoleStageTitleText.text = stageTitle;
+        for (int i = 0; i < missions.Count && i < _missionViews.Count; i++)
+        {
+            var mission = missions[i];
+            _missionViews[i].Init(mission.missionIndex, mission.missionTitle);
+        }
+    }
+
+    public void IsSuccess(int missionIndex)
+    {
+        foreach (var mission in _missionViews)
+        {
+            if (mission.Index == missionIndex)
+            {
+                mission.IsSuccess();
+            }
+        }
     }
 }
 
