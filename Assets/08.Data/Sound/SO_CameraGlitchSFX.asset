@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240a263856f202c40890ae19d5f8eea9, type: 3}
+  m_Name: SO_CameraGlitchSFX
+  m_EditorClassIdentifier: Assembly-CSharp::SO_SFX
+  _clips:
+  - {fileID: 8300000, guid: 54ed2e8fc15d5ef4999d060d76f557ab, type: 3}
+  - {fileID: 8300000, guid: e74eae06a5d3b434fbecd0c6c3702b26, type: 3}
+  - {fileID: 8300000, guid: a2fd2610a6efda043ab15e2a7f9787ad, type: 3}

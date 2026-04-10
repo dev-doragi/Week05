@@ -56,27 +56,13 @@ public class CoachDebugger : MonoBehaviour
     }
     private void LogLureInfluence()
     {
-        //if (_coach == null || _coach.MapGraph == null) return;
+        if (_coach == null || _gimmickManager == null)
+            return;
 
-        //RoomID coachRoom = _coach.CurrentRoomId;
-        //IReadOnlyList<RoomID> neighbors = _coach.MapGraph.GetNeighbors(coachRoom);
+        RoomID coachRoom = _coach.CurrentRoomId;
+        float extraStayTime = _gimmickManager.GetExtraStayTime();
 
-        //bool isEffective = false;
-        //string neighborList = "";
-
-        //foreach (var neighbor in neighbors)
-        //{
-        //    neighborList += neighbor.ToString() + ", ";
-        //    if (neighbor == lureRoom) isEffective = true;
-        //}
-
-        //if (coachRoom == lureRoom) isEffective = true;
-
-        //string status = isEffective ? "<color=green>영향 받음</color>" : "<color=red>영향 없음(너무 멂)</color>";
-
-        //Debug.Log($"[사운드 체크] 발생지: {lureRoom} | 코치 위치: {coachRoom} | 주변 경로: [{neighborList.TrimEnd(',', ' ')}]");
-        //Debug.Log($"[사운드 결과] 코치가 소리를 들을 수 있는가? : {status}");
+        Debug.Log($"[사운드 머무름] 코치 현재 방: {coachRoom} | 추가 체류 시간: {extraStayTime}초");
     }
-
 }
 
