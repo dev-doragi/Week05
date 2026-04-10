@@ -12,5 +12,6 @@ public class StagePlace : MiniGame
     protected override void OnStart()
     {
         _currentMatchCount = 0;
+        _requireMatchCount = targets.Length;
     }
 }
