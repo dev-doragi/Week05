@@ -2596,6 +2596,30 @@ PrefabInstance:
       propertyPath: _stages.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: _stageDefinitions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: '_stageDefinitions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 884dc096bc7c27643b73377f542618c8, type: 2}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: '_stageDefinitions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b0f923ed10dc01d4fb13afba1bb53c3b, type: 2}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: '_stageDefinitions.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 64344355a452a5b48996f59b33143051, type: 2}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: '_stageDefinitions.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d2f72392e3ec92d4483c33996f71c64b, type: 2}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: '_stageDefinitions.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3b3f3028cae7b6b4cb4334513d39a4ee, type: 2}
     - target: {fileID: 8249164980896304392, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

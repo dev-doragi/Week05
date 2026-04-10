@@ -3,26 +3,24 @@ using UnityEngine;
 
 public class UI_ConsolePresenter : MonoBehaviour
 {
-    [Header("Create One View Per Stage")]
+    [Header("Initial Data")]
+    [SerializeField] private List<StageDefinition> _stageDefinitions = new();
+
+    [Header("View")]
     [SerializeField] private UI_ConsoleComponentView _viewPrefab;
     [SerializeField] private Transform _viewParent;
 
-    [Header("Optional Manual Stage Order")]
-    [SerializeField] private List<Stage> _stages = new();
-
-    // Stage 하나당 Console View 하나를 연결해 둡니다.
-    private readonly Dictionary<Stage, UI_ConsoleComponentView> _viewByStage = new();
+    private readonly Dictionary<string, UI_ConsoleComponentView> _views = new();
 
     private void Awake()
     {
-        CollectStages();
-        CreateAllViews();
+        CreateAllViewsFromDefinitions();
+        ApplyCurrentRuntimeStates();
     }
 
     private void OnEnable()
     {
         Stage.OnStageChanged += HandleStageChanged;
-        RefreshAllRuntimeStates();
     }
 
     private void OnDisable()
@@ -30,108 +28,8 @@ public class UI_ConsolePresenter : MonoBehaviour
         Stage.OnStageChanged -= HandleStageChanged;
     }
 
-    // 필요하면 외부에서 다시 전체 생성/초기화할 때 호출
-    public void RenderCurrentStage()
-    {
-        RebuildAllViews();
-    }
-
-    // 특정 Stage 하나만 다시 그리고 싶을 때 사용
-    public void Render(Stage stage)
-    {
-        if (stage == null)
-            return;
-
-        EnsureStageRegistered(stage);
-        CreateViewForStage(stage);
-        DrawDefinition(stage);
-        UpdateMissionState(stage);
-    }
-
-    // StageDefinition만 받는 방식은 현재 구조와 맞지 않아서 권장하지 않습니다.
-    // Stage 여러 개를 관리해야 하므로, 어떤 Stage의 View인지 알아야 하기 때문입니다.
-    public void Render(StageDefinition stageDefinition)
-    {
-        Debug.LogWarning("[UI_ConsolePresenter] Render(StageDefinition) is not used in multi-stage mode. Use Render(Stage) instead.");
-    }
-
-    // 특정 Stage의 특정 미션만 반영하고 싶을 때 사용
-    public void SetMissionSuccess(Stage stage, int missionArrayIndex)
-    {
-        if (stage == null)
-            return;
-
-        if (_viewByStage.TryGetValue(stage, out var view) == false)
-            return;
-
-        StageMission[] runtimeMissions = stage.RuntimeMissions;
-        if (runtimeMissions == null)
-            return;
-
-        if (missionArrayIndex < 0 || missionArrayIndex >= runtimeMissions.Length)
-            return;
-
-        if (runtimeMissions[missionArrayIndex].isMissionSuccess == false)
-            return;
-
-        view.IsSuccess(runtimeMissions[missionArrayIndex].missionIndex);
-    }
-
-    public void Clear()
-    {
-        foreach (var pair in _viewByStage)
-        {
-            if (pair.Value != null)
-                Destroy(pair.Value.gameObject);
-        }
-
-        _viewByStage.Clear();
-    }
-
-    private void RebuildAllViews()
-    {
-        Clear();
-        CollectStages();
-        CreateAllViews();
-        RefreshAllRuntimeStates();
-    }
-
-    private void CollectStages()
-    {
-        if (_stages == null)
-            _stages = new List<Stage>();
-
-        _stages.RemoveAll(stage => stage == null);
-
-        // 인스펙터에 직접 넣어뒀다면 그 순서를 그대로 사용합니다.
-        if (_stages.Count > 0)
-            return;
-
-        Stage[] foundStages = FindObjectsByType<Stage>(
-            FindObjectsInactive.Include,
-            FindObjectsSortMode.None);
-
-        for (int i = 0; i < foundStages.Length; i++)
-        {
-            if (foundStages[i] == null)
-                continue;
-
-            _stages.Add(foundStages[i]);
-        }
-    }
-
-    private void EnsureStageRegistered(Stage stage)
-    {
-        if (stage == null)
-            return;
-
-        if (_stages.Contains(stage))
-            return;
-
-        _stages.Add(stage);
-    }
-
-    private void CreateAllViews()
+    // SO 데이터를 기반으로 만든 UI 생성
+    private void CreateAllViewsFromDefinitions()
     {
         if (_viewPrefab == null)
         {
@@ -139,41 +37,29 @@ public class UI_ConsolePresenter : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < _stages.Count; i++)
+        ClearAllViews();
+
+        for (int i = 0; i < _stageDefinitions.Count; i++)
         {
-            CreateViewForStage(_stages[i]);
+            CreateView(_stageDefinitions[i]);
         }
     }
 
-    private void CreateViewForStage(Stage stage)
+    private void CreateView(StageDefinition definition)
     {
-        if (stage == null)
+        if (definition == null)
             return;
 
-        if (_viewByStage.ContainsKey(stage))
+        if (string.IsNullOrEmpty(definition.StageId))
             return;
 
-        if (stage.StageSO == null)
+        if (_views.ContainsKey(definition.StageId))
             return;
 
         Transform parent = _viewParent != null ? _viewParent : transform;
         UI_ConsoleComponentView view = Instantiate(_viewPrefab, parent);
 
-        _viewByStage.Add(stage, view);
-        DrawDefinition(stage);
-    }
-
-    private void DrawDefinition(Stage stage)
-    {
-        if (stage == null)
-            return;
-
-        if (_viewByStage.TryGetValue(stage, out var view) == false)
-            return;
-
-        StageDefinition definition = stage.StageSO;
-        if (definition == null)
-            return;
+        _views.Add(definition.StageId, view);
 
         List<(int missionIndex, string missionTitle)> missionData = BuildMissionData(definition);
 
@@ -184,20 +70,38 @@ public class UI_ConsolePresenter : MonoBehaviour
             missionData.Count);
     }
 
-    private void RefreshAllRuntimeStates()
+    // 현재 씬에 있는 Stage들의 런타임 성공 상태를 한 번 반영
+    private void ApplyCurrentRuntimeStates()
     {
-        for (int i = 0; i < _stages.Count; i++)
+        Stage[] stages = FindObjectsByType<Stage>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None);
+
+        for (int i = 0; i < stages.Length; i++)
         {
-            UpdateMissionState(_stages[i]);
+            ApplyRuntimeState(stages[i]);
         }
     }
 
-    private void UpdateMissionState(Stage stage)
+    private void HandleStageChanged(Stage changedStage)
     {
-        if (stage == null)
+        if (changedStage == null)
             return;
 
-        if (_viewByStage.TryGetValue(stage, out var view) == false)
+        ApplyRuntimeState(changedStage);
+    }
+
+    // 런타임 데이터로 성공 여부 체크
+    private void ApplyRuntimeState(Stage stage)
+    {
+        if (stage == null || stage.StageSO == null)
+            return;
+
+        string stageId = stage.StageSO.StageId;
+        if (string.IsNullOrEmpty(stageId))
+            return;
+
+        if (_views.TryGetValue(stageId, out UI_ConsoleComponentView view) == false)
             return;
 
         StageMission[] runtimeMissions = stage.RuntimeMissions;
@@ -213,27 +117,30 @@ public class UI_ConsolePresenter : MonoBehaviour
         }
     }
 
-    private List<(int missionIndex, string missionTitle)> BuildMissionData(StageDefinition stageDefinition)
+    private List<(int missionIndex, string missionTitle)> BuildMissionData(StageDefinition definition)
     {
-        List<(int missionIndex, string missionTitle)> missionData = new();
+        List<(int missionIndex, string missionTitle)> result = new();
 
-        if (stageDefinition == null || stageDefinition.Missions == null)
-            return missionData;
+        if (definition == null || definition.Missions == null)
+            return result;
 
-        foreach (StageMission mission in stageDefinition.Missions)
+        for (int i = 0; i < definition.Missions.Length; i++)
         {
-            missionData.Add((mission.missionIndex, mission.missionTitle));
+            StageMission mission = definition.Missions[i];
+            result.Add((mission.missionIndex, mission.missionTitle));
         }
 
-        return missionData;
+        return result;
     }
 
-    private void HandleStageChanged(Stage changedStage)
+    private void ClearAllViews()
     {
-        if (changedStage == null)
-            return;
+        foreach (UI_ConsoleComponentView view in _views.Values)
+        {
+            if (view != null)
+                Destroy(view.gameObject);
+        }
 
-        CreateViewForStage(changedStage);
-        UpdateMissionState(changedStage);
+        _views.Clear();
     }
 }
