@@ -14,14 +14,31 @@ public class StageMove : MiniGame
         HandleCanMove(false);
     }
 
-    private void OnEnable() => _runtimeReferenceBlocker.BlockedChanged += HandleCanMove;
+    private void OnEnable()
+    {
+        _runtimeReferenceBlocker.BlockedChanged += HandleCanMove;
+        CollisionReporter.OnEnter2D += HandleCollision;
+    }
 
-    private void OnDisable() => _runtimeReferenceBlocker.BlockedChanged -= HandleCanMove;
+
+    private void OnDisable()
+    {
+        _runtimeReferenceBlocker.BlockedChanged -= HandleCanMove;
+        CollisionReporter.OnEnter2D -= HandleCollision;
+    }
 
     private void HandleCanMove(bool active)
     {
         Debug.Log("[Stage] Component Reference " + !active);
 
         OnMove?.Invoke(!active);
+    }
+
+    private void HandleCollision(Collider2D collision)
+    {
+        if (collision.GetComponent<ClearTrigger>())
+        {
+            Clear();
+        }
     }
 }

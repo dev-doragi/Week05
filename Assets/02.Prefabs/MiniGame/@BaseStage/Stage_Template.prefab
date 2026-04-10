@@ -320,6 +320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46e5d8986f7a0c4a896304e6576916c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  mission:
+    missionIndex: 0
+    missionTitle: 
+    isMissionSuccess: 0
   canMove: 1
   canJump: 0
   moveSpeed: 10
@@ -392,7 +396,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3997509020296108636, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       propertyPath: m_Name
-      value: Stage1_Move Variant
+      value: Stage_Template
       objectReference: {fileID: 0}
     - target: {fileID: 4307771753829958273, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       propertyPath: m_Color.b
