@@ -1,24 +1,46 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class RoomSelectionGroup : MonoBehaviour
 {
+    [System.Serializable]
+    public struct ViewPose
+    {
+        public Vector3 position;
+        public Vector3 rotationEuler;
+    }
+
     [SerializeField] private RoomTile[] rooms;
+
+    [Header("Target")]
+    [SerializeField] private Transform rotateTarget; // Archi
+
+    [Header("Tween")]
+    [SerializeField] private float moveDuration = 0.35f;
+    [SerializeField] private Ease moveEase = Ease.OutCubic;
+    [SerializeField] private bool useLocalSpace = true;
+
+    [Header("4 Preset Poses (index 0~3)")]
+    [SerializeField] private ViewPose[] poses = new ViewPose[4];
+
+    private Tween _moveTween;
+    private Tween _rotTween;
+
+    private void Awake()
+    {
+        if (rotateTarget == null) rotateTarget = transform;
+    }
 
     private void Start()
     {
         if (rooms == null || rooms.Length == 0)
             rooms = GetComponentsInChildren<RoomTile>(true);
+    }
 
-        RoomTile firstSelected = null;
-        for (int i = 0; i < rooms.Length; i++)
-        {
-            if (rooms[i] == null) continue;
-            if (rooms[i].IsSelected && firstSelected == null)
-                firstSelected = rooms[i];
-        }
-
-        if (firstSelected != null) SelectRoom(firstSelected);
-        else ClearSelection();
+    private void OnDisable()
+    {
+        if (_moveTween != null && _moveTween.IsActive()) _moveTween.Kill();
+        if (_rotTween != null && _rotTween.IsActive()) _rotTween.Kill();
     }
 
     public void SelectRoom(RoomTile target)
@@ -32,6 +54,7 @@ public class RoomSelectionGroup : MonoBehaviour
             room.SetSelectedVisual(room == target);
         }
 
+        MoveToPose(target.RotateStepIndex);
     }
 
     public void ClearSelection()
@@ -40,6 +63,28 @@ public class RoomSelectionGroup : MonoBehaviour
         {
             if (rooms[i] == null) continue;
             rooms[i].SetSelectedVisual(false);
+        }
+    }
+
+    private void MoveToPose(int index)
+    {
+        if (poses == null || poses.Length == 0) return;
+
+        index = Mathf.Clamp(index, 0, poses.Length - 1);
+        ViewPose p = poses[index];
+
+        if (_moveTween != null && _moveTween.IsActive()) _moveTween.Kill();
+        if (_rotTween != null && _rotTween.IsActive()) _rotTween.Kill();
+
+        if (useLocalSpace)
+        {
+            _moveTween = rotateTarget.DOLocalMove(p.position, moveDuration).SetEase(moveEase);
+            _rotTween = rotateTarget.DOLocalRotate(p.rotationEuler, moveDuration, RotateMode.Fast).SetEase(moveEase);
+        }
+        else
+        {
+            _moveTween = rotateTarget.DOMove(p.position, moveDuration).SetEase(moveEase);
+            _rotTween = rotateTarget.DORotate(p.rotationEuler, moveDuration, RotateMode.Fast).SetEase(moveEase);
         }
     }
 }
