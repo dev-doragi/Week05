@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log("[Player] Move Input " + moveInput);
         if (canMove) _rigid.linearVelocity = new Vector2(moveInput.x * moveSpeed, _rigid.linearVelocity.y);
         else _rigid.linearVelocity = Vector2.zero;
     }
