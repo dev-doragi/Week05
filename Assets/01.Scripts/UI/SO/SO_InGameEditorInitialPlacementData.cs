@@ -24,7 +24,7 @@ public class SO_InGameEditorInitialPlacementData : ScriptableObject
     {
         [SerializeField] private InspectorComponent _inspectorComponent;
         [SerializeField] private string _slotId;
-        [SerializeField] private string _label;
+        [SerializeField] private string _label = "reference";
         [SerializeField] private string _normalTargetId;
         [SerializeField] private bool _canSpawnError = true;
         [SerializeField] private bool _isRequired = true;
