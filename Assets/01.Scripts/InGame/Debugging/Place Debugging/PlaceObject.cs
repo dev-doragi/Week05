@@ -21,10 +21,6 @@ public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     private void Start()
     {
-        // 스테이지 클리어시
-
-        //Stage.OnClear +=
-
         Init();
     }
 
