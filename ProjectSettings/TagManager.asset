@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Pillar
+  - Wall
+  - MinimapRoom
+  - MinimapPassage
   layers:
   - Default
   - TransparentFX
@@ -24,7 +28,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Render
   - 
   - 
   - 
