@@ -1,134 +1,225 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-// 뷰(View)와 모델(Controller)의 연결 다리 역할.
 public class UI_ConsolePresenter : MonoBehaviour
 {
-    // 인스펙터 할당용 변수. 미할당 시 Awake에서 탐색.
-    [SerializeField] private UI_ConsoleComponentView _view;
-    [SerializeField] private Stage _stage;
+    [Header("Create One View Per Stage")]
+    [SerializeField] private UI_ConsoleComponentView _viewPrefab;
+    [SerializeField] private Transform _viewParent;
 
-    // 현재 화면에 그릴 스테이지 데이터.
-    private StageDefinition _currentStageDefinition;
+    [Header("Optional Manual Stage Order")]
+    [SerializeField] private List<Stage> _stages = new();
+
+    // Stage 하나당 Console View 하나를 연결해 둡니다.
+    private readonly Dictionary<Stage, UI_ConsoleComponentView> _viewByStage = new();
 
     private void Awake()
     {
-        // 컴포넌트 자동 할당. 방어적 코드.
-        _view ??= FindFirstObjectByType<UI_ConsoleComponentView>();
-        _stage ??= FindFirstObjectByType<Stage>();
+        CollectStages();
+        CreateAllViews();
     }
 
     private void OnEnable()
     {
-        // 이벤트 구독. 스테이지 변경 감지.
         Stage.OnStageChanged += HandleStageChanged;
-
-        // 활성화 시 즉시 화면 갱신.
-        RenderCurrentStage();
+        RefreshAllRuntimeStates();
     }
 
     private void OnDisable()
     {
-        // 이벤트 구독 해제. 메모리 누수 방지.
         Stage.OnStageChanged -= HandleStageChanged;
     }
 
-    // 현재 할당된 컨트롤러 기준으로 화면 그리기.
+    // 필요하면 외부에서 다시 전체 생성/초기화할 때 호출
     public void RenderCurrentStage()
     {
-        // 컨트롤러 누락 시 화면 초기화.
-        if (_stage == null)
-        {
-            Clear();
-            return;
-        }
-
-        Render(_stage);
+        RebuildAllViews();
     }
 
-    // 컨트롤러 데이터를 뷰에 전달. 오버로딩.
+    // 특정 Stage 하나만 다시 그리고 싶을 때 사용
     public void Render(Stage stage)
     {
         if (stage == null)
-        {
-            Clear();
             return;
-        }
 
-        _stage = stage;
-        _currentStageDefinition = stage.StageSO;
-
-        // 1. 스테이지 기본 정보 렌더링.
-        Render(_currentStageDefinition);
-        // 2. 런타임 미션 달성 상태 덮어쓰기.
-        ApplyMissionState(stage.RuntimeMissions);
+        EnsureStageRegistered(stage);
+        CreateViewForStage(stage);
+        DrawDefinition(stage);
+        UpdateMissionState(stage);
     }
 
-    // 스테이지 정의(데이터)를 뷰에 전달. 오버로딩.
+    // StageDefinition만 받는 방식은 현재 구조와 맞지 않아서 권장하지 않습니다.
+    // Stage 여러 개를 관리해야 하므로, 어떤 Stage의 View인지 알아야 하기 때문입니다.
     public void Render(StageDefinition stageDefinition)
     {
-        _currentStageDefinition = stageDefinition;
+        Debug.LogWarning("[UI_ConsolePresenter] Render(StageDefinition) is not used in multi-stage mode. Use Render(Stage) instead.");
+    }
 
-        if (_view == null)
+    // 특정 Stage의 특정 미션만 반영하고 싶을 때 사용
+    public void SetMissionSuccess(Stage stage, int missionArrayIndex)
+    {
+        if (stage == null)
             return;
 
-        if (_currentStageDefinition == null)
+        if (_viewByStage.TryGetValue(stage, out var view) == false)
+            return;
+
+        StageMission[] runtimeMissions = stage.RuntimeMissions;
+        if (runtimeMissions == null)
+            return;
+
+        if (missionArrayIndex < 0 || missionArrayIndex >= runtimeMissions.Length)
+            return;
+
+        if (runtimeMissions[missionArrayIndex].isMissionSuccess == false)
+            return;
+
+        view.IsSuccess(runtimeMissions[missionArrayIndex].missionIndex);
+    }
+
+    public void Clear()
+    {
+        foreach (var pair in _viewByStage)
         {
-            Clear();
+            if (pair.Value != null)
+                Destroy(pair.Value.gameObject);
+        }
+
+        _viewByStage.Clear();
+    }
+
+    private void RebuildAllViews()
+    {
+        Clear();
+        CollectStages();
+        CreateAllViews();
+        RefreshAllRuntimeStates();
+    }
+
+    private void CollectStages()
+    {
+        if (_stages == null)
+            _stages = new List<Stage>();
+
+        _stages.RemoveAll(stage => stage == null);
+
+        // 인스펙터에 직접 넣어뒀다면 그 순서를 그대로 사용합니다.
+        if (_stages.Count > 0)
+            return;
+
+        Stage[] foundStages = FindObjectsByType<Stage>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None);
+
+        for (int i = 0; i < foundStages.Length; i++)
+        {
+            if (foundStages[i] == null)
+                continue;
+
+            _stages.Add(foundStages[i]);
+        }
+    }
+
+    private void EnsureStageRegistered(Stage stage)
+    {
+        if (stage == null)
+            return;
+
+        if (_stages.Contains(stage))
+            return;
+
+        _stages.Add(stage);
+    }
+
+    private void CreateAllViews()
+    {
+        if (_viewPrefab == null)
+        {
+            Debug.LogWarning("[UI_ConsolePresenter] View Prefab is missing.");
             return;
         }
 
-        // 뷰에 넘길 미션 데이터 가공.
-        List<(int missionIndex, string missionTitle)> missionData = BuildMissionData(_currentStageDefinition);
+        for (int i = 0; i < _stages.Count; i++)
+        {
+            CreateViewForStage(_stages[i]);
+        }
+    }
 
-        // 뷰 초기화 함수 호출.
-        _view.Init(
-            _currentStageDefinition.StageId,
-            _currentStageDefinition.StageTitle,
+    private void CreateViewForStage(Stage stage)
+    {
+        if (stage == null)
+            return;
+
+        if (_viewByStage.ContainsKey(stage))
+            return;
+
+        if (stage.StageSO == null)
+            return;
+
+        Transform parent = _viewParent != null ? _viewParent : transform;
+        UI_ConsoleComponentView view = Instantiate(_viewPrefab, parent);
+
+        _viewByStage.Add(stage, view);
+        DrawDefinition(stage);
+    }
+
+    private void DrawDefinition(Stage stage)
+    {
+        if (stage == null)
+            return;
+
+        if (_viewByStage.TryGetValue(stage, out var view) == false)
+            return;
+
+        StageDefinition definition = stage.StageSO;
+        if (definition == null)
+            return;
+
+        List<(int missionIndex, string missionTitle)> missionData = BuildMissionData(definition);
+
+        view.Init(
+            definition.StageId,
+            definition.StageTitle,
             missionData,
             missionData.Count);
     }
 
-    // 특정 미션 성공 처리. 뷰 업데이트.
-    public void SetMissionSuccess(int missionArrayIndex)
+    private void RefreshAllRuntimeStates()
     {
-        if (_view == null || _currentStageDefinition == null)
-            return;
-
-        StageMission[] missions = _currentStageDefinition.Missions;
-        if (missions == null)
-            return;
-
-        // 인덱스 범위 초과 예외 처리.
-        if (missionArrayIndex < 0 || missionArrayIndex >= missions.Length)
-            return;
-
-        // 실제 미션 고유 인덱스 추출 및 뷰 전달.
-        int missionIndex = missions[missionArrayIndex].missionIndex;
-        _view.IsSuccess(missionIndex);
+        for (int i = 0; i < _stages.Count; i++)
+        {
+            UpdateMissionState(_stages[i]);
+        }
     }
 
-    // 뷰 데이터 비우기.
-    public void Clear()
+    private void UpdateMissionState(Stage stage)
     {
-        if (_view == null)
+        if (stage == null)
             return;
 
-        _currentStageDefinition = null;
+        if (_viewByStage.TryGetValue(stage, out var view) == false)
+            return;
 
-        // 빈 값 전달하여 화면 리셋.
-        _view.Init(string.Empty, string.Empty, new List<(int missionIndex, string missionTitle)>(), 0);
+        StageMission[] runtimeMissions = stage.RuntimeMissions;
+        if (runtimeMissions == null)
+            return;
+
+        for (int i = 0; i < runtimeMissions.Length; i++)
+        {
+            if (runtimeMissions[i].isMissionSuccess == false)
+                continue;
+
+            view.IsSuccess(runtimeMissions[i].missionIndex);
+        }
     }
 
-    // 미션 데이터 리스트 생성. 뷰 포맷에 맞게 가공.
     private List<(int missionIndex, string missionTitle)> BuildMissionData(StageDefinition stageDefinition)
     {
-        List<(int missionIndex, string missionTitle)> missionData = new List<(int missionIndex, string missionTitle)>();
+        List<(int missionIndex, string missionTitle)> missionData = new();
 
         if (stageDefinition == null || stageDefinition.Missions == null)
             return missionData;
 
-        // 튜플 형태로 추출 및 저장.
         foreach (StageMission mission in stageDefinition.Missions)
         {
             missionData.Add((mission.missionIndex, mission.missionTitle));
@@ -137,41 +228,12 @@ public class UI_ConsolePresenter : MonoBehaviour
         return missionData;
     }
 
-    // 현재 런타임 미션 진행 상황을 뷰에 동기화.
-    private void ApplyMissionState(StageMission[] runtimeMissions)
-    {
-        if (_view == null || _currentStageDefinition == null)
-            return;
-
-        if (_currentStageDefinition.Missions == null || runtimeMissions == null)
-            return;
-
-        // 배열 길이 차이로 인한 OutOfRange 방지.
-        int count = Mathf.Min(_currentStageDefinition.Missions.Length, runtimeMissions.Length);
-
-        for (int i = 0; i < count; i++)
-        {
-            // 미달성 미션 무시.
-            if (runtimeMissions[i].isMissionSuccess == false)
-                continue;
-
-            // 달성한 미션만 뷰에 성공 처리.
-            int missionIndex = _currentStageDefinition.Missions[i].missionIndex;
-            _view.IsSuccess(missionIndex);
-        }
-    }
-
-    // 스테이지 변경 이벤트 콜백.
     private void HandleStageChanged(Stage changedStage)
     {
         if (changedStage == null)
             return;
 
-        // 추적 중인 스테이지와 다르면 무시.
-        if (_stage != null && changedStage != _stage)
-            return;
-
-        // 새 스테이지 정보로 화면 갱신.
-        Render(changedStage);
+        CreateViewForStage(changedStage);
+        UpdateMissionState(changedStage);
     }
 }
