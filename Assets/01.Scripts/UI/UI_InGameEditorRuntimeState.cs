@@ -10,6 +10,7 @@ public class UI_InGameEditorRuntimeState
     public event System.Action ReferencesChanged;
     public event System.Action<UI_RuntimeReferenceKey> ReferenceBroken;
     public event System.Action<UI_RuntimeReferenceKey> ReferenceSolved;
+    public event System.Action<string, bool> OwnerBlockStateChanged;
 
     public string SelectedRuntimeComponentId { get; private set; }
     public string SelectedProjectComponentId { get; private set; }
@@ -62,6 +63,42 @@ public class UI_InGameEditorRuntimeState
             return false;
 
         return _componentById.ContainsKey(objectId);
+    }
+
+    public bool HasAnyReferenceError(string ownerId)
+    {
+        if (_componentById.TryGetValue(ownerId, out var runtimeData) == false)
+            return false;
+
+        return runtimeData.HasReferenceError();
+    }
+
+    public bool HasMissingReference(string ownerId)
+    {
+        if (_componentById.TryGetValue(ownerId, out var runtimeData) == false)
+            return false;
+
+        foreach (var section in runtimeData.Sections)
+        {
+            if (section == null)
+                continue;
+
+            foreach (var reference in section.References)
+            {
+                if (reference == null)
+                    continue;
+
+                if (reference.GetErrorType() == UI_ReferenceValidationErrorType.MissingReference)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool IsOwnerBlocked(string ownerId)
+    {
+        return HasAnyReferenceError(ownerId);
     }
 
     public void SelectFromProject(string componentId)
@@ -148,6 +185,7 @@ public class UI_InGameEditorRuntimeState
 
     public bool TryBreakReference(string ownerId, InspectorComponent inspectorComponent, string slotId)
     {
+        bool ownerWasBlocked = IsOwnerBlocked(ownerId);
         var reference = FindReference(ownerId, inspectorComponent, slotId);
         if (reference == null || !reference.CanSpawnError)
             return false;
@@ -161,6 +199,8 @@ public class UI_InGameEditorRuntimeState
 
         if (changed)
             NotifyReferenceBroken(ownerId, inspectorComponent, slotId);
+
+        NotifyOwnerBlockStateChangedIfNeeded(ownerId, ownerWasBlocked);
 
         if (changed)
             NotifyReferencesChanged();
@@ -188,35 +228,35 @@ public class UI_InGameEditorRuntimeState
     {
         brokenKey = null;
 
-        string ownerId = component.ToString();
-
-        if (_componentById.TryGetValue(ownerId, out var runtimeData) == false)
-            return false;
-
-        foreach (var section in runtimeData.Sections)
+        foreach (var pair in _componentById)
         {
-            if (section == null || section.InspectorComponent != component)
-                continue;
+            var runtimeData = pair.Value;
 
-            foreach (var reference in section.References)
+            foreach (var section in runtimeData.Sections)
             {
-                if (reference == null)
+                if (section == null || section.InspectorComponent != component)
                     continue;
 
-                if (!reference.CanSpawnError || !reference.IsCorrect())
-                    continue;
-
-                if (!TryBreakReference(ownerId, component, reference.SlotId))
-                    return false;
-
-                brokenKey = new UI_RuntimeReferenceKey
+                foreach (var reference in section.References)
                 {
-                    OwnerId = ownerId,
-                    InspectorComponent = component,
-                    SlotId = reference.SlotId
-                };
+                    if (reference == null)
+                        continue;
 
-                return true;
+                    if (!reference.CanSpawnError || !reference.IsCorrect())
+                        continue;
+
+                    if (!TryBreakReference(runtimeData.Id, component, reference.SlotId))
+                        return false;
+
+                    brokenKey = new UI_RuntimeReferenceKey
+                    {
+                        OwnerId = runtimeData.Id,
+                        InspectorComponent = component,
+                        SlotId = reference.SlotId
+                    };
+
+                    return true;
+                }
             }
         }
 
@@ -225,6 +265,7 @@ public class UI_InGameEditorRuntimeState
 
     public bool TryRestoreReference(string ownerId, InspectorComponent inspectorComponent, string slotId)
     {
+        bool ownerWasBlocked = IsOwnerBlocked(ownerId);
         var reference = FindReference(ownerId, inspectorComponent, slotId);
         if (reference == null)
             return false;
@@ -237,6 +278,8 @@ public class UI_InGameEditorRuntimeState
         reference.CurrentTargetId = reference.ExpectedTargetId;
         reference.CurrentTargetDisplayName = reference.ExpectedTargetDisplayName;
 
+        NotifyOwnerBlockStateChangedIfNeeded(ownerId, ownerWasBlocked);
+
         if (changed)
             NotifyReferencesChanged();
 
@@ -246,6 +289,7 @@ public class UI_InGameEditorRuntimeState
 
     public bool TryAssignReference(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
     {
+        bool ownerWasBlocked = IsOwnerBlocked(ownerId);
         var reference = FindReference(ownerId, inspectorComponent, slotId);
         if (reference == null)
             return false;
@@ -258,6 +302,8 @@ public class UI_InGameEditorRuntimeState
 
         reference.CurrentTargetId = targetId;
         reference.CurrentTargetDisplayName = targetDisplayName;
+
+        NotifyOwnerBlockStateChangedIfNeeded(ownerId, ownerWasBlocked);
 
         if (changed)
             NotifyReferencesChanged();
@@ -522,6 +568,18 @@ public class UI_InGameEditorRuntimeState
             InspectorComponent = inspectorComponent,
             SlotId = slotId
         });
+    }
+
+    private void NotifyOwnerBlockStateChangedIfNeeded(string ownerId, bool previousBlockedState)
+    {
+        if (string.IsNullOrEmpty(ownerId))
+            return;
+
+        bool currentBlockedState = IsOwnerBlocked(ownerId);
+        if (previousBlockedState == currentBlockedState)
+            return;
+
+        OwnerBlockStateChanged?.Invoke(ownerId, currentBlockedState);
     }
 
     private void NotifyReferencesChanged()
