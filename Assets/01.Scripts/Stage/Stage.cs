@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Stage : MonoBehaviour
 {
     public static event Action<Stage> OnStageChanged;
+    public static event Action<Stage> OnClear;
 
     [SerializeField] private StageDefinition stageSO;
     public StageDefinition StageSO => stageSO;
