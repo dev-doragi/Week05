@@ -22,6 +22,6 @@ public class StageMove : MiniGame
     {
         Debug.Log("[Stage] Component Reference " + active);
 
-        OnMove?.Invoke(active);
+        OnMove?.Invoke(!active);
     }
 }

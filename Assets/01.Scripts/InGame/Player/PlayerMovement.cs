@@ -30,7 +30,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("[Player] Move " + active);
 
-        canMove = !active;
+        canMove = active;
+
+        if (!canMove)
+        {
+            moveInput = Vector2.zero;
+            _rigid.linearVelocity = new Vector2(0f, _rigid.linearVelocityY);
+        }
     }
 
 
