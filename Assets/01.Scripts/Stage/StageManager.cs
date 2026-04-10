@@ -23,6 +23,8 @@ public class StageManager : Singleton<StageManager>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _currStage = Stages[_currentStageIndex];
+        _currStage.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

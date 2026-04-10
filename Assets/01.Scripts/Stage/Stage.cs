@@ -4,13 +4,15 @@ using UnityEngine;
 public abstract class Stage : MonoBehaviour
 {
     public static event Action<Stage> OnStageChanged;
-    public static event Action<Stage> OnClear;
+    public static event Action OnClear;
 
     [SerializeField] private StageDefinition stageSO;
     public StageDefinition StageSO => stageSO;
 
-    private StageMission[] _runtimeMissions;
+    [SerializeField] private StageMission[] _runtimeMissions;
     public StageMission[] RuntimeMissions => _runtimeMissions;
+
+    private bool _isCleared = false;
 
     protected virtual void Awake()
     {
@@ -41,8 +43,11 @@ public abstract class Stage : MonoBehaviour
 
         _runtimeMissions[index].isMissionSuccess = true;
 
-        if (IsAllMissionCleared())
+        if (!_isCleared && IsAllMissionCleared())
         {
+            _isCleared = true;
+            OnClear?.Invoke();
+
             Debug.Log("Stage Clear!");
             Clear();
             return;
