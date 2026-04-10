@@ -20,6 +20,16 @@ public class StageManager : Singleton<StageManager>
         InvokeAllStages(Stages);
     }
 
+    private void OnEnable()
+    {
+        Stage.OnClear += NextStage;
+    }
+
+    private void OnDisable()
+    {
+        Stage.OnClear -= NextStage;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,5 +69,14 @@ public class StageManager : Singleton<StageManager>
             if (list[i] != null)
                 list[i].InvokeChange();
         }
+    }
+
+    private void NextStage()
+    {
+        if (_currentStageIndex >= Stages.Length - 1) return;
+        _currStage.gameObject.SetActive(false);
+        _currentStageIndex++;
+        _currStage = Stages[_currentStageIndex];
+        _currStage.gameObject.SetActive(true);
     }
 }
