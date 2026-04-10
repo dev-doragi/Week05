@@ -72,6 +72,9 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
         if (UI_DragContext.IsDragging == false)
             return;
 
+        if (UI_DragContext.DragType != UIProjectDragType.ReferenceTarget)
+            return;
+
         if (string.IsNullOrEmpty(_ownerId) || string.IsNullOrEmpty(_slotId))
             return;
 
