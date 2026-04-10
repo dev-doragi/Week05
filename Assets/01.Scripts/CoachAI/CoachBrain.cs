@@ -13,6 +13,7 @@ public class CoachBrain
     [SerializeField] private float _aggroIncreasePerMove = 0.2f;
 
     private RoomID _lastRoomId = RoomID.None;
+
     public float CurrentAggro => _officeAggro;
 
     public void Initialize(MapGraph mapGraph, GimmickManager gimmickManager)
@@ -32,7 +33,8 @@ public class CoachBrain
     {
         IReadOnlyList<RoomID> neighbors = _mapGraph.GetNeighbors(currentRoomId);
 
-        if (neighbors.Count == 0) return currentRoomId;
+        if (neighbors.Count == 0)
+            return currentRoomId;
 
         RoomID targetRoom = _gimmickManager.ActiveTempTarget != RoomID.None
             ? _gimmickManager.ActiveTempTarget
@@ -45,24 +47,28 @@ public class CoachBrain
         {
             float score = CalculateRoomScore(currentRoomId, nextRoom, targetRoom);
 
-            if (score <= 0f) continue;
+            if (score <= 0f)
+                continue;
 
             roomWeights.Add(new KeyValuePair<RoomID, float>(nextRoom, score));
             totalWeight += score;
         }
 
-        if (roomWeights.Count == 0) return currentRoomId;
+        if (roomWeights.Count == 0)
+            return currentRoomId;
 
         float randomRoll = Random.Range(0f, totalWeight);
         float cumulativeWeight = 0f;
 
         RoomID selectedRoom = currentRoomId;
-        foreach (var rw in roomWeights)
+
+        foreach (var roomWeight in roomWeights)
         {
-            cumulativeWeight += rw.Value;
+            cumulativeWeight += roomWeight.Value;
+
             if (randomRoll <= cumulativeWeight)
             {
-                selectedRoom = rw.Key;
+                selectedRoom = roomWeight.Key;
                 break;
             }
         }
@@ -74,21 +80,17 @@ public class CoachBrain
     private float CalculateRoomScore(RoomID currentRoom, RoomID nextRoom, RoomID targetRoom)
     {
         if (_gimmickManager.IsPathBlocked(currentRoom, nextRoom))
-        {
             return 0f;
-        }
 
-        float score = _mapGraph.GetBaseWeight(currentRoom, nextRoom);
+        float score = 1f;
 
         int currentDistance = _mapGraph.GetDistance(currentRoom, targetRoom);
         int nextDistance = _mapGraph.GetDistance(nextRoom, targetRoom);
 
-        if (currentDistance == MapGraph.UnreachableDistance || nextDistance == MapGraph.UnreachableDistance)
-        {
+        if (currentDistance == int.MaxValue || nextDistance == int.MaxValue)
             return score;
-        }
 
-        float multiplier = (targetRoom != RoomID.Office) ? 3.0f : 1.0f; // 코칭룸 목표 시 가중치 보너스
+        float multiplier = targetRoom != RoomID.Office ? 3.0f : 1.0f;
 
         if (nextDistance < currentDistance)
         {
@@ -97,19 +99,6 @@ public class CoachBrain
         else if (nextDistance > currentDistance)
         {
             score -= (_baseAggroMultiplier * 0.8f) * _officeAggro * multiplier;
-        }
-
-        RoomID activeLureRoom = _gimmickManager.ActiveLureRoom;
-        float lureValue = _gimmickManager.GetLureValue(nextRoom);
-
-        if (lureValue > 0f && activeLureRoom != RoomID.None)
-        {
-            int distanceToLure = _mapGraph.GetDistance(currentRoom, activeLureRoom);
-
-            if (distanceToLure <= 1)
-            {
-                score += lureValue / Mathf.Max(1f, _officeAggro * 0.5f);
-            }
         }
 
         if (nextRoom == _lastRoomId)

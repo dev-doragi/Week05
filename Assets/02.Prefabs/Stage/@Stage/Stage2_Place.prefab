@@ -148,6 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8269449782347873289}
   - component: {fileID: 1251828425323920472}
+  - component: {fileID: 5521529357799763422}
   m_Layer: 27
   m_Name: Target Platform
   m_TagString: Untagged
@@ -220,7 +221,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.13629557, g: 0.24528301, b: 0.0983446, a: 1}
+  m_Color: {r: 0.3647059, g: 0.7764706, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -229,6 +230,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &5521529357799763422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436118309304199962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c5c4d7b550148b499ca30f37bbd9473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaceTarget
+  snapDistance: 0.5
 --- !u!1001 &9008834642612399591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248,6 +262,14 @@ PrefabInstance:
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_Name
       value: Stage2_Place
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618345775492974790, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: stage
+      value: 
+      objectReference: {fileID: 5470624632667960534}
+    - target: {fileID: 3618345775492974790, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: missionIndexToClear
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6381365576677643745, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalScale.x
@@ -311,6 +333,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5470624632667960534}
+    - targetCorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3457219292326617883}
   m_SourcePrefab: {fileID: 100100000, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
 --- !u!4 &473275880062105152 stripped
 Transform:
@@ -334,5 +359,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1814ebd297971fe478ed623626e86507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePlace
-  issue: {fileID: 0}
-  targets: []
+  stageSO: {fileID: 11400000, guid: ffcddb1e1169e2d4cac4e0ca30937a87, type: 2}
+  targets:
+  - {fileID: 5521529357799763422}
+--- !u!114 &3457219292326617883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5948439288589993063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
+  isClear: 0
+  stage: {fileID: 5470624632667960534}
+  missionIndexToClear: 0

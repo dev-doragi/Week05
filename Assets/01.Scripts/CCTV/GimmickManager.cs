@@ -8,64 +8,97 @@ public class GimmickManager : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private CoachMovementController _coachController;
 
+    [Header("BlockPathCoolDown")]
+    [SerializeField] private float _blockPathDuration = 5f;
+    [SerializeField] private float _blockPathCooldown = 10f;
+
     private RoomID _activeTempTarget = RoomID.None;
     private Coroutine _tempTargetRoutine;
 
-    private Dictionary<(RoomID, RoomID), float> _blockedPaths = new();
+    private Coroutine _stayDelayRoutine;
+    private float _activeExtraStayTime = 0f;
+    private float _stayDelayEndTime = 0f;
 
-    private RoomID _activeLureRoom = RoomID.None;
-    private float _lureValue = 0f;
-    private Coroutine _lureRoutine;
-
-    public event Action<RoomID> OnLureActivated;
+    public event Action OnStayDelayActivated;
 
     public RoomID ActiveTempTarget => _activeTempTarget;
-    public RoomID ActiveLureRoom => _activeLureRoom;
 
-    #region 1. Path Blocking & Elevator Delay
+    public static GimmickManager Instance { get; private set; }
 
-    public void BlockPath(RoomID from, RoomID to, float duration)
+    private void Awake()
     {
-        StartCoroutine(Co_BlockPath(from, to, duration));
-        StartCoroutine(Co_BlockPath(to, from, duration));
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
     }
 
-    private IEnumerator Co_BlockPath(RoomID from, RoomID to, float duration)
-    {
-        var path = (from, to);
-        _blockedPaths[path] = Time.time + duration;
-        yield return new WaitForSeconds(duration);
+    #region 1. Path Blocking
 
-        if (_blockedPaths.ContainsKey(path) && _blockedPaths[path] <= Time.time)
+    private bool _hasBlockedPath;
+    private RoomID _blockedFrom = RoomID.None;
+    private RoomID _blockedTo = RoomID.None;
+    private float _blockPathEndTime = 0f;
+    private float _nextBlockPathAvailableTime = 0f;
+
+    public bool HasBlockedPath => _hasBlockedPath && Time.time < _blockPathEndTime;
+
+    public bool CanUseBlockPath
+    {
+        get
         {
-            _blockedPaths.Remove(path);
+            if (Time.time < _nextBlockPathAvailableTime)
+                return false;
+
+            if (_coachController.IsTransitioning)
+                return false;
+
+            return true;
         }
     }
 
-    public void DelayElevator()
+    public bool TryBlockPath(RoomID from, RoomID to)
     {
-        if (_coachController == null) return;
+        if (CanUseBlockPath == false)
+            return false;
 
-        bool isInsideB1F = _coachController.CurrentRoomId == RoomID.Elevator_B ||
-                          _coachController.CurrentRoomId == RoomID.Cafeteria ||
-                          _coachController.CurrentRoomId == RoomID.Stair_B;
+        BlockPath(from, to);
+        return true;
+    }
 
-        bool isMovingTo3F = _coachController.IsTransitioning && _coachController.NextRoomId == RoomID.Elevator_A;
+    public void BlockPath(RoomID from, RoomID to)
+    {
+        _hasBlockedPath = true;
+        _blockedFrom = from;
+        _blockedTo = to;
+        _blockPathEndTime = Time.time + _blockPathDuration;
+        _nextBlockPathAvailableTime = Time.time + _blockPathCooldown;
+    }
 
-        if (isInsideB1F || isMovingTo3F)
-        {
-            _coachController.ForceMoveTo(RoomID.Elevator_B);
-            Debug.Log("[Gimmick] 엘리베이터 지연 발생: 코치를 B1F로 회귀시킵니다.");
-        }
+    public void ClearBlockedPath()
+    {
+        _hasBlockedPath = false;
+        _blockedFrom = RoomID.None;
+        _blockedTo = RoomID.None;
+        _blockPathEndTime = 0f;
     }
 
     public bool IsPathBlocked(RoomID from, RoomID to)
     {
-        if (_blockedPaths.TryGetValue((from, to), out float unlockTime))
+        if (_hasBlockedPath == false)
+            return false;
+
+        if (Time.time >= _blockPathEndTime)
         {
-            return Time.time < unlockTime;
+            ClearBlockedPath();
+            return false;
         }
-        return false;
+
+        return (_blockedFrom == from && _blockedTo == to)
+            || (_blockedFrom == to && _blockedTo == from);
     }
 
     #endregion
@@ -88,34 +121,38 @@ public class GimmickManager : MonoBehaviour
 
     #endregion
 
-    #region 3. Sound Lure
+    #region 3. Stay Delay (Sound Lure)
 
-    public void ActivateLure(RoomID room, float initialLureValue, float duration)
+    public bool HasActiveStayDelay => Time.time < _stayDelayEndTime;
+    public float ActiveExtraStayTime => HasActiveStayDelay ? _activeExtraStayTime : 0f;
+
+    public void ActivateStayDelay(float extraStayTime, float duration)
     {
-        if (_lureRoutine != null) StopCoroutine(_lureRoutine);
-        _lureRoutine = StartCoroutine(Co_DecayLure(room, initialLureValue, duration));
+        if (_stayDelayRoutine != null)
+            StopCoroutine(_stayDelayRoutine);
 
-        OnLureActivated?.Invoke(room);
+        _stayDelayRoutine = StartCoroutine(Co_StayDelay(extraStayTime, duration));
+        OnStayDelayActivated?.Invoke();
     }
 
-    private IEnumerator Co_DecayLure(RoomID room, float maxValue, float duration)
+    private IEnumerator Co_StayDelay(float extraStayTime, float duration)
     {
-        _activeLureRoom = room;
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            _lureValue = Mathf.Lerp(maxValue, 0f, elapsed / duration);
-            yield return null;
-        }
-        _activeLureRoom = RoomID.None;
-        _lureValue = 0f;
-        _lureRoutine = null;
+        _activeExtraStayTime = extraStayTime;
+        _stayDelayEndTime = Time.time + duration;
+
+        yield return new WaitForSeconds(duration);
+
+        _activeExtraStayTime = 0f;
+        _stayDelayEndTime = 0f;
+        _stayDelayRoutine = null;
     }
 
-    public float GetLureValue(RoomID room)
+    public float GetExtraStayTime()
     {
-        return (room == _activeLureRoom) ? _lureValue : 0f;
+        if (HasActiveStayDelay == false)
+            return 0f;
+
+        return _activeExtraStayTime;
     }
 
     #endregion

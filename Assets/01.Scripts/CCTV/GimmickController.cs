@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GimmickType { None, SoundLure, BlockElevator, RequestInterview }
+public enum GimmickType { None, SoundLure, RequestInterview }
 
 [Serializable]
 public struct RoomGimmickSetting
@@ -94,18 +94,11 @@ public class GimmickController : MonoBehaviour
         {
             case GimmickType.SoundLure:
                 if (_gimmickManager != null)
-                    _gimmickManager.ActivateLure(data.Room, data.Value, data.Duration);
-                break;
-            case GimmickType.BlockElevator:
-                if (data.Room == RoomID.Elevator_A && _gimmickManager != null)
-                {
-                    _gimmickManager.BlockPath(RoomID.Elevator_B, RoomID.Elevator_A, data.Duration);
-                    _gimmickManager.DelayElevator();
-                }
+                    _gimmickManager.ActivateStayDelay(data.Value, data.Duration);
                 break;
             case GimmickType.RequestInterview:
                 if (_gimmickManager != null)
-                    _gimmickManager.SetTempTarget(RoomID.CoachingRoom, data.Duration);
+                    _gimmickManager.SetTempTarget(data.Room, data.Duration);
                 break;
         }
 
