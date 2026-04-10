@@ -11,9 +11,10 @@ public abstract class Stage : MonoBehaviour
     private StageMission[] _runtimeMissions;
     public StageMission[] RuntimeMissions => _runtimeMissions;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _runtimeMissions = (StageMission[])stageSO.Missions.Clone();
+        Debug.Log("[Stage] Misstion Count: " + _runtimeMissions.Length);
     }
 
     public void StartGame()
