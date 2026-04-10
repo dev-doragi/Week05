@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-public class StageController : MonoBehaviour
+public abstract class StageController : MonoBehaviour
 {
     [SerializeField] private StageDefinition stageDef;
 
