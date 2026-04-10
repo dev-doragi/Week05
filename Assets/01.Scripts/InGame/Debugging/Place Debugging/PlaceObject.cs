@@ -3,21 +3,37 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
-    public event Action<PlaceObject> OnDrop;
+    [Tooltip("배치 오브젝트를 놔둘때 이벤트")]
+    public static event Action OnDrop;
 
-    private bool _isPlaced = false;
+    [Header("Match Settings")]
+    public string objectKey;
+
+    [Header("Match State")]
+    [SerializeField] private bool _isPlaced = false;
     private Vector3 _offset;
     private Camera _camera;
+    private Collider2D _collider;
 
     public bool IsPlaced => _isPlaced;
 
+    private void Start()
+    {
+        // 스테이지 클리어시
+
+        //Stage.OnClear +=
+
+        Init();
+    }
 
     public void Init()
     {
         _isPlaced = false;
         _camera = Camera.main;
+        _collider = GetComponent<Collider2D>();
+        if (_collider != null) _collider.isTrigger = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -36,12 +52,14 @@ public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         transform.position = GetMouseWorldPos() + _offset;
     }
 
+    /*
     public void OnPointerUp(PointerEventData eventData)
     {
         if (_isPlaced) return;
 
-        OnDrop?.Invoke(this);
+        OnDrop?.Invoke();
     }
+    */
 
     private Vector3 GetMouseWorldPos()
     {
@@ -58,5 +76,6 @@ public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         _isPlaced = true;
 
         transform.position = pos;
+        _collider.isTrigger = false;
     }
 }

@@ -3,56 +3,81 @@ using UnityEngine;
 
 public class PlaceTarget : MonoBehaviour
 {
-    [SerializeField] private PlaceDebugging manager;
-    public float snapDistance = 1f;
-
+    [Header("Match Settings")]
+    public string targetKey;
+    [Tooltip("배치 타겟에 오브젝트가 매칭됐을 때 이벤트")]
     public event Action OnMatch;
 
-    private bool _isMatch = false;
+    //[Tooltip("근처에 놓으면 자동으로 붙을 거리")]
+    //[SerializeField] public float snapDistance = 1f;
+
+    [Header("Match State")]
+    [SerializeField] private bool _isMatch = false;
     public bool IsMatch => _isMatch;
 
-
+    /*
     private void OnEnable()
     {
-        if (manager == null) return;
-
-        foreach (var obj in manager.objects) obj.OnDrop += HandleDrop;
+        PlaceObject.OnDrop += HandleDrop;
     }
+
+    private void OnDisable()
+    {
+        PlaceObject.OnDrop -= HandleDrop;
+    }
+    */
 
     public void Init()
     {
         _isMatch = false;
     }
 
-    private void HandleDrop(PlaceObject droppedObj)
+    private void HandleDrop()
     {
-        if (_isMatch || droppedObj.IsPlaced) return;
+        if (_isMatch) return;
 
+        /*
         float dist = Vector2.Distance(transform.position, droppedObj.transform.position);
         if (dist < snapDistance)
         {
-            _isMatch = true;
-            droppedObj.SnapTo(transform.position);
-
-            OnMatch?.Invoke();
+            MatchSuccess(droppedObj);
         }
+        */
     }
 
-    private void OnDisable()
+    private void CheckMatch(Collider2D collision)
     {
-        if (manager != null)
+        if (_isMatch) return;
+
+        PlaceObject obj = collision.GetComponent<PlaceObject>();
+        if (obj != null
+            && !obj.IsPlaced
+            && obj.objectKey == this.targetKey)
         {
-            foreach (var obj in manager.objects)
-            {
-                if (obj != null) obj.OnDrop -= HandleDrop;
-            }
+            Debug.Log("[Place Target] Enter: " + collision.gameObject);
+            MatchSuccess(obj);
         }
     }
 
+    private void MatchSuccess(PlaceObject obj)
+    {
+        _isMatch = true;
+        obj.SnapTo(transform.position);
+
+        OnMatch?.Invoke();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        CheckMatch(collision);
+    }
+
+    /*
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
 
         Gizmos.DrawWireSphere(transform.position, snapDistance);
     }
+    */
 }
