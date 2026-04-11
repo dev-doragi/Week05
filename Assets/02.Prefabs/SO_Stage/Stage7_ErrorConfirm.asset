@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageDefinition
   stageId: STAGE_008
   stageTitle: "\uC5D0\uB7EC \uD655\uC778"
+  startMessage: ERROR
   missions:
   - missionIndex: 0
-    missionTitle: "\uC5D0\uB7EC \uD655\uC778"
+    missionTitle: "\uC5D0\uB7EC\uCC3D \uB2EB\uAE30"
     isMissionSuccess: 0
+    missionMessage: 
