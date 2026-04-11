@@ -1,10 +1,8 @@
-// StageAnim.cs
 using UnityEngine;
 
 public class StageAnim : Stage
 {
-    [SerializeField] private AnimPanel _panel;
-    [SerializeField] private AnimTarget[] _targets;
+    [SerializeField] private AnimObject[] _targets;
 
     private void OnEnable()
     {
@@ -18,13 +16,10 @@ public class StageAnim : Stage
 
     protected override void OnStart()
     {
-        if (_panel != null)
-            _panel.Close();
-
-        foreach (AnimTarget target in _targets)
+        foreach (AnimObject target in _targets)
         {
             if (target == null) continue;
-            target.Init(_panel);
+            target.Init();
         }
     }
 
