@@ -37,7 +37,7 @@ public class UI_HierarchyItemSlot : MonoBehaviour
         _selectable.SetSelected(isSelected);
 
         if (_draggable != null)
-            _draggable.Bind(data.Id, data.DisplayName, data.SourceData.IconSprite);
+            _draggable.BindReference(data.Id, data.DisplayName, data.SourceData.IconSprite);
     }
 
     private void HandleClicked(string componentId)
