@@ -13,6 +13,13 @@ public class MovingPlatform : MonoBehaviour
     [Space(5), Min(0f)]
     public float distance = 3f;   // 얼마나 멀리 이동할지
     public float speed = 2f;
+    private float currentOffset;
+
+    private bool movingToEnd = true;
+
+    [Min(0f)]
+    public float waitTime = 1f; // 도착 후 대기 시간
+    private float waitTimer = 0f;
 
     private Rigidbody2D rb;
     private Vector2 startPos;
@@ -25,16 +32,48 @@ public class MovingPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rb == null) return;
         if (!canMove) return;
-
+        if (rb == null) return;
+        
         // 방향 설정
         Vector2 axisDir = axis == MoveAxis.Vertical ? Vector2.up : Vector2.right;
         axisDir *= (int)direction;
 
-        float offset = Mathf.PingPong(Time.time * speed, distance);
+        if (waitTimer > 0f)
+        {
+            waitTimer -= Time.fixedDeltaTime;
 
-        Vector2 newPos = startPos + axisDir * offset;
+            Vector2 waitPos = startPos + axisDir * currentOffset;
+            rb.MovePosition(waitPos);
+            return;
+        }
+
+        float delta = speed * Time.fixedDeltaTime;
+
+        if (movingToEnd)
+        {
+            currentOffset += delta;
+
+            if (currentOffset >= distance)
+            {
+                currentOffset = distance;
+                movingToEnd = false;
+                waitTimer = waitTime;
+            }
+        }
+        else
+        {
+            currentOffset -= delta;
+
+            if (currentOffset <= 0f)
+            {
+                currentOffset = 0f;
+                movingToEnd = true;
+                waitTimer = waitTime;
+            }
+        }
+
+        Vector2 newPos = startPos + axisDir * currentOffset;
         rb.MovePosition(newPos);
     }
 
