@@ -4860,8 +4860,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraAreaController
   _roomId: 5
-  _roomBackgroundTexture: {fileID: 2800000, guid: bb5db331afe6d5643aed6e358749cd51, type: 3}
-  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: d27d8761cf48ab64ca25d7392ed7a0a1, type: 3}
+  _roomBackgroundTexture: {fileID: 2800000, guid: 75dd3a48b7284214d9d97c9112e53e06, type: 3}
+  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 84981b2b7065f2a4f9f5c856ec36f564, type: 3}
 --- !u!1 &5314402229525191313
 GameObject:
   m_ObjectHideFlags: 0
@@ -6262,12 +6262,13 @@ RectTransform:
   - {fileID: 5536262355638218884}
   - {fileID: 8540183759144856971}
   - {fileID: 8121844014515172217}
+  - {fileID: 7017020290588730232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 44.309937}
-  m_SizeDelta: {x: 0, y: -88.61993}
+  m_SizeDelta: {x: 0, y: -88.6199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6704994074350578141
 GameObject:
@@ -6695,6 +6696,96 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7106285237230604119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7017020290588730232}
+  - component: {fileID: 6697154231073894324}
+  - component: {fileID: 3428495581923079224}
+  - component: {fileID: 5634661057406194781}
+  m_Layer: 5
+  m_Name: Minimap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7017020290588730232
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8849768993961723665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 684, y: -271.30997}
+  m_SizeDelta: {x: 600, y: 600}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6697154231073894324
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_CullTransparentMesh: 1
+--- !u!114 &3428495581923079224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: a0deec6bd55bcfc499f677ae9339329a, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!114 &5634661057406194781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8e3e6a23f94a54dac22a34266da15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinimapRawImageInteractor
+  minimapCamera: {fileID: 0}
+  minimapHitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  maxDistance: 1000
 --- !u!1 &7110399907047713233
 GameObject:
   m_ObjectHideFlags: 0
@@ -7429,8 +7520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraAreaController
   _roomId: 3
-  _roomBackgroundTexture: {fileID: 2800000, guid: 3d340e2424b5fd64f86988d3fad1f4f6, type: 3}
-  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 3663b0ee2ec3b7243b6830b75b40d70b, type: 3}
+  _roomBackgroundTexture: {fileID: 2800000, guid: 58d4b2a4c4dde3a429eced8b31fb8fcb, type: 3}
+  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 18dc8dc912182d04f8158e858e1a9de1, type: 3}
 --- !u!1 &7735181790456907719
 GameObject:
   m_ObjectHideFlags: 0
@@ -8405,8 +8496,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraAreaController
   _roomId: 6
-  _roomBackgroundTexture: {fileID: 2800000, guid: a475323b88309c14e87760e0080a2cae, type: 3}
-  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: c63ef9f597a646b479942dca78b41ff1, type: 3}
+  _roomBackgroundTexture: {fileID: 2800000, guid: 2a9710a07e824ee478b4693c0e16dbe9, type: 3}
+  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 306601fe05fcf164197ef87587f531b5, type: 3}
 --- !u!1 &8454265955920046358
 GameObject:
   m_ObjectHideFlags: 0
