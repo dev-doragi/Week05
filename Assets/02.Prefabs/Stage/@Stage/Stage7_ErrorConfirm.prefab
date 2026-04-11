@@ -95,8 +95,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageErrorConfirm
   stageSO: {fileID: 11400000, guid: d175894642003f34c9bfa8b0627b91a2, type: 2}
   _runtimeMissions: []
-  errorWindowPrefab: {fileID: 5725332323237849396, guid: 4bd1bc688440c2848bc3b961e0ea21cb, type: 3}
   canvasRect: {fileID: 0}
   padding: 100
+  errorWindowPrefab: {fileID: 5725332323237849396, guid: 4bd1bc688440c2848bc3b961e0ea21cb, type: 3}
   minErrors: 8
   maxErrors: 12
+  _firstSpawnInterval: 1
+  _nextSpawnInterval: 0.15
+  spawnStep: {x: 50, y: -50}
