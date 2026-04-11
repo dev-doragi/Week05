@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class StageEnemyKill : Stage
 {
+    [Header("Setting")]
+    [SerializeField] private float _clearDelay;
+
     private MissionClearer _mission_Reference;
 
 
@@ -14,7 +17,7 @@ public class StageEnemyKill : Stage
 
     protected override void OnStart()
     {
-        Invoke(nameof(StageClear), 1.5f);
+        Invoke(nameof(StageClear), _clearDelay);
     }
 
     private void StageClear()

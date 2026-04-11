@@ -296,7 +296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5948439288589993063, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -365,26 +365,6 @@ PrefabInstance:
     - target: {fileID: 2644449855538155069, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
       propertyPath: m_Name
       value: Stage8_Anim
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742723123933379416, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
-      propertyPath: _clearColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742723123933379416, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
-      propertyPath: _clearColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742723123933379416, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
-      propertyPath: _clearColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742723123933379416, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
-      propertyPath: _normalColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742723123933379416, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
-      propertyPath: _normalColor.r
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8119579745937636378, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
       propertyPath: m_LocalPosition.x
@@ -756,6 +736,10 @@ PrefabInstance:
     - target: {fileID: 4152429188606585899, guid: 10104147360faa1488b83093db77aab2, type: 3}
       propertyPath: m_Name
       value: Stage4_RGB
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152429188606585899, guid: 10104147360faa1488b83093db77aab2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7907221138728885772, guid: 10104147360faa1488b83093db77aab2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5189,7 +5173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8077539535610596263, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5210,7 +5194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1658197698016047524, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4836700965109433219, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5286,7 +5270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2464342386414477239, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3898494520838356443, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
       propertyPath: canvasRect
@@ -5400,10 +5384,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage6_EnemyKill
       objectReference: {fileID: 0}
-    - target: {fileID: 8378446812440863213, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5474,7 +5454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5948439288589993063, guid: 49aa1e222430a6f44a0cbc71484c8454, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
