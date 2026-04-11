@@ -456,7 +456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_Name
-      value: Stage6_PlaceEnemys
+      value: Stage5_PlaceEnemys
       objectReference: {fileID: 0}
     - target: {fileID: 3618345775492974790, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: stage
@@ -464,7 +464,7 @@ PrefabInstance:
       objectReference: {fileID: 7115216680439290580}
     - target: {fileID: 3618345775492974790, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: missionIndexToClear
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6381365576677643745, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalScale.x
@@ -516,7 +516,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5709549751756206717, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 890574288983086220, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       insertIndex: 2
