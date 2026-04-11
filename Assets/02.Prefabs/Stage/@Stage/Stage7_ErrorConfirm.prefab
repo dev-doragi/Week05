@@ -8,9 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 890574288983086220, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387600207036235742, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_Name
       value: Stage7_ErrorConfirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751344869349819844, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9159170497037585249, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77,10 +93,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4303e5a4ac12180468aa8547688f9a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageErrorConfirm
-  stageSO: {fileID: 0}
+  stageSO: {fileID: 11400000, guid: d175894642003f34c9bfa8b0627b91a2, type: 2}
   _runtimeMissions: []
-  errorWindowPrefab: {fileID: 0}
+  errorWindowPrefab: {fileID: 5725332323237849396, guid: 4bd1bc688440c2848bc3b961e0ea21cb, type: 3}
   canvasRect: {fileID: 0}
   padding: 100
-  minErrors: 15
-  maxErrors: 20
+  minErrors: 8
+  maxErrors: 12
