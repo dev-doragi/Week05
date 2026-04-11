@@ -5,6 +5,7 @@ public abstract class Stage : MonoBehaviour
 {
     public static event Action<Stage> OnStageChanged;
     public static event Action OnClear;
+    public static event Action<string> OnSendMessage;
 
     [SerializeField] private StageDefinition stageSO;
     public StageDefinition StageSO => stageSO;

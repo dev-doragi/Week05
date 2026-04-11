@@ -21,4 +21,5 @@ public struct StageMission
     public int missionIndex;
     public string missionTitle;
     public bool isMissionSuccess;
+    public string missionMessage;
 }
