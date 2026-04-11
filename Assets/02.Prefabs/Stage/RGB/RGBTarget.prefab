@@ -155,12 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RGBObject
   _panel: {fileID: 316666356062177411}
-  _objectID: 0
   _targetRect: {fileID: 2400875964041158654}
+  _collider: {fileID: 6383448177358078361}
   _sliderR: {fileID: 1251181237987444242}
   _sliderG: {fileID: 352296589078115807}
   _sliderB: {fileID: 4223718241125669033}
-  _missionClearer: {fileID: 0}
+  _missionClearer: {fileID: 7074554077442032351}
   _clearThreshold: 0.07
   _targetColor: {r: 0.4901961, g: 0.9333334, b: 0.3372549, a: 1}
   _defaultColor: {r: 0, g: 0.90401125, b: 1, a: 1}
