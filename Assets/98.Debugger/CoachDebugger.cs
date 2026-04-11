@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class CoachDebugger : MonoBehaviour
 {
     [SerializeField] private CoachMovementController _coach;
-    [SerializeField] private BuildFailEndingController _endingController;
+    //[SerializeField] private BuildFailEndingController _endingController;
 
     private GimmickManager _gimmickManager;
 
@@ -52,7 +52,7 @@ public class CoachDebugger : MonoBehaviour
     private void HandleCoachReachedOffice()
     {
         Debug.Log("GameOver");
-        _endingController?.PlayBuildFailSequence();
+        //_endingController?.PlayBuildFailSequence();
     }
     private void LogLureInfluence()
     {

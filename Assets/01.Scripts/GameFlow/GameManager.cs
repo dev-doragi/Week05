@@ -16,8 +16,8 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         OnGameStart?.Invoke();
-
-        GameFlowManager.Instance?.BeginFlow();
+        StageManager.Instance.StartStages();
+        //GameFlowManager.Instance?.BeginFlow();
         
     }
 

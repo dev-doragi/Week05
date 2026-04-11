@@ -35,7 +35,7 @@ public class StageManager : Singleton<StageManager>
     void Start()
     {
         //테스트용으로 바로 스테이지 시작
-        StartStages();
+        //StartStages();
     }
 
     // 스테이지 시작

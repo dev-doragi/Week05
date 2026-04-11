@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BuildRunStartupController : MonoBehaviour
 {
     [Header("Refs")]
-    [SerializeField] private ETypePoolManager poolManager;
+    [SerializeField] private StageManager stageManager;
     [SerializeField] private Slider progressSlider;
     [SerializeField] private GameObject startupRoot;
     [SerializeField] private TextMeshProUGUI[] messageSlots;
@@ -26,6 +26,11 @@ public class BuildRunStartupController : MonoBehaviour
 
     private bool _confirmBlinkLockedOff;
 
+    private void Awake()
+    {
+        if (stageManager == null)
+            stageManager = StageManager.Instance;
+    }
 
     public void OnClickBuildAndRun()
     {
@@ -75,11 +80,8 @@ public class BuildRunStartupController : MonoBehaviour
 
         ResetUI();
 
-        List<IssueDefinition> issues = poolManager != null
-            ? poolManager.GetSeedIssuesSnapshot()
-            : new List<IssueDefinition>();
-
-        int showCount = Mathf.Min(issues.Count, messageSlots != null ? messageSlots.Length : 0);
+        List<StageDefinition> stages = CollectStageMoveDefinitions();
+        int showCount = Mathf.Min(stages.Count, messageSlots != null ? messageSlots.Length : 0);
 
         float elapsed = 0f;
         int nextIndex = 0;
@@ -95,7 +97,7 @@ public class BuildRunStartupController : MonoBehaviour
 
             while (nextIndex < showCount && elapsed >= perMessage * (nextIndex + 1))
             {
-                ShowMessage(nextIndex, issues[nextIndex]);
+                ShowMessage(nextIndex, stages[nextIndex]);
                 nextIndex++;
             }
 
@@ -107,14 +109,14 @@ public class BuildRunStartupController : MonoBehaviour
 
         while (nextIndex < showCount)
         {
-            ShowMessage(nextIndex, issues[nextIndex]);
+            ShowMessage(nextIndex, stages[nextIndex]);
             nextIndex++;
         }
 
         if (startupRoot != null)
             startupRoot.SetActive(false);
         GameManager.Instance?.StartGame();
-        UIManager.Instance.SetCCTVAlert(true);
+        //UIManager.Instance.SetCCTVAlert(true);
         _running = false;
     }
 
@@ -139,15 +141,38 @@ public class BuildRunStartupController : MonoBehaviour
         SetConfirmAlpha01(0f);
     }
 
-    private void ShowMessage(int index, IssueDefinition issue)
+    private void ShowMessage(int index, StageDefinition stageDef)
     {
         if (messageSlots == null || index < 0 || index >= messageSlots.Length) return;
-        if (messageSlots[index] == null || issue == null) return;
+        if (messageSlots[index] == null || stageDef == null) return;
 
         Transform notifyRoot = messageSlots[index].transform.parent;
         if (notifyRoot != null && !notifyRoot.gameObject.activeSelf)
             notifyRoot.gameObject.SetActive(true);
 
-        messageSlots[index].text = $"[{issue.IssueId}] {issue.IssueTitle}";
+        messageSlots[index].text = stageDef.StageTitle;
     }
+
+    private List<StageDefinition> CollectStageMoveDefinitions()
+    {
+        List<StageDefinition> list = new List<StageDefinition>();
+        if (stageManager == null || stageManager.Stages == null) return list;
+
+        Stage[] stages = stageManager.Stages;
+        for (int i = 0; i < stages.Length; i++)
+        {
+            Stage s = stages[i];
+            if (s == null) continue;
+
+            // StageMove만 사용
+            if (s is not StageMove) continue;
+
+            if (s.StageSO == null) continue;
+            list.Add(s.StageSO);
+        }
+
+        return list;
+    }
+
+
 }
