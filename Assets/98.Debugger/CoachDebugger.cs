@@ -50,6 +50,7 @@ public class CoachDebugger : MonoBehaviour
     private void HandleCoachReachedOffice()
     {
         Debug.Log("GameOver");
+        GameManager.Instance.GameOver();
     }
 
     private void LogLureInfluence()

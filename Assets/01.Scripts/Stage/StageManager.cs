@@ -81,13 +81,28 @@ public class StageManager : Singleton<StageManager>
     private void NextStage()
     {
         ClearRegistry();
-        if (_currentStageIndex >= Stages.Length - 1) return;
-        _currentStageIndex++;
 
+        if (RemainingStageCount() <= 0)
+        {
+            GameManager.Instance.GameClear();
+            return;
+        }
 
+        int nextIndex = _currentStageIndex++;
+        while (nextIndex < Stages.Length && Stages[nextIndex] == null)
+            nextIndex++;
+
+        if (nextIndex >= Stages.Length)
+        {
+            GameManager.Instance.GameClear();
+            return;
+        }
+
+        _currentStageIndex = nextIndex;
         _currStage = Stages[_currentStageIndex];
         _currStage.StartStage();
     }
+
 
     private void ClearRegistry()
     {
@@ -98,5 +113,18 @@ public class StageManager : Singleton<StageManager>
                 Destroy(go);
         }
         _registry.Clear();
+    }
+    public int RemainingStageCount()
+    {
+        
+            if (Stages == null) return 0;
+
+            int count = 0;
+            for (int i = _currentStageIndex + 1; i < Stages.Length; i++)
+            {
+                if (Stages[i] != null) count++;
+            }
+            return count;
+        
     }
 }

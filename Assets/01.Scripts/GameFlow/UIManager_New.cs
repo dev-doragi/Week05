@@ -30,6 +30,11 @@ public class UIManager_New : Singleton<UIManager_New>
     [Header("Initial")]
     [SerializeField] private bool startCctvOpened = false;
 
+    [Header("GameOver")]
+    [SerializeField] private GameObject GameOverImage;
+    [SerializeField] private GameObject GameClearImage;
+
+
     private bool _isOpen;
     private Sequence _seq;
 
@@ -37,6 +42,8 @@ public class UIManager_New : Singleton<UIManager_New>
     {
         _isOpen = startCctvOpened;
         ApplyImmediate(_isOpen);
+        GameOverImage.SetActive(false);
+        GameClearImage.SetActive(false);
     }
 
     private void Update()
@@ -122,5 +129,15 @@ public class UIManager_New : Singleton<UIManager_New>
     {
         if (_seq != null && _seq.IsActive())
             _seq.Kill();
+    }
+
+    public void GameOverImagePopUP()
+    {
+        GameOverImage.SetActive(true);
+
+    }
+    public void GameClearImagePopUP()
+    {
+        GameClearImage.SetActive(true);
     }
 }
