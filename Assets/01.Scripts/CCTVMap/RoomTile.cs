@@ -6,6 +6,10 @@ public class RoomTile : MonoBehaviour
     [SerializeField] private Material normalMaterial;
     [SerializeField] private Material selectedMaterial;
 
+    [SerializeField] private SO_SFX _cameraClickSfx;
+    [SerializeField] private SFXPlayer _sfxPlayer;
+    [SerializeField] private float _clickVolume = 1f;
+
     [Header("CCTV Link")]
     [SerializeField] private RoomID roomId = RoomID.None;
     [Header("Rotate Group")]
@@ -29,6 +33,10 @@ public class RoomTile : MonoBehaviour
     { 
         if (CameraManager.Instance != null)
         CameraManager.Instance.SelectCameraByRoomId(roomId);
+
+        if (_sfxPlayer != null && _cameraClickSfx != null)
+            _sfxPlayer.Play(_cameraClickSfx, _clickVolume);
+
         if (selectionGroup != null)
         {
             selectionGroup.SelectRoom(this);

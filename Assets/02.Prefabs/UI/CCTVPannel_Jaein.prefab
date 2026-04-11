@@ -795,14 +795,6 @@ MonoBehaviour:
   _roomId: 7
   _roomBackgroundTexture: {fileID: 2800000, guid: 49f280788689f854ca93f827abdd9605, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: dbfe4317384150b4fb3cc325ce9d86c9, type: 3}
-  _cameraUiBackground: {fileID: 5249433316415390896}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &962398923259972733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2531,14 +2523,6 @@ MonoBehaviour:
   _roomId: 4
   _roomBackgroundTexture: {fileID: 2800000, guid: 3aeec0981be77b84299560657e56e231, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: b38a5b8324d80624f9cf660d2751f39c, type: 3}
-  _cameraUiBackground: {fileID: 2793060526466462164}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &2494806668959261763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,14 +2616,6 @@ MonoBehaviour:
   _roomId: 11
   _roomBackgroundTexture: {fileID: 2800000, guid: 8f7b3e75fb8be0844bd5b212762fe287, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: f2157b94b5b1aab41b7a773d809c5fec, type: 3}
-  _cameraUiBackground: {fileID: 9161725348178543191}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &2526268288210869642
 GameObject:
   m_ObjectHideFlags: 0
@@ -2901,14 +2877,6 @@ MonoBehaviour:
   _roomId: 10
   _roomBackgroundTexture: {fileID: 2800000, guid: 8ca454b733645b64e9e633bb667e6921, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 1acf55f3c12e1e24fb59441d9e4617e2, type: 3}
-  _cameraUiBackground: {fileID: 5632762267699543403}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &2807464013811367815
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,7 +3807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -118.4, y: -358}
+  m_AnchoredPosition: {x: -118.400024, y: -358}
   m_SizeDelta: {x: -749.7064, y: -1114.8705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &914944349046674237
@@ -4481,14 +4449,6 @@ MonoBehaviour:
   _roomId: 8
   _roomBackgroundTexture: {fileID: 2800000, guid: 3aeec0981be77b84299560657e56e231, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 5b6bd63151100264ebd6ea6b2251411f, type: 3}
-  _cameraUiBackground: {fileID: 4560535742297043726}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &4840687091092193559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,14 +4862,6 @@ MonoBehaviour:
   _roomId: 5
   _roomBackgroundTexture: {fileID: 2800000, guid: bb5db331afe6d5643aed6e358749cd51, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: d27d8761cf48ab64ca25d7392ed7a0a1, type: 3}
-  _cameraUiBackground: {fileID: 7314407837996727788}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &5314402229525191313
 GameObject:
   m_ObjectHideFlags: 0
@@ -6836,14 +6788,6 @@ MonoBehaviour:
   _roomId: 1
   _roomBackgroundTexture: {fileID: 2800000, guid: 3d340e2424b5fd64f86988d3fad1f4f6, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 3663b0ee2ec3b7243b6830b75b40d70b, type: 3}
-  _cameraUiBackground: {fileID: 5314333820626546103}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &7115215972201605764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7394,14 +7338,6 @@ MonoBehaviour:
   _roomId: 12
   _roomBackgroundTexture: {fileID: 2800000, guid: fcf7e5d6ecf3c254d96ea2a15183ba94, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 87b97322ae744544d8641ba529c59075, type: 3}
-  _cameraUiBackground: {fileID: 6333640132055885048}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &7725704549192417331
 GameObject:
   m_ObjectHideFlags: 0
@@ -7495,14 +7431,6 @@ MonoBehaviour:
   _roomId: 3
   _roomBackgroundTexture: {fileID: 2800000, guid: 3d340e2424b5fd64f86988d3fad1f4f6, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 3663b0ee2ec3b7243b6830b75b40d70b, type: 3}
-  _cameraUiBackground: {fileID: 8913007633161267524}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &7735181790456907719
 GameObject:
   m_ObjectHideFlags: 0
@@ -8220,7 +8148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5536262355638218884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8479,14 +8407,6 @@ MonoBehaviour:
   _roomId: 6
   _roomBackgroundTexture: {fileID: 2800000, guid: a475323b88309c14e87760e0080a2cae, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: c63ef9f597a646b479942dca78b41ff1, type: 3}
-  _cameraUiBackground: {fileID: 229101258892297667}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &8454265955920046358
 GameObject:
   m_ObjectHideFlags: 0
@@ -8854,14 +8774,6 @@ MonoBehaviour:
   _roomId: 2
   _roomBackgroundTexture: {fileID: 2800000, guid: a475323b88309c14e87760e0080a2cae, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: c63ef9f597a646b479942dca78b41ff1, type: 3}
-  _cameraUiBackground: {fileID: 9064688052414707409}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &8819367980017631791
 GameObject:
   m_ObjectHideFlags: 0
@@ -9092,14 +9004,6 @@ MonoBehaviour:
   _roomId: 9
   _roomBackgroundTexture: {fileID: 2800000, guid: b6edb132f446b4348b14b45118613c67, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: b03c7acd6026df346a0c59f50af67e72, type: 3}
-  _cameraUiBackground: {fileID: 489360330909097672}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
-  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
 --- !u!1 &9012466387625460657
 GameObject:
   m_ObjectHideFlags: 0

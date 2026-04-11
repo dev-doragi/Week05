@@ -34,9 +34,17 @@ public class CoachBrain
         if (neighbors.Count == 0)
             return currentRoomId;
 
-        RoomID targetRoom = GimmickManager.Instance.ActiveTempTarget != RoomID.None
-            ? GimmickManager.Instance.ActiveTempTarget
-            : RoomID.Office;
+        RoomID activeTempTarget = GimmickManager.Instance.ActiveTempTarget;
+
+        if (activeTempTarget != RoomID.None)
+        {
+            if (currentRoomId == activeTempTarget)
+                return currentRoomId;
+
+            return activeTempTarget;
+        }
+
+        RoomID targetRoom = RoomID.Office;
 
         float totalWeight = 0f;
         List<KeyValuePair<RoomID, float>> roomWeights = new List<KeyValuePair<RoomID, float>>();
