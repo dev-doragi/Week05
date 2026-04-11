@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7609851600804403645}
   - component: {fileID: 2936158478093498433}
   m_Layer: 0
-  m_Name: stagemanager
+  m_Name: StageManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   isDontDestroyOnLoad: 1
-  Stages:
-  - {fileID: 0}
-  - {fileID: 0}
+  Stages: []

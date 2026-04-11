@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 6193438085548997491}
   - component: {fileID: 5191341743292378590}
   m_Layer: 5
-  m_Name: Cam7
+  m_Name: Cam7_Lobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,11 +795,6 @@ MonoBehaviour:
   _roomId: 7
   _roomBackgroundTexture: {fileID: 2800000, guid: 49f280788689f854ca93f827abdd9605, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: dbfe4317384150b4fb3cc325ce9d86c9, type: 3}
-  _cameraUiBackground: {fileID: 5249433316415390896}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &962398923259972733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.00006103516, y: 0.00006103516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6875947931404162792
@@ -2448,7 +2443,7 @@ GameObject:
   - component: {fileID: 6217928260765879740}
   - component: {fileID: 324275664261242430}
   m_Layer: 5
-  m_Name: Cam9
+  m_Name: Cam9_Stair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2528,11 +2523,6 @@ MonoBehaviour:
   _roomId: 4
   _roomBackgroundTexture: {fileID: 2800000, guid: 3aeec0981be77b84299560657e56e231, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: b38a5b8324d80624f9cf660d2751f39c, type: 3}
-  _cameraUiBackground: {fileID: 2793060526466462164}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &2494806668959261763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2536,7 @@ GameObject:
   - component: {fileID: 7647755934595668461}
   - component: {fileID: 8210069837094195814}
   m_Layer: 5
-  m_Name: Cam1
+  m_Name: Cam1_CoachingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2626,11 +2616,6 @@ MonoBehaviour:
   _roomId: 11
   _roomBackgroundTexture: {fileID: 2800000, guid: 8f7b3e75fb8be0844bd5b212762fe287, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: f2157b94b5b1aab41b7a773d809c5fec, type: 3}
-  _cameraUiBackground: {fileID: 9161725348178543191}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &2526268288210869642
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,7 +2797,7 @@ GameObject:
   - component: {fileID: 5650999942191926104}
   - component: {fileID: 5308180082813875023}
   m_Layer: 5
-  m_Name: Cam2
+  m_Name: Cam2_Lounge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2892,11 +2877,6 @@ MonoBehaviour:
   _roomId: 10
   _roomBackgroundTexture: {fileID: 2800000, guid: 8ca454b733645b64e9e633bb667e6921, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 1acf55f3c12e1e24fb59441d9e4617e2, type: 3}
-  _cameraUiBackground: {fileID: 5632762267699543403}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &2807464013811367815
 GameObject:
   m_ObjectHideFlags: 0
@@ -3373,7 +3353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.001953125, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.001953125, y: 0}
   m_SizeDelta: {x: 0.0034179688, y: 0.00006103516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &81911343392537688
@@ -3827,7 +3807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -118.4, y: -358}
+  m_AnchoredPosition: {x: -118.400024, y: -358}
   m_SizeDelta: {x: -749.7064, y: -1114.8705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &914944349046674237
@@ -4389,7 +4369,7 @@ GameObject:
   - component: {fileID: 4592343355605103858}
   - component: {fileID: 2793953843740077625}
   m_Layer: 5
-  m_Name: Cam5
+  m_Name: Cam5_F1Stair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4469,11 +4449,6 @@ MonoBehaviour:
   _roomId: 8
   _roomBackgroundTexture: {fileID: 2800000, guid: 3aeec0981be77b84299560657e56e231, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 5b6bd63151100264ebd6ea6b2251411f, type: 3}
-  _cameraUiBackground: {fileID: 4560535742297043726}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &4840687091092193559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,7 +4782,7 @@ GameObject:
   - component: {fileID: 3087281174793931523}
   - component: {fileID: 255909648478888153}
   m_Layer: 5
-  m_Name: Cam6
+  m_Name: Cam6_F1Elevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4885,13 +4860,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraAreaController
   _roomId: 5
-  _roomBackgroundTexture: {fileID: 2800000, guid: bb5db331afe6d5643aed6e358749cd51, type: 3}
-  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: d27d8761cf48ab64ca25d7392ed7a0a1, type: 3}
-  _cameraUiBackground: {fileID: 7314407837996727788}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
+  _roomBackgroundTexture: {fileID: 2800000, guid: 75dd3a48b7284214d9d97c9112e53e06, type: 3}
+  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 84981b2b7065f2a4f9f5c856ec36f564, type: 3}
 --- !u!1 &5314402229525191313
 GameObject:
   m_ObjectHideFlags: 0
@@ -6292,12 +6262,13 @@ RectTransform:
   - {fileID: 5536262355638218884}
   - {fileID: 8540183759144856971}
   - {fileID: 8121844014515172217}
+  - {fileID: 7017020290588730232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 44.309937}
-  m_SizeDelta: {x: 0, y: -88.61993}
+  m_SizeDelta: {x: 0, y: -88.6199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6704994074350578141
 GameObject:
@@ -6725,6 +6696,96 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7106285237230604119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7017020290588730232}
+  - component: {fileID: 6697154231073894324}
+  - component: {fileID: 3428495581923079224}
+  - component: {fileID: 5634661057406194781}
+  m_Layer: 5
+  m_Name: Minimap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7017020290588730232
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8849768993961723665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 684, y: -271.30997}
+  m_SizeDelta: {x: 600, y: 600}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6697154231073894324
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_CullTransparentMesh: 1
+--- !u!114 &3428495581923079224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: a0deec6bd55bcfc499f677ae9339329a, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!114 &5634661057406194781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106285237230604119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8e3e6a23f94a54dac22a34266da15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinimapRawImageInteractor
+  minimapCamera: {fileID: 0}
+  minimapHitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  maxDistance: 1000
 --- !u!1 &7110399907047713233
 GameObject:
   m_ObjectHideFlags: 0
@@ -6738,7 +6799,7 @@ GameObject:
   - component: {fileID: 5047821685321420391}
   - component: {fileID: 4468796254842608744}
   m_Layer: 5
-  m_Name: Cam10
+  m_Name: Cam10_Cafeteria
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6818,11 +6879,6 @@ MonoBehaviour:
   _roomId: 1
   _roomBackgroundTexture: {fileID: 2800000, guid: 3d340e2424b5fd64f86988d3fad1f4f6, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 3663b0ee2ec3b7243b6830b75b40d70b, type: 3}
-  _cameraUiBackground: {fileID: 5314333820626546103}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &7115215972201605764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7293,7 +7349,7 @@ GameObject:
   - component: {fileID: 8657624392457985978}
   - component: {fileID: 435815257612568094}
   m_Layer: 5
-  m_Name: Cam3
+  m_Name: Cam3_Hallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7373,11 +7429,6 @@ MonoBehaviour:
   _roomId: 12
   _roomBackgroundTexture: {fileID: 2800000, guid: fcf7e5d6ecf3c254d96ea2a15183ba94, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 87b97322ae744544d8641ba529c59075, type: 3}
-  _cameraUiBackground: {fileID: 6333640132055885048}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &7725704549192417331
 GameObject:
   m_ObjectHideFlags: 0
@@ -7391,7 +7442,7 @@ GameObject:
   - component: {fileID: 6352631372168966215}
   - component: {fileID: 8209569060949464347}
   m_Layer: 5
-  m_Name: Cam11
+  m_Name: Cam11_Cafe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7469,13 +7520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraAreaController
   _roomId: 3
-  _roomBackgroundTexture: {fileID: 2800000, guid: 3d340e2424b5fd64f86988d3fad1f4f6, type: 3}
-  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 3663b0ee2ec3b7243b6830b75b40d70b, type: 3}
-  _cameraUiBackground: {fileID: 8913007633161267524}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
+  _roomBackgroundTexture: {fileID: 2800000, guid: 58d4b2a4c4dde3a429eced8b31fb8fcb, type: 3}
+  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 18dc8dc912182d04f8158e858e1a9de1, type: 3}
 --- !u!1 &7735181790456907719
 GameObject:
   m_ObjectHideFlags: 0
@@ -8193,7 +8239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5536262355638218884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8372,7 +8418,7 @@ GameObject:
   - component: {fileID: 4793519629768876442}
   - component: {fileID: 528888700789157049}
   m_Layer: 5
-  m_Name: Cam8
+  m_Name: Cam8_JungleStepUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8450,13 +8496,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraAreaController
   _roomId: 6
-  _roomBackgroundTexture: {fileID: 2800000, guid: a475323b88309c14e87760e0080a2cae, type: 3}
-  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: c63ef9f597a646b479942dca78b41ff1, type: 3}
-  _cameraUiBackground: {fileID: 229101258892297667}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
+  _roomBackgroundTexture: {fileID: 2800000, guid: 2a9710a07e824ee478b4693c0e16dbe9, type: 3}
+  _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: 306601fe05fcf164197ef87587f531b5, type: 3}
 --- !u!1 &8454265955920046358
 GameObject:
   m_ObjectHideFlags: 0
@@ -8744,7 +8785,7 @@ GameObject:
   - component: {fileID: 9037382191643125433}
   - component: {fileID: 3407084905398968094}
   m_Layer: 5
-  m_Name: Cam12
+  m_Name: Cam12_JungleStepLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8824,11 +8865,6 @@ MonoBehaviour:
   _roomId: 2
   _roomBackgroundTexture: {fileID: 2800000, guid: a475323b88309c14e87760e0080a2cae, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: c63ef9f597a646b479942dca78b41ff1, type: 3}
-  _cameraUiBackground: {fileID: 9064688052414707409}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &8819367980017631791
 GameObject:
   m_ObjectHideFlags: 0
@@ -8979,7 +9015,7 @@ GameObject:
   - component: {fileID: 5859923954442493820}
   - component: {fileID: 7127388146485887455}
   m_Layer: 5
-  m_Name: Cam4
+  m_Name: Cam4_3FElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9059,11 +9095,6 @@ MonoBehaviour:
   _roomId: 9
   _roomBackgroundTexture: {fileID: 2800000, guid: b6edb132f446b4348b14b45118613c67, type: 3}
   _roomBackgroundWithCoachTexture: {fileID: 2800000, guid: b03c7acd6026df346a0c59f50af67e72, type: 3}
-  _cameraUiBackground: {fileID: 489360330909097672}
-  _normalColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
-  _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
-  _blinkInterval: 0.5
 --- !u!1 &9012466387625460657
 GameObject:
   m_ObjectHideFlags: 0
@@ -9232,7 +9263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EdgePath
   _from: 4
-  _to: 3
+  _to: 1
   _gimmickManager: {fileID: 0}
 --- !u!1 &9079508080011269690
 GameObject:

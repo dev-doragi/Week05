@@ -5,6 +5,7 @@ public abstract class Stage : MonoBehaviour
 {
     public static event Action<Stage> OnStageChanged;
     public static event Action OnClear;
+    public static event Action<string> OnSendMessage;
 
     [SerializeField] private StageDefinition stageSO;
     public StageDefinition StageSO => stageSO;
@@ -20,7 +21,7 @@ public abstract class Stage : MonoBehaviour
         Debug.Log("[Stage] Misstion Count: " + _runtimeMissions.Length);
     }
 
-    public void StartGame()
+    public void StartStage()
     {
         Debug.Log(StageSO.StageId);
         gameObject.SetActive(true);

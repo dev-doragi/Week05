@@ -18,6 +18,7 @@ public class StageManager : Singleton<StageManager>
     {
         SetAllStagesActive(false);
         InvokeAllStages(Stages);
+        _currStage = Stages[_currentStageIndex];
     }
 
     private void OnEnable()
@@ -33,8 +34,14 @@ public class StageManager : Singleton<StageManager>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _currStage = Stages[_currentStageIndex];
-        _currStage.StartGame();
+        //테스트용으로 바로 스테이지 시작
+        StartStages();
+    }
+
+    // 스테이지 시작
+    public void StartStages()
+    {
+        _currStage.StartStage();
     }
 
     // Update is called once per frame
@@ -79,7 +86,7 @@ public class StageManager : Singleton<StageManager>
 
 
         _currStage = Stages[_currentStageIndex];
-        _currStage.StartGame();
+        _currStage.StartStage();
     }
 
     private void ClearRegistry()

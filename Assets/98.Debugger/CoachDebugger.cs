@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class CoachDebugger : MonoBehaviour
 {
@@ -8,13 +7,12 @@ public class CoachDebugger : MonoBehaviour
 
     private GimmickManager _gimmickManager;
 
-    private void Awake()
+    private void Start()
     {
+        // 1. 모든 오브젝트의 Awake가 끝난 Start 시점에 싱글톤 참조
         _gimmickManager = GimmickManager.Instance;
-    }
 
-    private void OnEnable()
-    {
+        // 2. 참조가 보장된 상태에서 이벤트 구독
         if (_coach != null)
         {
             _coach.OnCoachPreparingToMove += HandleCoachPreparing;
@@ -26,8 +24,9 @@ public class CoachDebugger : MonoBehaviour
             _gimmickManager.OnStayDelayActivated += LogLureInfluence;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
+        // Start에서 구독한 이벤트는 오브젝트 파괴 시점에 해제
         if (_coach != null)
         {
             _coach.OnCoachPreparingToMove -= HandleCoachPreparing;
@@ -52,31 +51,18 @@ public class CoachDebugger : MonoBehaviour
     private void HandleCoachReachedOffice()
     {
         Debug.Log("GameOver");
-        _endingController?.PlayBuildFailSequence();
+        if (_endingController != null)
+            _endingController.PlayBuildFailSequence();
     }
+
     private void LogLureInfluence()
     {
-        //if (_coach == null || _coach.MapGraph == null) return;
+        if (_coach == null || _gimmickManager == null)
+            return;
 
-        //RoomID coachRoom = _coach.CurrentRoomId;
-        //IReadOnlyList<RoomID> neighbors = _coach.MapGraph.GetNeighbors(coachRoom);
+        RoomID coachRoom = _coach.CurrentRoomId;
+        float extraStayTime = _gimmickManager.GetExtraStayTime();
 
-        //bool isEffective = false;
-        //string neighborList = "";
-
-        //foreach (var neighbor in neighbors)
-        //{
-        //    neighborList += neighbor.ToString() + ", ";
-        //    if (neighbor == lureRoom) isEffective = true;
-        //}
-
-        //if (coachRoom == lureRoom) isEffective = true;
-
-        //string status = isEffective ? "<color=green>영향 받음</color>" : "<color=red>영향 없음(너무 멂)</color>";
-
-        //Debug.Log($"[사운드 체크] 발생지: {lureRoom} | 코치 위치: {coachRoom} | 주변 경로: [{neighborList.TrimEnd(',', ' ')}]");
-        //Debug.Log($"[사운드 결과] 코치가 소리를 들을 수 있는가? : {status}");
+        Debug.Log($"[사운드 머무름] 코치 현재 방: {coachRoom} | 추가 체류 시간: {extraStayTime}초");
     }
-
 }
-
