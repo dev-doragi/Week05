@@ -29,4 +29,22 @@ public class StageRGB : Stage
                 data.target.Init(i, _spawnPos);
         }
     }
+    private void OnEnable()
+    {
+        CollisionReporter.OnEnter2D += HandleCollision;
+    }
+
+    private void OnDisable()
+    {
+        CollisionReporter.OnEnter2D -= HandleCollision;
+    }
+
+    private void HandleCollision(Collider2D collision)
+    {
+        MissionClearer _mission_Clear;
+        if (_mission_Clear = collision.GetComponent<MissionClearer>())
+        {
+            _mission_Clear.ClearMission();
+        }
+    }
 }
