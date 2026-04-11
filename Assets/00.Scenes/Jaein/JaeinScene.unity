@@ -357,9 +357,9 @@ MonoBehaviour:
     Duration: 15
     Value: 15
     Cooldown: 40
-  - Room: 6
+  - Room: 2
     GimmickType: 1
-    ButtonText: "\uAC1C\uC778 \uBA74\uB2F4 \uC2E0\uCCAD\uD558\uAE30"
+    ButtonText: "\uC2A4\uD06C\uB9B0\uC5D0 \uAC8C\uC784\uB7A9 \uC791\uD488 \uD64D\uBCF4"
     Duration: 15
     Value: 15
     Cooldown: 30
@@ -375,6 +375,12 @@ MonoBehaviour:
     Duration: 30
     Value: 30
     Cooldown: 100
+  - Room: 5
+    GimmickType: 2
+    ButtonText: "\uC5D8\uB9AC\uBCA0\uC774\uD130 \uB2EB\uD798 \uBC84\uD2BC \uB04A\uAE30"
+    Duration: 5
+    Value: 5
+    Cooldown: 10
   _maxWidth: 1000
 --- !u!1001 &463950445
 PrefabInstance:
