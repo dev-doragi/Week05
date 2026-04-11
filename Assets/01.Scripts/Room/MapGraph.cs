@@ -49,16 +49,19 @@ public class MapGraph
             _adjList[room] = new List<RoomID>();
         }
 
+        // B1F
         AddBidirectionalEdge(RoomID.B1F_Cafeteria, RoomID.B1F_JungleStepLower);
-        AddBidirectionalEdge(RoomID.B1F_JungleStepLower, RoomID.B1F_Cafe);
-        AddBidirectionalEdge(RoomID.B1F_Cafe, RoomID.B1F_Stair);
-        AddBidirectionalEdge(RoomID.B1F_Stair, RoomID.B1F_Cafeteria);
+        AddBidirectionalEdge(RoomID.B1F_JungleStepLower, RoomID.B1F_Stair);
+        AddBidirectionalEdge(RoomID.B1F_Stair, RoomID.B1F_Cafe);
+        AddBidirectionalEdge(RoomID.B1F_Cafe, RoomID.B1F_Cafeteria);
 
+        // 1F
         AddBidirectionalEdge(RoomID.F1_Elevator, RoomID.F1_JungleStepUpper);
-        AddBidirectionalEdge(RoomID.F1_JungleStepUpper, RoomID.F1_Lobby);
-        AddBidirectionalEdge(RoomID.F1_Lobby, RoomID.F1_Stair);
-        AddBidirectionalEdge(RoomID.F1_Stair, RoomID.F1_Elevator);
+        AddBidirectionalEdge(RoomID.F1_JungleStepUpper, RoomID.F1_Stair);
+        AddBidirectionalEdge(RoomID.F1_Stair, RoomID.F1_Lobby);
+        AddBidirectionalEdge(RoomID.F1_Lobby, RoomID.F1_Elevator);
 
+        // 3F
         AddBidirectionalEdge(RoomID.F3_Elevator, RoomID.F3_Lounge);
         AddBidirectionalEdge(RoomID.F3_Lounge, RoomID.F3_CoachingRoom);
         AddBidirectionalEdge(RoomID.F3_CoachingRoom, RoomID.F3_Hallway);
