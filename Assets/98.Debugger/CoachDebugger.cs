@@ -1,20 +1,17 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class CoachDebugger : MonoBehaviour
 {
     [SerializeField] private CoachMovementController _coach;
-    //[SerializeField] private BuildFailEndingController _endingController;
 
     private GimmickManager _gimmickManager;
 
-    private void Awake()
+    private void Start()
     {
+        // 1. 모든 오브젝트의 Awake가 끝난 Start 시점에 싱글톤 참조
         _gimmickManager = GimmickManager.Instance;
-    }
 
-    private void OnEnable()
-    {
+        // 2. 참조가 보장된 상태에서 이벤트 구독
         if (_coach != null)
         {
             _coach.OnCoachPreparingToMove += HandleCoachPreparing;
@@ -26,8 +23,9 @@ public class CoachDebugger : MonoBehaviour
             _gimmickManager.OnStayDelayActivated += LogLureInfluence;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
+        // Start에서 구독한 이벤트는 오브젝트 파괴 시점에 해제
         if (_coach != null)
         {
             _coach.OnCoachPreparingToMove -= HandleCoachPreparing;
@@ -52,8 +50,8 @@ public class CoachDebugger : MonoBehaviour
     private void HandleCoachReachedOffice()
     {
         Debug.Log("GameOver");
-        //_endingController?.PlayBuildFailSequence();
     }
+
     private void LogLureInfluence()
     {
         if (_coach == null || _gimmickManager == null)
@@ -65,4 +63,3 @@ public class CoachDebugger : MonoBehaviour
         Debug.Log($"[사운드 머무름] 코치 현재 방: {coachRoom} | 추가 체류 시간: {extraStayTime}초");
     }
 }
-
