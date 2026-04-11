@@ -91,8 +91,7 @@ public class CameraManager : MonoBehaviour
         _registeredRooms.Clear();
         _registeredCameraList.Clear();
 
-        var foundAreas = FindObjectsByType<CameraAreaController>(FindObjectsSortMode.None);
-
+        var foundAreas = FindObjectsByType<CameraAreaController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         var sortedAreas = foundAreas.OrderBy(area =>
         {
             var match = Regex.Match(area.gameObject.name, @"Cam(\d+)([A-Z]?)");
@@ -128,6 +127,19 @@ public class CameraManager : MonoBehaviour
 
         OnCameraSelected?.Invoke(selectedArea.RoomId);
     }
+
+    public bool SelectCameraByRoomId(RoomID roomId)
+    {
+        if (roomId == RoomID.None)
+            return false;
+
+        if (_registeredRooms.TryGetValue(roomId, out CameraAreaController area) == false || area == null)
+            return false;
+
+        SelectCamera(area);
+        return true;
+    }
+
 
     public void RefreshSelectedCamera()
     {
@@ -184,48 +196,48 @@ public class CameraManager : MonoBehaviour
             if (area == null)
                 continue;
 
-            area.SetBlinkState(GetBlinkState(area));
+            //area.SetBlinkState(GetBlinkState(area));
         }
     }
 
-    private CameraAreaController.BlinkState GetBlinkState(CameraAreaController area)
-    {
-        if (area == null)
-            return CameraAreaController.BlinkState.None;
+    // private CameraAreaController.BlinkState GetBlinkState(CameraAreaController area)
+    // {
+    //     if (area == null)
+    //         return CameraAreaController.BlinkState.None;
 
-        if (IsSelectedArea(area))
-            return CameraAreaController.BlinkState.Selected;
+    //     if (IsSelectedArea(area))
+    //         return CameraAreaController.BlinkState.Selected;
 
-        if (ShouldShowCoachDetection(area.RoomId))
-            return CameraAreaController.BlinkState.CoachDetected;
+    //     if (ShouldShowCoachDetection(area.RoomId))
+    //         return CameraAreaController.BlinkState.CoachDetected;
 
-        return CameraAreaController.BlinkState.None;
-    }
+    //     return CameraAreaController.BlinkState.None;
+    // }
 
-    private bool IsSelectedArea(CameraAreaController area)
-    {
-        return _selectedArea == area;
-    }
+    // private bool IsSelectedArea(CameraAreaController area)
+    // {
+    //     return _selectedArea == area;
+    // }
 
-    private bool ShouldShowCoachDetection(RoomID roomId)
-    {
-        if (_isHardMode)
-            return false;
+    // private bool ShouldShowCoachDetection(RoomID roomId)
+    // {
+    //     if (_isHardMode)
+    //         return false;
 
-        if (IsBuildIssueActive())
-            return false;
+    //     if (IsBuildIssueActive())
+    //         return false;
 
-        if (_coachMovementController == null)
-            return false;
+    //     if (_coachMovementController == null)
+    //         return false;
 
-        return _coachMovementController.IsCoachInRoom(roomId);
-    }
+    //     return _coachMovementController.IsCoachInRoom(roomId);
+    // }
 
-    private bool IsBuildIssueActive()
-    {
-        return GameFlowManager.Instance != null &&
-               GameFlowManager.Instance.State == FlowState.Debug;
-    }
+    // private bool IsBuildIssueActive()
+    // {
+    //     return GameFlowManager.Instance != null &&
+    //            GameFlowManager.Instance.State == FlowState.Debug;
+    // }
 
     private void ApplyCameraTexture(CameraAreaController selectedArea)
     {

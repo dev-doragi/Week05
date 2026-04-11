@@ -8,7 +8,6 @@ public class MinimapRawImageInteractor3D : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Camera minimapCamera;
     [SerializeField] private LayerMask minimapHitMask = ~0;
     [SerializeField] private float maxDistance = 1000f;
-    [SerializeField] private bool debugLog = true;
 
     private RawImage _rawImage;
     private RectTransform _rect;
