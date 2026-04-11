@@ -122,13 +122,20 @@ public class GimmickManager : Singleton<GimmickManager>
     public bool HasActiveStayDelay => Time.time < _stayDelayEndTime;
     public float ActiveExtraStayTime => HasActiveStayDelay ? _activeExtraStayTime : 0f;
 
-    public void ActivateStayDelay(float extraStayTime, float duration)
+    public bool ActivateStayDelay(RoomID targetRoom, float extraStayTime, float duration)
     {
+        if (_coachController == null)
+            return false;
+
+        if (_coachController.CurrentRoomId != targetRoom)
+            return false;
+
         if (_stayDelayRoutine != null)
             StopCoroutine(_stayDelayRoutine);
 
         _stayDelayRoutine = StartCoroutine(Co_StayDelay(extraStayTime, duration));
         OnStayDelayActivated?.Invoke();
+        return true;
     }
 
     private IEnumerator Co_StayDelay(float extraStayTime, float duration)
