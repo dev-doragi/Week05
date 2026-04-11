@@ -242,7 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5c4d7b550148b499ca30f37bbd9473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaceTarget
-  snapDistance: 0.5
+  targetKey: 
+  _isMatch: 0
 --- !u!1001 &9008834642612399591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,11 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.60921
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.04248
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -360,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePlace
   stageSO: {fileID: 11400000, guid: ffcddb1e1169e2d4cac4e0ca30937a87, type: 2}
+  _runtimeMissions: []
   targets:
   - {fileID: 5521529357799763422}
 --- !u!114 &3457219292326617883
@@ -374,6 +376,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
-  isClear: 0
   stage: {fileID: 5470624632667960534}
   missionIndexToClear: 0
