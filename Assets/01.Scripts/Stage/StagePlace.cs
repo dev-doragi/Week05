@@ -25,7 +25,8 @@ public class StagePlace : Stage
     {
         _mission_Reference = GetComponent<MissionClearer>();
 
-        OnStart();
+        // 테스트용
+        //OnStart();
     }
 
     protected override void OnStart()

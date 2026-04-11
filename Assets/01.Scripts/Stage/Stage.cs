@@ -46,10 +46,10 @@ public abstract class Stage : MonoBehaviour
         if (!_isCleared && IsAllMissionCleared())
         {
             _isCleared = true;
-            OnClear?.Invoke();
-
-            Debug.Log("Stage Clear!");
             Clear();
+            Debug.Log("Stage Clear!");
+            
+            OnClear?.Invoke();
             return;
         }
 
