@@ -75,6 +75,7 @@ public class UI_ConsoleMissionView : MonoBehaviour
             return;
 
         _missionTitle.fontStyle |= FontStyles.Strikethrough;
+        _missionTitle.color = Color.gray;
     }
 
     private void ShowSuccessIcon()
