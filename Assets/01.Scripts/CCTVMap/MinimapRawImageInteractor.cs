@@ -3,12 +3,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RawImage))]
-public class MinimapRawImageInteractor3D : MonoBehaviour, IPointerClickHandler
+public class MinimapRawImageInteractor3D : MonoBehaviour, IPointerClickHandler, IPointerMoveHandler, IPointerExitHandler
 {
     [SerializeField] private Camera minimapCamera;
     [SerializeField] private LayerMask minimapHitMask = ~0;
     [SerializeField] private float maxDistance = 1000f;
-    [SerializeField] private bool debugLog = true;
+
+    private IMinimapHoverTarget _currentHover;
+
 
     private RawImage _rawImage;
     private RectTransform _rect;
@@ -59,4 +61,76 @@ public class MinimapRawImageInteractor3D : MonoBehaviour, IPointerClickHandler
         }
         
     }
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        UpdateHover(eventData.position, eventData.enterEventCamera);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        SetHover(null);
+    }
+
+    private void OnDisable()
+    {
+        SetHover(null);
+    }
+
+    private void UpdateHover(Vector2 screenPos, Camera eventCam)
+    {
+        if (!TryRaycastMinimap(screenPos, eventCam, out RaycastHit hit))
+        {
+            SetHover(null);
+            return;
+        }
+
+        RoomTile room = hit.collider.GetComponentInParent<RoomTile>();
+        if (room != null)
+        {
+            SetHover(room);
+            return;
+        }
+
+        PassageTile passage = hit.collider.GetComponentInParent<PassageTile>();
+        if (passage != null)
+        {
+            SetHover(passage);
+            return;
+        }
+
+        SetHover(null);
+    }
+
+    private void SetHover(IMinimapHoverTarget next)
+    {
+        if (ReferenceEquals(_currentHover, next)) return;
+
+        if (_currentHover != null) _currentHover.SetHovered(false);
+        _currentHover = next;
+        if (_currentHover != null) _currentHover.SetHovered(true);
+    }
+
+    private bool TryRaycastMinimap(Vector2 screenPos, Camera eventCam, out RaycastHit hit)
+    {
+        hit = default;
+        if (minimapCamera == null) return false;
+
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            _rect, screenPos, eventCam, out Vector2 localPoint))
+            return false;
+
+        Rect r = _rect.rect;
+        if (!r.Contains(localPoint)) return false;
+
+        float nx = Mathf.InverseLerp(r.xMin, r.xMax, localPoint.x);
+        float ny = Mathf.InverseLerp(r.yMin, r.yMax, localPoint.y);
+
+        Rect uv = _rawImage.uvRect;
+        float u = uv.x + nx * uv.width;
+        float v = uv.y + ny * uv.height;
+
+        Ray ray = minimapCamera.ViewportPointToRay(new Vector3(u, v, 0f));
+        return Physics.Raycast(ray, out hit, maxDistance, minimapHitMask, QueryTriggerInteraction.Collide);
+    }
+
 }

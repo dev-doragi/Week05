@@ -88,7 +88,8 @@ MonoBehaviour:
   direction: 1
   canMove: 1
   distance: 3
-  speed: 2
+  speed: 1
+  waitTime: 0.5
 --- !u!114 &1121437800627042121
 MonoBehaviour:
   m_ObjectHideFlags: 0
