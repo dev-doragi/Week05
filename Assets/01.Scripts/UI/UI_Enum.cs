@@ -45,3 +45,10 @@ public enum ComponentWindow
     Project,
     Both,
 }
+
+public enum UIProjectDragType
+{
+    None,
+    ReferenceTarget,
+    ScenePlaceablePrefab
+}
