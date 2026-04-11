@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8807665291685990974, guid: 5ecda74f2bd41284c8905b0c74ae384f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8807665291685990974, guid: 5ecda74f2bd41284c8905b0c74ae384f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 8807665291685990974, guid: 5ecda74f2bd41284c8905b0c74ae384f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -93,6 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47509c799f5a4439126f094ae3a57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameObjectSelectable
-  _componentId: 
+  _componentId: Player
   _scene: 0
   _controller: {fileID: 0}

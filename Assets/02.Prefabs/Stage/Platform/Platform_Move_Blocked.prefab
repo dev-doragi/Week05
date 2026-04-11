@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d787dd413b6a54192ef8ee2b8bf57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_RuntimeReferenceBlocker
-  _selectable: {fileID: 0}
+  _selectable: {fileID: 8654436813143533035}
 --- !u!114 &8654436813143533035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47509c799f5a4439126f094ae3a57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameObjectSelectable
-  _componentId: Bomb
+  _componentId: MovingPlatform
   _scene: 0
   _controller: {fileID: 0}

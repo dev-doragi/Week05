@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5948439288589993063, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
       propertyPath: m_Name
-      value: Stage6_PlaceEnemys
+      value: Stage5_PlaceEnemys
       objectReference: {fileID: 0}
     - target: {fileID: 5948439288589993063, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
       propertyPath: m_IsActive
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2412383b494e40e438135abb70e24d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGameEditorController
-  _initialPlacementData: {fileID: 11400000, guid: cbe524c7c86d5324e959a42f1d6feef8, type: 2}
+  _initialPlacementData: {fileID: 11400000, guid: eaa07dc97c72e8344b334ad3320821ae, type: 2}
   _projectPresenter: {fileID: 244647702}
   _hierarchyPresenter: {fileID: 65100070}
   _inspectorPresenter: {fileID: 1859192753}
@@ -831,6 +831,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10104147360faa1488b83093db77aab2, type: 3}
+--- !u!114 &1487892905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5470624632667960534, guid: 49aa1e222430a6f44a0cbc71484c8454, type: 3}
+  m_PrefabInstance: {fileID: 8719105416845979330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1814ebd297971fe478ed623626e86507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StagePlace
 --- !u!1001 &1614621733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -841,16 +852,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: Stages.Array.size
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[0]'
       value: 
-      objectReference: {fileID: 4866457256443695708}
+      objectReference: {fileID: 1367228729}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[1]'
       value: 
-      objectReference: {fileID: 49436145}
+      objectReference: {fileID: 1487892905}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[2]'
       value: 
@@ -866,9 +877,13 @@ PrefabInstance:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[5]'
       value: 
-      objectReference: {fileID: 4866457256443695708}
+      objectReference: {fileID: 7442217968422387662}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[6]'
+      value: 
+      objectReference: {fileID: 4866457256443695708}
+    - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
+      propertyPath: 'Stages.Array.data[7]'
       value: 
       objectReference: {fileID: 49436145}
     - target: {fileID: 4010879763591745260, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
@@ -3094,7 +3109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4418710141838786178, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 4520248127880767466, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3746,7 +3761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920730025593358206, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5946513238670324704, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5315,14 +5330,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2167392666017333095, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167392666017333095, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 4836700965109433219, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6
@@ -5395,6 +5402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage7_ErrorConfirm
       objectReference: {fileID: 0}
+    - target: {fileID: 2464342386414477239, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3898494520838356443, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
       propertyPath: canvasRect
       value: 
@@ -5455,6 +5466,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4303e5a4ac12180468aa8547688f9a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageErrorConfirm
+--- !u!1001 &7442217968422387659
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331258356363449290, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378446812440863213, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_Name
+      value: Stage6_EnemyKill
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378446812440863213, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+--- !u!114 &7442217968422387662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6512641077876969054, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+  m_PrefabInstance: {fileID: 7442217968422387659}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6acdce35a48784cb5e12097937e4ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageEnemyKill
 --- !u!1001 &8719105416845979330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5534,6 +5617,7 @@ SceneRoots:
   - {fileID: 3522025752228769279}
   - {fileID: 1473317710}
   - {fileID: 340496891}
+  - {fileID: 7442217968422387659}
   - {fileID: 4866457256443695707}
   - {fileID: 1155467618}
   - {fileID: 1614621733}
