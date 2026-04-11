@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class UI_ConsoleComponentView : MonoBehaviour
 {
-    [SerializeField] private Image _consoleLogImage_Fail;
-    [SerializeField] private Image _consoleLogImage_Success;
+    [SerializeField] private Image _consoleLogImage;
+    [SerializeField] private Sprite _spriteFail;
+    [SerializeField] private Sprite _spriteSuccess;
+
     [SerializeField] private TMP_Text _consoleStageIdText;
     [SerializeField] private TMP_Text _consoleStageTitleText;
 
@@ -14,10 +16,13 @@ public class UI_ConsoleComponentView : MonoBehaviour
     [SerializeField] private GameObject _missionViewPrefab;
     [SerializeField] private List<UI_ConsoleMissionView> _missionViews = new List<UI_ConsoleMissionView>();
 
+    private int _successMissionCount = 0;
+
     public void Init(string stageId, string stageTitle, List<(int missionIndex, string missionTitle)> missions, int count)
     {
         _consoleStageIdText.text = stageId;
         _consoleStageTitleText.text = stageTitle;
+        _successMissionCount = 0;
 
         InitializeConsoleState();
         CreateMissionViews(count);
@@ -31,11 +36,8 @@ public class UI_ConsoleComponentView : MonoBehaviour
 
     private void InitializeConsoleState()
     {
-        if (_consoleLogImage_Fail != null)
-            _consoleLogImage_Fail.gameObject.SetActive(true);
-
-        if (_consoleLogImage_Success != null)
-            _consoleLogImage_Success.gameObject.SetActive(false);
+        if (_consoleLogImage != null && _spriteFail != null)
+            _consoleLogImage.sprite = _spriteFail;
     }
 
     private void CreateMissionViews(int count)
@@ -45,17 +47,8 @@ public class UI_ConsoleComponentView : MonoBehaviour
 
         ClearMissionViews();
 
-        if (_missionParent == null)
-        {
-            Debug.LogError("[UI_ConsoleComponentView] Mission Parent is null.");
-            return;
-        }
-
-        if (_missionViewPrefab == null)
-        {
-            Debug.LogError("[UI_ConsoleComponentView] Mission View Prefab is null.");
-            return;
-        }
+        if (_missionParent == null) return;
+        if (_missionViewPrefab == null) return;
 
         for (int i = 0; i < count; i++)
         {
@@ -64,7 +57,6 @@ public class UI_ConsoleComponentView : MonoBehaviour
 
             if (missionView == null)
             {
-                Debug.LogError("[UI_ConsoleComponentView] UI_ConsoleMissionView component is missing on prefab.");
                 Destroy(obj);
                 continue;
             }
@@ -94,8 +86,19 @@ public class UI_ConsoleComponentView : MonoBehaviour
             if (mission != null && mission.Index == missionIndex)
             {
                 mission.IsSuccess();
+                _successMissionCount++;
+                CheckAllComplete();
                 break;
             }
+        }
+    }
+
+    private void CheckAllComplete()
+    {
+        if (_successMissionCount >= _missionViews.Count)
+        {
+            if (_consoleLogImage != null && _spriteSuccess != null)
+                _consoleLogImage.sprite = _spriteSuccess;
         }
     }
 }
