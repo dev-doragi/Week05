@@ -9,6 +9,15 @@ public class StagePlatformMove : Stage
     private MissionClearer _mission_Reference;
 
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (_runtimeReferenceBlocker == null) 
+            _runtimeReferenceBlocker.GetComponentInChildren<UI_RuntimeReferenceBlocker>();
+        _mission_Reference = GetComponent<MissionClearer>();
+    }
+
     private void OnEnable()
     {
         _runtimeReferenceBlocker.BlockedChanged += HandlePlatformMove;
@@ -27,15 +36,18 @@ public class StagePlatformMove : Stage
         if (InGameEditorController.EditorRuntimeState != null)
         {
             InGameEditorController.EditorRuntimeState.
-                TryBreakReference("Bomb", InspectorComponent.Bomb, "reference01");
+                TryBreakReference("MovingPlatform", InspectorComponent.BallPop, "reference03");
         }
     }
 
-    private void HandlePlatformMove(bool active)
+    private void HandlePlatformMove(bool blocked)
     {
-        Debug.Log("[Stage Move] Component Reference " + !active);
+        // Blocked는 컴포넌트 기준이기 때문에, (Blocked == True: 컴포넌트 빠짐)1
+        // 플레이어 입장에서는 Blocked가 false일 때 움직일 수 있어야 함
+        bool active = !blocked;
+        Debug.Log("[Stage Move] Component Reference " + active);
 
-        OnPlatformMove?.Invoke(!active);
+        OnPlatformMove?.Invoke(active);
         if (active) _mission_Reference.ClearMission();
     }
 

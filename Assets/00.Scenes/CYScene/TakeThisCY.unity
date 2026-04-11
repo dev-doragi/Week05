@@ -198,9 +198,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8077539535610596263, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2128123650}
-    - targetCorrespondingSourceObject: {fileID: 2602616258134345414, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 606589571}
   m_SourcePrefab: {fileID: 100100000, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
 --- !u!1 &127879827
 GameObject:
@@ -380,6 +377,22 @@ MonoBehaviour:
   _worldCamera: {fileID: 938291669}
   _controller: {fileID: 127879829}
   _placementZ: 0
+--- !u!4 &424541771 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+  m_PrefabInstance: {fileID: 777543047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &424541779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7115216680439290580, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+  m_PrefabInstance: {fileID: 777543047}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e039fde245a2340479af9bc80942e0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StagePlaceEnemy
 --- !u!1 &442006539
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,25 +597,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7907221138728885772, guid: 10104147360faa1488b83093db77aab2, type: 3}
   m_PrefabInstance: {fileID: 605377584}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &606589568 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2602616258134345414, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-  m_PrefabInstance: {fileID: 67400135}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &606589571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606589568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
-  stage: {fileID: 2128123648}
-  missionIndexToClear: 0
 --- !u!1001 &638847120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2431,6 +2425,14 @@ PrefabInstance:
       propertyPath: _stage
       value: 
       objectReference: {fileID: 2128123648}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: _stageDefinitions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182955477169693012, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: '_stageDefinitions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 99f736878566ffe4f998313cf1edb2f6, type: 2}
     - target: {fileID: 8249164980896304392, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2939,6 +2941,63 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1001 &777543047
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2085350423}
+    m_Modifications:
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.51109
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.00734
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 473275880062105152, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948439288589993063, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
+      propertyPath: m_Name
+      value: Stage6_PlaceEnemys
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
 --- !u!1 &938291663
 GameObject:
   m_ObjectHideFlags: 0
@@ -3321,7 +3380,7 @@ PrefabInstance:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[0]'
       value: 
-      objectReference: {fileID: 2128123648}
+      objectReference: {fileID: 424541779}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[1]'
       value: 
@@ -3536,6 +3595,7 @@ Transform:
   - {fileID: 258690431}
   - {fileID: 135938379}
   - {fileID: 605377585}
+  - {fileID: 424541771}
   m_Father: {fileID: 1391439701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2128123647 stripped

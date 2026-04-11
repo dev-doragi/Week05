@@ -12,7 +12,8 @@ public class StageMove : Stage
     {
         base.Awake();
 
-        _runtimeReferenceBlocker.GetComponentInChildren<UI_RuntimeReferenceBlocker>();
+        if (_runtimeReferenceBlocker == null) 
+            _runtimeReferenceBlocker.GetComponentInChildren<UI_RuntimeReferenceBlocker>();
         _mission_Reference = GetComponent<MissionClearer>();
     }
 
@@ -27,7 +28,7 @@ public class StageMove : Stage
         if (InGameEditorController.EditorRuntimeState != null)
         {
             InGameEditorController.EditorRuntimeState.
-                TryBreakReference("BallPop", InspectorComponent.BallPop, "reference01");
+                TryBreakReference("Player", InspectorComponent.PlayerController, "reference01");
         }
     }
 
@@ -44,12 +45,15 @@ public class StageMove : Stage
         CollisionReporter.OnEnter2D -= HandleCollision;
     }
 
-    private void HandleCanMove(bool active)
+    private void HandleCanMove(bool blocked)
     {
-        Debug.Log("[Stage Move] Component Reference " + !active);
+        // Blocked는 컴포넌트 기준이기 때문에, (Blocked == True: 컴포넌트 빠짐)1
+        // 플레이어 입장에서는 Blocked가 false일 때 움직일 수 있어야 함
+        bool active = !blocked;
+        Debug.Log("[Stage Move] Component Reference " + active);
 
-        OnMove?.Invoke(!active);
-        if (!active) _mission_Reference.ClearMission();
+        OnMove?.Invoke(active);
+        if (active) _mission_Reference.ClearMission();
     }
 
     private void HandleCollision(Collider2D collision)

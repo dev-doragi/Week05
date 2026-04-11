@@ -3,7 +3,6 @@ using UnityEngine;
 public class CoachDebugger : MonoBehaviour
 {
     [SerializeField] private CoachMovementController _coach;
-    [SerializeField] private BuildFailEndingController _endingController;
 
     private GimmickManager _gimmickManager;
 
@@ -51,8 +50,7 @@ public class CoachDebugger : MonoBehaviour
     private void HandleCoachReachedOffice()
     {
         Debug.Log("GameOver");
-        if (_endingController != null)
-            _endingController.PlayBuildFailSequence();
+        GameManager.Instance.GameOver();
     }
 
     private void LogLureInfluence()
