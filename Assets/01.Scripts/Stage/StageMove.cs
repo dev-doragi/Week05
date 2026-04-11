@@ -49,7 +49,7 @@ public class StageMove : Stage
         Debug.Log("[Stage Move] Component Reference " + !active);
 
         OnMove?.Invoke(!active);
-        if (active) _mission_Reference.ClearMission();
+        if (!active) _mission_Reference.ClearMission();
     }
 
     private void HandleCollision(Collider2D collision)
