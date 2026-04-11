@@ -73,3 +73,59 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: a705b7d7ecdd5294dad03297e1ba6156, type: 2}
     _scene: 0
     _references: []
+  - _objectId: MovingPlatform
+    _componentData: {fileID: 11400000, guid: 28a06890b0d4f544f9973477b044878e, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 18
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: MPRigidbody
+      _canSpawnError: 1
+      _isRequired: 0
+    - _inspectorComponent: 18
+      _slotId: reference02
+      _label: Collider
+      _normalTargetId: MPCollider
+      _canSpawnError: 1
+      _isRequired: 0
+    - _inspectorComponent: 18
+      _slotId: reference03
+      _label: Controller
+      _normalTargetId: MPController
+      _canSpawnError: 1
+      _isRequired: 0
+    - _inspectorComponent: 18
+      _slotId: reference04
+      _label: Sprite
+      _normalTargetId: MPSprite
+      _canSpawnError: 1
+      _isRequired: 0
+  - _objectId: MPCollider
+    _componentData: {fileID: 11400000, guid: 312dd52c1af3af049b6ece27d2316f15, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: MPRigidbody
+    _componentData: {fileID: 11400000, guid: d8a4299283713ea49afd9bd55ec6947e, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: MPSprite
+    _componentData: {fileID: 11400000, guid: b05b683a4a206ed42a75da488dbdcd7a, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: MPController
+    _componentData: {fileID: 11400000, guid: 4fb8c8e3809d6e64eb35203b9eeb9830, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: MainCamera
+    _componentData: {fileID: 11400000, guid: 6efab56c373c96545aad5c3591a96b79, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: DirectionalLight
+    _componentData: {fileID: 11400000, guid: 9e0285cac80da61448d1bfcd1b5bc965, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: enemyprefab
+    _componentData: {fileID: 11400000, guid: 26cb5f014e569f64d851ceefd8716ea3, type: 2}
+    _scene: 0
+    _references: []

@@ -23,7 +23,8 @@ public enum InspectorComponent
     DentureCollect,
     Flying,
     Parrycing,
-    Reflect
+    Reflect,
+    MovingPlatformController
 }
 
 public enum ProejctFileStruct
