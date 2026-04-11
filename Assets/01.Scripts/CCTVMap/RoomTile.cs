@@ -11,6 +11,8 @@ public class RoomTile : MonoBehaviour, IMinimapHoverTarget
 
     [Header("CCTV Link")]
     [SerializeField] private RoomID roomId = RoomID.None;
+    public RoomID RoomId => roomId;
+        
     [Header("Rotate Group")]
     [SerializeField, Range(0, 3)] private int rotateStepIndex = 0;
     public int RotateStepIndex => rotateStepIndex;

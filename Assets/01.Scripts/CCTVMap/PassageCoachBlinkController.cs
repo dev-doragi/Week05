@@ -7,6 +7,11 @@ public class PassageCoachBlinkController : MonoBehaviour
     [SerializeField] private PassageTile[] passageTiles;
     [SerializeField] private bool autoFindPassages = true;
 
+    
+
+    private bool _coachFound;
+
+
     private void Awake()
     {
         if (coach == null)
@@ -16,12 +21,14 @@ public class PassageCoachBlinkController : MonoBehaviour
             passageTiles = FindObjectsByType<PassageTile>(FindObjectsSortMode.None);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         if (coach == null) return;
 
         coach.OnCoachMoved += HandleCoachMoved;
         coach.OnCoachPreparingToMove += HandleCoachPreparingToMove;
+        CameraManager.Instance.OnCameraSelected += HandleCameraSelected;
+
     }
 
     private void OnDisable()
@@ -30,6 +37,8 @@ public class PassageCoachBlinkController : MonoBehaviour
         {
             coach.OnCoachMoved -= HandleCoachMoved;
             coach.OnCoachPreparingToMove -= HandleCoachPreparingToMove;
+            CameraManager.Instance.OnCameraSelected -= HandleCameraSelected;
+
         }
 
         ClearAllBlink();
@@ -37,14 +46,22 @@ public class PassageCoachBlinkController : MonoBehaviour
 
     private void HandleCoachMoved(RoomID from, RoomID current)
     {
-        ApplyBlinkFromCurrentRoom(current);
+        if (_coachFound)
+        {
+            _coachFound = false;
+            ClearAllBlink();
+        }
     }
 
     private void HandleCoachPreparingToMove(RoomID from, RoomID to)
     {
-        // "그 방에 있는 동안만" Blink 하려면 여기서 끔
-        ClearAllBlink();
+        if (_coachFound)
+        {
+            _coachFound = false;
+            ClearAllBlink();
+        }
     }
+
 
     private void ApplyBlinkFromCurrentRoom(RoomID currentRoom)
     {
@@ -85,4 +102,20 @@ public class PassageCoachBlinkController : MonoBehaviour
             tile.SetCoachBlink(false);
         }
     }
+    private void HandleCameraSelected(RoomID selectedRoom)
+    {
+        if (coach == null)
+        {
+            _coachFound = false;
+            ClearAllBlink();
+            return;
+        }
+
+        // "코치가 있는 방을 찾았을 때만" true
+        _coachFound = (selectedRoom != RoomID.None && selectedRoom == coach.CurrentRoomId);
+
+        if (_coachFound) ApplyBlinkFromCurrentRoom(coach.CurrentRoomId);
+        else ClearAllBlink();
+    }
+
 }
