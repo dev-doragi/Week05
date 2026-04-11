@@ -131,6 +131,9 @@ MonoBehaviour:
   normalMaterial: {fileID: 2100000, guid: ee3a84c43f78b8040a66ba99be8dc65f, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
+  _cameraClickSfx: {fileID: 0}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
   roomId: 0
   rotateStepIndex: 0
   selectionGroup: {fileID: 0}
