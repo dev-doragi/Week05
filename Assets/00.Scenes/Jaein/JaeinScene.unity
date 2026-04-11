@@ -438,7 +438,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6458063848749523830, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2030125075797581499, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6825747082703383883, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5703326795701964481, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7368198658287718015, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4429376808468720653, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1260997605190832825, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2078973426080637125, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3875236972914182560, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3791239248124566279, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1367338326878423093, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2712464705534995745, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 449a9010bd1fd3b46a481d7be0899c46, type: 3}
 --- !u!1 &482575137
 GameObject:
@@ -534,6 +570,8 @@ MonoBehaviour:
   _maxDistance: 5
   _minAlpha: 0.1
   _maxAlpha: 0.8
+  _firstFloorMultiplier: 0.3
+  _thirdFloorMultiplier: 1
   _tickInterval: 0.02
 --- !u!114 &690169840 stripped
 MonoBehaviour:
@@ -767,9 +805,29 @@ PrefabInstance:
       propertyPath: _sfxPlayer
       value: 
       objectReference: {fileID: 1207921499}
+    - target: {fileID: 5634661057406194781, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 860579492}
     - target: {fileID: 6637246248637749692, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_Name
       value: CCTVPannel_Jaein
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017020290588730232, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 812.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017020290588730232, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 812.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017020290588730232, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 494.0913
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017020290588730232, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -193.75006
       objectReference: {fileID: 0}
     - target: {fileID: 7127388146485887455, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _sfxPlayer
@@ -799,6 +857,10 @@ PrefabInstance:
       propertyPath: _sfxPlayer
       value: 
       objectReference: {fileID: 1207921499}
+    - target: {fileID: 8400254499853252959, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8490839963661677703, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
       value: 
@@ -884,7 +946,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7106285237230604119, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
