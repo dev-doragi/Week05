@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2321238155183678136}
   - component: {fileID: 6273142883000500011}
   - component: {fileID: 4355923178161635117}
-  m_Layer: 27
-  m_Name: Placeable_Platform
+  m_Layer: 0
+  m_Name: Place Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 7993821632629198118}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.8, z: 0}
-  m_LocalScale: {x: 4.1598234, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.8, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -151,7 +151,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -179,5 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ac5d813a7a3b54d85a0ac81ca7c4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaceObject
-  objectKey: platform
+  objectKey: 
   _isPlaced: 0
