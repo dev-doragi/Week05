@@ -23,20 +23,19 @@ public enum InspectorComponent
     DentureCollect,
     Flying,
     Parrycing,
-    Reflect
+    Reflect,
+    MovingPlatformController
 }
 
 public enum ProejctFileStruct
 {
     Folder1,
-    Folder2,
 }
 
 public enum UIEditorScene
 {
     Test1,
-    Test2,
-    None,
+    None
 }
 
 public enum ComponentWindow

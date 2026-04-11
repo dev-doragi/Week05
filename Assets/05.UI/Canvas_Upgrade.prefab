@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 4928994940324613541}
   - component: {fileID: 926174591584432935}
   - component: {fileID: 3823245528655795372}
+  - component: {fileID: 5953388352887293760}
   m_Layer: 5
   m_Name: ContentScrollView
   m_TagString: Untagged
@@ -318,6 +319,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fef1ec412f41d64db69d2844d7e2611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_ScrollAutoDown
+  _scrollRect: {fileID: 926174591584432935}
+  _contentRect: {fileID: 120777703746866513}
+--- !u!114 &5953388352887293760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77127470410706637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee262effc65f6974ca66e8e8c4afa6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_ScrollFocusController
   _scrollRect: {fileID: 926174591584432935}
   _contentRect: {fileID: 120777703746866513}
 --- !u!1 &115157831135016821
@@ -3026,7 +3041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6470201336330943233
@@ -3649,6 +3664,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 84729db625381114888328d964bd777f, type: 2}
   _viewPrefab: {fileID: 8738106586284195295, guid: f4535bd14f73cfb46b210031c208e9c1, type: 3}
   _viewParent: {fileID: 120777703746866513}
+  _scrollFocusController: {fileID: 5953388352887293760}
 --- !u!1 &3973230538134229779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3762,7 +3778,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 15, y: 0}
+  m_SizeDelta: {x: 7, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &3606034120211134383
 CanvasRenderer:
@@ -3963,8 +3979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -15}
-  m_SizeDelta: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: -20}
+  m_SizeDelta: {x: 0, y: -39.999996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8701904840468724955
 CanvasRenderer:
@@ -5239,7 +5255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 1174}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4215272072368018763
@@ -5269,14 +5285,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
   m_Padding:
-    m_Left: 40
+    m_Left: 50
     m_Right: 40
     m_Top: 40
     m_Bottom: 40
-  m_ChildAlignment: 1
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 120}
+  m_CellSize: {x: 100, y: 110}
   m_Spacing: {x: 40, y: 30}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -6181,8 +6197,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: 15, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 7, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &1131461448066762882
 CanvasRenderer:
@@ -7594,8 +7610,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4.963974}
-  m_SizeDelta: {x: 7, y: -9.945984}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 7, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &8404812390960822231
 CanvasRenderer:
@@ -7678,8 +7694,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6908079569453738030}
   m_HandleRect: {fileID: 266594288164366947}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.18451613
+  m_Value: 0.00000005198906
+  m_Size: 0.19034483
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

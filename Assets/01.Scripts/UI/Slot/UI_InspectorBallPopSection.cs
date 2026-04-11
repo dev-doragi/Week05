@@ -44,7 +44,7 @@ public class UI_InspectorBallPopSection : MonoBehaviour, IUIInspectorReferenceSe
     public void Bind(string ownerId, UI_RuntimeInspectorSectionData sectionData)
     {
         if (_titleText != null)
-            _titleText.text = "Ball Pop";
+            _titleText.text = "Moving Platform";
 
         if (_firstReferenceSlot != null)
             _firstReferenceSlot.Bind(ownerId, sectionData.InspectorComponent, FindReference(sectionData, _firstSlotId));

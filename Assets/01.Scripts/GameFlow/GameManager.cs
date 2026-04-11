@@ -16,8 +16,8 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         OnGameStart?.Invoke();
-
-        GameFlowManager.Instance?.BeginFlow();
+        StageManager.Instance.StartStages();
+        //GameFlowManager.Instance?.BeginFlow();
         
     }
 
@@ -25,6 +25,14 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void GameOver()
+    {
+        UIManager_New.Instance.GameOverImagePopUP();
+    }
+    public void GameClear()
+    {
+        UIManager_New.Instance.GameClearImagePopUP();
     }
 
 

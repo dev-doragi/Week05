@@ -36,7 +36,7 @@ public class StagePlatformMove : Stage
         if (InGameEditorController.EditorRuntimeState != null)
         {
             InGameEditorController.EditorRuntimeState.
-                TryBreakReference("Bomb", InspectorComponent.Bomb, "reference01");
+                TryBreakReference("MovingPlatform", InspectorComponent.BallPop, "reference03");
         }
     }
 

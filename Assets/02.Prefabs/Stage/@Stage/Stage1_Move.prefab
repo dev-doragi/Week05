@@ -38,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.55
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.38
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -138,10 +138,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2595582511186753920}
     m_Modifications:
-    - target: {fileID: -4842747274202265739, guid: 91b5dc5f8b34dd24e9d5272d1c474fff, type: 3}
-      propertyPath: _componentId
-      value: BallPop
-      objectReference: {fileID: 0}
     - target: {fileID: 2178883761609338891, guid: 91b5dc5f8b34dd24e9d5272d1c474fff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
