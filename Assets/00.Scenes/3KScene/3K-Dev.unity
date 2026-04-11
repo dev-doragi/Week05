@@ -707,11 +707,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7609851600804403645, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.04663
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7609851600804403645, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.26055
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7609851600804403645, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3167,7 +3167,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8316392321043206104, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+    - {fileID: 1068853930606570577, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
@@ -3297,10 +3299,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2040456244855714601, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-      propertyPath: _controller
-      value: 
-      objectReference: {fileID: 1446213894}
     - target: {fileID: 2595582511186753920, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.55
@@ -3341,21 +3339,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7901293154239933153, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-      propertyPath: stage
+    - target: {fileID: 5666679570795514415, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
+      propertyPath: _controller
       value: 
-      objectReference: {fileID: 1367228729}
-    - target: {fileID: 7901293154239933153, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-      propertyPath: missionIndexToClear
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1446213894}
     - target: {fileID: 8077539535610596263, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
       propertyPath: m_Name
       value: Stage1_Move
-      objectReference: {fileID: 0}
-    - target: {fileID: 8077539535610596263, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3373,6 +3363,10 @@ PrefabInstance:
     - target: {fileID: 1658197698016047524, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_Name
       value: Stage3_PlatformMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658197698016047524, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2167392666017333095, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_LocalPosition.x
