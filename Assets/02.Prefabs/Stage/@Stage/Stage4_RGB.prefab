@@ -372,30 +372,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       insertIndex: 3
       addedObject: {fileID: 3928917313994299573}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2893913215406702215}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
---- !u!1 &4152429188606585899 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
-  m_PrefabInstance: {fileID: 1596720941585171883}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2893913215406702215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4152429188606585899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
-  stage: {fileID: 0}
-  missionIndexToClear: 0
 --- !u!4 &7907221138728885772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
