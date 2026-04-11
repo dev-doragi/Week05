@@ -1,17 +1,32 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ToastManager : Singleton<ToastManager>
 {
     [Header("UI Reference")]
     [SerializeField] private UI_ToastSender toastSender;
 
-    [Header("Toast Data Assets")]
-    [SerializeField] private SO_ToastData introToast;            // 인트로 토스트
-    [SerializeField] private List<SO_ToastData> randomToasts;    // 랜덤 상황용 리스트
-    [SerializeField] private SO_ToastData blockedPathToast;      // 길 막힘 상황용 토스트
+    [Header("Dependencies")]
+    [SerializeField] private CoachMovementController coachMovementController;
+    [SerializeField] private GimmickManager gimmickManager;
 
-    private bool isBusy = false; // 현재 알림 출력 여부
+    [Header("Toast Data Assets")]
+    [SerializeField] private SO_ToastData introToast;
+    [SerializeField] private List<SO_ToastData> randomToasts;
+    [SerializeField] private SO_ToastData blockedPathToast;
+
+    [Header("Random Toast")]
+    [SerializeField] private bool useRandomToast = true;
+    [SerializeField] private float randomToastMinInterval = 15f;
+    [SerializeField] private float randomToastMaxInterval = 30f;
+
+    private readonly Queue<SO_ToastData> _toastQueue = new Queue<SO_ToastData>();
+
+    private bool _isShowing;
+    private bool _introShown;
+    private Coroutine _randomToastRoutine;
+    private MapGraph _mapGraph;
 
     protected override void Init()
     {
@@ -21,52 +36,148 @@ public class ToastManager : Singleton<ToastManager>
             return;
         }
 
-        // 애니메이션 종료 시 플래그 해제
-        toastSender.OnAnimationComplete = () => isBusy = false;
+        toastSender.OnAnimationComplete = HandleToastComplete;
     }
 
-    private void Start()
+    private void Awake()
     {
-        // 게임 시작 시 인트로 토스트 실행
-        SendIntroToast();
+        if (coachMovementController == null)
+            coachMovementController = FindFirstObjectByType<CoachMovementController>();
+
+        if (gimmickManager == null)
+            gimmickManager = GimmickManager.Instance;
+
+        _mapGraph = new MapGraph();
     }
 
-    /// <summary>
-    /// 인트로 알림 호출 (중복 방지 적용)
-    /// </summary>
+    private void OnEnable()
+    {
+        GameManager.OnGameStart += HandleGameStart;
+
+        if (gimmickManager != null)
+            gimmickManager.OnPathBlocked += HandlePathBlocked;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStart -= HandleGameStart;
+
+        if (gimmickManager != null)
+            gimmickManager.OnPathBlocked -= HandlePathBlocked;
+    }
+
+    private void HandleGameStart()
+    {
+        if (_introShown == false)
+        {
+            _introShown = true;
+            EnqueueToast(introToast);
+        }
+
+        if (useRandomToast)
+        {
+            if (_randomToastRoutine != null)
+                StopCoroutine(_randomToastRoutine);
+
+            _randomToastRoutine = StartCoroutine(Co_RandomToastLoop());
+        }
+    }
+
+    private IEnumerator Co_RandomToastLoop()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(randomToastMinInterval, randomToastMaxInterval);
+            yield return new WaitForSeconds(waitTime);
+
+            if (randomToasts == null || randomToasts.Count == 0)
+                continue;
+
+            int index = Random.Range(0, randomToasts.Count);
+            EnqueueToast(randomToasts[index]);
+        }
+    }
+
+    private void HandlePathBlocked(RoomID from, RoomID to)
+    {
+        if (blockedPathToast == null)
+            return;
+
+        if (coachMovementController == null)
+            return;
+
+        RoomID coachRoom = coachMovementController.CurrentRoomId;
+        if (coachRoom == RoomID.None)
+            return;
+
+        if (IsNearBlockedPath(coachRoom, from, to) == false)
+            return;
+
+        EnqueueToast(blockedPathToast);
+    }
+
+    private bool IsNearBlockedPath(RoomID coachRoom, RoomID from, RoomID to)
+    {
+        if (coachRoom == from || coachRoom == to)
+            return true;
+
+        if (_mapGraph == null)
+            return false;
+
+        IReadOnlyList<RoomID> neighbors = _mapGraph.GetNeighbors(coachRoom);
+        for (int i = 0; i < neighbors.Count; i++)
+        {
+            if (neighbors[i] == from || neighbors[i] == to)
+                return true;
+        }
+
+        return false;
+    }
+
     public void SendIntroToast()
     {
-        if (isBusy || introToast == null) return;
-        ExecuteToast(introToast);
+        EnqueueToast(introToast);
     }
 
-    /// <summary>
-    /// 랜덤 알림 호출 (중복 방지 적용)
-    /// </summary>
     public void SendRandomToast()
     {
-        if (isBusy || randomToasts == null || randomToasts.Count == 0) return;
+        if (randomToasts == null || randomToasts.Count == 0)
+            return;
 
         int randomIndex = Random.Range(0, randomToasts.Count);
-        ExecuteToast(randomToasts[randomIndex]);
+        EnqueueToast(randomToasts[randomIndex]);
     }
 
-    /// <summary>
-    /// 길 막힘 알림 호출 (중복 방지 적용)
-    /// </summary>
     public void SendBlockedPathToast()
     {
-        if (isBusy || blockedPathToast == null) return;
-
-        ExecuteToast(blockedPathToast);
+        EnqueueToast(blockedPathToast);
     }
 
-    /// <summary>
-    /// 실제 UI 표시 및 플래그 설정
-    /// </summary>
-    private void ExecuteToast(SO_ToastData data)
+    public void EnqueueToast(SO_ToastData data)
     {
-        isBusy = true;
+        if (data == null || toastSender == null)
+            return;
+
+        _toastQueue.Enqueue(data);
+        TryShowNextToast();
+    }
+
+    private void TryShowNextToast()
+    {
+        if (_isShowing)
+            return;
+
+        if (_toastQueue.Count == 0)
+            return;
+
+        SO_ToastData data = _toastQueue.Dequeue();
+        _isShowing = true;
         toastSender.Show(data);
+    }
+
+    private void HandleToastComplete()
+    {
+        _isShowing = false;
+        TryShowNextToast();
     }
 }

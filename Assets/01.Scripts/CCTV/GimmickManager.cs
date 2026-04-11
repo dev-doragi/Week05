@@ -20,12 +20,12 @@ public class GimmickManager : Singleton<GimmickManager>
     private float _stayDelayEndTime = 0f;
 
     public event Action OnStayDelayActivated;
+    public event Action<RoomID, RoomID> OnPathBlocked;
 
     public RoomID ActiveTempTarget => _activeTempTarget;
 
     public bool IsBlockPathCooldownReady => Time.time >= _nextBlockPathAvailableTime;
     public float BlockPathCooldownRemaining => Mathf.Max(0f, _nextBlockPathAvailableTime - Time.time);
-
 
     #region 1. Path Blocking
 
@@ -39,7 +39,6 @@ public class GimmickManager : Singleton<GimmickManager>
 
     protected override void Init()
     {
-        
     }
 
     public bool CanUseBlockPath
@@ -49,7 +48,7 @@ public class GimmickManager : Singleton<GimmickManager>
             if (Time.time < _nextBlockPathAvailableTime)
                 return false;
 
-            if (_coachController.IsTransitioning)
+            if (_coachController != null && _coachController.IsTransitioning)
                 return false;
 
             return true;
@@ -72,6 +71,8 @@ public class GimmickManager : Singleton<GimmickManager>
         _blockedTo = to;
         _blockPathEndTime = Time.time + _blockPathDuration;
         _nextBlockPathAvailableTime = Time.time + _blockPathCooldown;
+
+        OnPathBlocked?.Invoke(from, to);
     }
 
     public void ClearBlockedPath()
@@ -103,7 +104,9 @@ public class GimmickManager : Singleton<GimmickManager>
 
     public void SetTempTarget(RoomID targetRoom, float duration)
     {
-        if (_tempTargetRoutine != null) StopCoroutine(_tempTargetRoutine);
+        if (_tempTargetRoutine != null)
+            StopCoroutine(_tempTargetRoutine);
+
         _tempTargetRoutine = StartCoroutine(Co_TempTarget(targetRoom, duration));
     }
 
