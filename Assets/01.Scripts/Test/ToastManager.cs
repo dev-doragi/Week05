@@ -15,6 +15,7 @@ public class ToastManager : Singleton<ToastManager>
     [SerializeField] private SO_ToastData introToast;
     [SerializeField] private List<SO_ToastData> randomToasts;
     [SerializeField] private SO_ToastData blockedPathToast;
+    [SerializeField] private SO_ToastData coachFloorChangedToast;
 
     [Header("Random Toast")]
     [SerializeField] private bool useRandomToast = true;
@@ -39,15 +40,20 @@ public class ToastManager : Singleton<ToastManager>
         toastSender.OnAnimationComplete = HandleToastComplete;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (coachMovementController == null)
             coachMovementController = FindFirstObjectByType<CoachMovementController>();
 
+        _mapGraph = new MapGraph();
+    }
+
+    private void Start()
+    {
         if (gimmickManager == null)
             gimmickManager = GimmickManager.Instance;
-
-        _mapGraph = new MapGraph();
     }
 
     private void OnEnable()
@@ -56,6 +62,9 @@ public class ToastManager : Singleton<ToastManager>
 
         if (gimmickManager != null)
             gimmickManager.OnPathBlocked += HandlePathBlocked;
+
+        if (coachMovementController != null)
+            coachMovementController.OnCoachMoved += HandleCoachMoved;
     }
 
     private void OnDisable()
@@ -64,6 +73,9 @@ public class ToastManager : Singleton<ToastManager>
 
         if (gimmickManager != null)
             gimmickManager.OnPathBlocked -= HandlePathBlocked;
+
+        if (coachMovementController != null)
+            coachMovementController.OnCoachMoved -= HandleCoachMoved;
     }
 
     private void HandleGameStart()
@@ -100,6 +112,7 @@ public class ToastManager : Singleton<ToastManager>
 
     private void HandlePathBlocked(RoomID from, RoomID to)
     {
+        Debug.Log("벽 막음");
         if (blockedPathToast == null)
             return;
 
@@ -179,5 +192,45 @@ public class ToastManager : Singleton<ToastManager>
     {
         _isShowing = false;
         TryShowNextToast();
+    }
+
+    private void HandleCoachMoved(RoomID previousRoom, RoomID currentRoom)
+    {
+        Debug.Log($"CoachMoved: {previousRoom} -> {currentRoom}");
+
+        if (coachFloorChangedToast == null)
+            return;
+
+        if (previousRoom == RoomID.None || currentRoom == RoomID.None)
+            return;
+
+        Debug.Log($"FloorChanged: {HasFloorChanged(previousRoom, currentRoom)}");
+
+        if (HasFloorChanged(previousRoom, currentRoom) == false)
+            return;
+
+        EnqueueToast(coachFloorChangedToast);
+    }
+
+    private bool HasFloorChanged(RoomID from, RoomID to)
+    {
+        string fromFloor = GetFloorKey(from);
+        string toFloor = GetFloorKey(to);
+
+        if (string.IsNullOrEmpty(fromFloor) || string.IsNullOrEmpty(toFloor))
+            return false;
+
+        return fromFloor != toFloor;
+    }
+
+    private string GetFloorKey(RoomID roomId)
+    {
+        string roomName = roomId.ToString();
+        int underscoreIndex = roomName.IndexOf('_');
+
+        if (underscoreIndex <= 0)
+            return string.Empty;
+
+        return roomName.Substring(0, underscoreIndex);
     }
 }

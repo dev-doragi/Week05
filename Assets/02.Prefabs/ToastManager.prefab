@@ -54,6 +54,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f9a1a7b2ac3dc644ba8f976333867f32, type: 2}
   - {fileID: 11400000, guid: 166b7f866dbb85c4a8ab13105192e7db, type: 2}
   blockedPathToast: {fileID: 11400000, guid: 0d5f971efdd95d74fb07b04268c41d55, type: 2}
+  coachFloorChangedToast: {fileID: 0}
   useRandomToast: 1
-  randomToastMinInterval: 15
-  randomToastMaxInterval: 30
+  randomToastMinInterval: 10
+  randomToastMaxInterval: 15
