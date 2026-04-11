@@ -10,7 +10,11 @@ public class UI_ConsolePresenter : MonoBehaviour
     [SerializeField] private UI_ConsoleComponentView _viewPrefab;
     [SerializeField] private Transform _viewParent;
 
-    private readonly Dictionary<string, UI_ConsoleComponentView> _views = new();
+    [Header("Scroll")]
+    [SerializeField] private UI_ScrollFocusController _scrollFocusController;
+
+    private readonly Dictionary<string, UI_ConsoleComponentView> _viewsByStageId = new();
+    private readonly Dictionary<string, HashSet<int>> _appliedMissionIndicesByStageId = new();
 
     private void Awake()
     {
@@ -28,7 +32,6 @@ public class UI_ConsolePresenter : MonoBehaviour
         Stage.OnStageChanged -= HandleStageChanged;
     }
 
-    // SO 데이터를 기반으로 만든 UI 생성
     private void CreateAllViewsFromDefinitions()
     {
         if (_viewPrefab == null)
@@ -53,13 +56,11 @@ public class UI_ConsolePresenter : MonoBehaviour
         if (string.IsNullOrEmpty(definition.StageId))
             return;
 
-        if (_views.ContainsKey(definition.StageId))
+        if (_viewsByStageId.ContainsKey(definition.StageId))
             return;
 
         Transform parent = _viewParent != null ? _viewParent : transform;
         UI_ConsoleComponentView view = Instantiate(_viewPrefab, parent);
-
-        _views.Add(definition.StageId, view);
 
         List<(int missionIndex, string missionTitle)> missionData = BuildMissionData(definition);
 
@@ -68,9 +69,11 @@ public class UI_ConsolePresenter : MonoBehaviour
             definition.StageTitle,
             missionData,
             missionData.Count);
+
+        _viewsByStageId.Add(definition.StageId, view);
+        _appliedMissionIndicesByStageId.Add(definition.StageId, new HashSet<int>());
     }
 
-    // 현재 씬에 있는 Stage들의 런타임 성공 상태를 한 번 반영
     private void ApplyCurrentRuntimeStates()
     {
         Stage[] stages = FindObjectsByType<Stage>(
@@ -79,42 +82,87 @@ public class UI_ConsolePresenter : MonoBehaviour
 
         for (int i = 0; i < stages.Length; i++)
         {
-            ApplyRuntimeState(stages[i]);
+            ApplyRuntimeState(stages[i], shouldFocusOnNewSuccess: false);
         }
     }
 
     private void HandleStageChanged(Stage changedStage)
     {
-        if (changedStage == null)
-            return;
-
-        ApplyRuntimeState(changedStage);
+        ApplyRuntimeState(changedStage, shouldFocusOnNewSuccess: true);
     }
 
-    // 런타임 데이터로 성공 여부 체크
-    private void ApplyRuntimeState(Stage stage)
+    private void ApplyRuntimeState(Stage stage, bool shouldFocusOnNewSuccess)
     {
-        if (stage == null || stage.StageSO == null)
+        if (TryGetStageContext(stage, out string stageId, out UI_ConsoleComponentView view) == false)
             return;
 
-        string stageId = stage.StageSO.StageId;
-        if (string.IsNullOrEmpty(stageId))
-            return;
-
-        if (_views.TryGetValue(stageId, out UI_ConsoleComponentView view) == false)
+        if (_appliedMissionIndicesByStageId.TryGetValue(stageId, out HashSet<int> appliedMissionIndices) == false)
             return;
 
         StageMission[] runtimeMissions = stage.RuntimeMissions;
         if (runtimeMissions == null)
             return;
 
+        bool hasNewSuccess = false;
+
         for (int i = 0; i < runtimeMissions.Length; i++)
         {
-            if (runtimeMissions[i].isMissionSuccess == false)
+            StageMission mission = runtimeMissions[i];
+
+            if (mission.isMissionSuccess == false)
                 continue;
 
-            view.IsSuccess(runtimeMissions[i].missionIndex);
+            if (appliedMissionIndices.Add(mission.missionIndex) == false)
+                continue;
+
+            view.IsSuccess(mission.missionIndex);
+            hasNewSuccess = true;
         }
+
+        if (shouldFocusOnNewSuccess && hasNewSuccess)
+        {
+            FocusView(view);
+        }
+    }
+
+    private bool TryGetStageContext(
+        Stage stage,
+        out string stageId,
+        out UI_ConsoleComponentView view)
+    {
+        stageId = null;
+        view = null;
+
+        if (stage == null)
+            return false;
+
+        if (stage.StageSO == null)
+            return false;
+
+        stageId = stage.StageSO.StageId;
+
+        if (string.IsNullOrEmpty(stageId))
+            return false;
+
+        if (_viewsByStageId.TryGetValue(stageId, out view) == false)
+            return false;
+
+        return true;
+    }
+
+    private void FocusView(UI_ConsoleComponentView view)
+    {
+        if (_scrollFocusController == null)
+            return;
+
+        if (view == null)
+            return;
+
+        RectTransform targetRect = view.transform as RectTransform;
+        if (targetRect == null)
+            return;
+
+        _scrollFocusController.Focus(targetRect);
     }
 
     private List<(int missionIndex, string missionTitle)> BuildMissionData(StageDefinition definition)
@@ -135,12 +183,13 @@ public class UI_ConsolePresenter : MonoBehaviour
 
     private void ClearAllViews()
     {
-        foreach (UI_ConsoleComponentView view in _views.Values)
+        foreach (UI_ConsoleComponentView view in _viewsByStageId.Values)
         {
             if (view != null)
                 Destroy(view.gameObject);
         }
 
-        _views.Clear();
+        _viewsByStageId.Clear();
+        _appliedMissionIndicesByStageId.Clear();
     }
 }

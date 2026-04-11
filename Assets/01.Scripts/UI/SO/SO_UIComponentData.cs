@@ -8,6 +8,7 @@ public class SO_ComponentData : ScriptableObject
     [SerializeField] private string _componentId;
     [SerializeField] private string _displayName;
     [SerializeField] private Sprite _iconSprite;
+    [SerializeField] private Sprite _projectSprite;
 
     [Header("Window")]
     [SerializeField] private ComponentWindow _componentWindow;
@@ -23,6 +24,8 @@ public class SO_ComponentData : ScriptableObject
     public string ComponentId => _componentId;
     public string DisplayName => _displayName;
     public Sprite IconSprite => _iconSprite;
+    public Sprite ProjectSprite => _projectSprite;
+    public Sprite ProjectVisualSprite => _projectSprite != null ? _projectSprite : _iconSprite;
     public ComponentWindow ComponentWindow => _componentWindow;
     public ProejctFileStruct ProjectFileStruct => _projectFileStruct;
     public UIProjectDragType ProjectDragType => _projectDragType;
