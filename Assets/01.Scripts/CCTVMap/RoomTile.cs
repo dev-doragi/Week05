@@ -5,9 +5,17 @@ public class RoomTile : MonoBehaviour
     [SerializeField] private Renderer[] renderers;
     [SerializeField] private Material normalMaterial;
     [SerializeField] private Material selectedMaterial;
-    [SerializeField] private bool selectedOnStart = false;
+
+    [Header("CCTV Link")]
+    [SerializeField] private RoomID roomId = RoomID.None;
+    [Header("Rotate Group")]
+    [SerializeField, Range(0, 3)] private int rotateStepIndex = 0;
+    public int RotateStepIndex => rotateStepIndex;
+
 
     [SerializeField] private RoomSelectionGroup selectionGroup;
+
+    
     public bool IsSelected { get; private set; }
 
     private void Awake()
@@ -15,11 +23,12 @@ public class RoomTile : MonoBehaviour
         if (selectionGroup == null)
             selectionGroup = GetComponentInParent<RoomSelectionGroup>();
 
-        SetSelectedVisual(selectedOnStart);
     }
 
     public void OnMinimapClicked()
-    {
+    { 
+        if (CameraManager.Instance != null)
+        CameraManager.Instance.SelectCameraByRoomId(roomId);
         if (selectionGroup != null)
         {
             selectionGroup.SelectRoom(this);

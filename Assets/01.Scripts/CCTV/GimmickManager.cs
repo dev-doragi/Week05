@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GimmickManager : MonoBehaviour
+public class GimmickManager : Singleton<GimmickManager>
 {
     [Header("Dependencies")]
     [SerializeField] private CoachMovementController _coachController;
@@ -24,19 +24,8 @@ public class GimmickManager : MonoBehaviour
     public RoomID ActiveTempTarget => _activeTempTarget;
 
     public bool IsBlockPathCooldownReady => Time.time >= _nextBlockPathAvailableTime;
+    public float BlockPathCooldownRemaining => Mathf.Max(0f, _nextBlockPathAvailableTime - Time.time);
 
-    public static GimmickManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
 
     #region 1. Path Blocking
 
@@ -47,6 +36,11 @@ public class GimmickManager : MonoBehaviour
     private float _nextBlockPathAvailableTime = 0f;
 
     public bool HasBlockedPath => _hasBlockedPath && Time.time < _blockPathEndTime;
+
+    protected override void Init()
+    {
+        
+    }
 
     public bool CanUseBlockPath
     {
