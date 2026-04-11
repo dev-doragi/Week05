@@ -4,15 +4,18 @@ using UnityEngine;
 public class StageErrorConfirm : Stage
 {
     [Header("UI")]
-    public GameObject errorWindowPrefab;
     public RectTransform canvasRect;
     public float padding = 100f;
 
-    [Header("Settings")]
+    [Header("Error Window Settings")]
+    public GameObject errorWindowPrefab;
     public int minErrors = 15;
     public int maxErrors = 20;
-
+    [Space(5)]
+    [Min(0f)] public float spawnInterval = 0.1f;
+    
     private int _remainningErrors;
+    private Coroutine _spawnRoutine;
     private List<GameObject> _spawnedWindows = new List<GameObject>();
 
     protected override void OnStart()
@@ -53,6 +56,10 @@ public class StageErrorConfirm : Stage
     {
         Debug.Log($"[Confirm Debugging] Error Confirm! (Remain: {_remainningErrors})");
 
+        ConfirmErrorWindow errorWindowScript = window.GetComponent<ConfirmErrorWindow>();
+        if (errorWindowScript != null)
+            errorWindowScript.OnConfirm -= HandleErrorConfirmed;
+
         _remainningErrors--;
         _spawnedWindows.Remove(window);
         Destroy(window);
@@ -60,10 +67,26 @@ public class StageErrorConfirm : Stage
         if (_remainningErrors <= 0) Clear();
     }
 
-    private void OnDisable()
+    private void CleanWindow()
     {
-        foreach (var window in _spawnedWindows) if (window != null) Destroy(window);
+        foreach (var window in _spawnedWindows)
+        {
+            if (window != null) continue;
+
+            ConfirmErrorWindow errorWindowScript = window.GetComponent<ConfirmErrorWindow>();
+            if (errorWindowScript != null)
+                errorWindowScript.OnConfirm -= HandleErrorConfirmed;
+
+            Destroy(window);
+        }
 
         _spawnedWindows.Clear();
+    }
+
+    private void OnDisable()
+    {
+
+
+        CleanWindow();
     }
 }
