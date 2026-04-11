@@ -30,16 +30,16 @@ public class UI_ProjectItemSlot : MonoBehaviour
         if (data == null)
             return;
 
-        _view.Render(data.DisplayName, data.SourceData.IconSprite);
+        _view.Render(data.DisplayName, data.SourceData.ProjectVisualSprite);
         _selectable.Bind(data.Id);
         _selectable.SetSelected(isSelected);
 
         if (_draggable != null)
         {
             if (data.SourceData != null && data.SourceData.ProjectDragType == UIProjectDragType.ScenePlaceablePrefab)
-                _draggable.BindPlaceable(data.SourceData.PlaceablePrefabRecipe, data.DisplayName, data.SourceData.IconSprite);
+                _draggable.BindPlaceable(data.SourceData.PlaceablePrefabRecipe, data.DisplayName, data.SourceData.ProjectVisualSprite);
             else
-                _draggable.BindReference(data.Id, data.DisplayName, data.SourceData.IconSprite);
+                _draggable.BindReference(data.Id, data.DisplayName, data.SourceData.ProjectVisualSprite);
         }
     }
 
