@@ -24,7 +24,11 @@ public class StagePlatformMove : Stage
 
     protected override void OnStart()
     {
-
+        if (InGameEditorController.EditorRuntimeState != null)
+        {
+            InGameEditorController.EditorRuntimeState.
+                TryBreakReference("Bomb", InspectorComponent.Bomb, "reference01");
+        }
     }
 
     private void HandlePlatformMove(bool active)

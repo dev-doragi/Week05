@@ -686,6 +686,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
+      propertyPath: Stages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[0]'
       value: 
       objectReference: {fileID: 1367228729}
@@ -693,6 +697,10 @@ PrefabInstance:
       propertyPath: 'Stages.Array.data[1]'
       value: 
       objectReference: {fileID: 1065312367}
+    - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
+      propertyPath: 'Stages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3522025752228769281}
     - target: {fileID: 4010879763591745260, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: m_Name
       value: stagemanager
@@ -3366,6 +3374,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage3_PlatformMove
       objectReference: {fileID: 0}
+    - target: {fileID: 2167392666017333095, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167392666017333095, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4836700965109433219, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.59
@@ -3406,11 +3422,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6893447941276863629, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+      propertyPath: _controller
+      value: 
+      objectReference: {fileID: 1446213894}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+--- !u!114 &3522025752228769281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6028944012054649796, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+  m_PrefabInstance: {fileID: 3522025752228769279}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424e71d7ec89431408b114c4344104cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StagePlatformMove
 --- !u!1001 &8719105416845979330
 PrefabInstance:
   m_ObjectHideFlags: 0

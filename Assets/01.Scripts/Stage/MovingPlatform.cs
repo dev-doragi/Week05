@@ -26,6 +26,7 @@ public class MovingPlatform : MonoBehaviour
     void FixedUpdate()
     {
         if (rb == null) return;
+        if (!canMove) return;
 
         // 방향 설정
         Vector2 axisDir = axis == MoveAxis.Vertical ? Vector2.up : Vector2.right;
