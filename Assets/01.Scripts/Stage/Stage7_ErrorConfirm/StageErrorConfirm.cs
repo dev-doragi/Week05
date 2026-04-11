@@ -182,7 +182,7 @@ public class StageErrorConfirm : Stage
     {
         foreach (var window in _spawnedWindows)
         {
-            if (window != null) continue;
+            if (window == null) continue;
 
             ConfirmErrorWindow errorWindowScript = window.GetComponent<ConfirmErrorWindow>();
             if (errorWindowScript != null)
