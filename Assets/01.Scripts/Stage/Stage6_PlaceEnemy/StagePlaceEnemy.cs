@@ -5,7 +5,7 @@ public class StagePlaceEnemy : Stage
     [Header("Place Targets")]
     public PlaceTarget[] targets;
 
-    private MissionClearer _mission_Reference;
+    private MissionClearer[] _mission_References;
 
     private int _requireMatchCount;
     private int _currentMatchCount = 0;
@@ -23,7 +23,7 @@ public class StagePlaceEnemy : Stage
 
     private void Start()
     {
-        _mission_Reference = GetComponent<MissionClearer>();
+        _mission_References = GetComponents<MissionClearer>();
 
         // 테스트용
         //OnStart();
@@ -45,14 +45,8 @@ public class StagePlaceEnemy : Stage
 
     private void HandleMatch()
     {
+        _mission_References[_currentMatchCount].ClearMission();
         _currentMatchCount++;
-        Debug.Log($"[Stage Place] Match Success! Progress: {_currentMatchCount} / {_requireMatchCount}");
-
-        if (_currentMatchCount >= _requireMatchCount)
-        {
-            Debug.Log("[Stage Place] All Targets Matched!");
-            _mission_Reference.ClearMission();
-        }
     }
 
     private void HandleCollision(Collider2D collision)
