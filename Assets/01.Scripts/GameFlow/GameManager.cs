@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     public static event Action OnGameStart;
 
+    public bool GameFinish = false;
 
     protected override void Init()
     {
@@ -28,11 +29,15 @@ public class GameManager : Singleton<GameManager>
     }
     public void GameOver()
     {
+        if(GameFinish) return;
         UIManager_New.Instance.GameOverImagePopUP();
+        GameFinish = true;
     }
     public void GameClear()
     {
+        if(GameFinish) return;
         UIManager_New.Instance.GameClearImagePopUP();
+        GameFinish = true;
     }
 
 

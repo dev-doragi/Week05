@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 1691935360820087528}
   - component: {fileID: 7637932358897624268}
   - component: {fileID: 1046568134171639518}
-  - component: {fileID: 6700981827415613344}
   m_Layer: 5
   m_Name: BuldMessageText
   m_TagString: Untagged
@@ -231,19 +230,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6700981827415613344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6360397188357203759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c138d47d8d9c0f345a3e5dfd3df88a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissonMessageTest
-  messageText: {fileID: 1046568134171639518}
-  slideInDuration: 0.8
-  displayDuration: 2
-  slideOutDuration: 0.6
