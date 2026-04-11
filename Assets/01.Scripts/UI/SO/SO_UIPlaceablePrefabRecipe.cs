@@ -9,7 +9,7 @@ public class SO_UIPlaceablePrefabRecipe : ScriptableObject
 
     [Header("Placement")]
     [SerializeField] private GameObject _placementPrefab;
-    [SerializeField] private UIEditorScene _defaultScene = UIEditorScene.None;
+    [SerializeField] private UIEditorScene _defaultScene = UIEditorScene.Test1;
 
     [Header("Default References")]
     [SerializeField] private List<UI_ReferenceTemplateData> _defaultReferences = new();
