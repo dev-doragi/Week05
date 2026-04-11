@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 6193438085548997491}
   - component: {fileID: 5191341743292378590}
   m_Layer: 5
-  m_Name: Cam7
+  m_Name: Cam7_Lobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,6 +800,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &962398923259972733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.00006103516, y: 0.00006103516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6875947931404162792
@@ -2448,7 +2451,7 @@ GameObject:
   - component: {fileID: 6217928260765879740}
   - component: {fileID: 324275664261242430}
   m_Layer: 5
-  m_Name: Cam9
+  m_Name: Cam9_Stair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2533,6 +2536,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &2494806668959261763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2552,7 @@ GameObject:
   - component: {fileID: 7647755934595668461}
   - component: {fileID: 8210069837094195814}
   m_Layer: 5
-  m_Name: Cam1
+  m_Name: Cam1_CoachingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2631,6 +2637,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &2526268288210869642
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,7 +2821,7 @@ GameObject:
   - component: {fileID: 5650999942191926104}
   - component: {fileID: 5308180082813875023}
   m_Layer: 5
-  m_Name: Cam2
+  m_Name: Cam2_Lounge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2897,6 +2906,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &2807464013811367815
 GameObject:
   m_ObjectHideFlags: 0
@@ -3373,7 +3385,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.001953125, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.001953125, y: 0}
   m_SizeDelta: {x: 0.0034179688, y: 0.00006103516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &81911343392537688
@@ -4389,7 +4401,7 @@ GameObject:
   - component: {fileID: 4592343355605103858}
   - component: {fileID: 2793953843740077625}
   m_Layer: 5
-  m_Name: Cam5
+  m_Name: Cam5_F1Stair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4474,6 +4486,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &4840687091092193559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,7 +4822,7 @@ GameObject:
   - component: {fileID: 3087281174793931523}
   - component: {fileID: 255909648478888153}
   m_Layer: 5
-  m_Name: Cam6
+  m_Name: Cam6_F1Elevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4892,6 +4907,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &5314402229525191313
 GameObject:
   m_ObjectHideFlags: 0
@@ -6738,7 +6756,7 @@ GameObject:
   - component: {fileID: 5047821685321420391}
   - component: {fileID: 4468796254842608744}
   m_Layer: 5
-  m_Name: Cam10
+  m_Name: Cam10_Cafeteria
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6823,6 +6841,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &7115215972201605764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7293,7 +7314,7 @@ GameObject:
   - component: {fileID: 8657624392457985978}
   - component: {fileID: 435815257612568094}
   m_Layer: 5
-  m_Name: Cam3
+  m_Name: Cam3_Hallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7378,6 +7399,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &7725704549192417331
 GameObject:
   m_ObjectHideFlags: 0
@@ -7391,7 +7415,7 @@ GameObject:
   - component: {fileID: 6352631372168966215}
   - component: {fileID: 8209569060949464347}
   m_Layer: 5
-  m_Name: Cam11
+  m_Name: Cam11_Cafe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7476,6 +7500,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &7735181790456907719
 GameObject:
   m_ObjectHideFlags: 0
@@ -8372,7 +8399,7 @@ GameObject:
   - component: {fileID: 4793519629768876442}
   - component: {fileID: 528888700789157049}
   m_Layer: 5
-  m_Name: Cam8
+  m_Name: Cam8_JungleStepUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8457,6 +8484,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &8454265955920046358
 GameObject:
   m_ObjectHideFlags: 0
@@ -8744,7 +8774,7 @@ GameObject:
   - component: {fileID: 9037382191643125433}
   - component: {fileID: 3407084905398968094}
   m_Layer: 5
-  m_Name: Cam12
+  m_Name: Cam12_JungleStepLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8829,6 +8859,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &8819367980017631791
 GameObject:
   m_ObjectHideFlags: 0
@@ -8979,7 +9012,7 @@ GameObject:
   - component: {fileID: 5859923954442493820}
   - component: {fileID: 7127388146485887455}
   m_Layer: 5
-  m_Name: Cam4
+  m_Name: Cam4_3FElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9064,6 +9097,9 @@ MonoBehaviour:
   _selectedBlinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _coachDetectedBlinkColor: {r: 1, g: 0, b: 0, a: 1}
   _blinkInterval: 0.5
+  _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+  _sfxPlayer: {fileID: 0}
+  _clickVolume: 1
 --- !u!1 &9012466387625460657
 GameObject:
   m_ObjectHideFlags: 0
@@ -9232,7 +9268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EdgePath
   _from: 4
-  _to: 3
+  _to: 1
   _gimmickManager: {fileID: 0}
 --- !u!1 &9079508080011269690
 GameObject:
