@@ -20,7 +20,7 @@ public abstract class Stage : MonoBehaviour
         Debug.Log("[Stage] Misstion Count: " + _runtimeMissions.Length);
     }
 
-    public void StartGame()
+    public void StartStage()
     {
         Debug.Log(StageSO.StageId);
         gameObject.SetActive(true);
