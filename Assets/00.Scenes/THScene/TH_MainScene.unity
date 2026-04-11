@@ -36146,6 +36146,7 @@ PrefabInstance:
     - {fileID: 5951235496611256483, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
     - {fileID: 8086649795979904401, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
     - {fileID: 5339950897301567806, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
+    - {fileID: 7106285237230604119, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       insertIndex: -1
@@ -39749,6 +39750,7 @@ MonoBehaviour:
   _projectPresenter: {fileID: 813964642}
   _hierarchyPresenter: {fileID: 2011875030}
   _inspectorPresenter: {fileID: 980881274}
+  _consolePresenter: {fileID: 0}
 --- !u!4 &1902719692
 Transform:
   m_ObjectHideFlags: 0
