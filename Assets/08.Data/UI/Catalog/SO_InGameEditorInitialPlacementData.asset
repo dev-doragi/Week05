@@ -22,37 +22,37 @@ MonoBehaviour:
       _label: Rigidbody2D
       _normalTargetId: PlayerRigidbody
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
     - _inspectorComponent: 8
       _slotId: reference02
       _label: Collider2D
       _normalTargetId: PlayerCollider
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
     - _inspectorComponent: 9
       _slotId: reference01
       _label: Rigidbody2D
       _normalTargetId: PlayerRigidbody
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
     - _inspectorComponent: 9
       _slotId: reference02
       _label: Collider2D
       _normalTargetId: PlayerCollider
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
     - _inspectorComponent: 10
       _slotId: reference01
       _label: Sprite_1
       _normalTargetId: PlayerSprite_1
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
     - _inspectorComponent: 10
       _slotId: reference02
       _label: Sprite_2
       _normalTargetId: PlayerSprite_2
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
   - _objectId: PlayerCollider
     _componentData: {fileID: 11400000, guid: 854958ffac9c34144a1c05e841e7955b, type: 2}
     _scene: 0
@@ -82,25 +82,19 @@ MonoBehaviour:
       _label: Rigidbody
       _normalTargetId: MPRigidbody
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
     - _inspectorComponent: 18
       _slotId: reference02
       _label: Collider
       _normalTargetId: MPCollider
       _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
     - _inspectorComponent: 18
       _slotId: reference03
       _label: Controller
       _normalTargetId: MPController
       _canSpawnError: 1
-      _isRequired: 0
-    - _inspectorComponent: 18
-      _slotId: reference04
-      _label: Sprite
-      _normalTargetId: MPSprite
-      _canSpawnError: 1
-      _isRequired: 0
+      _isRequired: 1
   - _objectId: MPCollider
     _componentData: {fileID: 11400000, guid: 312dd52c1af3af049b6ece27d2316f15, type: 2}
     _scene: 0

@@ -28,7 +28,7 @@ public class StageMove : Stage
         if (InGameEditorController.EditorRuntimeState != null)
         {
             InGameEditorController.EditorRuntimeState.
-                TryBreakReference("BallPop", InspectorComponent.BallPop, "reference01");
+                TryBreakReference("Player", InspectorComponent.PlayerController, "reference01");
         }
     }
 
