@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cdffb24f3a6534cbdf22c7a07ddbc5, type: 3}
   m_Name: Stage8_Anim
   m_EditorClassIdentifier: Assembly-CSharp::StageDefinition
-  stageId: STAGE_008
+  stageId: STAGE_005
   stageTitle: "\uC560\uB2C8\uBA54\uC774\uC158 \uB9DE\uCD94\uAE30"
+  startMessage: "\uC801\uC758 \uC560\uB2C8\uBA54\uC774\uC158\uC5D0 \uBB38\uC81C\uAC00
+    \uC788\uB294\uAC70\uAC19\uC740\uB370?"
   missions:
   - missionIndex: 0
-    missionTitle: "\uC560\uB2C8\uBA54\uC774\uC158 \uB9DE\uCD94\uAE30"
+    missionTitle: "\uC801\uC774 \uC815\uC0C1\uC801\uC73C\uB85C \uB3D9\uC791\uD558\uB2C8\uAE4C
+      \uB118\uC5B4\uAC00\uB3C4 \uB418\uACA0\uB2E4."
     isMissionSuccess: 0
     missionMessage: 
   - missionIndex: 1
-    missionTitle: "\uC55E\uC73C\uB85C \uAC00\uC138\uC694"
+    missionTitle: "\uD3EC\uD0C8\uC744 \uD0C0\uC11C \uB2E4\uC74C \uBB38\uC81C\uB97C
+      \uD574\uACB0\uD558\uB7EC \uAC00\uAE30"
     isMissionSuccess: 0
     missionMessage: 

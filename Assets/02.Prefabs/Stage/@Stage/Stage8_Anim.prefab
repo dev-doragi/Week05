@@ -119,11 +119,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3952272125925980741, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.21
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3952272125925980741, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.34
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3952272125925980741, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -132,6 +132,30 @@ PrefabInstance:
     - target: {fileID: 3974556116073440745, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
       propertyPath: m_Name
       value: AnimTargetSample
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986579962839373829, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
+      propertyPath: _clearColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986579962839373829, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
+      propertyPath: _clearColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986579962839373829, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
+      propertyPath: _normalColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986579962839373829, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
+      propertyPath: _normalColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5082971309402010638, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
+      propertyPath: _offset.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5082971309402010638, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
+      propertyPath: _offset.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5451991075170201294, guid: ac2581215b365ca44a51da63f8b8c641, type: 3}
       propertyPath: stage
