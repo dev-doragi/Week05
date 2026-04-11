@@ -29,8 +29,11 @@ public abstract class Stage : MonoBehaviour
 
     protected void Clear()
     {
+        Debug.Log("Stage Clear!");
+        _isCleared = true;
         OnStageChanged?.Invoke(this);
         gameObject.SetActive(false);
+        OnClear?.Invoke();
     }
 
     protected abstract void OnStart();
@@ -45,11 +48,7 @@ public abstract class Stage : MonoBehaviour
 
         if (!_isCleared && IsAllMissionCleared())
         {
-            _isCleared = true;
             Clear();
-            Debug.Log("Stage Clear!");
-            
-            OnClear?.Invoke();
             return;
         }
 
