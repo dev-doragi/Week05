@@ -5,7 +5,6 @@ using UnityEngine;
 public class CoachBrain
 {
     private MapGraph _mapGraph;
-    private GimmickManager _gimmickManager;
 
     [Header("Aggro Settings")]
     [SerializeField] private float _officeAggro = 1.0f;
@@ -19,7 +18,6 @@ public class CoachBrain
     public void Initialize(MapGraph mapGraph, GimmickManager gimmickManager)
     {
         _mapGraph = mapGraph;
-        _gimmickManager = gimmickManager;
         _officeAggro = 1.0f;
         _lastRoomId = RoomID.None;
     }
@@ -36,9 +34,17 @@ public class CoachBrain
         if (neighbors.Count == 0)
             return currentRoomId;
 
-        RoomID targetRoom = _gimmickManager.ActiveTempTarget != RoomID.None
-            ? _gimmickManager.ActiveTempTarget
-            : RoomID.Office;
+        RoomID activeTempTarget = GimmickManager.Instance.ActiveTempTarget;
+
+        if (activeTempTarget != RoomID.None)
+        {
+            if (currentRoomId == activeTempTarget)
+                return currentRoomId;
+
+            return activeTempTarget;
+        }
+
+        RoomID targetRoom = RoomID.Office;
 
         float totalWeight = 0f;
         List<KeyValuePair<RoomID, float>> roomWeights = new List<KeyValuePair<RoomID, float>>();
@@ -79,7 +85,7 @@ public class CoachBrain
 
     private float CalculateRoomScore(RoomID currentRoom, RoomID nextRoom, RoomID targetRoom)
     {
-        if (_gimmickManager.IsPathBlocked(currentRoom, nextRoom))
+        if (GimmickManager.Instance.IsPathBlocked(currentRoom, nextRoom))
             return 0f;
 
         float score = 1f;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GimmickManager : MonoBehaviour
+public class GimmickManager : Singleton<GimmickManager>
 {
     [Header("Dependencies")]
     [SerializeField] private CoachMovementController _coachController;
@@ -23,18 +23,9 @@ public class GimmickManager : MonoBehaviour
 
     public RoomID ActiveTempTarget => _activeTempTarget;
 
-    public static GimmickManager Instance { get; private set; }
+    public bool IsBlockPathCooldownReady => Time.time >= _nextBlockPathAvailableTime;
+    public float BlockPathCooldownRemaining => Mathf.Max(0f, _nextBlockPathAvailableTime - Time.time);
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
 
     #region 1. Path Blocking
 
@@ -45,6 +36,11 @@ public class GimmickManager : MonoBehaviour
     private float _nextBlockPathAvailableTime = 0f;
 
     public bool HasBlockedPath => _hasBlockedPath && Time.time < _blockPathEndTime;
+
+    protected override void Init()
+    {
+        
+    }
 
     public bool CanUseBlockPath
     {
@@ -126,13 +122,20 @@ public class GimmickManager : MonoBehaviour
     public bool HasActiveStayDelay => Time.time < _stayDelayEndTime;
     public float ActiveExtraStayTime => HasActiveStayDelay ? _activeExtraStayTime : 0f;
 
-    public void ActivateStayDelay(float extraStayTime, float duration)
+    public bool ActivateStayDelay(RoomID targetRoom, float extraStayTime, float duration)
     {
+        if (_coachController == null)
+            return false;
+
+        if (_coachController.CurrentRoomId != targetRoom)
+            return false;
+
         if (_stayDelayRoutine != null)
             StopCoroutine(_stayDelayRoutine);
 
         _stayDelayRoutine = StartCoroutine(Co_StayDelay(extraStayTime, duration));
         OnStayDelayActivated?.Invoke();
+        return true;
     }
 
     private IEnumerator Co_StayDelay(float extraStayTime, float duration)
