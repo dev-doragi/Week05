@@ -4,9 +4,11 @@ using System.Collections;
 public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 {
     [Header("Path")]
-    [SerializeField] private RoomID fromRoom = RoomID.None;
-    [SerializeField] private RoomID toRoom = RoomID.None;
+    [SerializeField] private RoomTile fromRoomTile;
+    [SerializeField] private RoomTile toRoomTile;
 
+    private RoomID FromRoom => fromRoomTile != null ? fromRoomTile.RoomId : RoomID.None;
+    private RoomID ToRoom => toRoomTile != null ? toRoomTile.RoomId : RoomID.None;
     [Header("Visual")]
     [SerializeField] private Renderer[] renderers;
     [SerializeField] private Material openMaterial;
@@ -25,9 +27,6 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
     private bool _blinkOn;
     private Coroutine _blinkRoutine;
 
-    public RoomID FromRoom => fromRoom;
-    public RoomID ToRoom => toRoom;
-
     private void Awake()
     {
 
@@ -45,16 +44,16 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
     }
     public void OnMinimapClicked()
     {
-        bool success = GimmickManager.Instance.TryBlockPath(fromRoom, toRoom);
+       RoomID from = FromRoom;
+        RoomID to = ToRoom;
 
-        if (success)
+        if (from == RoomID.None || to == RoomID.None)
         {
-            Debug.Log($"[PassageTile] BLOCKED: {fromRoom} <-> {toRoom}");
+            Debug.LogWarning($"[PassageTile] from/to RoomTile 연결 필요: {name}");
+            return;
         }
-        else
-        {
-            Debug.Log($"[PassageTile] 실패(쿨다운/이동중). 남은쿨: {GimmickManager.Instance.BlockPathCooldownRemaining:0.00}s");
-        }
+
+        bool success = GimmickManager.Instance.TryBlockPath(from, to);
 
         RefreshVisualFromManager();
     }
@@ -62,9 +61,12 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
     private void RefreshVisualFromManager()
     {
 
-        bool blockedNow = GimmickManager.Instance.IsPathBlocked(fromRoom, toRoom);
-        if (blockedNow == _isBlockedVisual) return;
+        RoomID from = FromRoom;
+        RoomID to = ToRoom;
+        if (from == RoomID.None || to == RoomID.None) return;
 
+        bool blockedNow = GimmickManager.Instance.IsPathBlocked(from, to);
+        if (blockedNow == _isBlockedVisual) return;
         SetBlockedVisual(blockedNow);
     }
 
@@ -114,8 +116,11 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 
     public bool Connects(RoomID a, RoomID b)
     {
-        return (fromRoom == a && toRoom == b) || (fromRoom == b && toRoom == a);
+        RoomID from = FromRoom;
+        RoomID to = ToRoom;
+        return (from == a && to == b) || (from == b && to == a);
     }
+
 
     public void SetCoachBlink(bool active)
     {

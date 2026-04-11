@@ -35,8 +35,8 @@ Transform:
   - {fileID: 3600201944476879546}
   - {fileID: 480515349001285550}
   - {fileID: 8196560014701840667}
-  - {fileID: 3686245651805495957}
   - {fileID: 6961340014292043419}
+  - {fileID: 3686245651805495957}
   - {fileID: 5980568211429925017}
   m_Father: {fileID: 2745441053754416562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,10 +75,10 @@ Transform:
   - {fileID: 9058518548025651140}
   - {fileID: 7794033233706011726}
   - {fileID: 5890614530034717548}
-  - {fileID: 7831279305080185193}
   - {fileID: 4246760353225477479}
   - {fileID: 4001888610485787144}
   - {fileID: 8537678092794588437}
+  - {fileID: 7831279305080185193}
   m_Father: {fileID: 2745441053754416562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1586983135667528319
@@ -290,9 +290,9 @@ Transform:
   - {fileID: 4599935805399097930}
   - {fileID: 5691560907325976363}
   - {fileID: 4438229304145844611}
-  - {fileID: 5830757801247996615}
   - {fileID: 5440217412395744358}
   - {fileID: 5791211872962640564}
+  - {fileID: 5830757801247996615}
   m_Father: {fileID: 2745441053754416562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8130569668808383189
@@ -480,6 +480,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &1508290026889749984 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 921172334653920234}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &4994113525322697968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
@@ -670,6 +681,14 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 4434310522635068766}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 3176850433705068244}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -747,6 +766,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 5145370354029060671}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 6941839896925791146}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -834,6 +861,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &4434310522635068766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 2715663426155270996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &7794033233706011726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
@@ -899,6 +937,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7192366020638308646}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 1508290026889749984}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -977,6 +1023,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 3176850433705068244}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 3112051901294250217}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1068,6 +1122,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &3112051901294250217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 3681154093923499747}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &8831586030930584057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
@@ -1146,6 +1211,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &3176850433705068244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 3760607054737748190}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &9058518548025651140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
@@ -1211,6 +1287,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 5058294926517940376}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 5145370354029060671}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1294,6 +1378,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 4434310522635068766}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 7963464125034525988}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -1371,6 +1463,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 5753298842595968914}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 1508290026889749984}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1463,6 +1563,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 5705265475986632884}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6272107089343694526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 5705265475986632884}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &6337125714259128728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1545,6 +1656,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 6337125714259128728}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5753298842595968914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 6337125714259128728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &6481882676504985190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1605,6 +1727,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7959658505164262234}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 5753298842595968914}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1683,6 +1813,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7959658505164262234}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 7192366020638308646}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1779,6 +1917,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 6779185166850115218}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5058294926517940376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 6779185166850115218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &6867474315060417589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1857,6 +2006,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 6867474315060417589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5145370354029060671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 6867474315060417589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &7022190936010243160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1917,6 +2077,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7963464125034525988}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 3112051901294250217}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1995,6 +2163,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 6272107089343694526}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 5058294926517940376}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -2087,6 +2263,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8525401709081165136}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7959658505164262234 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8525401709081165136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &8549456069859869486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2165,6 +2352,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8549456069859869486}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7963464125034525988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8549456069859869486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &8566544730067630907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2288,6 +2486,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 6941839896925791146}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 6272107089343694526}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -2383,6 +2589,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8678561865042007456}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6941839896925791146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8678561865042007456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &8932404270449135404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2461,3 +2678,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8932404270449135404}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7192366020638308646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8932404270449135404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
