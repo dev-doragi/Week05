@@ -1,10 +1,13 @@
 using UnityEngine;
+using TMPro;
 
-public class RoomTile : MonoBehaviour
+public class RoomTile : MonoBehaviour, IMinimapHoverTarget
 {
     [SerializeField] private Renderer[] renderers;
     [SerializeField] private Material normalMaterial;
     [SerializeField] private Material selectedMaterial;
+    [SerializeField] private Material hoverMaterial;
+    private bool _isHovered;
 
     [Header("CCTV Link")]
     [SerializeField] private RoomID roomId = RoomID.None;
@@ -15,6 +18,9 @@ public class RoomTile : MonoBehaviour
 
     [SerializeField] private RoomSelectionGroup selectionGroup;
 
+    [Header("Label")]
+    [SerializeField] private TMP_Text roomIdText;  
+
     
     public bool IsSelected { get; private set; }
 
@@ -22,6 +28,8 @@ public class RoomTile : MonoBehaviour
     {
         if (selectionGroup == null)
             selectionGroup = GetComponentInParent<RoomSelectionGroup>();
+        RefreshRoomIdText();
+        RefreshVisual();
 
     }
 
@@ -41,7 +49,7 @@ public class RoomTile : MonoBehaviour
     public void SetSelectedVisual(bool selected)
     {
         IsSelected = selected;
-        ApplyMaterial(selected ? selectedMaterial : normalMaterial);
+        RefreshVisual();
     }
 
 
@@ -56,4 +64,46 @@ public class RoomTile : MonoBehaviour
             r.sharedMaterial = mat;
         }
     }
+    #if UNITY_EDITOR
+    private void OnValidate()
+    {
+        RefreshRoomIdText();
+    }
+    #endif
+
+    private void RefreshRoomIdText()
+    {
+        if (roomIdText == null) return;
+
+        string value = roomId.ToString();
+
+        if (value.StartsWith("B1F_")) value = value.Substring("B1F_".Length);
+        else if (value.StartsWith("F1_")) value = value.Substring("F1_".Length);
+        else if (value.StartsWith("F3_")) value = value.Substring("F3_".Length);
+
+        value = value.Replace("Upper", "");
+        value = value.Replace("Lower", "");
+        value = value.Replace('_', ' ');
+        value = value.Trim();
+
+        roomIdText.text = value;
+    }
+
+    public void SetHovered(bool hovered)
+    {
+        if (_isHovered == hovered) return;
+        _isHovered = hovered;
+        RefreshVisual();
+    }
+
+    private void RefreshVisual()
+    {
+        Material mat = IsSelected? selectedMaterial : ((_isHovered && hoverMaterial != null) ? hoverMaterial : normalMaterial);
+
+        ApplyMaterial(mat);
+    }
+
+
+
+
 }
