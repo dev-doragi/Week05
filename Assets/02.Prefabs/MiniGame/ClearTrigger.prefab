@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3490212604836917911}
   - component: {fileID: 4969821893821915302}
   - component: {fileID: 3448082201148125848}
-  - component: {fileID: 5002651892317816511}
+  - component: {fileID: 7122075775219248775}
   m_Layer: 0
   m_Name: ClearTrigger
   m_TagString: Untagged
@@ -139,7 +139,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5002651892317816511
+--- !u!114 &7122075775219248775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,6 +148,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6682133457289491149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb4ae5cd15a0e5a4cb2cee9b70c31850, type: 3}
+  m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ClearTrigger
+  m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
+  stage: {fileID: 0}
+  missionIndexToClear: 0

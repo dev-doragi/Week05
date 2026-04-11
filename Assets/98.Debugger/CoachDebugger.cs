@@ -4,8 +4,14 @@ using System.Collections.Generic;
 public class CoachDebugger : MonoBehaviour
 {
     [SerializeField] private CoachMovementController _coach;
-    [SerializeField] private GimmickManager _gimmickManager;
     [SerializeField] private BuildFailEndingController _endingController;
+
+    private GimmickManager _gimmickManager;
+
+    private void Awake()
+    {
+        _gimmickManager = GimmickManager.Instance;
+    }
 
     private void OnEnable()
     {
@@ -17,7 +23,7 @@ public class CoachDebugger : MonoBehaviour
         }
 
         if (_gimmickManager != null)
-            _gimmickManager.OnLureActivated += LogLureInfluence;
+            _gimmickManager.OnStayDelayActivated += LogLureInfluence;
     }
 
     private void OnDisable()
@@ -30,7 +36,7 @@ public class CoachDebugger : MonoBehaviour
         }
 
         if (_gimmickManager != null)
-            _gimmickManager.OnLureActivated -= LogLureInfluence;
+            _gimmickManager.OnStayDelayActivated -= LogLureInfluence;
     }
 
     private void HandleCoachPreparing(RoomID from, RoomID to)
@@ -48,28 +54,28 @@ public class CoachDebugger : MonoBehaviour
         Debug.Log("GameOver");
         _endingController?.PlayBuildFailSequence();
     }
-    private void LogLureInfluence(RoomID lureRoom)
+    private void LogLureInfluence()
     {
-        if (_coach == null || _coach.MapGraph == null) return;
+        //if (_coach == null || _coach.MapGraph == null) return;
 
-        RoomID coachRoom = _coach.CurrentRoomId;
-        IReadOnlyList<RoomID> neighbors = _coach.MapGraph.GetNeighbors(coachRoom);
+        //RoomID coachRoom = _coach.CurrentRoomId;
+        //IReadOnlyList<RoomID> neighbors = _coach.MapGraph.GetNeighbors(coachRoom);
 
-        bool isEffective = false;
-        string neighborList = "";
+        //bool isEffective = false;
+        //string neighborList = "";
 
-        foreach (var neighbor in neighbors)
-        {
-            neighborList += neighbor.ToString() + ", ";
-            if (neighbor == lureRoom) isEffective = true;
-        }
+        //foreach (var neighbor in neighbors)
+        //{
+        //    neighborList += neighbor.ToString() + ", ";
+        //    if (neighbor == lureRoom) isEffective = true;
+        //}
 
-        if (coachRoom == lureRoom) isEffective = true;
+        //if (coachRoom == lureRoom) isEffective = true;
 
-        string status = isEffective ? "<color=green>영향 받음</color>" : "<color=red>영향 없음(너무 멂)</color>";
+        //string status = isEffective ? "<color=green>영향 받음</color>" : "<color=red>영향 없음(너무 멂)</color>";
 
-        Debug.Log($"[사운드 체크] 발생지: {lureRoom} | 코치 위치: {coachRoom} | 주변 경로: [{neighborList.TrimEnd(',', ' ')}]");
-        Debug.Log($"[사운드 결과] 코치가 소리를 들을 수 있는가? : {status}");
+        //Debug.Log($"[사운드 체크] 발생지: {lureRoom} | 코치 위치: {coachRoom} | 주변 경로: [{neighborList.TrimEnd(',', ' ')}]");
+        //Debug.Log($"[사운드 결과] 코치가 소리를 들을 수 있는가? : {status}");
     }
 
 }

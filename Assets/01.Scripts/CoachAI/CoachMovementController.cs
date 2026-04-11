@@ -14,7 +14,6 @@ public class CoachMovementController : MonoBehaviour
     [SerializeField] private float _transitionDuration = 2f;
 
     [Header("Dependencies")]
-    [SerializeField] private GimmickManager _gimmickManager;
     [SerializeField] private CoachBrain _coachBrain;
 
     [Header("Debug")]
@@ -28,6 +27,7 @@ public class CoachMovementController : MonoBehaviour
     private Coroutine _moveRoutine;
     private Coroutine _initialDelayRoutine;
     private MapGraph _mapGraph;
+    private GimmickManager _gimmickManager;
 
     public RoomID CurrentRoomId => _currentRoomId;
     public RoomID NextRoomId => _nextRoomId;
@@ -45,7 +45,7 @@ public class CoachMovementController : MonoBehaviour
     {
         _mapGraph = new MapGraph();
         if (_gimmickManager == null)
-            _gimmickManager = FindAnyObjectByType<GimmickManager>();
+            _gimmickManager = GimmickManager.Instance;
 
         _coachBrain.Initialize(_mapGraph, _gimmickManager);
 
@@ -57,11 +57,17 @@ public class CoachMovementController : MonoBehaviour
     private void OnEnable()
     {
         GameManager.OnGameStart += StartMovement;
+
+        if (_gimmickManager != null)
+            _gimmickManager.OnStayDelayActivated += HandleStayDelayActivated;
     }
 
     private void OnDisable()
     {
         GameManager.OnGameStart -= StartMovement;
+
+        if (_gimmickManager != null)
+            _gimmickManager.OnStayDelayActivated -= HandleStayDelayActivated;
     }
 
     private void Update()
@@ -174,6 +180,14 @@ public class CoachMovementController : MonoBehaviour
             OnCoachReachedOffice?.Invoke();
     }
 
+    private void HandleStayDelayActivated()
+    {
+        if (!_isActive || _isTransitioning || _isSpawnDelayed || _currentRoomId == RoomID.Office)
+            return;
+
+        _moveTimer += _gimmickManager.GetExtraStayTime();
+    }
+
     private void ResetMoveTimer()
     {
         _moveTimer = _timeToRoomChange + UnityEngine.Random.Range(0f, _timerVariability);
@@ -181,7 +195,7 @@ public class CoachMovementController : MonoBehaviour
 
     private RoomID GetRandomSpawnRoom()
     {
-        RoomID[] spawnRooms = { RoomID.Cafeteria, RoomID.Elevator_B, RoomID.Stair_B };
+        RoomID[] spawnRooms = { RoomID.B1F_Cafeteria, RoomID.B1F_JungleStepLower, RoomID.B1F_Cafe, };
         return spawnRooms[UnityEngine.Random.Range(0, spawnRooms.Length)];
     }
 

@@ -9,6 +9,7 @@ public class InGameEditorController : MonoBehaviour
     [SerializeField] private UI_ProjectPresenter _projectPresenter;
     [SerializeField] private UI_HierarchyPresenter _hierarchyPresenter;
     [SerializeField] private UI_InspectorPresenter _inspectorPresenter;
+    [SerializeField] private UI_ConsolePresenter _consolePresenter;
 
     private int _nextPlacedObjectIndex = 1;
 
@@ -147,6 +148,7 @@ public class InGameEditorController : MonoBehaviour
 
         string objectId = CreatePlacedObjectId(recipe.ComponentData);
         GameObject instance = Instantiate(recipe.PlacementPrefab);
+
         instance.name = objectId;
         instance.transform.position = worldPosition;
 
@@ -171,6 +173,7 @@ public class InGameEditorController : MonoBehaviour
         if (scene != UIEditorScene.None)
             EditorRuntimeState.SetCurrentScene(scene);
 
+        StageManager.Instance.Register(instance);
         SelectHierarchyComponent(objectId);
     }
 
