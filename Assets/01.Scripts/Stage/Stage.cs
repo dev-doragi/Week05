@@ -25,6 +25,7 @@ public abstract class Stage : MonoBehaviour
     {
         Debug.Log(StageSO.StageId);
         gameObject.SetActive(true);
+        OnSendMessage?.Invoke(StageSO.StartMessage);
         OnStart();
     }
 
@@ -54,6 +55,7 @@ public abstract class Stage : MonoBehaviour
         }
 
         OnStageChanged?.Invoke(this);
+        OnSendMessage?.Invoke(_runtimeMissions[index].missionMessage);
     }
 
     private bool IsAllMissionCleared()
