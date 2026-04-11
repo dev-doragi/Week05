@@ -88,7 +88,7 @@ public class StageManager : Singleton<StageManager>
             return;
         }
 
-        int nextIndex = _currentStageIndex++;
+        int nextIndex = ++_currentStageIndex;
         while (nextIndex < Stages.Length && Stages[nextIndex] == null)
             nextIndex++;
 
@@ -98,7 +98,6 @@ public class StageManager : Singleton<StageManager>
             return;
         }
 
-        _currentStageIndex = nextIndex;
         _currStage = Stages[_currentStageIndex];
         _currStage.StartStage();
     }
