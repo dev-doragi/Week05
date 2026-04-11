@@ -16,8 +16,8 @@ public class RGBMatchGame : MiniGame
     [Header("Settings")]
     [Range(0f, 1f)]
     public float clearThreshold = 0.1f;
+    [SerializeField] private Color _targetColor;
 
-    Color _targetColor;
 
     void Awake()
     {
@@ -29,7 +29,6 @@ public class RGBMatchGame : MiniGame
 
     protected override void OnStart()
     {
-        _targetColor = new Color(Random.value, Random.value, Random.value);
         sampleRect.color = _targetColor;
 
         sliderR.value = 0f;
