@@ -716,6 +716,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage6_EnemyKill
       objectReference: {fileID: 0}
+    - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6
@@ -803,6 +807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageEnemyKill
   stageSO: {fileID: 11400000, guid: da2e0f062916cf544ac2823148f4fbb1, type: 2}
   _runtimeMissions: []
+  _clearDelay: 3
 --- !u!114 &3214339135336972428
 MonoBehaviour:
   m_ObjectHideFlags: 0
