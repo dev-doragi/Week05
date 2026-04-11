@@ -82,10 +82,19 @@ public class BuildRunStartupController : MonoBehaviour
 
         List<StageDefinition> stages = CollectStageMoveDefinitions();
         int showCount = Mathf.Min(stages.Count, messageSlots != null ? messageSlots.Length : 0);
+        Debug.Log($"[Startup] showCount={showCount}");
 
         float elapsed = 0f;
         int nextIndex = 0;
-        float perMessage = showCount > 0 ? totalSeconds / showCount : totalSeconds;
+
+        if (showCount > 0)
+        {
+            ShowMessage(0, stages[0]);
+            nextIndex = 1;
+        }
+
+        float perMessage = showCount > 1 ? totalSeconds / (showCount - 1) : totalSeconds;
+
 
         while (elapsed < totalSeconds)
         {
@@ -95,7 +104,7 @@ public class BuildRunStartupController : MonoBehaviour
             if (progressSlider != null)
                 progressSlider.value = t;
 
-            while (nextIndex < showCount && elapsed >= perMessage * (nextIndex + 1))
+            while (nextIndex < showCount && elapsed >= perMessage * nextIndex)
             {
                 ShowMessage(nextIndex, stages[nextIndex]);
                 nextIndex++;
@@ -163,9 +172,6 @@ public class BuildRunStartupController : MonoBehaviour
         {
             Stage s = stages[i];
             if (s == null) continue;
-
-            // StageMove만 사용
-            if (s is not StageMove) continue;
 
             if (s.StageSO == null) continue;
             list.Add(s.StageSO);

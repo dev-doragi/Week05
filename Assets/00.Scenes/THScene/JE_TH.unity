@@ -739,7 +739,6 @@ MonoBehaviour:
   progressSlider: {fileID: 1351539289}
   startupRoot: {fileID: 1390423377}
   messageSlots:
-  - {fileID: 1619792696}
   - {fileID: 1392564268}
   - {fileID: 1994554998}
   - {fileID: 1553317257}
@@ -750,8 +749,8 @@ MonoBehaviour:
   - {fileID: 1216639171}
   - {fileID: 735424830}
   - {fileID: 2122296909}
-  - {fileID: 2037319801}
   - {fileID: 902528122}
+  - {fileID: 2146925083}
   - {fileID: 2102164390}
   - {fileID: 112011950}
   - {fileID: 815486749}
@@ -762,7 +761,8 @@ MonoBehaviour:
   - {fileID: 1221154789}
   - {fileID: 781207423}
   - {fileID: 464235999}
-  - {fileID: 2146925083}
+  - {fileID: 1619792696}
+  - {fileID: 2037319801}
   - {fileID: 566623928}
   confirmBlinkImage: {fileID: 1183651908}
   minAlpha: 0
@@ -3489,9 +3489,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8077539535610596263, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 401244359}
-    - targetCorrespondingSourceObject: {fileID: 2602616258134345414, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 401244358}
   m_SourcePrefab: {fileID: 100100000, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
 --- !u!114 &401244354 stripped
 MonoBehaviour:
@@ -3504,11 +3501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863e05781dc175e4aa87e9e130a0e741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageMove
---- !u!1 &401244355 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2602616258134345414, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
-  m_PrefabInstance: {fileID: 401244353}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &401244356 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2595582511186753920, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
@@ -3519,20 +3511,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8077539535610596263, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
   m_PrefabInstance: {fileID: 401244353}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &401244358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401244355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
-  stage: {fileID: 401244354}
-  missionIndexToClear: 0
 --- !u!114 &401244359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8201,37 +8179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37321ab3c20311d4c984f710397b194d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildFailEndingController
-  poolManager: {fileID: 0}
-  endingRoot: {fileID: 0}
-  progressSlider: {fileID: 0}
-  messageSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  totalSeconds: 4
-  _running: 0
 --- !u!1 &1183651906
 GameObject:
   m_ObjectHideFlags: 0
@@ -9462,36 +9409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ef118d53a03b046b5ca0f3f1e70604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearEndingController
-  endingPannel: {fileID: 0}
-  progressSlider: {fileID: 0}
-  messageSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  totalSeconds: 8
-  _running: 0
 --- !u!1 &1429055853
 GameObject:
   m_ObjectHideFlags: 0
@@ -10617,7 +10534,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8456916478756333715}
+    m_TransformParent: {fileID: 1891257640}
     m_Modifications:
     - target: {fileID: 638270824216754091, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: _gimmickManager
@@ -10845,15 +10762,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8849768993961723665, guid: 433f5c3c00a86874e96b69f66deede03, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -11403,6 +11320,108 @@ Transform:
   - {fileID: 1105031677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1891257636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1891257640}
+  - component: {fileID: 1891257639}
+  - component: {fileID: 1891257638}
+  - component: {fileID: 1891257637}
+  m_Layer: 5
+  m_Name: Canvas_Another
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1891257637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891257636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1891257638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891257636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1200}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0.5
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1891257639
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891257636}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 672848526}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 101
+  m_TargetDisplay: 0
+--- !u!224 &1891257640
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891257636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1711868245}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1902719690
 GameObject:
   m_ObjectHideFlags: 0
@@ -12472,6 +12491,10 @@ PrefabInstance:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: Stages.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
+      propertyPath: isDontDestroyOnLoad
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[0]'
@@ -36286,7 +36309,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &4159714303466741860
 MonoBehaviour:
@@ -38054,7 +38077,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4424303675989128452
@@ -38998,7 +39021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4542275055268427151
@@ -58889,7 +58912,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1711868245}
   - {fileID: 280551396}
   - {fileID: 317008598}
   - {fileID: 1722339176}
@@ -63011,5 +63033,6 @@ SceneRoots:
   - {fileID: 1847272025}
   - {fileID: 509166419}
   - {fileID: 8456916478756333715}
+  - {fileID: 1891257640}
   - {fileID: 534452370}
   - {fileID: 1432742643}
