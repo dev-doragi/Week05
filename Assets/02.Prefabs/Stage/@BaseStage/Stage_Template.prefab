@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2559186210273141822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8413962639735843337}
+  m_Layer: 0
+  m_Name: RespawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8413962639735843337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2559186210273141822}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.98, y: -1.81, z: 0}
+  m_LocalScale: {x: 0.6, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8904925464904702887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4345097017420385150
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +339,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1080744167983693859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,8 +502,32 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6958054545871459542}
-    m_AddedComponents: []
+    - targetCorrespondingSourceObject: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8413962639735843337}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3488729450120180513, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4853118974776796491}
   m_SourcePrefab: {fileID: 100100000, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+--- !u!1 &2925264779494244605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3488729450120180513, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
+  m_PrefabInstance: {fileID: 1797732444043752412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4853118974776796491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2925264779494244605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87bf92c89189ac84d925de0f6c9f4b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageDeathZone
+  RespawnPoint: {fileID: 8413962639735843337}
 --- !u!4 &8904925464904702887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7162538313572001915, guid: 3b1eff28df8190843a7fe15a8a0be485, type: 3}
