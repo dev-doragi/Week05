@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 634012596515313259}
   - component: {fileID: 1740127312960157194}
   m_Layer: 0
-  m_Name: Box
+  m_Name: Room
   m_TagString: MinimapRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,9 +130,11 @@ MonoBehaviour:
   - {fileID: 1618409029816481830}
   normalMaterial: {fileID: 2100000, guid: ee3a84c43f78b8040a66ba99be8dc65f, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
+  hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   roomId: 0
   rotateStepIndex: 0
   selectionGroup: {fileID: 0}
+  roomIdText: {fileID: 1352746214860252482}
 --- !u!1 &6191006018280266277
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,13 +145,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6372380984238176755}
   - component: {fileID: 3019892519236423829}
+  - component: {fileID: 5716242594333781958}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6372380984238176755
 Transform:
   m_ObjectHideFlags: 0
@@ -159,8 +162,8 @@ Transform:
   m_GameObject: {fileID: 6191006018280266277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -0.448, y: 0.352, z: 1.209}
-  m_LocalScale: {x: 1.8305944, y: 0.67457, z: 1}
+  m_LocalPosition: {x: -0.60949, y: 0.45818, z: 1.37049}
+  m_LocalScale: {x: 2.2873642, y: 0.46220347, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7228215147944547162}
@@ -225,6 +228,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &5716242594333781958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191006018280266277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21de29301557d041bad5a54d08d430c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BillBoard
+  minimapCamera: {fileID: 0}
+  flipY180: 1
 --- !u!1 &7676861652218224021
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,17 +267,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7676861652218224021}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.452, y: 0.452, z: 0.452}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.28}
+  m_LocalScale: {x: 0.79822165, y: 2.5503323, z: 0.75575}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6372380984238176755}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.534, y: 0.09}
-  m_SizeDelta: {x: 20, y: 5}
+  m_AnchoredPosition: {x: -3.78, y: -9.87}
+  m_SizeDelta: {x: 10.53697, y: 7.41528}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8862061825939427640
 MeshRenderer:
@@ -287,7 +304,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -3060244185711060312, guid: c06ec4cf416c1fc47bb5d1c9cce4c507, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -331,12 +348,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'as
-
-'
+  m_text: None
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c06ec4cf416c1fc47bb5d1c9cce4c507, type: 2}
+  m_sharedMaterial: {fileID: -3060244185711060312, guid: c06ec4cf416c1fc47bb5d1c9cce4c507, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -360,8 +375,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 2
+  m_fontSizeBase: 2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -399,7 +414,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.004488468, y: -0.1798675, z: 8.279785, w: 7.15995}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0

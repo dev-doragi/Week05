@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections;
 
-public class PassageTile : MonoBehaviour
+public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 {
     [Header("Path")]
     [SerializeField] private RoomID fromRoom = RoomID.None;
@@ -11,7 +12,21 @@ public class PassageTile : MonoBehaviour
     [SerializeField] private Material openMaterial;
     [SerializeField] private Material blockedMaterial;
 
+    [SerializeField] private Material hoverMaterial;
+    
+    [Header("Blink")]
+    [SerializeField] private Material coachBlinkMaterial;
+    [SerializeField] private float coachBlinkInterval = 0.2f;
+    private bool _isHovered;
+
     private bool _isBlockedVisual;
+
+    private bool _isCoachBlinking;
+    private bool _blinkOn;
+    private Coroutine _blinkRoutine;
+
+    public RoomID FromRoom => fromRoom;
+    public RoomID ToRoom => toRoom;
 
     private void Awake()
     {
@@ -24,6 +39,10 @@ public class PassageTile : MonoBehaviour
         RefreshVisualFromManager();
     }
 
+    private void OnDisable()
+    {
+        SetCoachBlink(false);
+    }
     public void OnMinimapClicked()
     {
         bool success = GimmickManager.Instance.TryBlockPath(fromRoom, toRoom);
@@ -52,8 +71,16 @@ public class PassageTile : MonoBehaviour
     private void SetBlockedVisual(bool blocked)
     {
         _isBlockedVisual = blocked;
-        ApplyMaterial(blocked ? blockedMaterial : openMaterial);
+
+        if (_isBlockedVisual && _isCoachBlinking)
+        {
+            SetCoachBlink(false);
+            return;
+        }
+
+        RefreshVisual();
     }
+
 
     private void ApplyMaterial(Material targetMat)
     {
@@ -66,4 +93,60 @@ public class PassageTile : MonoBehaviour
             r.sharedMaterial = targetMat;
         }
     }
+    public void SetHovered(bool hovered)
+    {
+        if (_isHovered == hovered) return;
+        _isHovered = hovered;
+        RefreshVisual();
+    }
+
+    private void RefreshVisual()
+    {
+        Material target =
+            _isBlockedVisual ? blockedMaterial :
+            (_isCoachBlinking && _blinkOn && coachBlinkMaterial != null) ? coachBlinkMaterial :
+            (_isHovered && hoverMaterial != null) ? hoverMaterial :
+            openMaterial;
+
+        ApplyMaterial(target);
+    }
+
+
+    public bool Connects(RoomID a, RoomID b)
+    {
+        return (fromRoom == a && toRoom == b) || (fromRoom == b && toRoom == a);
+    }
+
+    public void SetCoachBlink(bool active)
+    {
+        if (_isBlockedVisual) active = false; // 막힌 통로는 Blink 안 함
+        if (_isCoachBlinking == active) return;
+
+        _isCoachBlinking = active;
+
+        if (_blinkRoutine != null)
+        {
+            StopCoroutine(_blinkRoutine);
+            _blinkRoutine = null;
+        }
+
+        _blinkOn = false;
+
+        if (_isCoachBlinking)
+            _blinkRoutine = StartCoroutine(Co_Blink());
+
+        RefreshVisual();
+    }
+
+    private IEnumerator Co_Blink()
+    {
+        while (true)
+        {
+            _blinkOn = !_blinkOn;
+            RefreshVisual();
+            yield return new WaitForSeconds(coachBlinkInterval);
+        }
+    }
+
+
 }
