@@ -29,14 +29,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6661170693210496040}
+  - {fileID: 1635409116741339313}
   - {fileID: 1641602815067949871}
   - {fileID: 1698576607663446408}
   - {fileID: 3600201944476879546}
   - {fileID: 480515349001285550}
   - {fileID: 8196560014701840667}
-  - {fileID: 3686245651805495957}
   - {fileID: 6961340014292043419}
+  - {fileID: 3686245651805495957}
   - {fileID: 5980568211429925017}
   m_Father: {fileID: 2745441053754416562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,10 +75,10 @@ Transform:
   - {fileID: 9058518548025651140}
   - {fileID: 7794033233706011726}
   - {fileID: 5890614530034717548}
-  - {fileID: 7831279305080185193}
   - {fileID: 4246760353225477479}
   - {fileID: 4001888610485787144}
   - {fileID: 8537678092794588437}
+  - {fileID: 7831279305080185193}
   m_Father: {fileID: 2745441053754416562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1586983135667528319
@@ -142,118 +142,6 @@ MonoBehaviour:
     rotationEuler: {x: -14.869, y: 315.914, z: 14.375}
   - position: {x: 85.71887, y: 20.34906, z: -110.2087}
     rotationEuler: {x: -15.118, y: 404.827, z: -14.112}
---- !u!1 &1690760789006648249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6661170693210496040}
-  - component: {fileID: 6671488470321354762}
-  - component: {fileID: 8746347033433877457}
-  - component: {fileID: 1829335885924228709}
-  m_Layer: 19
-  m_Name: Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6661170693210496040
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690760789006648249}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35, y: -35.2, z: -13.9991}
-  m_LocalScale: {x: 60, y: 1, z: 63.87745}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4590548429512769908}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6671488470321354762
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690760789006648249}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8746347033433877457
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690760789006648249}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: ed32b6057154c3946857b7c970be7675, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1829335885924228709
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690760789006648249}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5072295712982154025
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,16 +283,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7573106444428268747}
+  - {fileID: 8166031664710307481}
   - {fileID: 4994113525322697968}
   - {fileID: 2195488136493739650}
   - {fileID: 3634484934551146550}
   - {fileID: 4599935805399097930}
   - {fileID: 5691560907325976363}
   - {fileID: 4438229304145844611}
-  - {fileID: 5830757801247996615}
   - {fileID: 5440217412395744358}
   - {fileID: 5791211872962640564}
+  - {fileID: 5830757801247996615}
   m_Father: {fileID: 2745441053754416562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8130569668808383189
@@ -519,230 +407,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &8526187846568075721
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7573106444428268747}
-  - component: {fileID: 303629408910467888}
-  - component: {fileID: 1504661719132227463}
-  - component: {fileID: 4408126096235252258}
-  m_Layer: 19
-  m_Name: Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7573106444428268747
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8526187846568075721}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35, y: -35.2, z: -13.9991}
-  m_LocalScale: {x: 60, y: 1, z: 63.87745}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8445588443467803102}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &303629408910467888
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8526187846568075721}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1504661719132227463
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8526187846568075721}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: ed32b6057154c3946857b7c970be7675, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4408126096235252258
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8526187846568075721}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &8827535733573476374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1737142522674878236}
-  - component: {fileID: 6598406817173908798}
-  - component: {fileID: 1259594718903657597}
-  - component: {fileID: 7813290988564996399}
-  m_Layer: 19
-  m_Name: Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1737142522674878236
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827535733573476374}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35, y: -35.2, z: -13.9991}
-  m_LocalScale: {x: 60, y: 1, z: 63.87745}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7645250289034887581}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6598406817173908798
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827535733573476374}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1259594718903657597
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827535733573476374}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: ed32b6057154c3946857b7c970be7675, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7813290988564996399
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827535733573476374}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &921172334653920234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -751,6 +415,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8445588443467803102}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Hallway
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 12
@@ -812,10 +480,145 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &1508290026889749984 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 921172334653920234}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &4994113525322697968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 921172334653920234}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1226046100495351059
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4590548429512769908}
+    m_Modifications:
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -35.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.9991
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290145353133671080, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_Name
+      value: Floor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+--- !u!4 &1635409116741339313 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+  m_PrefabInstance: {fileID: 1226046100495351059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2281768550895559358
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7645250289034887581}
+    m_Modifications:
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -35.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.9991
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290145353133671080, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_Name
+      value: Floor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+--- !u!4 &1737142522674878236 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+  m_PrefabInstance: {fileID: 2281768550895559358}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2342340145989258053
 PrefabInstance:
@@ -877,6 +680,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 4434310522635068766}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 3176850433705068244}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -956,6 +767,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 5145370354029060671}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 6941839896925791146}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -981,6 +800,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7645250289034887581}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: JungleStep
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 6
@@ -1038,6 +861,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &4434310522635068766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 2715663426155270996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &7794033233706011726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
@@ -1103,6 +937,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7192366020638308646}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 1508290026889749984}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1182,6 +1024,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 3176850433705068244}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 3112051901294250217}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -1207,6 +1057,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7645250289034887581}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Stair
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 8
@@ -1268,6 +1122,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &3112051901294250217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 3681154093923499747}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &8831586030930584057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
@@ -1281,6 +1146,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7645250289034887581}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Elevator
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 5
@@ -1342,6 +1211,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+--- !u!114 &3176850433705068244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 3760607054737748190}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!4 &9058518548025651140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
@@ -1407,6 +1287,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 5058294926517940376}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 5145370354029060671}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1490,6 +1378,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 4434310522635068766}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 7963464125034525988}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -1568,6 +1464,14 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 5753298842595968914}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 1508290026889749984}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -1593,6 +1497,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4590548429512769908}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: JungleStep
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 2
@@ -1655,6 +1563,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 5705265475986632884}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6272107089343694526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 5705265475986632884}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &6337125714259128728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1663,6 +1582,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8445588443467803102}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: CoachingRoom
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 11
@@ -1733,6 +1656,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 6337125714259128728}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5753298842595968914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 6337125714259128728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &6481882676504985190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1793,6 +1727,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7959658505164262234}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 5753298842595968914}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -1872,6 +1814,14 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7959658505164262234}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 7192366020638308646}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -1897,6 +1847,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4590548429512769908}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Cafe
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 3
@@ -1963,6 +1917,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 6779185166850115218}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5058294926517940376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 6779185166850115218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &6867474315060417589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1971,6 +1936,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4590548429512769908}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Stair
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 4
@@ -2037,6 +2006,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 6867474315060417589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5145370354029060671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 6867474315060417589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &7022190936010243160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2097,6 +2077,14 @@ PrefabInstance:
       propertyPath: fromRoom
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 7963464125034525988}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 3112051901294250217}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
@@ -2176,6 +2164,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 6272107089343694526}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 5058294926517940376}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -2201,6 +2197,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8445588443467803102}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Lounge
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 10
@@ -2263,6 +2263,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8525401709081165136}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7959658505164262234 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8525401709081165136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &8549456069859869486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2271,6 +2282,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7645250289034887581}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Lobby
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 7
@@ -2337,6 +2352,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8549456069859869486}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7963464125034525988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8549456069859869486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
+--- !u!1001 &8566544730067630907
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8445588443467803102}
+    m_Modifications:
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -35.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.9991
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290145353133671080, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+      propertyPath: m_Name
+      value: Floor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+--- !u!4 &8166031664710307481 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 554480982079223202, guid: e61a6f3d4db2ba3439ae88f9c63a7d43, type: 3}
+  m_PrefabInstance: {fileID: 8566544730067630907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8616402391898216406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2398,6 +2486,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: toRoomTile
+      value: 
+      objectReference: {fileID: 6941839896925791146}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: fromRoomTile
+      value: 
+      objectReference: {fileID: 6272107089343694526}
+    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: openMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
@@ -2423,6 +2519,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4590548429512769908}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Cafeteria
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 1
@@ -2489,6 +2589,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8678561865042007456}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6941839896925791146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8678561865042007456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
 --- !u!1001 &8932404270449135404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2497,6 +2608,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8445588443467803102}
     m_Modifications:
+    - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_text
+      value: Elevator
+      objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
       value: 9
@@ -2563,3 +2678,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
   m_PrefabInstance: {fileID: 8932404270449135404}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7192366020638308646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+  m_PrefabInstance: {fileID: 8932404270449135404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccc9355ff913c49afc220e18cf12cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTile
