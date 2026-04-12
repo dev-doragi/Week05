@@ -5,19 +5,31 @@ using UnityEngine.InputSystem;
 
 public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
-    [Tooltip("배치 오브젝트를 놔둘때 이벤트")]
-    public static event Action OnDrop;
+    // Event
+    public event Action OnStateChanged;
+    public static event Action<PlaceObject> OnSelected;
 
     [Header("Match Settings")]
     public string objectKey;
 
     [Header("Match State")]
     [SerializeField] private bool _isPlaced = false;
+    [SerializeField] private bool _isSelected = false;
+    public bool IsPlaced => _isPlaced;
+    public bool IsSelected => _isSelected;
+
+
     private Vector3 _offset;
     private Camera _camera;
     private Collider2D _collider;
 
-    public bool IsPlaced => _isPlaced;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+        _collider = GetComponent<Collider2D>();
+    }
+
 
     private void Start()
     {
@@ -27,16 +39,32 @@ public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void Init()
     {
         _isPlaced = false;
-        _camera = Camera.main;
-        _collider = GetComponent<Collider2D>();
+        _isSelected = false;
+
         if (_collider != null) _collider.isTrigger = true;
+        OnStateChanged?.Invoke();
+    }
+
+    public void SetSelect(bool select)
+    {
+        if (_isPlaced) return;
+        _isSelected = select;
+
+        if (select) OnSelected?.Invoke(this);
+        OnStateChanged?.Invoke();
+    }
+
+    public void DeleteObject()
+    {
+        Destroy(gameObject);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_isPlaced) return;
+        SetSelect(true);
 
-        // 클릭한 순간의 거리
+        // Moment of click, Mouse Position
         _offset = transform.position - GetMouseWorldPos();
     }
 
@@ -44,10 +72,11 @@ public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
         if (_isPlaced) return;
 
-        // 드래그 하는 동안 마우스 따라 이동
+        // While dragging, Update position to mouse
         transform.position = GetMouseWorldPos() + _offset;
     }
 
+    // Change Match standard to Collider
     /*
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -60,8 +89,8 @@ public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler
     private Vector3 GetMouseWorldPos()
     {
         Vector3 screenPos = Pointer.current.position.ReadValue();
-
         float depth = Mathf.Abs(_camera.transform.position.z);
+
         Vector3 mousePos = new Vector3(screenPos.x, screenPos.y, depth);
 
         return _camera.ScreenToWorldPoint(mousePos);
@@ -70,8 +99,10 @@ public class PlaceObject : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void SnapTo(Vector2 pos)
     {
         _isPlaced = true;
-
+        _isSelected = false;
         transform.position = pos;
-        _collider.isTrigger = false;
+
+        if (_collider != null) _collider.isTrigger = false;
+        OnStateChanged?.Invoke();
     }
 }
