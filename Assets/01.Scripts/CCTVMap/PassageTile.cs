@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System;
 
 public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 {
@@ -9,29 +9,26 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 
     private RoomID FromRoom => fromRoomTile != null ? fromRoomTile.RoomId : RoomID.None;
     private RoomID ToRoom => toRoomTile != null ? toRoomTile.RoomId : RoomID.None;
+
     [Header("Visual")]
     [SerializeField] private Renderer[] renderers;
     [SerializeField] private Material openMaterial;
     [SerializeField] private Material blockedMaterial;
-
     [SerializeField] private Material hoverMaterial;
-    
-    [Header("Blink")]
-    [SerializeField] private GameObject coachBlinkObject;
-    [SerializeField] private float coachBlinkInterval = 0.2f;
+
+    [Header("Guide Arrows")]
+    [SerializeField] private GameObject arrowFromTo;
+    [SerializeField] private GameObject arrowToFrom;
 
     private bool _isHovered;
-
     private bool _isBlockedVisual;
 
-    private bool _isCoachBlinking;
-    private bool _blinkOn;
-    private Coroutine _blinkRoutine;
+    public event Action<PassageTile, bool> BlockVisualChanged;
 
     private void Awake()
     {
         SetBlockedVisual(false);
-        SetBlinkObject(false);    
+        HideGuide();
     }
 
     private void Update()
@@ -41,50 +38,65 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 
     private void OnDisable()
     {
-        SetCoachBlink(false);
-        SetBlinkObject(false);
+        HideGuide();
     }
+
     public void OnMinimapClicked()
     {
-       RoomID from = FromRoom;
+        RoomID from = FromRoom;
         RoomID to = ToRoom;
-
-        if (from == RoomID.None || to == RoomID.None)
-        {
-            Debug.LogWarning($"[PassageTile] from/to RoomTile 연결 필요: {name}");
-            return;
-        }
-
+        
         bool success = GimmickManager.Instance.TryBlockPath(from, to);
+        Debug.Log($"[PassageTile] Block {from} <-> {to} : {success}");
 
         RefreshVisualFromManager();
     }
 
     private void RefreshVisualFromManager()
     {
-
         RoomID from = FromRoom;
         RoomID to = ToRoom;
         if (from == RoomID.None || to == RoomID.None) return;
 
         bool blockedNow = GimmickManager.Instance.IsPathBlocked(from, to);
         if (blockedNow == _isBlockedVisual) return;
+
         SetBlockedVisual(blockedNow);
     }
 
     private void SetBlockedVisual(bool blocked)
     {
+        bool changed = (_isBlockedVisual != blocked);
         _isBlockedVisual = blocked;
 
-        if (_isBlockedVisual && _isCoachBlinking)
-        {
-            SetCoachBlink(false);
-            return;
-        }
+        if (_isBlockedVisual)
+            HideGuide();
 
+        RefreshVisual();
+
+        if (changed)
+            BlockVisualChanged?.Invoke(this, _isBlockedVisual);
+    }
+
+
+
+
+    public void SetHovered(bool hovered)
+    {
+        if (_isHovered == hovered) return;
+        _isHovered = hovered;
         RefreshVisual();
     }
 
+    private void RefreshVisual()
+    {
+        Material target =
+            _isBlockedVisual ? blockedMaterial :
+            (_isHovered && hoverMaterial != null) ? hoverMaterial :
+            openMaterial;
+
+        ApplyMaterial(target);
+    }
 
     private void ApplyMaterial(Material targetMat)
     {
@@ -97,23 +109,6 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
             r.sharedMaterial = targetMat;
         }
     }
-    public void SetHovered(bool hovered)
-    {
-        if (_isHovered == hovered) return;
-        _isHovered = hovered;
-        RefreshVisual();
-    }
-
-    private void RefreshVisual()
-    {
-        Material target =
-        _isBlockedVisual ? blockedMaterial :
-        (_isHovered && hoverMaterial != null) ? hoverMaterial :
-        openMaterial;
-
-        ApplyMaterial(target);
-    }
-
 
     public bool Connects(RoomID a, RoomID b)
     {
@@ -122,42 +117,49 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
         return (from == a && to == b) || (from == b && to == a);
     }
 
-
+    // 호환용 (기존 호출 유지)
     public void SetCoachBlink(bool active)
     {
-        if (_isBlockedVisual) active = false;
-        if (_isCoachBlinking == active) return;
-
-        _isCoachBlinking = active;
-
-        if (_blinkRoutine != null)
+        if (!active || _isBlockedVisual)
         {
-            StopCoroutine(_blinkRoutine);
-            _blinkRoutine = null;
+            HideGuide();
+            return;
         }
 
-        _blinkOn = false;
-        SetBlinkObject(false);
-
-        if (_isCoachBlinking)
-            _blinkRoutine = StartCoroutine(Co_Blink());
+        SetGuideObjects(false, false);
     }
 
-    private IEnumerator Co_Blink()
+    public void ShowGuideFrom(RoomID startRoom)
     {
-        while (true)
+        if (_isBlockedVisual)
         {
-            _blinkOn = !_blinkOn;
-            SetBlinkObject(_blinkOn);
-            yield return new WaitForSeconds(coachBlinkInterval);
+            HideGuide();
+            return;
         }
+
+        bool isFrom = (startRoom == FromRoom);
+        bool isTo = (startRoom == ToRoom);
+
+        if (!isFrom && !isTo)
+        {
+            HideGuide();
+            return;
+        }
+
+        SetGuideObjects(isFrom, isTo);
     }
-    private void SetBlinkObject(bool active)
+
+
+
+    public void HideGuide()
     {
-        if (coachBlinkObject == null) return;
-        if (coachBlinkObject.activeSelf == active) return;
-        coachBlinkObject.SetActive(active);
+        SetGuideObjects(false, false);
     }
 
+    private void SetGuideObjects(bool showFromTo, bool showToFrom)
+    {
+        if (arrowFromTo != null) arrowFromTo.SetActive(showFromTo);
+        if (arrowToFrom != null) arrowToFrom.SetActive(showToFrom);
 
+    }
 }
