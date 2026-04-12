@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2321238155183678136}
   - component: {fileID: 6273142883000500011}
   - component: {fileID: 4355923178161635117}
+  - component: {fileID: 1326943631457497861}
   m_Layer: 0
   m_Name: Place Object
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.8, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -61,7 +62,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: bb60a032a066f8345961c862ca27561f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,11 +85,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 04025224d74ad6a4f93472795fd15d59, type: 3}
   m_Color: {r: 0.49270344, g: 0.9339623, b: 0.33922213, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -157,12 +158,12 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.20022598, y: 0.19999999, z: 0.20022598, w: 0.19999999}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 8.86, y: 8.86}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
@@ -181,3 +182,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlaceObject
   objectKey: 
   _isPlaced: 0
+  _isSelected: 0
+--- !u!114 &1326943631457497861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993821632629198118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617bb428cd0072f4b8638339352e5f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaceVisual
+  _placeObject: {fileID: 4355923178161635117}
+  _outlineSprite: {fileID: 3054599648482671909}
+  _normalMaterial: {fileID: 2100000, guid: bb60a032a066f8345961c862ca27561f, type: 2}
+  _selectedMaterial: {fileID: 2100000, guid: 4d7db8c1eb1491940bc986406e817284, type: 2}
+  _placedMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
