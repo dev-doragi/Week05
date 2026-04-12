@@ -1,16 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class PassageCoachBlinkController : MonoBehaviour
 {
     [SerializeField] private CoachMovementController coach;
     [SerializeField] private PassageTile[] passageTiles;
     [SerializeField] private bool autoFindPassages = true;
+    
 
     
 
     private bool _coachFound;
-
+    private RoomID _selectedRoom = RoomID.None;
 
     private void Awake()
     {
@@ -19,6 +21,9 @@ public class PassageCoachBlinkController : MonoBehaviour
 
         if (autoFindPassages && (passageTiles == null || passageTiles.Length == 0))
             passageTiles = FindObjectsByType<PassageTile>(FindObjectsSortMode.None);
+
+        BindPassageEvents(true);
+
     }
 
     private void Start()
@@ -33,6 +38,8 @@ public class PassageCoachBlinkController : MonoBehaviour
 
     private void OnDisable()
     {
+        BindPassageEvents(false);
+
         if (coach != null)
         {
             coach.OnCoachMoved -= HandleCoachMoved;
@@ -46,21 +53,21 @@ public class PassageCoachBlinkController : MonoBehaviour
 
     private void HandleCoachMoved(RoomID from, RoomID current)
     {
-        if (_coachFound)
-        {
-            _coachFound = false;
-            ClearAllBlink();
-        }
+        RefreshGuideByState(); 
     }
 
     private void HandleCoachPreparingToMove(RoomID from, RoomID to)
     {
-        if (_coachFound)
-        {
-            _coachFound = false;
-            ClearAllBlink();
-        }
+        _coachFound = false;
+        ClearAllBlink();
     }
+
+    private void HandleCameraSelected(RoomID selectedRoom)
+    {
+        _selectedRoom = selectedRoom;
+        RefreshGuideByState();
+    }
+
 
 
     private void ApplyBlinkFromCurrentRoom(RoomID currentRoom)
@@ -87,7 +94,8 @@ public class PassageCoachBlinkController : MonoBehaviour
                 }
             }
 
-            tile.SetCoachBlink(shouldBlink);
+            if (shouldBlink) tile.ShowGuideFrom(currentRoom);
+            else tile.HideGuide();
         }
     }
 
@@ -99,10 +107,12 @@ public class PassageCoachBlinkController : MonoBehaviour
         {
             PassageTile tile = passageTiles[i];
             if (tile == null) continue;
-            tile.SetCoachBlink(false);
+            tile.HideGuide();
+
         }
     }
-    private void HandleCameraSelected(RoomID selectedRoom)
+    
+    private void RefreshGuideByState()
     {
         if (coach == null)
         {
@@ -111,11 +121,36 @@ public class PassageCoachBlinkController : MonoBehaviour
             return;
         }
 
-        // "코치가 있는 방을 찾았을 때만" true
-        _coachFound = (selectedRoom != RoomID.None && selectedRoom == coach.CurrentRoomId);
+        bool canShow =
+            _selectedRoom != RoomID.None &&
+            !coach.IsTransitioning &&
+            coach.CurrentRoomId == _selectedRoom;
+
+        _coachFound = canShow;
 
         if (_coachFound) ApplyBlinkFromCurrentRoom(coach.CurrentRoomId);
         else ClearAllBlink();
     }
+
+    private void BindPassageEvents(bool bind)
+    {
+        if (passageTiles == null) return;
+
+        for (int i = 0; i < passageTiles.Length; i++)
+        {
+            PassageTile tile = passageTiles[i];
+            if (tile == null) continue;
+
+            if (bind) tile.BlockVisualChanged += HandlePassageBlockVisualChanged;
+            else tile.BlockVisualChanged -= HandlePassageBlockVisualChanged;
+        }
+    }
+
+    private void HandlePassageBlockVisualChanged(PassageTile tile, bool isBlocked)
+    {
+        RefreshGuideByState();
+    }
+
+
 
 }
