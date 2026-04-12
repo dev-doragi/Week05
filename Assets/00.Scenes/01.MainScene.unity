@@ -5020,14 +5020,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77926dd8f111e3a46be0453de9cbb360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OfficeWarningIndicator
-  _coach: {fileID: 778841138}
+  _coachMovementController: {fileID: 0}
   _warningImage: {fileID: 317008600}
+  _b1Multiplier: 0.1
+  _f1Multiplier: 0.4
+  _f3Multiplier: 1
   _baseNoiseLevel: 0.005
   _maxDistance: 1.5
   _minAlpha: 0.1
   _maxAlpha: 0.8
-  _firstFloorMultiplier: 0.1
-  _thirdFloorMultiplier: 0.75
   _tickInterval: 0.1
 --- !u!114 &317008600
 MonoBehaviour:
@@ -15129,7 +15130,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 501013204}
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
+      propertyPath: _toastSender
+      value: 
+      objectReference: {fileID: 501013204}
+    - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
       propertyPath: gimmickManager
+      value: 
+      objectReference: {fileID: 1150576484}
+    - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
+      propertyPath: _gimmickManager
       value: 
       objectReference: {fileID: 1150576484}
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
@@ -15144,6 +15153,10 @@ PrefabInstance:
       propertyPath: randomToasts.Array.size
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
+      propertyPath: _coachMovementController
+      value: 
+      objectReference: {fileID: 778841138}
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
       propertyPath: 'randomToasts.Array.data[3]'
       value: 

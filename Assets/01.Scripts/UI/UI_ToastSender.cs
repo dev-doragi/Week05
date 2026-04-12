@@ -1,84 +1,58 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
-using TMPro;
 using DG.Tweening;
 
-[RequireComponent(typeof(CanvasGroup))]
 public class UI_ToastSender : MonoBehaviour
 {
-    [Header("UI References")]
-    [SerializeField] private Image profileImage;  
-    [SerializeField] private Outline toastOutline;  
-    [SerializeField] private TextMeshProUGUI workspaceNameText;
-    [SerializeField] private TextMeshProUGUI senderNameText; 
-    [SerializeField] private TextMeshProUGUI messageContextText; 
+    [Header("References")]
+    [SerializeField] private UI_ToastItem _toastItemPrefab;
+    [SerializeField] private RectTransform _toastRoot;
 
-    [Header("Animation Settings")]
-    [SerializeField] private float hiddenX = 650f;
-    [SerializeField] private float visibleX = -30f;
-    [SerializeField] private float animDuration = 0.5f;
+    [Header("Layout")]
+    [SerializeField] private float _stackSpacing = 20f;
+    [SerializeField] private float _moveDuration = 0.25f;
 
-    public Action OnAnimationComplete;
-
-    private CanvasGroup canvasGroup;
-    private RectTransform rectTransform;
+    private readonly List<UI_ToastItem> _activeToastItems = new List<UI_ToastItem>();
 
     private void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        rectTransform = GetComponent<RectTransform>();
-
-        ResetPosition();
-    }
-
-    private void ResetPosition()
-    {
-        DOTween.Kill(rectTransform);
-        DOTween.Kill(canvasGroup);
-
-        canvasGroup.alpha = 0f;
-        rectTransform.anchoredPosition = new Vector2(hiddenX, rectTransform.anchoredPosition.y);
+        if (_toastRoot == null)
+            _toastRoot = transform as RectTransform;
     }
 
     public void Show(SO_ToastData data)
     {
-        if (data == null) return;
+        if (data == null || _toastItemPrefab == null || _toastRoot == null)
+            return;
 
-        ResetPosition();
+        UI_ToastItem toastItem = Instantiate(_toastItemPrefab, _toastRoot);
+        toastItem.Initialize(this, data);
 
-        // 데이터 개별 할당
-        profileImage.sprite = data.profileIcon;
-        workspaceNameText.text = data.workspaceName;
-        senderNameText.text = data.senderName;
-        messageContextText.text = data.messageContext;
-
-        if (toastOutline != null)
-        {
-            toastOutline.effectColor = data.outlineColor;
-        }
-
-        PlayAnimation(data.displayDuration);
+        _activeToastItems.Add(toastItem);
+        RefreshToastPositions();
     }
 
-    private void PlayAnimation(float duration)
+    public void NotifyToastExpired(UI_ToastItem toastItem)
     {
-        DOTween.Kill(rectTransform);
-        DOTween.Kill(canvasGroup);
+        if (toastItem == null)
+            return;
 
-        Sequence seq = DOTween.Sequence();
+        if (_activeToastItems.Remove(toastItem) == false)
+            return;
 
-        // 등장, 대기, 퇴장 애니메이션 로직
-        seq.Append(rectTransform.DOAnchorPosX(visibleX, 0.5f).SetEase(Ease.OutBack));
-        seq.Join(canvasGroup.DOFade(1f, 0.4f));
-        seq.AppendInterval(duration);
-        seq.Append(rectTransform.DOAnchorPosX(hiddenX, 0.5f).SetEase(Ease.InBack));
-        seq.Join(canvasGroup.DOFade(0f, 0.4f));
+        RefreshToastPositions();
+    }
 
-        // 애니메이션 시퀀스가 완전히 끝났을 때 콜백 호출
-        seq.OnComplete(() =>
+    private void RefreshToastPositions()
+    {
+        for (int i = 0; i < _activeToastItems.Count; i++)
         {
-            OnAnimationComplete?.Invoke();
-        });
+            UI_ToastItem toastItem = _activeToastItems[i];
+            if (toastItem == null)
+                continue;
+
+            float targetY = toastItem.BaseAnchoredY + i * (toastItem.Height + _stackSpacing);
+            toastItem.MoveToStackPosition(targetY, _moveDuration);
+        }
     }
 }

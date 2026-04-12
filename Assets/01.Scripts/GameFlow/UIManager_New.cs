@@ -54,6 +54,15 @@ public class UIManager_New : Singleton<UIManager_New>
             ToggleByTab();
     }
 
+    public void OpenCctvPanel()
+    {
+        if (_isOpen)
+            return;
+
+        _isOpen = true;
+        PlayToggle(true);
+    }
+
     public void ToggleByTab()
     {
         _isOpen = !_isOpen;
