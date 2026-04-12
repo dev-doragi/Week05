@@ -28,8 +28,6 @@ public class UI_ConsoleMissionView : MonoBehaviour
 
         if (_hoverImage != null)
             _hoverImage.gameObject.SetActive(false);
-
-        PlaySuccessAnimation();
     }
 
     public void IsSuccess()
