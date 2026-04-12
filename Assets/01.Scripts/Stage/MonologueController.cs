@@ -13,12 +13,16 @@ public class MonologueController : MonoBehaviour
     private RectTransform rect;
     private float shownY;
     private float hiddenY;
+    private bool hasReceived = false;
 
     void Awake()
     {
         rect = GetComponent<RectTransform>();
         shownY = rect.anchoredPosition.y;
         hiddenY = shownY + rect.rect.height;
+
+        // 처음엔 숨김
+        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
     }
 
     void OnEnable() => Stage.OnSendMessage += HandleMessage;
@@ -27,18 +31,22 @@ public class MonologueController : MonoBehaviour
     void HandleMessage(string msg)
     {
         StopAllCoroutines();
-        StartCoroutine(SwapRoutine(msg));
+        StartCoroutine(hasReceived ? SwapRoutine(msg) : FirstRoutine(msg));
+        hasReceived = true;
     }
 
+    // 첫 메시지 — 그냥 바로 내려오기
+    IEnumerator FirstRoutine(string msg)
+    {
+        messageText.text = msg;
+        yield return Move(hiddenY, shownY, slideInDuration, EaseOutQuart);
+    }
+
+    // 이후 메시지 — 올라갔다가 텍스트 바꾸고 내려오기
     IEnumerator SwapRoutine(string msg)
     {
-        // 위로 슥 올라가기
         yield return Move(shownY, hiddenY, slideOutDuration, EaseInQuart);
-
-        // 텍스트 교체
         messageText.text = msg;
-
-        // 아래로 슥 내려오기
         yield return Move(hiddenY, shownY, slideInDuration, EaseOutQuart);
     }
 
