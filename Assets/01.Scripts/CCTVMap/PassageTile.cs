@@ -17,8 +17,9 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
     [SerializeField] private Material hoverMaterial;
     
     [Header("Blink")]
-    [SerializeField] private Material coachBlinkMaterial;
+    [SerializeField] private GameObject coachBlinkObject;
     [SerializeField] private float coachBlinkInterval = 0.2f;
+
     private bool _isHovered;
 
     private bool _isBlockedVisual;
@@ -29,8 +30,8 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 
     private void Awake()
     {
-
         SetBlockedVisual(false);
+        SetBlinkObject(false);    
     }
 
     private void Update()
@@ -41,6 +42,7 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
     private void OnDisable()
     {
         SetCoachBlink(false);
+        SetBlinkObject(false);
     }
     public void OnMinimapClicked()
     {
@@ -105,10 +107,9 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
     private void RefreshVisual()
     {
         Material target =
-            _isBlockedVisual ? blockedMaterial :
-            (_isCoachBlinking && _blinkOn && coachBlinkMaterial != null) ? coachBlinkMaterial :
-            (_isHovered && hoverMaterial != null) ? hoverMaterial :
-            openMaterial;
+        _isBlockedVisual ? blockedMaterial :
+        (_isHovered && hoverMaterial != null) ? hoverMaterial :
+        openMaterial;
 
         ApplyMaterial(target);
     }
@@ -124,7 +125,7 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 
     public void SetCoachBlink(bool active)
     {
-        if (_isBlockedVisual) active = false; // 막힌 통로는 Blink 안 함
+        if (_isBlockedVisual) active = false;
         if (_isCoachBlinking == active) return;
 
         _isCoachBlinking = active;
@@ -136,11 +137,10 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
         }
 
         _blinkOn = false;
+        SetBlinkObject(false);
 
         if (_isCoachBlinking)
             _blinkRoutine = StartCoroutine(Co_Blink());
-
-        RefreshVisual();
     }
 
     private IEnumerator Co_Blink()
@@ -148,9 +148,15 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
         while (true)
         {
             _blinkOn = !_blinkOn;
-            RefreshVisual();
+            SetBlinkObject(_blinkOn);
             yield return new WaitForSeconds(coachBlinkInterval);
         }
+    }
+    private void SetBlinkObject(bool active)
+    {
+        if (coachBlinkObject == null) return;
+        if (coachBlinkObject.activeSelf == active) return;
+        coachBlinkObject.SetActive(active);
     }
 
 

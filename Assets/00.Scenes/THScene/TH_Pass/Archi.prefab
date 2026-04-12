@@ -428,12 +428,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2145462789798269821}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -474,6 +482,14 @@ PrefabInstance:
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -632,6 +648,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Passage
       objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35
@@ -717,6 +737,10 @@ PrefabInstance:
     - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_Name
       value: Passage
+      objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -812,9 +836,17 @@ PrefabInstance:
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -856,6 +888,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -888,6 +928,10 @@ PrefabInstance:
     - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_Name
       value: Passage
+      objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -975,6 +1019,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Passage
       objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -59.7
@@ -1059,16 +1107,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_text
-      value: Stair
+      value: Lobby
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 2
@@ -1076,6 +1128,10 @@ PrefabInstance:
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1116,6 +1172,14 @@ PrefabInstance:
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1159,12 +1223,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2145462789798269821}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1206,6 +1278,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1238,6 +1318,10 @@ PrefabInstance:
     - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_Name
       value: Passage
+      objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1370,14 +1454,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
-      propertyPath: toRoom
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
-      propertyPath: fromRoom
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: toRoomTile
       value: 
       objectReference: {fileID: 4434310522635068766}
@@ -1385,14 +1461,6 @@ PrefabInstance:
       propertyPath: fromRoomTile
       value: 
       objectReference: {fileID: 7963464125034525988}
-    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
-      propertyPath: openMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: ded5e5ae2e516374eb936b60e30e90f1, type: 2}
-    - target: {fileID: 5801958829786631061, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
-      propertyPath: blockedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 6996fa23740535048850d6c8edefab87, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1414,6 +1482,10 @@ PrefabInstance:
     - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_Name
       value: Passage
+      objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1509,9 +1581,17 @@ PrefabInstance:
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1552,6 +1632,14 @@ PrefabInstance:
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1594,6 +1682,10 @@ PrefabInstance:
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 3
@@ -1646,6 +1738,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1678,6 +1778,10 @@ PrefabInstance:
     - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_Name
       value: Passage
+      objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1765,6 +1869,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Passage
       objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35
@@ -1849,16 +1957,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_text
-      value: Cafe
+      value: Stair
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 3
@@ -1866,6 +1978,10 @@ PrefabInstance:
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1907,6 +2023,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1938,16 +2062,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_text
-      value: Stair
+      value: Cafe
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 2
@@ -1955,6 +2083,10 @@ PrefabInstance:
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1996,6 +2128,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2028,6 +2168,10 @@ PrefabInstance:
     - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_Name
       value: Passage
+      objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2114,6 +2258,10 @@ PrefabInstance:
     - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_Name
       value: Passage
+      objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2209,9 +2357,17 @@ PrefabInstance:
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2253,6 +2409,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2284,16 +2448,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1352746214860252482, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_text
-      value: Lobby
+      value: Stair
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: roomId
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: selectionGroup
       value: 
       objectReference: {fileID: 2145462789798269821}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 3
@@ -2301,6 +2469,10 @@ PrefabInstance:
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2341,6 +2513,14 @@ PrefabInstance:
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2437,6 +2617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Passage
       objectReference: {fileID: 0}
+    - target: {fileID: 200811478456797291, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 1659639748399747405, guid: cd6ebf8f994c30140bf7e76730104bb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35
@@ -2532,12 +2716,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2145462789798269821}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2578,6 +2770,14 @@ PrefabInstance:
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2621,12 +2821,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2145462789798269821}
     - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: _cameraClickSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
+    - target: {fileID: 1740127312960157194, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: rotateStepIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554197191510605377, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2667,6 +2875,14 @@ PrefabInstance:
     - target: {fileID: 5297938027633680154, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191006018280266277, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676861652218224021, guid: 5ebda8c2dbf040e4997cf097b9c435f8, type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
