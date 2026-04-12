@@ -7,9 +7,8 @@ public class MonologueController : MonoBehaviour
     public TextMeshProUGUI messageText;
 
     [Header("Animation")]
-    public float slideInDuration = 0.8f;
-    public float displayDuration = 2f;
-    public float slideOutDuration = 0.6f;
+    public float slideOutDuration = 0.3f;
+    public float slideInDuration = 0.5f;
 
     private RectTransform rect;
     private float shownY;
@@ -20,8 +19,6 @@ public class MonologueController : MonoBehaviour
         rect = GetComponent<RectTransform>();
         shownY = rect.anchoredPosition.y;
         hiddenY = shownY + rect.rect.height;
-
-        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
     }
 
     void OnEnable() => Stage.OnSendMessage += HandleMessage;
@@ -30,15 +27,19 @@ public class MonologueController : MonoBehaviour
     void HandleMessage(string msg)
     {
         StopAllCoroutines();
-        messageText.text = msg;
-        StartCoroutine(ShowRoutine());
+        StartCoroutine(SwapRoutine(msg));
     }
 
-    IEnumerator ShowRoutine()
+    IEnumerator SwapRoutine(string msg)
     {
-        yield return Move(hiddenY, shownY, slideInDuration, EaseOutQuart);
-        yield return new WaitForSeconds(displayDuration);
+        // 위로 슥 올라가기
         yield return Move(shownY, hiddenY, slideOutDuration, EaseInQuart);
+
+        // 텍스트 교체
+        messageText.text = msg;
+
+        // 아래로 슥 내려오기
+        yield return Move(hiddenY, shownY, slideInDuration, EaseOutQuart);
     }
 
     IEnumerator Move(float fromY, float toY, float duration, System.Func<float, float> ease)

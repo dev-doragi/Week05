@@ -91,9 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonologueController
   messageText: {fileID: 1046568134171639518}
-  slideInDuration: 1.2
-  displayDuration: 2
-  slideOutDuration: 1
+  slideOutDuration: 0.5
+  slideInDuration: 0.5
 --- !u!114 &3016629645105438565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +173,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD558\uC774"
+  m_text: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ec095ec781a93e488631f0ee250b679, type: 2}
   m_sharedMaterial: {fileID: -5796130669965295353, guid: 1ec095ec781a93e488631f0ee250b679, type: 2}
@@ -201,12 +200,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
+  m_fontSize: 18
   m_fontSizeBase: 35.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 24
-  m_fontSizeMax: 64
+  m_fontSizeMin: 18
+  m_fontSizeMax: 24
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
