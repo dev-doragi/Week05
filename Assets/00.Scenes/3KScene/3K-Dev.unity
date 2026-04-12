@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &49436145 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2882087587447337241, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
-  m_PrefabInstance: {fileID: 1155467618}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1273a5e57e9116a4fbff9139af2b3d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageAnim
 --- !u!114 &65100070 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3109213973540422003, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
@@ -296,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5948439288589993063, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -366,6 +355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage8_Anim
       objectReference: {fileID: 0}
+    - target: {fileID: 2644449855538155069, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8119579745937636378, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6
@@ -411,17 +404,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
---- !u!114 &1174009369 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7115216680439290580, guid: 4fd04109ca4b0b843b7521beed564c92, type: 3}
-  m_PrefabInstance: {fileID: 340496891}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e039fde245a2340479af9bc80942e0dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StagePlaceEnemy
 --- !u!1 &1217884034
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,17 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   isDontDestroyOnLoad: 0
---- !u!114 &1231411684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6255483113002666112, guid: 10104147360faa1488b83093db77aab2, type: 3}
-  m_PrefabInstance: {fileID: 1473317710}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ac903e426096e409809774d51ec538, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageRGB
+  GameFinish: 0
 --- !u!114 &1367228729 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7791310530282463903, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
@@ -739,7 +711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4152429188606585899, guid: 10104147360faa1488b83093db77aab2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7907221138728885772, guid: 10104147360faa1488b83093db77aab2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -786,17 +758,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10104147360faa1488b83093db77aab2, type: 3}
---- !u!114 &1487892905 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5470624632667960534, guid: 49aa1e222430a6f44a0cbc71484c8454, type: 3}
-  m_PrefabInstance: {fileID: 8719105416845979330}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1814ebd297971fe478ed623626e86507, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StagePlace
 --- !u!1 &1637176602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,6 +1811,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1788406076019076062, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809272262491436444, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1814100954225074356, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
@@ -3083,6 +3048,14 @@ PrefabInstance:
     - target: {fileID: 4922273252384184192, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276342587528545, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1175
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276342587528545, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -32
       objectReference: {fileID: 0}
     - target: {fileID: 4947609078841497175, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5092,14 +5065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageTester
   Stages:
-  - {fileID: 1367228729}
-  - {fileID: 1487892905}
-  - {fileID: 3522025752228769281}
-  - {fileID: 1231411684}
-  - {fileID: 1174009369}
-  - {fileID: 7442217968422387662}
-  - {fileID: 4866457256443695708}
-  - {fileID: 49436145}
+  - {fileID: 629903681554281719}
 --- !u!4 &2005181491
 Transform:
   m_ObjectHideFlags: 0
@@ -5115,6 +5081,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &629903681554281718
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1159214052188860701, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: _controller
+      value: 
+      objectReference: {fileID: 1446213894}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459817422992944182, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: m_Name
+      value: Stage_WallMove
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+--- !u!114 &629903681554281719 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6999836833319180568, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+  m_PrefabInstance: {fileID: 629903681554281718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b0f8e7547f8cd4e8a36ab16b742453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageWallMove
 --- !u!1001 &2161056445026845696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5173,7 +5211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8077539535610596263, guid: e9d343bd1812ce44595223bf38a6e47f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5194,7 +5232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1658197698016047524, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4836700965109433219, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5236,7 +5274,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6893447941276863629, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+    - target: {fileID: 7486077876335115203, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: _controller
       value: 
       objectReference: {fileID: 1446213894}
@@ -5245,17 +5283,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
---- !u!114 &3522025752228769281 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6028944012054649796, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
-  m_PrefabInstance: {fileID: 3522025752228769279}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424e71d7ec89431408b114c4344104cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StagePlatformMove
 --- !u!1001 &4866457256443695707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5270,7 +5297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2464342386414477239, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3898494520838356443, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
       propertyPath: canvasRect
@@ -5321,17 +5348,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
---- !u!114 &4866457256443695708 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3898494520838356443, guid: 2f3828b9cad7be84badca5cbe22ed48f, type: 3}
-  m_PrefabInstance: {fileID: 4866457256443695707}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4303e5a4ac12180468aa8547688f9a46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageErrorConfirm
 --- !u!1001 &7442217968422387659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5384,22 +5400,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage6_EnemyKill
       objectReference: {fileID: 0}
+    - target: {fileID: 8378446812440863213, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
---- !u!114 &7442217968422387662 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6512641077876969054, guid: f9332316bfd6c79458ae9dc25194eb92, type: 3}
-  m_PrefabInstance: {fileID: 7442217968422387659}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6acdce35a48784cb5e12097937e4ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageEnemyKill
 --- !u!1001 &8719105416845979330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5454,7 +5463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5948439288589993063, guid: 49aa1e222430a6f44a0cbc71484c8454, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5475,6 +5484,7 @@ SceneRoots:
   - {fileID: 2161056445026845696}
   - {fileID: 8719105416845979330}
   - {fileID: 3522025752228769279}
+  - {fileID: 629903681554281718}
   - {fileID: 1473317710}
   - {fileID: 340496891}
   - {fileID: 7442217968422387659}
