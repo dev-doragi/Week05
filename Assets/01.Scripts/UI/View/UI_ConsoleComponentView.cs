@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,23 +15,23 @@ public class UI_ConsoleComponentView : MonoBehaviour
 
     [SerializeField] private Transform _missionParent;
     [SerializeField] private GameObject _missionViewPrefab;
-    [SerializeField] private List<UI_ConsoleMissionView> _missionViews = new List<UI_ConsoleMissionView>();
+    [SerializeField] private List<UI_ConsoleMissionView> _missionViews = new();
 
-    private int _successMissionCount = 0;
+    private readonly HashSet<int> _completedMissionSlots = new();
 
-    public void Init(string stageId, string stageTitle, List<(int missionIndex, string missionTitle)> missions, int count)
+    public void Init(string stageId, string stageTitle, List<string> missionTitles)
     {
         _consoleStageIdText.text = stageId;
         _consoleStageTitleText.text = stageTitle;
-        _successMissionCount = 0;
+
+        _completedMissionSlots.Clear();
 
         InitializeConsoleState();
-        CreateMissionViews(count);
+        CreateMissionViews(missionTitles.Count);
 
-        for (int i = 0; i < missions.Count && i < _missionViews.Count; i++)
+        for (int i = 0; i < missionTitles.Count && i < _missionViews.Count; i++)
         {
-            var mission = missions[i];
-            _missionViews[i].Init(mission.missionIndex, mission.missionTitle);
+            _missionViews[i].Init(i, missionTitles[i]);
         }
     }
 
@@ -47,8 +48,11 @@ public class UI_ConsoleComponentView : MonoBehaviour
 
         ClearMissionViews();
 
-        if (_missionParent == null) return;
-        if (_missionViewPrefab == null) return;
+        if (_missionParent == null)
+            return;
+
+        if (_missionViewPrefab == null)
+            return;
 
         for (int i = 0; i < count; i++)
         {
@@ -79,26 +83,69 @@ public class UI_ConsoleComponentView : MonoBehaviour
         _missionViews.Clear();
     }
 
-    public void IsSuccess(int missionIndex)
+    public bool TrySetMissionSuccess(int missionSlot)
     {
-        foreach (var mission in _missionViews)
-        {
-            if (mission != null && mission.Index == missionIndex)
-            {
-                mission.IsSuccess();
-                _successMissionCount++;
-                CheckAllComplete();
-                break;
-            }
-        }
+        if (missionSlot < 0 || missionSlot >= _missionViews.Count)
+            return false;
+
+        if (_completedMissionSlots.Add(missionSlot) == false)
+            return false;
+
+        UI_ConsoleMissionView missionView = _missionViews[missionSlot];
+        if (missionView == null)
+            return false;
+
+        missionView.IsSuccess();
+        UpdateCompleteVisual();
+        return true;
     }
 
-    private void CheckAllComplete()
+    private void UpdateCompleteVisual()
     {
-        if (_successMissionCount >= _missionViews.Count)
-        {
-            if (_consoleLogImage != null && _spriteSuccess != null)
-                _consoleLogImage.sprite = _spriteSuccess;
-        }
+        if (_completedMissionSlots.Count < _missionViews.Count)
+            return;
+
+        if (_consoleLogImage != null && _spriteSuccess != null)
+            _consoleLogImage.sprite = _spriteSuccess;
     }
+
+    public Sequence CreateCompleteSequence()
+    {
+        UpdateCompleteVisual();
+
+        Sequence sequence = DOTween.Sequence()
+            .Pause()
+            .SetAutoKill(true);
+
+        BuildCompleteAnimation(sequence);
+
+        if (sequence.Duration(false) <= 0f)
+            sequence.AppendInterval(0f);
+
+        return sequence;
+    }
+
+    private void BuildCompleteAnimation(Sequence sequence)
+    {
+        RectTransform rectTransform = transform as RectTransform;
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+
+        if (rectTransform == null)
+            return;
+
+        if (canvasGroup == null)
+            return;
+
+        Vector2 startPosition = rectTransform.anchoredPosition;
+        Vector2 endPosition = startPosition + new Vector2(120f, 0f);
+
+        canvasGroup.alpha = 1f;
+
+        sequence.Append(canvasGroup.DOFade(0.25f, 0.1f));
+        sequence.Append(canvasGroup.DOFade(1.2f, 0.1f));
+        sequence.AppendInterval(0.1f);
+        sequence.Append(rectTransform.DOAnchorPos(endPosition, 0.6f).SetEase(Ease.InCubic));
+        sequence.Join(canvasGroup.DOFade(0f, 0.6f));
+    }
+
 }

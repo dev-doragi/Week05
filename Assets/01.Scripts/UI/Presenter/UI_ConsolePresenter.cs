@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class UI_ConsolePresenter : MonoBehaviour
@@ -14,11 +15,16 @@ public class UI_ConsolePresenter : MonoBehaviour
     [SerializeField] private UI_ScrollFocusController _scrollFocusController;
 
     private readonly Dictionary<string, UI_ConsoleComponentView> _viewsByStageId = new();
-    private readonly Dictionary<string, HashSet<int>> _appliedMissionIndicesByStageId = new();
+    private readonly Dictionary<string, HashSet<int>> _appliedMissionSlotsByStageId = new();
+    private readonly HashSet<string> _destroyingStageIds = new();
 
     private void Awake()
     {
         CreateAllViewsFromDefinitions();
+    }
+
+    private void Start()
+    {
         ApplyCurrentRuntimeStates();
     }
 
@@ -62,16 +68,15 @@ public class UI_ConsolePresenter : MonoBehaviour
         Transform parent = _viewParent != null ? _viewParent : transform;
         UI_ConsoleComponentView view = Instantiate(_viewPrefab, parent);
 
-        List<(int missionIndex, string missionTitle)> missionData = BuildMissionData(definition);
+        List<string> missionTitles = BuildMissionTitles(definition);
 
         view.Init(
             definition.StageId,
             definition.StageTitle,
-            missionData,
-            missionData.Count);
+            missionTitles);
 
         _viewsByStageId.Add(definition.StageId, view);
-        _appliedMissionIndicesByStageId.Add(definition.StageId, new HashSet<int>());
+        _appliedMissionSlotsByStageId.Add(definition.StageId, new HashSet<int>());
     }
 
     private void ApplyCurrentRuntimeStates()
@@ -96,33 +101,111 @@ public class UI_ConsolePresenter : MonoBehaviour
         if (TryGetStageContext(stage, out string stageId, out UI_ConsoleComponentView view) == false)
             return;
 
-        if (_appliedMissionIndicesByStageId.TryGetValue(stageId, out HashSet<int> appliedMissionIndices) == false)
+        if (_appliedMissionSlotsByStageId.TryGetValue(stageId, out HashSet<int> appliedMissionSlots) == false)
             return;
 
-        StageMission[] runtimeMissions = stage.RuntimeMissions;
-        if (runtimeMissions == null)
+        if (TryGetReadyRuntimeMissions(stage, out StageMission[] runtimeMissions) == false)
             return;
 
-        bool hasNewSuccess = false;
-
-        for (int i = 0; i < runtimeMissions.Length; i++)
-        {
-            StageMission mission = runtimeMissions[i];
-
-            if (mission.isMissionSuccess == false)
-                continue;
-
-            if (appliedMissionIndices.Add(mission.missionIndex) == false)
-                continue;
-
-            view.IsSuccess(mission.missionIndex);
-            hasNewSuccess = true;
-        }
+        bool hasNewSuccess = ApplyMissionSuccesses(view, runtimeMissions, appliedMissionSlots);
 
         if (shouldFocusOnNewSuccess && hasNewSuccess)
         {
             FocusView(view);
         }
+
+        if (IsStageCompleted(runtimeMissions) == false)
+            return;
+
+        if (_destroyingStageIds.Add(stageId) == false)
+            return;
+
+        StartDestroySequence(stageId, view);
+    }
+
+    private bool TryGetReadyRuntimeMissions(Stage stage, out StageMission[] runtimeMissions)
+    {
+        runtimeMissions = null;
+
+        if (stage == null)
+            return false;
+
+        if (stage.StageSO == null)
+            return false;
+
+        StageMission[] definedMissions = stage.StageSO.Missions;
+        if (definedMissions == null)
+            return false;
+
+        runtimeMissions = stage.RuntimeMissions;
+        if (runtimeMissions == null)
+            return false;
+
+        // Stage.Awake()가 아직 안 돌면 runtime 은 보통 빈 배열이다.
+        if (runtimeMissions.Length != definedMissions.Length)
+            return false;
+
+        // 빈 배열은 완료 상태가 아니라 "아직 준비 안 됨"으로 본다.
+        if (runtimeMissions.Length == 0)
+            return false;
+
+        return true;
+    }
+
+    private bool ApplyMissionSuccesses(
+        UI_ConsoleComponentView view,
+        StageMission[] runtimeMissions,
+        HashSet<int> appliedMissionSlots)
+    {
+        bool hasNewSuccess = false;
+
+        for (int missionSlot = 0; missionSlot < runtimeMissions.Length; missionSlot++)
+        {
+            StageMission mission = runtimeMissions[missionSlot];
+
+            if (mission.isMissionSuccess == false)
+                continue;
+
+            if (appliedMissionSlots.Add(missionSlot) == false)
+                continue;
+
+            view.TrySetMissionSuccess(missionSlot);
+            hasNewSuccess = true;
+        }
+
+        return hasNewSuccess;
+    }
+
+    private bool IsStageCompleted(StageMission[] runtimeMissions)
+    {
+        if (runtimeMissions == null)
+            return false;
+
+        if (runtimeMissions.Length == 0)
+            return false;
+
+        for (int i = 0; i < runtimeMissions.Length; i++)
+        {
+            if (runtimeMissions[i].isMissionSuccess == false)
+                return false;
+        }
+
+        return true;
+    }
+
+    private void StartDestroySequence(string stageId, UI_ConsoleComponentView view)
+    {
+        if (view == null)
+        {
+            DestroyView(stageId, null);
+            return;
+        }
+
+        Sequence completeSequence = view.CreateCompleteSequence();
+
+        completeSequence
+            .OnComplete(() => DestroyView(stageId, view))
+            .Play();
     }
 
     private bool TryGetStageContext(
@@ -165,20 +248,29 @@ public class UI_ConsolePresenter : MonoBehaviour
         _scrollFocusController.Focus(targetRect);
     }
 
-    private List<(int missionIndex, string missionTitle)> BuildMissionData(StageDefinition definition)
+    private List<string> BuildMissionTitles(StageDefinition definition)
     {
-        List<(int missionIndex, string missionTitle)> result = new();
+        List<string> result = new();
 
         if (definition == null || definition.Missions == null)
             return result;
 
         for (int i = 0; i < definition.Missions.Length; i++)
         {
-            StageMission mission = definition.Missions[i];
-            result.Add((mission.missionIndex, mission.missionTitle));
+            result.Add(definition.Missions[i].missionTitle);
         }
 
         return result;
+    }
+
+    private void DestroyView(string stageId, UI_ConsoleComponentView view)
+    {
+        _viewsByStageId.Remove(stageId);
+        _appliedMissionSlotsByStageId.Remove(stageId);
+        _destroyingStageIds.Remove(stageId);
+
+        if (view != null)
+            Destroy(view.gameObject);
     }
 
     private void ClearAllViews()
@@ -190,6 +282,7 @@ public class UI_ConsolePresenter : MonoBehaviour
         }
 
         _viewsByStageId.Clear();
-        _appliedMissionIndicesByStageId.Clear();
+        _appliedMissionSlotsByStageId.Clear();
+        _destroyingStageIds.Clear();
     }
 }

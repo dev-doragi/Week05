@@ -43,27 +43,24 @@ public class CoachMovementController : MonoBehaviour
 
     private void Awake()
     {
-        _mapGraph = new MapGraph();
+        if (_gimmickManager == null)
+            _gimmickManager = GimmickManager.Instance;
 
-        _coachBrain.Initialize(_mapGraph, _gimmickManager);
+        _mapGraph = new MapGraph();
 
         _currentRoomId = RoomID.None;
         _isSpawnDelayed = true;
         _isActive = false;
-    }
 
-    private void Start()
-    {
-        if (_gimmickManager == null)
-            _gimmickManager = GimmickManager.Instance;
-
-        if (_gimmickManager != null)
-            _gimmickManager.OnStayDelayActivated += HandleStayDelayActivated;
+        _coachBrain.Initialize(_mapGraph, _gimmickManager);
     }
 
     private void OnEnable()
     {
         GameManager.OnGameStart += StartMovement;
+
+        if (_gimmickManager != null)
+            _gimmickManager.OnStayDelayActivated += HandleStayDelayActivated;
     }
 
     private void OnDisable()

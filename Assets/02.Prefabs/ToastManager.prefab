@@ -45,16 +45,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToastManager
   isDontDestroyOnLoad: 1
-  toastSender: {fileID: 0}
-  coachMovementController: {fileID: 0}
-  gimmickManager: {fileID: 0}
-  introToast: {fileID: 11400000, guid: a6f8982e4d753614289a260848f727ee, type: 2}
-  randomToasts:
+  _toastSender: {fileID: 0}
+  _coachMovementController: {fileID: 0}
+  _gimmickManager: {fileID: 0}
+  _introToast: {fileID: 11400000, guid: a6f8982e4d753614289a260848f727ee, type: 2}
+  _randomToasts:
   - {fileID: 11400000, guid: be184efeb9cd65942a43ca1e5765359a, type: 2}
   - {fileID: 11400000, guid: f9a1a7b2ac3dc644ba8f976333867f32, type: 2}
   - {fileID: 11400000, guid: 166b7f866dbb85c4a8ab13105192e7db, type: 2}
-  blockedPathToast: {fileID: 11400000, guid: 0d5f971efdd95d74fb07b04268c41d55, type: 2}
-  coachFloorChangedToast: {fileID: 0}
-  useRandomToast: 1
-  randomToastMinInterval: 10
-  randomToastMaxInterval: 15
+  - {fileID: 11400000, guid: 5ebbce0f955806141942af47a7fc12bf, type: 2}
+  - {fileID: 11400000, guid: 267327347d188f04a963247d1a971ebf, type: 2}
+  _blockedPathToasts:
+  - {fileID: 11400000, guid: 0d5f971efdd95d74fb07b04268c41d55, type: 2}
+  - {fileID: 11400000, guid: 8cf7ee7bb9ebcad488737608d94119bb, type: 2}
+  - {fileID: 11400000, guid: 99014eebc21e3cc40be93a63c64efa92, type: 2}
+  _coachB1ToF1Toast: {fileID: 11400000, guid: f950a0abf90ef784bbfe5de2506c0529, type: 2}
+  _coachF1ToF3Toast: {fileID: 11400000, guid: 3d8347e45815699419c24decef0b7081, type: 2}
+  _coachGoingDownToast: {fileID: 11400000, guid: 02420bda1e4bdfb48b8a1ddff4b06e40, type: 2}
+  _useRandomToast: 1
+  _randomToastMinInterval: 5
+  _randomToastMaxInterval: 10

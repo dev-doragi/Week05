@@ -5,18 +5,19 @@ using UnityEngine.UI;
 public class UI_WarningIndicator : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private CoachMovementController _coach;
+    [SerializeField] private CoachMovementController _coachMovementController;
     [SerializeField] private Image _warningImage;
+
+    [Header("Intensity Multipliers by Floor")]
+    [SerializeField] private float _b1Multiplier = 0.1f;
+    [SerializeField] private float _f1Multiplier = 0.4f;
+    [SerializeField] private float _f3Multiplier = 1.0f;
 
     [Header("Geiger Settings")]
     [Range(0f, 1f)][SerializeField] private float _baseNoiseLevel = 0.05f;
     [SerializeField] private float _maxDistance = 5f;
     [SerializeField] private float _minAlpha = 0.1f;
     [SerializeField] private float _maxAlpha = 0.8f;
-
-    [Header("Floor Multipliers")]
-    [SerializeField] private float _firstFloorMultiplier = 0.3f;
-    [SerializeField] private float _thirdFloorMultiplier = 1f;
 
     [Header("Timing")]
     [SerializeField] private float _tickInterval = 0.02f;
@@ -25,24 +26,33 @@ public class UI_WarningIndicator : MonoBehaviour
     private float _currentIntensity = 0f;
     private bool _forceSolid;
 
+    private void Awake()
+    {
+        if (_coachMovementController == null)
+            _coachMovementController = FindFirstObjectByType<CoachMovementController>();
+    }
+
     private void OnEnable()
     {
-        if (_coach != null)
+        if (_coachMovementController == null || _warningImage == null)
         {
-            _coach.OnCoachPreparingToMove += HandleCoachPreparingToMove;
-            _coach.OnCoachMoved += HandleCoachMoved;
+            Debug.LogError("UI_WarningIndicator 참조 누락");
+            return;
         }
 
+        _coachMovementController.OnCoachPreparingToMove += HandleCoachPreparingToMove;
+        _coachMovementController.OnCoachMoved += HandleCoachMoved;
+
         StartGeigerCounter();
-        UpdateIntensity(_coach != null ? _coach.CurrentRoomId : RoomID.None);
+        UpdateIntensity(_coachMovementController.CurrentRoomId);
     }
 
     private void OnDisable()
     {
-        if (_coach != null)
+        if (_coachMovementController != null)
         {
-            _coach.OnCoachPreparingToMove -= HandleCoachPreparingToMove;
-            _coach.OnCoachMoved -= HandleCoachMoved;
+            _coachMovementController.OnCoachPreparingToMove -= HandleCoachPreparingToMove;
+            _coachMovementController.OnCoachMoved -= HandleCoachMoved;
         }
 
         StopGeigerCounter();
@@ -57,98 +67,36 @@ public class UI_WarningIndicator : MonoBehaviour
     private void HandleCoachMoved(RoomID from, RoomID to)
     {
         _forceSolid = false;
-        UpdateIntensity(_coach.CurrentRoomId);
+        UpdateIntensity(_coachMovementController.CurrentRoomId);
     }
 
     private void UpdateIntensity(RoomID currentRoom)
     {
-        if (_coach == null || _coach.MapGraph == null || currentRoom == RoomID.None)
+        if (_coachMovementController == null || _coachMovementController.MapGraph == null || currentRoom == RoomID.None)
         {
             _currentIntensity = 0f;
             return;
         }
 
-        if (IsBasement(currentRoom))
-        {
-            _currentIntensity = 0f;
-            return;
-        }
-
-        if (currentRoom == RoomID.Office)
-        {
-            _currentIntensity = 1f;
-            return;
-        }
-
-        int distance = _coach.MapGraph.GetDistance(currentRoom, RoomID.Office);
-
-        float distanceIntensity;
-        if (distance <= 0)
-            distanceIntensity = 1f;
-        else
-            distanceIntensity = Mathf.Clamp01(1f - ((float)distance / _maxDistance));
+        int distance = _coachMovementController.MapGraph.GetDistance(currentRoom, RoomID.Office);
+        float distanceFactor = Mathf.Clamp01(1f - ((float)distance / _maxDistance));
 
         float floorMultiplier = GetFloorMultiplier(currentRoom);
-        _currentIntensity = Mathf.Clamp01(distanceIntensity * floorMultiplier);
+        float aggroFactor = _coachMovementController.CurrentAggro;
+
+        _currentIntensity = Mathf.Clamp01(distanceFactor * floorMultiplier * aggroFactor);
     }
 
     private float GetFloorMultiplier(RoomID room)
     {
-        if (IsBasement(room))
-            return 0f;
+        string roomName = room.ToString();
 
-        if (IsFirstFloor(room))
-            return _firstFloorMultiplier;
-
-        if (IsThirdFloor(room))
-            return _thirdFloorMultiplier;
-
-        if (room == RoomID.Office)
-            return 1f;
+        if (roomName.StartsWith("B1F")) return _b1Multiplier;
+        if (roomName.StartsWith("F1")) return _f1Multiplier;
+        if (roomName.StartsWith("F3")) return _f3Multiplier;
+        if (room == RoomID.Office) return 1.0f;
 
         return 0f;
-    }
-
-    private bool IsBasement(RoomID room)
-    {
-        switch (room)
-        {
-            case RoomID.B1F_Cafeteria:
-            case RoomID.B1F_JungleStepLower:
-            case RoomID.B1F_Cafe:
-            case RoomID.B1F_Stair:
-                return true;
-        }
-
-        return false;
-    }
-
-    private bool IsFirstFloor(RoomID room)
-    {
-        switch (room)
-        {
-            case RoomID.F1_Elevator:
-            case RoomID.F1_JungleStepUpper:
-            case RoomID.F1_Lobby:
-            case RoomID.F1_Stair:
-                return true;
-        }
-
-        return false;
-    }
-
-    private bool IsThirdFloor(RoomID room)
-    {
-        switch (room)
-        {
-            case RoomID.F3_Elevator:
-            case RoomID.F3_Lounge:
-            case RoomID.F3_CoachingRoom:
-            case RoomID.F3_Hallway:
-                return true;
-        }
-
-        return false;
     }
 
     private void StartGeigerCounter()
@@ -170,7 +118,7 @@ public class UI_WarningIndicator : MonoBehaviour
     {
         while (true)
         {
-            if (_forceSolid || _currentIntensity >= 0.99f)
+            if (_forceSolid || _currentIntensity >= 0.95f)
             {
                 SetAlpha(1f);
             }
@@ -191,7 +139,10 @@ public class UI_WarningIndicator : MonoBehaviour
     private void SetAlpha(float alpha)
     {
         if (_warningImage == null)
+        {
+            Debug.LogError("_warningImage가 null입니다.");
             return;
+        }
 
         Color color = _warningImage.color;
         color.a = alpha;
