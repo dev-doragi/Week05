@@ -8269,17 +8269,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2727897707685710589, guid: f802e4252f4b3e44494a843c61000583, type: 3}
   m_PrefabInstance: {fileID: 501013202}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &501013204 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8337024286513069350, guid: f802e4252f4b3e44494a843c61000583, type: 3}
-  m_PrefabInstance: {fileID: 501013202}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb86eaa7e06075b41a3511cf51a18453, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI_ToastSender
 --- !u!1001 &509166419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15128,11 +15117,11 @@ PrefabInstance:
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
       propertyPath: toastSender
       value: 
-      objectReference: {fileID: 501013204}
+      objectReference: {fileID: 0}
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
       propertyPath: _toastSender
       value: 
-      objectReference: {fileID: 501013204}
+      objectReference: {fileID: 0}
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
       propertyPath: gimmickManager
       value: 
@@ -24471,6 +24460,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ffcddb1e1169e2d4cac4e0ca30937a87, type: 2}
   - {fileID: 11400000, guid: da3447371d21d2d459174fc9ee9565bc, type: 2}
   - {fileID: 11400000, guid: 41237f386c27b9e478b8acef77ed2d17, type: 2}
+  - {fileID: 11400000, guid: 99f736878566ffe4f998313cf1edb2f6, type: 2}
+  - {fileID: 11400000, guid: da2e0f062916cf544ac2823148f4fbb1, type: 2}
+  - {fileID: 11400000, guid: d175894642003f34c9bfa8b0627b91a2, type: 2}
   - {fileID: 11400000, guid: 84729db625381114888328d964bd777f, type: 2}
   _viewPrefab: {fileID: 8738106586284195295, guid: f4535bd14f73cfb46b210031c208e9c1, type: 3}
   _viewParent: {fileID: 219171812}

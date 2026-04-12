@@ -21,6 +21,10 @@ public class UI_ConsolePresenter : MonoBehaviour
     private void Awake()
     {
         CreateAllViewsFromDefinitions();
+    }
+
+    private void Start()
+    {
         ApplyCurrentRuntimeStates();
     }
 
@@ -63,6 +67,7 @@ public class UI_ConsolePresenter : MonoBehaviour
 
         Transform parent = _viewParent != null ? _viewParent : transform;
         UI_ConsoleComponentView view = Instantiate(_viewPrefab, parent);
+
         List<string> missionTitles = BuildMissionTitles(definition);
 
         view.Init(
@@ -99,8 +104,7 @@ public class UI_ConsolePresenter : MonoBehaviour
         if (_appliedMissionSlotsByStageId.TryGetValue(stageId, out HashSet<int> appliedMissionSlots) == false)
             return;
 
-        StageMission[] runtimeMissions = stage.RuntimeMissions;
-        if (runtimeMissions == null)
+        if (TryGetReadyRuntimeMissions(stage, out StageMission[] runtimeMissions) == false)
             return;
 
         bool hasNewSuccess = ApplyMissionSuccesses(view, runtimeMissions, appliedMissionSlots);
@@ -117,6 +121,35 @@ public class UI_ConsolePresenter : MonoBehaviour
             return;
 
         StartDestroySequence(stageId, view);
+    }
+
+    private bool TryGetReadyRuntimeMissions(Stage stage, out StageMission[] runtimeMissions)
+    {
+        runtimeMissions = null;
+
+        if (stage == null)
+            return false;
+
+        if (stage.StageSO == null)
+            return false;
+
+        StageMission[] definedMissions = stage.StageSO.Missions;
+        if (definedMissions == null)
+            return false;
+
+        runtimeMissions = stage.RuntimeMissions;
+        if (runtimeMissions == null)
+            return false;
+
+        // Stage.Awake()가 아직 안 돌면 runtime 은 보통 빈 배열이다.
+        if (runtimeMissions.Length != definedMissions.Length)
+            return false;
+
+        // 빈 배열은 완료 상태가 아니라 "아직 준비 안 됨"으로 본다.
+        if (runtimeMissions.Length == 0)
+            return false;
+
+        return true;
     }
 
     private bool ApplyMissionSuccesses(
@@ -143,6 +176,23 @@ public class UI_ConsolePresenter : MonoBehaviour
         return hasNewSuccess;
     }
 
+    private bool IsStageCompleted(StageMission[] runtimeMissions)
+    {
+        if (runtimeMissions == null)
+            return false;
+
+        if (runtimeMissions.Length == 0)
+            return false;
+
+        for (int i = 0; i < runtimeMissions.Length; i++)
+        {
+            if (runtimeMissions[i].isMissionSuccess == false)
+                return false;
+        }
+
+        return true;
+    }
+
     private void StartDestroySequence(string stageId, UI_ConsoleComponentView view)
     {
         if (view == null)
@@ -151,22 +201,11 @@ public class UI_ConsolePresenter : MonoBehaviour
             return;
         }
 
-        var completeSequence = view.CreateCompleteSequence();
+        Sequence completeSequence = view.CreateCompleteSequence();
 
         completeSequence
             .OnComplete(() => DestroyView(stageId, view))
             .Play();
-    }
-
-    private bool IsStageCompleted(StageMission[] runtimeMissions)
-    {
-        for (int i = 0; i < runtimeMissions.Length; i++)
-        {
-            if (runtimeMissions[i].isMissionSuccess == false)
-                return false;
-        }
-
-        return true;
     }
 
     private bool TryGetStageContext(
