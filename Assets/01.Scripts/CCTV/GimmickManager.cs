@@ -11,7 +11,7 @@ public class GimmickManager : Singleton<GimmickManager>
     [Header("BlockPathCoolDown")]
     [SerializeField] private float _blockPathDuration = 5f;
     [SerializeField] private float _blockPathCooldown = 10f;
-
+    public float BlockPathCooldownDuration => _blockPathCooldown;
     private RoomID _activeTempTarget = RoomID.None;
     private Coroutine _tempTargetRoutine;
 

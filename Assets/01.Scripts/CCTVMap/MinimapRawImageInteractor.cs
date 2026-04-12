@@ -23,7 +23,6 @@ public class MinimapRawImageInteractor3D : MonoBehaviour, IPointerClickHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (minimapCamera == null) return;
 
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
             _rect, eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
@@ -43,24 +42,24 @@ public class MinimapRawImageInteractor3D : MonoBehaviour, IPointerClickHandler, 
 
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, minimapHitMask, QueryTriggerInteraction.Collide))
         {
-
             RoomTile room = hit.collider.GetComponentInParent<RoomTile>();
             if (room != null)
             {
-                room.OnMinimapClicked();
+                if (eventData.button == PointerEventData.InputButton.Left)
+                    room.OnMinimapClicked();
                 return;
             }
 
             PassageTile passage = hit.collider.GetComponentInParent<PassageTile>();
             if (passage != null)
             {
-                passage.OnMinimapClicked();
+                if (eventData.button == PointerEventData.InputButton.Right)
+                    passage.OnMinimapClicked();
                 return;
             }
-
         }
-        
     }
+
     public void OnPointerMove(PointerEventData eventData)
     {
         UpdateHover(eventData.position, eventData.enterEventCamera);
