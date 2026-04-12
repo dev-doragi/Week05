@@ -7,13 +7,13 @@ public class MonologueController : MonoBehaviour
     public TextMeshProUGUI messageText;
 
     [Header("Animation")]
-    public float slideInDuration = 0.8f;
-    public float displayDuration = 2f;
-    public float slideOutDuration = 0.6f;
+    public float slideOutDuration = 0.3f;
+    public float slideInDuration = 0.5f;
 
     private RectTransform rect;
     private float shownY;
     private float hiddenY;
+    private bool hasReceived = false;
 
     void Awake()
     {
@@ -21,6 +21,7 @@ public class MonologueController : MonoBehaviour
         shownY = rect.anchoredPosition.y;
         hiddenY = shownY + rect.rect.height;
 
+        // 처음엔 숨김
         rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
     }
 
@@ -30,15 +31,23 @@ public class MonologueController : MonoBehaviour
     void HandleMessage(string msg)
     {
         StopAllCoroutines();
-        messageText.text = msg;
-        StartCoroutine(ShowRoutine());
+        StartCoroutine(hasReceived ? SwapRoutine(msg) : FirstRoutine(msg));
+        hasReceived = true;
     }
 
-    IEnumerator ShowRoutine()
+    // 첫 메시지 — 그냥 바로 내려오기
+    IEnumerator FirstRoutine(string msg)
     {
+        messageText.text = msg;
         yield return Move(hiddenY, shownY, slideInDuration, EaseOutQuart);
-        yield return new WaitForSeconds(displayDuration);
+    }
+
+    // 이후 메시지 — 올라갔다가 텍스트 바꾸고 내려오기
+    IEnumerator SwapRoutine(string msg)
+    {
         yield return Move(shownY, hiddenY, slideOutDuration, EaseInQuart);
+        messageText.text = msg;
+        yield return Move(hiddenY, shownY, slideInDuration, EaseOutQuart);
     }
 
     IEnumerator Move(float fromY, float toY, float duration, System.Func<float, float> ease)
