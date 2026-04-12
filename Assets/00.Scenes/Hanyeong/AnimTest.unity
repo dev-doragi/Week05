@@ -555,6 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   isDontDestroyOnLoad: 0
+  GameFinish: 0
 --- !u!1 &1446213893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,7 +1927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4418710141838786178, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 573.7251
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 4540533329386658106, guid: b43b23ba1da5e7341935c83f29854001, type: 3}
       propertyPath: m_SizeDelta.y

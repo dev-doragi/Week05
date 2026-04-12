@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 584771039545001072}
   - component: {fileID: 5246846535726747940}
   - component: {fileID: 2334896318367582978}
+  - component: {fileID: 5266532466590415531}
   m_Layer: 5
   m_Name: UI_ConsoleComponent
   m_TagString: Untagged
@@ -282,6 +283,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!225 &5266532466590415531
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3652923157319478919}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4006982366056997108
 GameObject:
   m_ObjectHideFlags: 0

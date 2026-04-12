@@ -8,6 +8,6 @@ public class UI_MovingPlatformController : MonoBehaviour, IUIInspectorSection
     public void Bind(string ownerId, UI_RuntimeInspectorSectionData sectionData)
     {
         if (_titleText != null)
-            _titleText.text = "Moving Platform Controller";
+            _titleText.text = "Platform Controller";
     }
 }
