@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("01.MainScene");
     }
     public void ExitGame()
     {
@@ -56,12 +56,20 @@ public class GameManager : Singleton<GameManager>
     {
         if (GameFinish) return;
 
+        if (StageManager.Instance != null)
+        {
+            var cleared = StageManager.Instance.GetClearedStageDefinitionsSnapshot();
+            EndingRuntimePayload.SetClearedStages(cleared);
+        }
+
+        SceneManager.LoadScene("03.GameClearScene");
         if (SoundManager.Instance != null)
             SoundManager.Instance.StopBgm();
 
         UIManager_New.Instance.GameClearImagePopUP();
         GameFinish = true;
     }
+
 
 
 }
