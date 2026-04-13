@@ -1,13 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
-using System;
 
 public class TypingPanel : MonoBehaviour
 {
-    public Action<bool> OnTypingComplete;
-
     [Header("설정")]
     [TextArea] public string targetText = "Hello World";
 
@@ -16,17 +14,15 @@ public class TypingPanel : MonoBehaviour
     public TextMeshProUGUI displayText;
     public Button saveButton;
 
+    public event Action<bool> OnTypingComplete;
+
     private int currentIndex = 0;
-
-    private void Start()
-    {
-        OpenPanel();
-
-    }
+    private bool _isComplete = false;
 
     public void OpenPanel()
     {
         currentIndex = 0;
+        _isComplete = false;
         panel.SetActive(true);
         saveButton.interactable = false;
 
@@ -34,11 +30,13 @@ public class TypingPanel : MonoBehaviour
         UpdateDisplay();
 
         Keyboard.current.onTextInput += OnTextInput;
+        InputSystem.onAfterUpdate += CheckEnter;
     }
 
     void CloseInput()
     {
         Keyboard.current.onTextInput -= OnTextInput;
+        InputSystem.onAfterUpdate -= CheckEnter;
     }
 
     void OnTextInput(char c)
@@ -52,8 +50,17 @@ public class TypingPanel : MonoBehaviour
             UpdateDisplay();
 
             if (currentIndex >= targetText.Length)
+            {
+                _isComplete = true;
                 saveButton.interactable = true;
+            }
         }
+    }
+
+    void CheckEnter()
+    {
+        if (_isComplete && Keyboard.current.enterKey.wasPressedThisFrame)
+            TrySave();
     }
 
     void SkipNonAlpha()
@@ -69,17 +76,25 @@ public class TypingPanel : MonoBehaviour
         displayText.text = $"<color=white>{done}</color><color=grey>{remaining}</color>";
     }
 
+    // Save 버튼 OnClick에 연결
     public void OnSaveClicked()
     {
+        TrySave();
+    }
+
+    void TrySave()
+    {
+        if (!_isComplete) return;
+
         CloseInput();
-        OnTypingComplete?.Invoke(true);
         panel.SetActive(false);
+        OnTypingComplete?.Invoke(true);
     }
 
     void OnDisable()
     {
-        // 패널 비활성화될 때 구독 누수 방지
         if (Keyboard.current != null)
             Keyboard.current.onTextInput -= OnTextInput;
+        InputSystem.onAfterUpdate -= CheckEnter;
     }
 }

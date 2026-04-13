@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 moveInput;
 
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float jumpForce = 15f;
     private bool _isGrounded = false;
 
     private Rigidbody2D _rigid;
@@ -26,12 +26,14 @@ public class PlayerMovement : MonoBehaviour
     {
         StageMove.OnMove += HandleMove;
         StageScriptJump.OnJump += HandleJump;
+        StageMakeTrampoline.OnJump += HandleJump;
     }
 
     private void OnDisable()
     {
         StageMove.OnMove -= HandleMove;
         StageScriptJump.OnJump -= HandleJump;
+        StageMakeTrampoline.OnJump -= HandleJump;
     }
 
     private void HandleMove(bool active)
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("[Player] Jump " + active);
         canJump = active;
+        canMove = active;
     }
 
     private void FixedUpdate()
