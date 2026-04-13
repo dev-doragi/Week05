@@ -254,9 +254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3957614003104702727, guid: 747214cc6ed2e0b4990146189c0ae939, type: 3}
       propertyPath: targetText
-      value: 'If press spacebar
+      value: 'press
 
-        addforce to player 15'
+        space
+
+        force'
       objectReference: {fileID: 0}
     - target: {fileID: 6269637971183777094, guid: 747214cc6ed2e0b4990146189c0ae939, type: 3}
       propertyPath: m_Pivot.x
