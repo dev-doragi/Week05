@@ -81,14 +81,14 @@ MonoBehaviour:
       _slotId: reference01
       _label: Rigidbody
       _normalTargetId: MPRigidbody
-      _canSpawnError: 1
-      _isRequired: 1
+      _canSpawnError: 0
+      _isRequired: 0
     - _inspectorComponent: 18
       _slotId: reference02
       _label: Collider
       _normalTargetId: MPCollider
-      _canSpawnError: 1
-      _isRequired: 1
+      _canSpawnError: 0
+      _isRequired: 0
     - _inspectorComponent: 18
       _slotId: reference03
       _label: Controller
@@ -123,3 +123,47 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: 26cb5f014e569f64d851ceefd8716ea3, type: 2}
     _scene: 0
     _references: []
+  - _objectId: Platform1
+    _componentData: {fileID: 11400000, guid: 97abfb3fbdbb943459528e8523a67030, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 18
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: MPRigidbody
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 18
+      _slotId: reference02
+      _label: Collider
+      _normalTargetId: MPCollider
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 18
+      _slotId: reference03
+      _label: Controller
+      _normalTargetId: MPController
+      _canSpawnError: 1
+      _isRequired: 1
+  - _objectId: Platform2
+    _componentData: {fileID: 11400000, guid: cced57e7d13ea9f4097a1d925142aa4a, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 18
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: MPRigidbody
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 18
+      _slotId: reference02
+      _label: Collider
+      _normalTargetId: MPCollider
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 18
+      _slotId: reference03
+      _label: Controller
+      _normalTargetId: MPController
+      _canSpawnError: 1
+      _isRequired: 1

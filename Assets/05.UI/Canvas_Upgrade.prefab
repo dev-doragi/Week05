@@ -2654,7 +2654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6470201336330943233
@@ -3063,8 +3063,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41237f386c27b9e478b8acef77ed2d17, type: 2}
   - {fileID: 11400000, guid: 99f736878566ffe4f998313cf1edb2f6, type: 2}
   - {fileID: 11400000, guid: da2e0f062916cf544ac2823148f4fbb1, type: 2}
-  - {fileID: 11400000, guid: d175894642003f34c9bfa8b0627b91a2, type: 2}
   - {fileID: 11400000, guid: 84729db625381114888328d964bd777f, type: 2}
+  - {fileID: 11400000, guid: 772711501af4b454086c7175641ce88b, type: 2}
   _viewPrefab: {fileID: 8738106586284195295, guid: f4535bd14f73cfb46b210031c208e9c1, type: 3}
   _viewParent: {fileID: 120777703746866513}
   _scrollFocusController: {fileID: 5953388352887293760}
@@ -4381,7 +4381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4215272072368018763
