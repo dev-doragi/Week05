@@ -38,6 +38,7 @@ public class GimmickManager : Singleton<GimmickManager>
     public event Action<GimmickType> OnGimmickActivated;
     public event Action<GimmickType> OnStayDelayActivated;
     public event Action<RoomID, RoomID> OnPathBlocked;
+    public event Action OnFakeInterviewRevealed;
 
     protected override void Init()
     {
@@ -136,10 +137,35 @@ public class GimmickManager : Singleton<GimmickManager>
     {
         _activeTempTarget = targetRoom;
 
+        if (targetRoom == RoomID.F3_CoachingRoom)
+        {
+            while (_coachController != null && _coachController.CurrentRoomId != RoomID.F3_CoachingRoom)
+                yield return null;
+
+            ActivateStayDelay(GimmickType.RequestInterview, RoomID.F3_CoachingRoom, duration, duration);
+
+            yield return new WaitForSeconds(duration);
+
+            RevealFakeInterview();
+
+            if (_coachController != null && _coachController.CoachBrain != null)
+                _coachController.CoachBrain.SetAggro(1f);
+
+            _tempTargetRoutine = null;
+            yield break;
+        }
+
         yield return new WaitForSeconds(duration);
 
         _activeTempTarget = RoomID.None;
         _tempTargetRoutine = null;
+    }
+
+    public void RevealFakeInterview()
+    {
+        _activeTempTarget = RoomID.None;
+        _tempTargetRoutine = null;
+        OnFakeInterviewRevealed?.Invoke();
     }
 
     #endregion
