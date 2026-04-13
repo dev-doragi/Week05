@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 324c42b73b00cbd4296ef2a7ec5f3e49, type: 3}
-  m_Name: SO_Block 3
+  m_Name: SO_InterviewPromotion
   m_EditorClassIdentifier: Assembly-CSharp::SO_ToastData
-  profileIcon: {fileID: 21300000, guid: b25a32bb808449f44a5a37ffc9b48ad2, type: 3}
+  profileIcon: {fileID: 21300000, guid: a7225adab7ea9b6408875e1348d97c58, type: 3}
   workspaceName: Krafton-aliens
-  senderName: "Coach Nim (\uCF54\uCE58\uB2D8)"
-  messageContext: "\uAE38\uC774 \uB9C9\uD614\uB124;; \uC880 \uAC78\uB824\uC694"
-  outlineColor: {r: 0, g: 1, b: 0.2463131, a: 1}
-  displayDuration: 5
+  senderName: "\uAC8C\uC784\uB7A9 5\uAE30 \uCD5COO"
+  messageContext: "\uC57C \uCF54\uCE58\uB2D8 3\uCE35\uC774\uB798! \uCF54\uCE6D\uC2E4
+    \uBA74\uB2F4 \uC2E0\uCCAD\uC774\uB77C\uB3C4 \uD574\uC11C \uC2DC\uAC04\uC880 \uB04C\uC5B4\uBD10!!"
+  outlineColor: {r: 0.03579378, g: 0, b: 1, a: 1}
+  displayDuration: 8

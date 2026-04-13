@@ -63,10 +63,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8cf7ee7bb9ebcad488737608d94119bb, type: 2}
   - {fileID: 11400000, guid: 99014eebc21e3cc40be93a63c64efa92, type: 2}
   _requestInterviewToast: {fileID: 11400000, guid: bc712d640032ccd4b9166bde63aa9abe, type: 2}
+  _promoteInterviewToast: {fileID: 11400000, guid: b546db31b5cace54ca229c952a7e2e7c, type: 2}
   _disableF3ButtonToast: {fileID: 11400000, guid: b7a567d678c3e7d4e803f3507576b833, type: 2}
   _promoteSpringMenuToast: {fileID: 11400000, guid: 67f3aafbe80a9ef4dad9b390cdb24100, type: 2}
   _blockedPathNoticeToast: {fileID: 11400000, guid: 775aa2d6b6073cd4aa83f0f056f766cb, type: 2}
   _fakeInterviewRevealedToast: {fileID: 11400000, guid: 5dbf9553605ede941859c6594209075c, type: 2}
   _useRandomToast: 1
-  _randomToastMinInterval: 5
-  _randomToastMaxInterval: 10
+  _randomToastMinInterval: 7
+  _randomToastMaxInterval: 14

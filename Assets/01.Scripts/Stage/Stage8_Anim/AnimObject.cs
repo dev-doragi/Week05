@@ -54,7 +54,7 @@ public class AnimObject : MonoBehaviour
     [SerializeField] private PairData[] _pairs;
 
     [Header("Hit")]
-    [SerializeField] private float _hitRadius = 40f;
+    [SerializeField] private float _hitRadius = 200f;
     [SerializeField] private float _lineThickness = 8f;
 
     [Header("View")]
@@ -265,9 +265,13 @@ public class AnimObject : MonoBehaviour
 
         foreach (RuntimeNode node in nodes)
         {
-            if (node == null) continue;
-            if (node.point == null) continue;
+            if (node == null || node.root == null || node.point == null) continue;
             if (skipLinked && node.IsLinked) continue;
+
+            if (RectTransformUtility.RectangleContainsScreenPoint(node.root, mouseScreen, GetEventCamera()))
+            {
+                return node; 
+            }
 
             Vector2 pointScreen = RectTransformUtility.WorldToScreenPoint(
                 GetEventCamera(),
@@ -285,7 +289,6 @@ public class AnimObject : MonoBehaviour
 
         return best;
     }
-
     private bool CanConnect(RuntimeNode leftNode, RuntimeNode rightNode)
     {
         if (leftNode == null) return false;

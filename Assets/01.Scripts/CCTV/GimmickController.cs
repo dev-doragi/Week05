@@ -26,9 +26,13 @@ public struct RoomGimmickSetting
 public class GimmickController : MonoBehaviour
 {
     [Header("UI Components")]
+    [SerializeField] private GameObject _panelRoot;
     [SerializeField] private Button _interactionButton;
     [SerializeField] private TMP_Text _buttonLabel;
     [SerializeField] private RectTransform _cooldownGaugeRect;
+
+    [Header("References")]
+    [SerializeField] private CoachMovementController _coachMovementController;
 
     [Header("Settings")]
     [SerializeField] private List<RoomGimmickSetting> _settings = new();
@@ -43,6 +47,9 @@ public class GimmickController : MonoBehaviour
     private void Awake()
     {
         _cameraManager = FindAnyObjectByType<CameraManager>();
+
+        if (_coachMovementController == null)
+            _coachMovementController = FindAnyObjectByType<CoachMovementController>();
     }
 
     private void OnEnable()
@@ -55,6 +62,9 @@ public class GimmickController : MonoBehaviour
 
         if (_interactionButton != null)
             _interactionButton.onClick.AddListener(HandleButtonClick);
+
+        RefreshPanelVisibility();
+        RefreshButtonInteractable();
     }
 
     private void OnDisable()
@@ -69,6 +79,8 @@ public class GimmickController : MonoBehaviour
     private void Update()
     {
         UpdateCooldownUI();
+        RefreshPanelVisibility();
+        RefreshButtonInteractable();
     }
 
     private void UpdateUIByRoom(RoomID currentRoom)
@@ -78,16 +90,22 @@ public class GimmickController : MonoBehaviour
         if (setting.GimmickType != GimmickType.None)
         {
             _currentActiveSetting = setting;
-            _buttonLabel.text = setting.ButtonText;
-            RefreshButtonInteractable();
+
+            if (_buttonLabel != null)
+                _buttonLabel.text = setting.ButtonText;
         }
         else
         {
             _currentActiveSetting = null;
-            _buttonLabel.text = string.Empty;
-            _interactionButton.interactable = false;
+
+            if (_buttonLabel != null)
+                _buttonLabel.text = string.Empty;
+
             SetGaugeWidth(0f);
         }
+
+        RefreshPanelVisibility();
+        RefreshButtonInteractable();
     }
 
     private void HandleButtonClick()
@@ -95,9 +113,15 @@ public class GimmickController : MonoBehaviour
         if (_currentActiveSetting == null)
             return;
 
+        if (IsPanelVisible() == false)
+            return;
+
         RoomGimmickSetting data = _currentActiveSetting.Value;
 
         if (IsOnCooldown(data.Room))
+            return;
+
+        if (_gimmickManager == null || _gimmickManager.CanUseGimmick == false)
             return;
 
         _cooldownEndTimeMap[data.Room] = Time.time + data.Cooldown;
@@ -105,43 +129,41 @@ public class GimmickController : MonoBehaviour
         switch (data.GimmickType)
         {
             case GimmickType.RequestInterview:
-                if (_gimmickManager != null)
-                    _gimmickManager.SetTempTarget(data.Room, data.Duration);
+                _gimmickManager.SetTempTarget(data.Room, data.Duration);
                 break;
 
             case GimmickType.DisableF3Button:
             case GimmickType.PromoteSpringMenu:
-                if (_gimmickManager != null)
-                    _gimmickManager.ActivateStayDelay(data.GimmickType, data.Room, data.Value, data.Duration);
+                _gimmickManager.ActivateStayDelay(data.GimmickType, data.Room, data.Value, data.Duration);
                 break;
         }
 
+        RefreshPanelVisibility();
         RefreshButtonInteractable();
     }
 
     private void UpdateCooldownUI()
     {
         if (_currentActiveSetting == null)
+        {
+            SetGaugeWidth(0f);
             return;
+        }
 
         RoomID currentRoom = _currentActiveSetting.Value.Room;
 
         if (_cooldownEndTimeMap.TryGetValue(currentRoom, out float endTime))
         {
             float remaining = endTime - Time.time;
+
             if (remaining > 0f)
             {
                 float progress = remaining / _currentActiveSetting.Value.Cooldown;
                 SetGaugeWidth(progress * _maxWidth);
-
-                if (_interactionButton.interactable)
-                    _interactionButton.interactable = false;
             }
             else
             {
                 SetGaugeWidth(0f);
-                if (_interactionButton.interactable == false)
-                    _interactionButton.interactable = true;
             }
         }
         else
@@ -158,10 +180,35 @@ public class GimmickController : MonoBehaviour
         _cooldownGaugeRect.sizeDelta = new Vector2(width, _cooldownGaugeRect.sizeDelta.y);
     }
 
-    private void RefreshButtonInteractable()
+    private void RefreshPanelVisibility()
+    {
+        if (_panelRoot == null)
+            return;
+
+        _panelRoot.SetActive(IsPanelVisible());
+    }
+
+    private bool IsPanelVisible()
     {
         if (_currentActiveSetting == null)
+            return false;
+
+        if (_coachMovementController != null && _coachMovementController.IsTransitioning)
+            return false;
+
+        return true;
+    }
+
+    private void RefreshButtonInteractable()
+    {
+        if (_interactionButton == null)
             return;
+
+        if (IsPanelVisible() == false)
+        {
+            _interactionButton.interactable = false;
+            return;
+        }
 
         if (_gimmickManager == null)
         {
