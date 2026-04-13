@@ -19,23 +19,23 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     [SerializeField] private float _visibleX = 0f;
     [SerializeField] private float _enterDuration = 0.5f;
     [SerializeField] private float _exitDuration = 0.5f;
-
     [SerializeField] private float _swipeCloseThreshold = 150f;
+
+    [SerializeField] private Button _bodyButton;
+    [SerializeField] private Button _closeButton;
+    [SerializeField] private bool _focusCoachRoomOnOpen = true;
 
     private bool _isDragging;
     private bool _isSwiped;
     private Vector2 _dragStartPointerPosition;
     private float _dragStartAnchoredX;
 
-    [SerializeField] private Button _bodyButton;
-    [SerializeField] private Button _closeButton;
-    [SerializeField] private bool _focusCoachRoomOnOpen = true;
-
     private CoachMovementController _coachMovementController;
     private UI_ToastSender _owner;
     private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
     private Tween _stackMoveTween;
+    private Tween _closeTween;
     private Sequence _sequence;
     private float _baseAnchoredY;
     private bool _isClosing;
@@ -73,6 +73,7 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         _sequence?.Kill();
         _stackMoveTween?.Kill();
+        _closeTween?.Kill();
     }
 
     public void Initialize(UI_ToastSender owner, SO_ToastData data)
@@ -86,7 +87,7 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void MoveToStackPosition(float targetY, float duration)
     {
-        if (_rectTransform == null)
+        if (_rectTransform == null || _isClosing)
             return;
 
         _stackMoveTween?.Kill();
@@ -121,6 +122,11 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         _sequence?.Kill();
         _stackMoveTween?.Kill();
+        _closeTween?.Kill();
+
+        _isClosing = false;
+        _isDragging = false;
+        _isSwiped = false;
 
         _canvasGroup.alpha = 1f;
         _rectTransform.anchoredPosition = new Vector2(_hiddenX, _baseAnchoredY);
@@ -133,26 +139,12 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         _sequence = DOTween.Sequence();
         _sequence.Append(_rectTransform.DOAnchorPosX(_visibleX, _enterDuration).SetEase(Ease.OutBack));
         _sequence.AppendInterval(duration);
-        _sequence.Append(_rectTransform.DOAnchorPosX(_hiddenX, _exitDuration).SetEase(Ease.InBack));
-        _sequence.OnComplete(HandleAnimationComplete);
-    }
-
-    private void HandleAnimationComplete()
-    {
-        if (_isClosing)
-            return;
-
-        _isClosing = true;
-
-        if (_owner != null)
-            _owner.NotifyToastExpired(this);
-
-        Destroy(gameObject);
+        _sequence.AppendCallback(() => RequestClose());
     }
 
     private void HandleBodyClicked()
     {
-        if (_isSwiped || _isDragging)
+        if (_isSwiped || _isDragging || _isClosing)
             return;
 
         UIManager_New.Instance.OpenCctvPanel();
@@ -163,7 +155,7 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     private void HandleCloseClicked()
     {
-        ForceClose();
+        RequestClose();
     }
 
     private void FocusCoachCurrentRoom()
@@ -183,6 +175,11 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void ForceClose()
     {
+        RequestClose();
+    }
+
+    private void RequestClose()
+    {
         if (_isClosing)
             return;
 
@@ -190,16 +187,20 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         _sequence?.Kill();
         _stackMoveTween?.Kill();
+        _closeTween?.Kill();
 
-        Sequence closeSequence = DOTween.Sequence();
-        closeSequence.Append(_rectTransform.DOAnchorPosX(_hiddenX, _exitDuration).SetEase(Ease.InBack));
-        closeSequence.OnComplete(() =>
-        {
-            if (_owner != null)
-                _owner.NotifyToastExpired(this);
+        _closeTween = _rectTransform
+            .DOAnchorPosX(_hiddenX, _exitDuration)
+            .SetEase(Ease.InBack)
+            .OnComplete(FinalizeClose);
+    }
 
-            Destroy(gameObject);
-        });
+    private void FinalizeClose()
+    {
+        if (_owner != null)
+            _owner.NotifyToastExpired(this);
+
+        Destroy(gameObject);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -214,6 +215,7 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         _sequence?.Pause();
         _stackMoveTween?.Kill();
+        _closeTween?.Kill();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -244,15 +246,17 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         if (movedDistance >= _swipeCloseThreshold)
         {
-            _isClosing = true;
-            _sequence?.Kill();
-            _stackMoveTween?.Kill();
-
-            if (_owner != null)
-                _owner.NotifyToastExpired(this);
-
-            Destroy(gameObject);
+            RequestClose();
             return;
         }
+
+        _rectTransform
+            .DOAnchorPosX(_dragStartAnchoredX, 0.2f)
+            .SetEase(Ease.OutCubic)
+            .OnComplete(() =>
+            {
+                if (_isClosing == false)
+                    _sequence?.Play();
+            });
     }
 }

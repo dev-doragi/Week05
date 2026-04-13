@@ -11,6 +11,7 @@ public class StageScriptJump : Stage
     protected override void OnStart()
     {
         Debug.Log("[Stage ScriptJump] Start.");
+        _typingPanel.OpenPanel();
     }
 
     private void OnEnable()
@@ -41,8 +42,8 @@ public class StageScriptJump : Stage
     void HandleCanJump(bool active)
     {
         Debug.Log("[Stage Script Jump] Jump " + active);
-        _missionClearerCanJump.ClearMission();
         OnJump?.Invoke(active);
+        _missionClearerCanJump.ClearMission();
     }
 
     private void HandleCollision(Collider2D collision)

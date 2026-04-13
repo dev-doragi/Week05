@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StagePlace : Stage
 {
@@ -23,7 +23,6 @@ public class StagePlace : Stage
 
     private void Start()
     {
-        _mission_Reference = GetComponent<MissionClearer>();
 
         // 테스트용
         //OnStart();
@@ -31,6 +30,7 @@ public class StagePlace : Stage
 
     protected override void OnStart()
     {
+        _mission_Reference = GetComponent<MissionClearer>();
         _currentMatchCount = 0;
         _requireMatchCount = targets.Length;
 

@@ -188,7 +188,8 @@ public class GimmickManager : Singleton<GimmickManager>
 
         _stayDelayRoutine = StartCoroutine(CoStayDelay(gimmickType, extraStayTime, duration));
 
-        OnGimmickActivated?.Invoke(gimmickType);
+        if (gimmickType != GimmickType.RequestInterview)
+            OnGimmickActivated?.Invoke(gimmickType);
         OnStayDelayActivated?.Invoke(gimmickType);
         return true;
     }
