@@ -25524,7 +25524,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da2e0f062916cf544ac2823148f4fbb1, type: 2}
   - {fileID: 11400000, guid: 84729db625381114888328d964bd777f, type: 2}
   - {fileID: 11400000, guid: 772711501af4b454086c7175641ce88b, type: 2}
-  - {fileID: 11400000, guid: 8176d0acacfe60a4e9bd35b1fb19c446, type: 2}
   - {fileID: 11400000, guid: ea64901466944e848968878b09f4f049, type: 2}
   _viewPrefab: {fileID: 8738106586284195295, guid: f4535bd14f73cfb46b210031c208e9c1, type: 3}
   _viewParent: {fileID: 219171812}
@@ -34541,7 +34540,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: Stages.Array.size
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: isDontDestroyOnLoad
@@ -34590,11 +34589,11 @@ PrefabInstance:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[10]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1848538866}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[11]'
       value: 
-      objectReference: {fileID: 1848538866}
+      objectReference: {fileID: 0}
     - target: {fileID: 4010879763591745260, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: m_Name
       value: StageManager
