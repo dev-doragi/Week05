@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 46743748600322415, guid: 03cb883e25815614baed615352568d74, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 46743748600322415, guid: 03cb883e25815614baed615352568d74, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 46743748600322415, guid: 03cb883e25815614baed615352568d74, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 46743748600322415, guid: 03cb883e25815614baed615352568d74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.26299
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 46743748600322415, guid: 03cb883e25815614baed615352568d74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -58,7 +58,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1144930844252031935, guid: 03cb883e25815614baed615352568d74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.496
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215758791401875049, guid: 03cb883e25815614baed615352568d74, type: 3}
+      propertyPath: m_Color.b
+      value: 0.23529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215758791401875049, guid: 03cb883e25815614baed615352568d74, type: 3}
+      propertyPath: m_Color.g
+      value: 0.28627452
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215758791401875049, guid: 03cb883e25815614baed615352568d74, type: 3}
+      propertyPath: m_Color.r
+      value: 0.90588236
       objectReference: {fileID: 0}
     - target: {fileID: 2044117580181522670, guid: 03cb883e25815614baed615352568d74, type: 3}
       propertyPath: distance
@@ -76,6 +88,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4874453752945309808, guid: 03cb883e25815614baed615352568d74, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3669078360813575733}
+    - targetCorrespondingSourceObject: {fileID: 4874453752945309808, guid: 03cb883e25815614baed615352568d74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6103182306649644876}
     - targetCorrespondingSourceObject: {fileID: 4874453752945309808, guid: 03cb883e25815614baed615352568d74, type: 3}
       insertIndex: -1
       addedObject: {fileID: 560410493803038850}
@@ -106,9 +121,28 @@ MonoBehaviour:
   axis: 1
   direction: 1
   canMove: 1
-  distance: 1.8
+  distance: 1.9
   speed: 1
   waitTime: 0.5
+--- !u!114 &6103182306649644876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707989249011897181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5119f4edab40050419fd56d7485b2edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Blocked_Visual
+  _platform: {fileID: 3669078360813575733}
+  _sprite: {fileID: 8569789541662100804}
+  _normalColor: {r: 0.32941177, g: 0.3764706, b: 0.9019608, a: 1}
+  _blockedColor: {r: 0.90588236, g: 0.28627452, b: 0.23529412, a: 1}
+  _pulseSpeed: 2
+  _minAlpha: 0
+  _maxAlpha: 1
 --- !u!114 &560410493803038850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +206,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -188,3 +222,8 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9, y: 0.01}
   m_EdgeRadius: 0
+--- !u!212 &8569789541662100804 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1215758791401875049, guid: 03cb883e25815614baed615352568d74, type: 3}
+  m_PrefabInstance: {fileID: 7363732849724336941}
+  m_PrefabAsset: {fileID: 0}
