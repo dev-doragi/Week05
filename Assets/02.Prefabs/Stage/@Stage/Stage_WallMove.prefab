@@ -8,29 +8,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3718543444604182033}
     m_Modifications:
-    - target: {fileID: -5132024340233742644, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: canMove
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2707989249011897181, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
       propertyPath: m_Name
       value: Wall_Move_Blocked
-      objectReference: {fileID: 0}
-    - target: {fileID: 3669078360813575733, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: distance
-      value: 1.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083703911610016211, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7392427006299435586, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7392427006299435586, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7392427006299435586, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -76,22 +56,6 @@ PrefabInstance:
       propertyPath: RespawnPoint
       value: 
       objectReference: {fileID: 4380361386553257919}
-    - target: {fileID: 7625333635548602514, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.496
-      objectReference: {fileID: 0}
-    - target: {fileID: 8569789541662100804, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: m_Color.b
-      value: 0.23529412
-      objectReference: {fileID: 0}
-    - target: {fileID: 8569789541662100804, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: m_Color.g
-      value: 0.28627452
-      objectReference: {fileID: 0}
-    - target: {fileID: 8569789541662100804, guid: da5d7817dc619a944bc3aee52ea444be, type: 3}
-      propertyPath: m_Color.r
-      value: 0.90588236
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
