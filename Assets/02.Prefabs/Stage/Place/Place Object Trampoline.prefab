@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2833781952697203935
+--- !u!1001 &6725636439611032734
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,36 +9,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3054599648482671909, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054599648482671909, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: m_Color.b
-      value: 0.078431375
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3054599648482671909, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: m_Color.g
-      value: 0.078431375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3054599648482671909, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: m_Color.r
-      value: 0.078431375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3473593763409457026, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3473593763409457026, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3473593763409457026, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 24.410034
       objectReference: {fileID: 0}
     - target: {fileID: 3473593763409457026, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.3914294
       objectReference: {fileID: 0}
     - target: {fileID: 3473593763409457026, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -74,34 +62,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4355923178161635117, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: objectKey
-      value: platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 6273142883000500011, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6273142883000500011, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 1af019c150e1302498bb6ce41f7072e6, type: 2}
-    - target: {fileID: 6273142883000500011, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6273142883000500011, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 4
+      value: trampoline
       objectReference: {fileID: 0}
     - target: {fileID: 7993821632629198118, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
       propertyPath: m_Name
-      value: Place Object Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993821632629198118, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
-      propertyPath: m_Layer
-      value: 27
+      value: Trampoline Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7993821632629198118, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4515910964831599374}
   m_SourcePrefab: {fileID: 100100000, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
+--- !u!1 &3727151861048936888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7993821632629198118, guid: 9015fa0215ff42c4796e7a281bd3ef4f, type: 3}
+  m_PrefabInstance: {fileID: 6725636439611032734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4515910964831599374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3727151861048936888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f9a7830bdf07d4f8f55e17fb274da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trampoline
+  jumpForce: 20

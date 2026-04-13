@@ -1,17 +1,23 @@
 ﻿using System;
 using UnityEngine;
 
-public class StageScriptJump : Stage
+public class StageMakeTrampoline : Stage
 {
+    [Header("Place Targets")]
+    public PlaceTarget target;
+
     public static Action<bool> OnJump;
     [SerializeField] private TypingPanel _typingPanel;
-    [SerializeField] private MissionClearer _missionClearerCanJump;
+    [SerializeField] private MissionClearer _missionClearerScriptTampoline;
+    [SerializeField] private MissionClearer _missionClearerPlaceTrampoline;
 
 
     protected override void OnStart()
     {
         Debug.Log("[Stage ScriptJump] Start.");
         _typingPanel.OpenPanel();
+        target.Init();
+        target.OnMatch += HandleMatch;
     }
 
     private void OnEnable()
@@ -36,14 +42,20 @@ public class StageScriptJump : Stage
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void HandleCanJump(bool active)
     {
         Debug.Log("[Stage Script Jump] Jump " + active);
         OnJump?.Invoke(active);
-        _missionClearerCanJump.ClearMission();
+        _missionClearerScriptTampoline.ClearMission();
+    }
+
+    private void HandleMatch()
+    {
+        _missionClearerPlaceTrampoline.ClearMission();
+        
     }
 
     private void HandleCollision(Collider2D collision)
