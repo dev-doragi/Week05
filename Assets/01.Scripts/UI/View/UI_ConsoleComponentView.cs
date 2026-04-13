@@ -137,15 +137,16 @@ public class UI_ConsoleComponentView : MonoBehaviour
             return;
 
         Vector2 startPosition = rectTransform.anchoredPosition;
-        Vector2 endPosition = startPosition + new Vector2(120f, 0f);
+        Vector2 endPosition = startPosition + new Vector2(90f, 0f);
 
         canvasGroup.alpha = 1f;
 
-        sequence.Append(canvasGroup.DOFade(0.25f, 0.1f));
-        sequence.Append(canvasGroup.DOFade(1.2f, 0.1f));
-        sequence.AppendInterval(0.1f);
-        sequence.Append(rectTransform.DOAnchorPos(endPosition, 0.6f).SetEase(Ease.InCubic));
-        sequence.Join(canvasGroup.DOFade(0f, 0.6f));
+        sequence.Append(canvasGroup.DOFade(0.35f, 0.07f));
+        sequence.Append(canvasGroup.DOFade(1f, 0.09f));
+        sequence.AppendInterval(0.05f);
+
+        sequence.Append(rectTransform.DOAnchorPos(endPosition, 0.7f).SetEase(Ease.InBack));
+        sequence.Join(canvasGroup.DOFade(0f, 0.7f).SetEase(Ease.OutQuad));
     }
 
 }

@@ -128,6 +128,16 @@ public class CoachBrain
         for (int i = 0; i < neighbors.Count; i++)
         {
             RoomID nextRoomId = neighbors[i];
+
+            // 코칭 면담 중이면 Office 진입 금지
+            if (hasTempTarget &&
+                targetRoomId == RoomID.F3_CoachingRoom &&
+                currentRoomId != RoomID.Office &&
+                nextRoomId == RoomID.Office)
+            {
+                continue;
+            }
+
             float score = CalculateRoomScore(currentRoomId, nextRoomId, targetRoomId, aggroState, hasTempTarget);
 
             if (score <= 0f)
