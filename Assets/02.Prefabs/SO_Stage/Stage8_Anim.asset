@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageDefinition
   stageId: STAGE_008
   stageTitle: "\uC560\uB2C8\uBA54\uC774\uC158 \uB9DE\uCD94\uAE30"
-  startMessage: "\uC801\uC758 \uC560\uB2C8\uBA54\uC774\uC158\uC5D0 \uBB38\uC81C\uAC00
-    \uC788\uB294\uAC70\uAC19\uC740\uB370?"
+  startMessage: "\uC801 \uC560\uB2C8\uBA54\uC774\uC158\uC774 \uC774\uC0C1\uD55C\uB370?
+    \uC801\uC744 \uD074\uB9AD\uD574\uBCFC\uAE4C?"
   missions:
   - missionIndex: 0
-    missionTitle: "\uC801\uC774 \uC815\uC0C1\uC801\uC73C\uB85C \uB3D9\uC791\uD558\uB2C8\uAE4C
-      \uB118\uC5B4\uAC00\uB3C4 \uB418\uACA0\uB2E4."
+    missionTitle: "\uC774\uC81C \uB2E4\uC74C \uC2A4\uD14C\uC774\uC9C0\uB85C \uB118\uC5B4\uAC00\uC790."
     isMissionSuccess: 0
     missionMessage: 
   - missionIndex: 1

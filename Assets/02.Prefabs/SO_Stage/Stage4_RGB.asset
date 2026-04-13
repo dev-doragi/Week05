@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: Stage4_RGB
   m_EditorClassIdentifier: Assembly-CSharp::StageDefinition
   stageId: STAGE_004
-  stageTitle: "\uC0C9\uC0C1\uC774 \uC548\uB9DE\uB2E4"
-  startMessage: "\uBC14\uB2E5\uC774 \uC788\uB294\uAC74\uAC00? \uC0C9\uAE54\uC744
-    \uC870\uC808\uD574\uC57C \uD560 \uAC83 \uAC19\uC740\uB370?"
+  stageTitle: "\uD50C\uB7AB\uD3FC \uC0C9\uC0C1 \uBD88\uC77C\uCE58"
+  startMessage: "\uD50C\uB7AB\uD3FC\uC758 \uC0C9\uAE54\uC774 \uC774\uC0C1\uD55C\uB370?
+    \uC774\uC0C1\uD55C \uD50C\uB7AB\uD3FC\uC744 \uD074\uB9AD\uD574\uBCFC\uAE4C?"
   missions:
   - missionIndex: 0
     missionTitle: "\uBE44\uB2E5 \uC0C9\uC0C1 \uBCC0\uACBD"
     isMissionSuccess: 0
-    missionMessage: "\uBC14\uB2E5\uC774 \uC228\uC5B4\uC788\uC5C8\uAD6C\uB098.. \uC774\uC81C
-      \uC55E\uC73C\uB85C \uAC08 \uC218 \uC788\uACA0\uB2E4."
+    missionMessage: "\uC774\uC81C \uB2E4\uC74C \uC2A4\uD14C\uC774\uC9C0\uB85C \uB118\uC5B4\uAC00\uC790."
   - missionIndex: 1
     missionTitle: "\uD3EC\uD0C8\uC744 \uD0C0\uC11C \uB2E4\uC74C \uBB38\uC81C\uB97C
       \uD574\uACB0\uD558\uB7EC \uAC00\uAE30"

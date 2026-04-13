@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageDefinition
   stageId: STAGE_005
   stageTitle: "\uC801 \uBC30\uCE58\uD558\uAE30"
-  startMessage: "\uC801\uC744 \uC880 \uB9CE\uC774 \uBC30\uCE58\uD574\uBCFC\uAE4C?"
+  startMessage: "\uC801\uB4E4\uC774 \uD544\uC694\uD558\uACA0\uB2E4. \uD504\uB85C\uC81D\uD2B8
+    \uBDF0\uB97C \uD655\uC778\uD574\uBCFC\uAE4C?"
   missions:
   - missionIndex: 0
     missionTitle: "\uC801\uC744 \uBC30\uCE58\uD558\uB77C1"
     isMissionSuccess: 0
-    missionMessage: "\uC801\uC744\uC880 \uBC30\uCE58\uD574\uC57C\uACA0\uB294\uB370"
+    missionMessage: "\uC801\uC744 \uB354 \uBC30\uCE58\uD574\uC57C\uACA0\uB2E4."
   - missionIndex: 1
     missionTitle: "\uC801\uC744 \uBC30\uCE58\uD558\uB77C2"
     isMissionSuccess: 0
@@ -39,4 +40,4 @@ MonoBehaviour:
   - missionIndex: 5
     missionTitle: "\uC801\uC744 \uBC30\uCE58\uD558\uB77C6"
     isMissionSuccess: 0
-    missionMessage: "\uB2E4\uBC30\uCE58\uD588\uB2E4 \uC55E\uC73C\uB85C \uAC00\uBCFC\uAE4C?"
+    missionMessage: "\uC774\uC81C \uB2E4\uC74C \uC2A4\uD14C\uC774\uC9C0\uB85C \uB118\uC5B4\uAC00\uC790."
