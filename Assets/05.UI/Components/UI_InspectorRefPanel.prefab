@@ -55,13 +55,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271736079876029283}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -90,9 +90,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa2a6cfdffeeb84b81083e54948b311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_InspectorReferenceDropSlot
+  _backgroundImage: {fileID: 2079871308479328935}
   _labelText: {fileID: 6374764176782946711}
   _valueText: {fileID: 8217945151840795180}
   _highlightImage: {fileID: 3326574251176693047}
+  _idleHighlightAlpha: 0.2
+  _hoverHighlightAlpha: 0.5
+  _normalLabelColor: {r: 1, g: 1, b: 1, a: 1}
+  _missingLabelColor: {r: 1, g: 0.35, b: 0.35, a: 1}
+  _wrongLabelColor: {r: 1, g: 0.65, b: 0.2, a: 1}
 --- !u!1 &5619283404964530260
 GameObject:
   m_ObjectHideFlags: 0
