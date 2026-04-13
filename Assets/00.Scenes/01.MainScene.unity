@@ -18581,9 +18581,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29e1f9dacb443d4b8932b6ab9650480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GimmickController
+  _panelRoot: {fileID: 0}
   _interactionButton: {fileID: 1561323822}
   _buttonLabel: {fileID: 2025617338}
   _cooldownGaugeRect: {fileID: 273283153}
+  _coachMovementController: {fileID: 0}
   _settings:
   - Room: 11
     GimmickType: 1
@@ -30908,6 +30910,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 401244356}
+  - {fileID: 1465900908}
   - {fileID: 1049921287}
   - {fileID: 2037616429}
   - {fileID: 1105031677}
@@ -30915,7 +30918,6 @@ Transform:
   - {fileID: 1670225451}
   - {fileID: 22958870}
   - {fileID: 1102540674}
-  - {fileID: 1465900908}
   - {fileID: 1848538865}
   - {fileID: 1653183244}
   m_Father: {fileID: 0}
