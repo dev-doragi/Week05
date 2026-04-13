@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_Name
-      value: Stage_EX4 Variant
+      value: Stage_EX4
       objectReference: {fileID: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_IsActive
@@ -645,9 +645,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       insertIndex: -1
       addedObject: {fileID: 290267102492375285}
-    - targetCorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9022330983640554158}
   m_SourcePrefab: {fileID: 100100000, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
 --- !u!4 &3055753469122763858 stripped
 Transform:
@@ -681,17 +678,3 @@ MonoBehaviour:
   _platformBlockers:
   - {fileID: 583326566779596385}
   - {fileID: 5382513527433678530}
---- !u!114 &9022330983640554158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9111983213693382261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
-  stage: {fileID: 290267102492375285}
-  missionIndexToClear: 0
