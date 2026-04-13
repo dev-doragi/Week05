@@ -13,6 +13,22 @@ MonoBehaviour:
   m_Name: SO_InGameEditorInitialPlacementData
   m_EditorClassIdentifier: Assembly-CSharp::SO_InGameEditorInitialPlacementData
   _objects:
+  - _objectId: MainCamera
+    _componentData: {fileID: 11400000, guid: 6efab56c373c96545aad5c3591a96b79, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: DirectionalLight
+    _componentData: {fileID: 11400000, guid: 9e0285cac80da61448d1bfcd1b5bc965, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: PlayerCollider
+    _componentData: {fileID: 11400000, guid: 854958ffac9c34144a1c05e841e7955b, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: Trampoline
+    _componentData: {fileID: 11400000, guid: 6cedb0bb3b25e614d8a640e93d24055f, type: 2}
+    _scene: 0
+    _references: []
   - _objectId: Player
     _componentData: {fileID: 11400000, guid: 82f29148d0c8e934ebc2e6bf8f5d0bc5, type: 2}
     _scene: 0
@@ -53,10 +69,6 @@ MonoBehaviour:
       _normalTargetId: PlayerSprite_2
       _canSpawnError: 1
       _isRequired: 1
-  - _objectId: PlayerCollider
-    _componentData: {fileID: 11400000, guid: 854958ffac9c34144a1c05e841e7955b, type: 2}
-    _scene: 0
-    _references: []
   - _objectId: PlayerRigidbody
     _componentData: {fileID: 11400000, guid: aebe893040f4b7945a28692bfd081234, type: 2}
     _scene: 0
@@ -67,10 +79,6 @@ MonoBehaviour:
     _references: []
   - _objectId: PlayerSprite_2
     _componentData: {fileID: 11400000, guid: c0582bfe554b5f94d996e479e954c443, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: Platform
-    _componentData: {fileID: 11400000, guid: a705b7d7ecdd5294dad03297e1ba6156, type: 2}
     _scene: 0
     _references: []
   - _objectId: MovingPlatform
@@ -99,28 +107,12 @@ MonoBehaviour:
     _componentData: {fileID: 11400000, guid: 312dd52c1af3af049b6ece27d2316f15, type: 2}
     _scene: 0
     _references: []
-  - _objectId: MPRigidbody
-    _componentData: {fileID: 11400000, guid: d8a4299283713ea49afd9bd55ec6947e, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: MPSprite
-    _componentData: {fileID: 11400000, guid: b05b683a4a206ed42a75da488dbdcd7a, type: 2}
-    _scene: 0
-    _references: []
   - _objectId: MPController
     _componentData: {fileID: 11400000, guid: 4fb8c8e3809d6e64eb35203b9eeb9830, type: 2}
     _scene: 0
     _references: []
-  - _objectId: MainCamera
-    _componentData: {fileID: 11400000, guid: 6efab56c373c96545aad5c3591a96b79, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: DirectionalLight
-    _componentData: {fileID: 11400000, guid: 9e0285cac80da61448d1bfcd1b5bc965, type: 2}
-    _scene: 0
-    _references: []
-  - _objectId: enemyprefab
-    _componentData: {fileID: 11400000, guid: 26cb5f014e569f64d851ceefd8716ea3, type: 2}
+  - _objectId: MPRigidbody
+    _componentData: {fileID: 11400000, guid: d8a4299283713ea49afd9bd55ec6947e, type: 2}
     _scene: 0
     _references: []
   - _objectId: Platform1
@@ -167,7 +159,11 @@ MonoBehaviour:
       _normalTargetId: MPController
       _canSpawnError: 1
       _isRequired: 1
-  - _objectId: Trampoline
-    _componentData: {fileID: 11400000, guid: 6cedb0bb3b25e614d8a640e93d24055f, type: 2}
+  - _objectId: Platform
+    _componentData: {fileID: 11400000, guid: a705b7d7ecdd5294dad03297e1ba6156, type: 2}
+    _scene: 0
+    _references: []
+  - _objectId: enemyprefab
+    _componentData: {fileID: 11400000, guid: 26cb5f014e569f64d851ceefd8716ea3, type: 2}
     _scene: 0
     _references: []

@@ -3119,7 +3119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2644449855538155069, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8119579745937636378, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3217,6 +3217,10 @@ PrefabInstance:
     - target: {fileID: 7501880331717909867, guid: d84a8b53ed6805944abd3f0a8a0c30bf, type: 3}
       propertyPath: m_Name
       value: Stage_EX1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501880331717909867, guid: d84a8b53ed6805944abd3f0a8a0c30bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
