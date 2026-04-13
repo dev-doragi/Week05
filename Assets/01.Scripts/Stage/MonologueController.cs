@@ -19,7 +19,7 @@ public class MonologueController : MonoBehaviour
     {
         rect = GetComponent<RectTransform>();
         shownY = rect.anchoredPosition.y;
-        hiddenY = shownY + rect.rect.height;
+        hiddenY = shownY + rect.rect.height + 5f;
 
         // 처음엔 숨김
         rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
