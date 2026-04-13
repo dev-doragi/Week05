@@ -34,7 +34,6 @@ public class RoomTile : MonoBehaviour, IMinimapHoverTarget
     {
         if (selectionGroup == null)
             selectionGroup = GetComponentInParent<RoomSelectionGroup>();
-        RefreshRoomIdText();
         RefreshVisual();
 
     }
@@ -74,30 +73,7 @@ public class RoomTile : MonoBehaviour, IMinimapHoverTarget
             r.sharedMaterial = mat;
         }
     }
-    #if UNITY_EDITOR
-    private void OnValidate()
-    {
-        RefreshRoomIdText();
-    }
-    #endif
-
-    private void RefreshRoomIdText()
-    {
-        if (roomIdText == null) return;
-
-        string value = roomId.ToString();
-
-        if (value.StartsWith("B1F_")) value = value.Substring("B1F_".Length);
-        else if (value.StartsWith("F1_")) value = value.Substring("F1_".Length);
-        else if (value.StartsWith("F3_")) value = value.Substring("F3_".Length);
-
-        value = value.Replace("Upper", "");
-        value = value.Replace("Lower", "");
-        value = value.Replace('_', ' ');
-        value = value.Trim();
-
-        roomIdText.text = value;
-    }
+  
 
     public void SetHovered(bool hovered)
     {
