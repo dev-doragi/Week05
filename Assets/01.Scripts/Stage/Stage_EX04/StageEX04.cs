@@ -118,7 +118,7 @@ public class StageEX4 : Stage
     {
         MissionClearer mission = collision.GetComponent<MissionClearer>();
         if (mission == null) return;
-
+        _runtimeState?.RestoreAllInvalidReferences();
         mission.ClearMission();
     }
 }
