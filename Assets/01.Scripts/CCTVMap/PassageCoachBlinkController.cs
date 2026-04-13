@@ -44,7 +44,10 @@ public class PassageCoachBlinkController : MonoBehaviour
         {
             coach.OnCoachMoved -= HandleCoachMoved;
             coach.OnCoachPreparingToMove -= HandleCoachPreparingToMove;
-            CameraManager.Instance.OnCameraSelected -= HandleCameraSelected;
+            if(CameraManager.Instance != null)
+            {
+                CameraManager.Instance.OnCameraSelected -= HandleCameraSelected;
+            }
 
         }
 
