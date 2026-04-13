@@ -12810,9 +12810,9 @@ MonoBehaviour:
   _timerVariability: 2
   _transitionDuration: 1.5
   _coachBrain:
-    _officeAggro: 1
+    _officeAggro: 0
     _maxAggro: 1
-    _aggroIncreasePerMove: 0.25
+    _aggroIncreasePerMove: 0.125
     _alertThreshold: 0.35
     _chaseThreshold: 0.75
     _wanderCloserBonus: 0.15
@@ -18604,7 +18604,7 @@ MonoBehaviour:
     GimmickType: 1
     ButtonText: "\uCF54\uCE58\uB2D8 \uBA74\uB2F4 \uC2E0\uCCAD\uD558\uAE30"
     Duration: 15
-    Value: 0
+    Value: 15
     Cooldown: 100
   - Room: 5
     GimmickType: 2
