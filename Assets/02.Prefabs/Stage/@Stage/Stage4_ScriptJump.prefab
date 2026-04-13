@@ -252,6 +252,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: TypingPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3957614003104702727, guid: 747214cc6ed2e0b4990146189c0ae939, type: 3}
+      propertyPath: targetText
+      value: 'If press spacebar
+
+        addforce to player 15'
+      objectReference: {fileID: 0}
     - target: {fileID: 6269637971183777094, guid: 747214cc6ed2e0b4990146189c0ae939, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -399,11 +405,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_Name
-      value: Stage10_ScriptJump
+      value: Stage4_ScriptJump
       objectReference: {fileID: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3618345775492974790, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: stage
@@ -467,11 +473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.181435
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.6319714
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.z
