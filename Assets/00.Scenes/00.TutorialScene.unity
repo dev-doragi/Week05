@@ -386,6 +386,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f03120e15255814194976dbd1805784, type: 3}
+--- !u!114 &134735784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4373601432894941060, guid: 2f03120e15255814194976dbd1805784, type: 3}
+  m_PrefabInstance: {fileID: 134735783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6338fedf010b0e48bd20428b52d4fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXPlayer
 --- !u!1 &136317367
 GameObject:
   m_ObjectHideFlags: 0
@@ -4492,6 +4503,7 @@ MonoBehaviour:
   startCctvOpened: 0
   GameOverImage: {fileID: 1420124492}
   GameClearImage: {fileID: 461222268}
+  NormalEndingObject: {fileID: 0}
 --- !u!1 &672848520
 GameObject:
   m_ObjectHideFlags: 0
@@ -7783,10 +7795,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ef118d53a03b046b5ca0f3f1e70604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearEndingController
-  endingPannel: {fileID: 0}
+  endingRoot: {fileID: 0}
   progressSlider: {fileID: 0}
   messageSlots: []
+  buildButton: {fileID: 0}
+  gameClearImage: {fileID: 0}
+  gameClearCanvasGroup: {fileID: 0}
+  gameClearFadeDuration: 0.45
   totalSeconds: 8
+  clearPrefix: '[Build Success] '
 --- !u!1 &1432723616
 GameObject:
   m_ObjectHideFlags: 0
@@ -13967,8 +13984,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 12
   rotateStepIndex: 2
   selectionGroup: {fileID: 2145462790137721326}
@@ -14874,6 +14891,7 @@ MonoBehaviour:
     rotationEuler: {x: -14.869, y: 315.914, z: 14.375}
   - position: {x: 85.71887, y: 20.34906, z: -110.2087}
     rotationEuler: {x: -15.118, y: 404.827, z: -14.112}
+  mapRotationEnabled: 1
 --- !u!33 &2158875290490664720
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16069,8 +16087,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 7
   rotateStepIndex: 2
   selectionGroup: {fileID: 2145462790137721326}
@@ -16210,8 +16228,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 5
   rotateStepIndex: 1
   selectionGroup: {fileID: 2145462790137721326}
@@ -18012,8 +18030,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 6
   rotateStepIndex: 0
   selectionGroup: {fileID: 2145462790137721326}
@@ -19087,8 +19105,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 4
   rotateStepIndex: 3
   selectionGroup: {fileID: 2145462790137721326}
@@ -19305,8 +19323,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 3
   rotateStepIndex: 2
   selectionGroup: {fileID: 2145462790137721326}
@@ -20277,8 +20295,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 11
   rotateStepIndex: 3
   selectionGroup: {fileID: 2145462790137721326}
@@ -21073,8 +21091,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 2
   rotateStepIndex: 0
   selectionGroup: {fileID: 2145462790137721326}
@@ -22166,8 +22184,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 1
   rotateStepIndex: 1
   selectionGroup: {fileID: 2145462790137721326}
@@ -22593,8 +22611,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 9
   rotateStepIndex: 1
   selectionGroup: {fileID: 2145462790137721326}
@@ -24073,8 +24091,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 10
   rotateStepIndex: 0
   selectionGroup: {fileID: 2145462790137721326}
@@ -24105,8 +24123,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 094da9eb293b87f4595cc7ef06048a58, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
-  _sfxPlayer: {fileID: 0}
-  _clickVolume: 1
+  _sfxPlayer: {fileID: 134735784}
+  _clickVolume: 0.2
   roomId: 8
   rotateStepIndex: 3
   selectionGroup: {fileID: 2145462790137721326}

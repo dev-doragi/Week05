@@ -35,6 +35,9 @@ public class UIManager_New : Singleton<UIManager_New>
     [SerializeField] private GameObject GameClearImage;
 
 
+    [SerializeField] private GameObject NormalEndingObject;
+
+
     private bool _isOpen;
     private Sequence _seq;
 
@@ -44,6 +47,11 @@ public class UIManager_New : Singleton<UIManager_New>
         ApplyImmediate(_isOpen);
         GameOverImage.SetActive(false);
         GameClearImage.SetActive(false);
+        if(NormalEndingObject != null)
+        {
+            NormalEndingObject.SetActive(false);
+        }
+        Time.timeScale = 1f;
     }
 
     private void Update()
@@ -140,13 +148,17 @@ public class UIManager_New : Singleton<UIManager_New>
             _seq.Kill();
     }
 
-    public void GameOverImagePopUP()
+    public void NormalEndingObjectOpen()
     {
-        GameOverImage.SetActive(true);
+        NormalEndingObject.SetActive(true);
+        Time.timeScale = 0f; // 일시정지
+    }
 
-    }
-    public void GameClearImagePopUP()
+    public void NormalEndingObjectClose()
     {
-        GameClearImage.SetActive(true);
+        NormalEndingObject.SetActive(false);
+        Time.timeScale = 1f; // 재개
     }
+
+    
 }

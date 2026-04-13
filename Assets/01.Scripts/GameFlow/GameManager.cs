@@ -62,14 +62,27 @@ public class GameManager : Singleton<GameManager>
             EndingRuntimePayload.SetClearedStages(cleared);
         }
 
+        SceneManager.LoadScene("04.HiddenEndingScene");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.StopBgm();
+
+        GameFinish = true;
+    }
+    public void GameNormalClear()
+    {
+        if (GameFinish) return;
+
+        if (StageManager.Instance != null)
+        {
+            var cleared = StageManager.Instance.GetClearedStageDefinitionsSnapshot();
+            EndingRuntimePayload.SetClearedStages(cleared);
+        }
         SceneManager.LoadScene("03.GameClearScene");
         if (SoundManager.Instance != null)
             SoundManager.Instance.StopBgm();
 
-        UIManager_New.Instance.GameClearImagePopUP();
         GameFinish = true;
     }
-
 
 
 }
