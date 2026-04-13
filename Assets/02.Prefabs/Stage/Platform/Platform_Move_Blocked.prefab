@@ -13,6 +13,10 @@ PrefabInstance:
       value: Platform_Move_Blocked
       objectReference: {fileID: 0}
     - target: {fileID: 4811143622149294302, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4811143622149294302, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -52,6 +56,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5962118013997266904, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.23529413
+      objectReference: {fileID: 0}
+    - target: {fileID: 5962118013997266904, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.28627452
+      objectReference: {fileID: 0}
+    - target: {fileID: 5962118013997266904, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9058824
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6790485444276214111, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
     m_RemovedGameObjects: []
@@ -60,6 +76,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 128076953697479105, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1617936673923350263}
+    - targetCorrespondingSourceObject: {fileID: 128076953697479105, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9129814441326095861}
     - targetCorrespondingSourceObject: {fileID: 128076953697479105, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1121437800627042121}
@@ -90,6 +109,25 @@ MonoBehaviour:
   distance: 3
   speed: 1
   waitTime: 0.5
+--- !u!114 &9129814441326095861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345291270792732985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5119f4edab40050419fd56d7485b2edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Blocked_Visual
+  _platform: {fileID: 1617936673923350263}
+  _sprite: {fileID: 6318567207960461088}
+  _normalColor: {r: 0.32941177, g: 0.3764706, b: 0.9019608, a: 1}
+  _blockedColor: {r: 0.90588236, g: 0.28627452, b: 0.23529412, a: 1}
+  _pulseSpeed: 2
+  _minAlpha: 0
+  _maxAlpha: 1
 --- !u!114 &1121437800627042121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,3 +156,8 @@ MonoBehaviour:
   _componentId: MovingPlatform
   _scene: 0
   _controller: {fileID: 0}
+--- !u!212 &6318567207960461088 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5962118013997266904, guid: ad7a1929aee42cd46a71b3aa60e2f55f, type: 3}
+  m_PrefabInstance: {fileID: 364155894300772600}
+  m_PrefabAsset: {fileID: 0}

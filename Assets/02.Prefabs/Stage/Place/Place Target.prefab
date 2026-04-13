@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7994857739060844802}
   - component: {fileID: 967974097636858195}
   - component: {fileID: 5805673940458932437}
+  - component: {fileID: 793990740283798987}
   - component: {fileID: 824095534654963488}
   m_Layer: 0
   m_Name: Place Target
@@ -107,6 +108,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlaceTarget
   targetKey: 
   _isMatch: 0
+--- !u!114 &793990740283798987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7575776840027557393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617bb428cd0072f4b8638339352e5f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaceVisual
+  _type: 1
+  _placeObject: {fileID: 0}
+  _placeTarget: {fileID: 5805673940458932437}
+  _sprite: {fileID: 967974097636858195}
+  _normalMaterial: {fileID: 0}
+  _selectedMaterial: {fileID: 0}
+  _placedMaterial: {fileID: 0}
+  _pulseSpeed: 2
+  _minAlpha: 0
+  _maxAlpha: 1
 --- !u!61 &824095534654963488
 BoxCollider2D:
   m_ObjectHideFlags: 0

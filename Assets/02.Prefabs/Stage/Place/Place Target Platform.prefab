@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 793990740283798987, guid: 46f561c12a649bb4096054d96a73aacb, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 2998697331667658944}
     - target: {fileID: 967974097636858195, guid: 46f561c12a649bb4096054d96a73aacb, type: 3}
       propertyPath: m_Color.b
       value: 0.105882354
@@ -81,3 +85,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46f561c12a649bb4096054d96a73aacb, type: 3}
+--- !u!212 &2998697331667658944 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 967974097636858195, guid: 46f561c12a649bb4096054d96a73aacb, type: 3}
+  m_PrefabInstance: {fileID: 2662590577389531539}
+  m_PrefabAsset: {fileID: 0}

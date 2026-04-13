@@ -130,9 +130,18 @@ public class TutorialController : MonoBehaviour
 
     public void StartButton()
     {
-        BeginStep(0);
+        StartCoroutine(Co_StartTutorial());
+    }
+
+    private IEnumerator Co_StartTutorial()
+    {
         StartButtonAndTitle.SetActive(false);
         dialogueBG.SetActive(true);
+
+        // 1프레임 대기하여 현재 프레임의 마우스 클릭 입력(wasPressedThisFrame) 소진
+        yield return null;
+
+        BeginStep(0);
     }
 
     private void Update()
@@ -180,8 +189,11 @@ public class TutorialController : MonoBehaviour
 
         _isTyping = false;
 
-        if (dialogueText != null && _stepIndex >= 0 && _stepIndex < lines.Length)
-            dialogueText.text = lines[_stepIndex];
+        if (dialogueText != null)
+        {
+            // 텍스트를 다시 설정할 필요 없이 보이는 수치만 최대로 변경
+            dialogueText.maxVisibleCharacters = dialogueText.textInfo.characterCount;
+        }
 
         OnTypeCompleteForCurrentStep();
     }
@@ -204,11 +216,21 @@ public class TutorialController : MonoBehaviour
 
     private IEnumerator TypeLine(string line)
     {
-        dialogueText.text = string.Empty;
+        // 전체 텍스트를 미리 설정 (태그가 포함된 상태)
+        dialogueText.text = line;
 
-        for (int i = 0; i < line.Length; i++)
+        // 현재 표시되는 글자 수를 0으로 초기화
+        dialogueText.maxVisibleCharacters = 0;
+
+        // TMP가 텍스트를 분석하여 실제 글자 수를 계산하도록 강제 갱신
+        dialogueText.ForceMeshUpdate();
+
+        // 실제 눈에 보이는 글자 수 (태그 제외)
+        int totalVisibleCharacters = dialogueText.textInfo.characterCount;
+
+        for (int i = 0; i <= totalVisibleCharacters; i++)
         {
-            dialogueText.text += line[i];
+            dialogueText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(typeCharInterval);
         }
 
@@ -474,18 +496,18 @@ public class TutorialController : MonoBehaviour
     {
         return new[]
         {
-            "이번 프로젝트는, 제가 직접 여러분이 만든 빌드를 평가하러 갑니다.",
-            "평가 시간은 10시,\n제가 도착했을때 여러분의 게임이 실행되어야합니다.",
-            "약간의 사정으로 조금은 늦을 수도 있습니다.",
-            "늦어질 때마다, Jlack 메시지로 공지해드리죠.",
-            "'큰일이야.'\n'제 시간에 오시면 빌드가 완성되지 않을 것 같은데'",
-            "'일단 TAB키를 눌러 CCTV 사용법부터 익히자.'",
-            "'코치님은 B1F Cafeteria 부터 시작해서'\n'3F 에 있는 내 위치까지 올라오신다.'",
-            "'B1F 에서는 계단을 통해서만 1F에 올라오고,'\n'1F에선 엘레베이터로만 3F로 올라온다.'",
-            "'방을 좌클릭해 코치의 위치를 찾을 수 있고,'\n'찾으면 다음 이동 경로를 확인할 수 있다.'",
-            "'통로를 우클릭하면 코치의 이동경로를 막을 수 있다.'\n'길이 막히면 코치는 반대편 경로로 우회한다.'",
-            "'특정방에 코치가 있을 땐 발을 묶을 수단이 있을 것 같다.'",
-            "'코치님을 최대한 지연시키고, 도착 전에 빌드를 끝내자.'"
+            "이번 프로젝트는 제가 직접 여러분이 만든 빌드를 평가하러 갑니다.",
+            "평가 시간은 10시 정각입니다.\n제가 도착했을 때 여러분의 게임은 정상 실행되어야 합니다.",
+            "사정에 따라 도착 시간이 조금 늦어질 수도 있습니다.",
+            "지연될 경우에는 Jlack 메시지로 실시간으로 공지하겠습니다.",
+            "'큰일이야..!'\n'코치님이 제시간에 오시면 빌드를 다 완성하지 못할 것 같아..'",
+            "'일단 <color=yellow>TAB 키</color>를 눌러서 CCTV를 확인해보자.'",
+            "'코치님은 지하 1층 카페테리아에서 시작해서'\n'3층에 있는 305호까지 오실 거야.'",
+            "'지하 1층에서는 계단을 통해서만 1층으로 올라오고,'\n'1층에서는 엘리베이터를 타야만 3층으로 올 수 있어.'",
+            "'방을 클릭하면 코치님의 위치를 찾을 수 있고,'\n'위치를 파악하면 다음 이동 경로까지 확인이 가능해.'",
+            "'통로를 우클릭하면 코치님의 이동 경로를 막을 수 있어.'\n'길이 막히면 코치님은 다른 경로로 돌아오시겠지.'",
+            "'어떤 방에선 <color=yellow>장치를 가동해</color> '\n'코치님의 발을 잠시 묶어둘 수 있을 것 같아.'",
+            "'코치님을 최대한 지연시키면서,'\n' 도착하시기 전까지 빌드를 끝내야해...!'"
         };
     }
 
