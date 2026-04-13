@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
     [SerializeField] private TMP_Text _labelText;
     [SerializeField] private TMP_Text _valueText;
     [SerializeField] private Image _highlightImage;
+    
 
     [SerializeField][Range(0f, 1f)] private float _idleHighlightAlpha = 0.2f;
     [SerializeField][Range(0f, 1f)] private float _hoverHighlightAlpha = 0.5f;
@@ -93,14 +95,17 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
         {
             case UI_ReferenceValidationErrorType.MissingReference:
                 _labelText.color = _missingLabelColor;
+                SetHighlight(true);
                 break;
 
             case UI_ReferenceValidationErrorType.WrongReference:
                 _labelText.color = _wrongLabelColor;
+                SetHighlight(true);
                 break;
 
             default:
                 _labelText.color = _normalLabelColor;
+                SetHighlight(false);
                 break;
         }
     }
@@ -114,6 +119,14 @@ public class UI_InspectorReferenceDropSlot : MonoBehaviour, IDropHandler, IPoint
 
         var color = _highlightImage.color;
         color.a = alpha;
+        _highlightImage.color = color;
+    }
+
+    private void SetHighlight(bool active)
+    {
+        Color color = _highlightImage.color;
+        color = active ? Color.red : Color.clear;
+        color.a = active ? 1f : 0f;
         _highlightImage.color = color;
     }
 }
