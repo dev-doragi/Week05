@@ -110,4 +110,20 @@ public class StageManager : Singleton<StageManager>
         }
         _registry.Clear();
     }
+
+    public List<StageDefinition> GetUnclearedStageDefinitionsSnapshot()
+    {
+        List<StageDefinition> list = new List<StageDefinition>();
+        if (Stages == null) return list;
+
+        for (int i = _currentStageIndex; i < Stages.Length; i++)
+        {
+            Stage s = Stages[i];
+            if (s == null || s.StageSO == null) continue;
+            list.Add(s.StageSO);
+        }
+
+        return list;
+    }
+
 }
