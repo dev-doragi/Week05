@@ -163,7 +163,16 @@ public class GimmickController : MonoBehaviour
         if (_currentActiveSetting == null)
             return;
 
-        _interactionButton.interactable = IsOnCooldown(_currentActiveSetting.Value.Room) == false;
+        if (_gimmickManager == null)
+        {
+            _interactionButton.interactable = false;
+            return;
+        }
+
+        bool isOnCooldown = IsOnCooldown(_currentActiveSetting.Value.Room);
+        bool canUseNow = _gimmickManager.CanUseGimmick;
+
+        _interactionButton.interactable = !isOnCooldown && canUseNow;
     }
 
     private bool IsOnCooldown(RoomID room)

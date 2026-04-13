@@ -57,6 +57,17 @@ public class GimmickManager : Singleton<GimmickManager>
         }
     }
 
+    public bool CanUseGimmick
+    {
+        get
+        {
+            if (_coachController != null && _coachController.IsTransitioning)
+                return false;
+
+            return true;
+        }
+    }
+
     #region 1. Path Blocking
 
     public bool TryBlockPath(RoomID from, RoomID to)
@@ -106,13 +117,17 @@ public class GimmickManager : Singleton<GimmickManager>
 
     #region 2. Temp Target
 
-    public void SetTempTarget(RoomID targetRoom, float duration)
+    public bool SetTempTarget(RoomID targetRoom, float duration)
     {
+        if (CanUseGimmick == false)
+            return false;
+
         if (_tempTargetRoutine != null)
             StopCoroutine(_tempTargetRoutine);
 
         _tempTargetRoutine = StartCoroutine(CoTempTarget(targetRoom, duration));
         OnGimmickActivated?.Invoke(GimmickType.RequestInterview);
+        return true;
     }
 
     private IEnumerator CoTempTarget(RoomID targetRoom, float duration)
@@ -131,6 +146,9 @@ public class GimmickManager : Singleton<GimmickManager>
 
     public bool ActivateStayDelay(GimmickType gimmickType, RoomID targetRoom, float extraStayTime, float duration)
     {
+        if (CanUseGimmick == false)
+            return false;
+
         if (_coachController == null)
             return false;
 
