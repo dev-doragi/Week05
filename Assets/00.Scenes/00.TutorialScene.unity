@@ -2541,7 +2541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBC18\uAC11\uB2E4\uB124\u3141\u3134\u3147\u3147\u3134\n\uC548\uB155\uD558\uC2E0\uAC00\u3141\u3134\u3147\u3139\n\uADF8\uB807\uC2B5\uB2C8\uB2E4"
+  m_text: ' '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c48698acb66abda40bd26d0edd54a157, type: 2}
   m_sharedMaterial: {fileID: 697555715455890385, guid: c48698acb66abda40bd26d0edd54a157, type: 2}
@@ -6167,9 +6167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29e1f9dacb443d4b8932b6ab9650480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GimmickController
+  _panelRoot: {fileID: 0}
   _interactionButton: {fileID: 1561323822}
   _buttonLabel: {fileID: 2025617338}
   _cooldownGaugeRect: {fileID: 273283153}
+  _coachMovementController: {fileID: 0}
   _settings:
   - Room: 6
     GimmickType: 2

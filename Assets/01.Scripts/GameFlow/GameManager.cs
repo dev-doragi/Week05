@@ -37,10 +37,18 @@ public class GameManager : Singleton<GameManager>
     }
     public void GameOver()
     {
-        if(GameFinish) return;
-        UIManager_New.Instance.GameOverImagePopUP();
+        if (GameFinish) return;
+
+        if (StageManager.Instance != null)
+        {
+            var uncleared = StageManager.Instance.GetUnclearedStageDefinitionsSnapshot();
+            EndingRuntimePayload.SetFailedStages(uncleared);
+        }
+
+        SceneManager.LoadScene("02.GameOverScene");
         GameFinish = true;
     }
+
     public void GameClear()
     {
         if(GameFinish) return;
