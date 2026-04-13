@@ -23,6 +23,9 @@ public class RoomSelectionGroup : MonoBehaviour
     [Header("4 Preset Poses (index 0~3)")]
     [SerializeField] private ViewPose[] poses = new ViewPose[4];
 
+    [Header("Rotate Toggle")]
+    [SerializeField] private bool mapRotationEnabled = true;
+    public bool MapRotationEnabled => mapRotationEnabled;
     private Tween _moveTween;
     private Tween _rotTween;
 
@@ -54,7 +57,18 @@ public class RoomSelectionGroup : MonoBehaviour
             room.SetSelectedVisual(room == target);
         }
 
-        MoveToPose(target.RotateStepIndex);
+        if (mapRotationEnabled)
+            MoveToPose(target.RotateStepIndex);
+    }
+    public void SetMapRotationEnabled(bool enabled)
+    {
+        mapRotationEnabled = enabled;
+
+        if (!mapRotationEnabled)
+        {
+            if (_moveTween != null && _moveTween.IsActive()) _moveTween.Kill();
+            if (_rotTween != null && _rotTween.IsActive()) _rotTween.Kill();
+        }
     }
 
     public void ClearSelection()
