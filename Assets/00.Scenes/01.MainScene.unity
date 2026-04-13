@@ -17962,6 +17962,7 @@ Transform:
   - {fileID: 1320837501}
   - {fileID: 1619943255}
   - {fileID: 2088526292}
+  - {fileID: 983607073}
   - {fileID: 2096310019}
   - {fileID: 1317241978}
   - {fileID: 1255095043}
@@ -17971,7 +17972,6 @@ Transform:
   - {fileID: 2094658726}
   - {fileID: 936519931}
   - {fileID: 896328811}
-  - {fileID: 983607073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1861083943 stripped
@@ -19509,43 +19509,43 @@ PrefabInstance:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[6]'
       value: 
-      objectReference: {fileID: 2096310021}
+      objectReference: {fileID: 983607072}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[7]'
       value: 
-      objectReference: {fileID: 1317241979}
+      objectReference: {fileID: 2096310021}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[8]'
       value: 
-      objectReference: {fileID: 1255095050}
+      objectReference: {fileID: 1317241979}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[9]'
       value: 
-      objectReference: {fileID: 1000617557}
+      objectReference: {fileID: 1255095050}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[10]'
       value: 
-      objectReference: {fileID: 1752265792}
+      objectReference: {fileID: 1000617557}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[11]'
       value: 
-      objectReference: {fileID: 1804477644}
+      objectReference: {fileID: 1752265792}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[12]'
       value: 
-      objectReference: {fileID: 2094658728}
+      objectReference: {fileID: 1804477644}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[13]'
       value: 
-      objectReference: {fileID: 936519933}
+      objectReference: {fileID: 2094658728}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[14]'
       value: 
-      objectReference: {fileID: 896328813}
+      objectReference: {fileID: 936519933}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[15]'
       value: 
-      objectReference: {fileID: 983607072}
+      objectReference: {fileID: 896328813}
     - target: {fileID: 4010879763591745260, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: m_Name
       value: StageManager
