@@ -145,8 +145,8 @@ public class UI_ConsoleComponentView : MonoBehaviour
         sequence.Append(canvasGroup.DOFade(1f, 0.09f));
         sequence.AppendInterval(0.05f);
 
-        sequence.Append(rectTransform.DOAnchorPos(endPosition, 0.38f).SetEase(Ease.InBack));
-        sequence.Join(canvasGroup.DOFade(0f, 0.38f).SetEase(Ease.OutQuad));
+        sequence.Append(rectTransform.DOAnchorPos(endPosition, 0.7f).SetEase(Ease.InBack));
+        sequence.Join(canvasGroup.DOFade(0f, 0.7f).SetEase(Ease.OutQuad));
     }
 
 }
