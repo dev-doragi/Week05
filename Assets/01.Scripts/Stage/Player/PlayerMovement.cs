@@ -26,14 +26,12 @@ public class PlayerMovement : MonoBehaviour
     {
         StageMove.OnMove += HandleMove;
         StageScriptJump.OnJump += HandleJump;
-        StageMakeTrampoline.OnJump += HandleJump;
     }
 
     private void OnDisable()
     {
         StageMove.OnMove -= HandleMove;
         StageScriptJump.OnJump -= HandleJump;
-        StageMakeTrampoline.OnJump -= HandleJump;
     }
 
     private void HandleMove(bool active)
