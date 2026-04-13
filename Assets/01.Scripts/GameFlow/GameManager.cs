@@ -27,6 +27,14 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
     public void GameOver()
     {
         if(GameFinish) return;

@@ -64,11 +64,21 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private Vector2 targetOffsetMax = new Vector2(-781f, -267f);
     [SerializeField] private Vector3 targetScale = new Vector3(2.6402f, 2.6402f, 2.6402f);
 
+    [Header("Tutorial Guide Objects")]
+    [SerializeField] private GameObject floorRouteArrowObject;
+    [SerializeField] private GameObject coachArrowObject;
+    [SerializeField] private RoomID tutorialFocusRoomId = RoomID.B1F_JungleStepLower;
+    [SerializeField] private bool useRoomTileClickFlow = true;
+
+
     private const int STEP_TAB_REQUIRED = 5;
     private const int STEP_DRAW_LINE_1 = 6;
+    private const int STEP_FLOOR_ROUTE_RULE = 7;
     private const int STEP_ROOM_HIGHLIGHT = 8;
     private const int STEP_PASSAGE_HIGHLIGHT_AND_LINE_2 = 9;
-    private const int STEP_FINAL = 10;
+    private const int STEP_BIND_HINT = 10; 
+    private const int STEP_FINAL = 11;    
+
 
     private Sequence _cctvSeq;
     private Sequence _rectSeq;
@@ -111,7 +121,11 @@ public class TutorialController : MonoBehaviour
         if (firstPathLine != null) firstPathLine.gameObject.SetActive(false);
         if (secondPathLine != null) secondPathLine.gameObject.SetActive(false);
         dialogueBG.SetActive(false);
+        if (floorRouteArrowObject != null) floorRouteArrowObject.SetActive(false);
+        if (coachArrowObject != null) coachArrowObject.SetActive(false);
+        dialogueBG.SetActive(false);
         ApplyCctvImmediate(false);
+
     }
 
     public void StartButton()
@@ -183,6 +197,7 @@ public class TutorialController : MonoBehaviour
 
         if (_typingRoutine != null) StopCoroutine(_typingRoutine);
         if (_stepActionRoutine != null) StopCoroutine(_stepActionRoutine);
+        HandleStepEnter(index);
 
         _typingRoutine = StartCoroutine(TypeLine(lines[index]));
     }
@@ -237,10 +252,38 @@ public class TutorialController : MonoBehaviour
     {
         if (tutorialRoomToHighlight == null) return;
 
+        if (useRoomTileClickFlow)
+        {
+            tutorialRoomToHighlight.OnMinimapClicked();
+            return;
+        }
+
+        if (CameraManager.Instance != null)
+            CameraManager.Instance.SelectCameraByRoomId(tutorialFocusRoomId);
+
         if (roomSelectionGroup != null)
             roomSelectionGroup.SelectRoom(tutorialRoomToHighlight);
         else
             tutorialRoomToHighlight.SetSelectedVisual(true);
+    }
+
+    private void HandleStepEnter(int step)
+    {
+        if (step == STEP_FLOOR_ROUTE_RULE)
+        {
+            if (floorRouteArrowObject != null) floorRouteArrowObject.SetActive(true);
+        }
+
+        if (step == STEP_ROOM_HIGHLIGHT)
+        {
+            if (floorRouteArrowObject != null) floorRouteArrowObject.SetActive(false);
+            if (coachArrowObject != null) coachArrowObject.SetActive(true);
+        }
+
+        if (step >= STEP_PASSAGE_HIGHLIGHT_AND_LINE_2)
+        {
+            if (coachArrowObject != null) coachArrowObject.SetActive(false);
+        }
     }
 
     private IEnumerator DrawFirstPathThenWaitClick()
@@ -254,7 +297,7 @@ public class TutorialController : MonoBehaviour
         if (firstPathLine != null) firstPathLine.gameObject.SetActive(false);
 
         if (tutorialPassageToHighlight != null)
-            tutorialPassageToHighlight.SetTutorialBlockedVisual(true); // 변경
+            tutorialPassageToHighlight.SetTutorialBlockedVisual(true);
 
         yield return DrawPath(secondPathLine, secondPathPoints, pathDrawDuration);
         _waitingClick = true;
@@ -441,6 +484,7 @@ public class TutorialController : MonoBehaviour
             "'B1F 에서는 계단을 통해서만 1F에 올라오고,'\n'1F에선 엘레베이터로만 3F로 올라온다.'",
             "'방을 좌클릭해 코치의 위치를 찾을 수 있고,'\n'찾으면 다음 이동 경로를 확인할 수 있다.'",
             "'통로를 우클릭하면 코치의 이동경로를 막을 수 있다.'\n'길이 막히면 코치는 반대편 경로로 우회한다.'",
+            "'특정방에 코치가 있을 땐 발을 묶을 수단이 있을 것 같다.'",
             "'코치님을 최대한 지연시키고, 도착 전에 빌드를 끝내자.'"
         };
     }
