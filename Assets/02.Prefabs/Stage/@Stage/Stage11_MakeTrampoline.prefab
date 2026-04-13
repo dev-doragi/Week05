@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 799283402054408701}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.8056068, y: -0.21916057, z: 0}
-  m_LocalScale: {x: 2.548785, y: 4.161679, z: 1}
+  m_LocalPosition: {x: 3.8056068, y: -1.5, z: 0}
+  m_LocalScale: {x: 2.548785, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1662078682021463639}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.49270344, g: 0.9339623, b: 0.33922213, a: 1}
+  m_Color: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -256,13 +256,21 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2538503742220874077, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538503742220874077, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_Name
-      value: Stage11_MakeTrampoline Variant
+      value: Stage11_MakeTrampoline
       objectReference: {fileID: 0}
     - target: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3618345775492974790, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: stage
@@ -272,21 +280,41 @@ PrefabInstance:
       propertyPath: missionIndexToClear
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4667072216167157353, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_Color.b
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667072216167157353, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_Color.g
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667072216167157353, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_Color.r
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381365576677643745, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381365576677643745, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6958054545871459542, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.36
       objectReference: {fileID: 0}
     - target: {fileID: 6958054545871459542, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3616788
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 8904925464904702887, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -525,17 +553,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6606067925743369596}
     m_Modifications:
+    - target: {fileID: 967974097636858195, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.38640907
+      objectReference: {fileID: 0}
+    - target: {fileID: 967974097636858195, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 967974097636858195, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21933962
+      objectReference: {fileID: 0}
     - target: {fileID: 7575776840027557393, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
       propertyPath: m_Name
       value: Place Target Trampoline
       objectReference: {fileID: 0}
     - target: {fileID: 7994857739060844802, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994857739060844802, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.0312138
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7994857739060844802, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8
+      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 7994857739060844802, guid: 726fa20265d54444b92486fd7be0d8b8, type: 3}
       propertyPath: m_LocalPosition.z
