@@ -51,10 +51,18 @@ public class GameManager : Singleton<GameManager>
 
     public void GameClear()
     {
-        if(GameFinish) return;
-        UIManager_New.Instance.GameClearImagePopUP();
+        if (GameFinish) return;
+
+        if (StageManager.Instance != null)
+        {
+            var cleared = StageManager.Instance.GetClearedStageDefinitionsSnapshot();
+            EndingRuntimePayload.SetClearedStages(cleared);
+        }
+
+        SceneManager.LoadScene("03.GameClearScene");
         GameFinish = true;
     }
+
 
 
 }

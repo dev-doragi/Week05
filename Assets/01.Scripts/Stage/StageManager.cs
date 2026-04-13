@@ -126,4 +126,21 @@ public class StageManager : Singleton<StageManager>
         return list;
     }
 
+    public List<StageDefinition> GetClearedStageDefinitionsSnapshot()
+    {
+        List<StageDefinition> list = new List<StageDefinition>();
+        if (Stages == null || Stages.Length == 0) return list;
+
+        int last = Mathf.Clamp(_currentStageIndex, 0, Stages.Length - 1);
+        for (int i = 0; i <= last; i++)
+        {
+            Stage s = Stages[i];
+            if (s == null || s.StageSO == null) continue;
+            list.Add(s.StageSO);
+        }
+
+        return list;
+    }
+
+
 }

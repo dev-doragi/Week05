@@ -18598,9 +18598,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29e1f9dacb443d4b8932b6ab9650480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GimmickController
+  _panelRoot: {fileID: 0}
   _interactionButton: {fileID: 0}
   _buttonLabel: {fileID: 0}
   _cooldownGaugeRect: {fileID: 0}
+  _coachMovementController: {fileID: 0}
   _settings:
   - Room: 6
     GimmickType: 2
@@ -18908,7 +18910,7 @@ MonoBehaviour:
   gameOverImage: {fileID: 461222268}
   gameOverCanvasGroup: {fileID: 461222272}
   gameOverFadeDuration: 0.45
-  totalSeconds: 4
+  totalSeconds: 6
   failPrefix: '[Build Error] '
 --- !u!1001 &1164978313
 PrefabInstance:
@@ -23846,10 +23848,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ef118d53a03b046b5ca0f3f1e70604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearEndingController
-  endingPannel: {fileID: 0}
+  endingRoot: {fileID: 0}
   progressSlider: {fileID: 0}
   messageSlots: []
+  buildButton: {fileID: 0}
+  gameClearImage: {fileID: 0}
+  gameClearCanvasGroup: {fileID: 0}
+  gameClearFadeDuration: 0.45
   totalSeconds: 8
+  clearPrefix: '[Build Success] '
 --- !u!1 &1428993879
 GameObject:
   m_ObjectHideFlags: 0
