@@ -39,6 +39,9 @@ public class GameManager : Singleton<GameManager>
     {
         if (GameFinish) return;
 
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.StopBgm();
+
         if (StageManager.Instance != null)
         {
             var uncleared = StageManager.Instance.GetUnclearedStageDefinitionsSnapshot();
@@ -51,7 +54,11 @@ public class GameManager : Singleton<GameManager>
 
     public void GameClear()
     {
-        if(GameFinish) return;
+        if (GameFinish) return;
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.StopBgm();
+
         UIManager_New.Instance.GameClearImagePopUP();
         GameFinish = true;
     }

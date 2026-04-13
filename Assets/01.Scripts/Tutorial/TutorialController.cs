@@ -70,6 +70,14 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private RoomID tutorialFocusRoomId = RoomID.B1F_JungleStepLower;
     [SerializeField] private bool useRoomTileClickFlow = true;
 
+    [Header("Typing Sound")]
+    [SerializeField] private SO_SFX typingLoopSfx;
+    [SerializeField, Range(0f, 1f)] private float typingLoopVolume = 0.6f;
+    [SerializeField] private int typingSoundLastStepIndex = 3;
+
+    private AudioSource _typingLoopSource;
+    private bool _ignoreClickThisFrame;
+
 
     private const int STEP_TAB_REQUIRED = 5;
     private const int STEP_DRAW_LINE_1 = 6;
@@ -187,6 +195,8 @@ public class TutorialController : MonoBehaviour
             _typingRoutine = null;
         }
 
+        StopTypingLoopSfx();
+
         _isTyping = false;
 
         if (dialogueText != null)
@@ -216,16 +226,12 @@ public class TutorialController : MonoBehaviour
 
     private IEnumerator TypeLine(string line)
     {
-        // 전체 텍스트를 미리 설정 (태그가 포함된 상태)
         dialogueText.text = line;
-
-        // 현재 표시되는 글자 수를 0으로 초기화
         dialogueText.maxVisibleCharacters = 0;
-
-        // TMP가 텍스트를 분석하여 실제 글자 수를 계산하도록 강제 갱신
         dialogueText.ForceMeshUpdate();
 
-        // 실제 눈에 보이는 글자 수 (태그 제외)
+        StartTypingLoopSfx();
+
         int totalVisibleCharacters = dialogueText.textInfo.characterCount;
 
         for (int i = 0; i <= totalVisibleCharacters; i++)
@@ -233,6 +239,8 @@ public class TutorialController : MonoBehaviour
             dialogueText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(typeCharInterval);
         }
+
+        StopTypingLoopSfx();
 
         _isTyping = false;
         OnTypeCompleteForCurrentStep();
@@ -492,6 +500,40 @@ public class TutorialController : MonoBehaviour
         return duration;
     }
 
+    private bool ShouldPlayTypingLoopSfx()
+    {
+        return _stepIndex >= 0 && _stepIndex <= typingSoundLastStepIndex;
+    }
+
+    private void StartTypingLoopSfx()
+    {
+        StopTypingLoopSfx();
+
+        if (ShouldPlayTypingLoopSfx() == false)
+            return;
+
+        if (typingLoopSfx == null)
+            return;
+
+        if (SoundManager.Instance == null)
+            return;
+
+        _typingLoopSource = SoundManager.Instance.PlayLoopSfx(typingLoopSfx, typingLoopVolume);
+    }
+
+    private void StopTypingLoopSfx()
+    {
+        if (_typingLoopSource == null)
+            return;
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.StopLoopSfx(_typingLoopSource);
+        else
+            _typingLoopSource.Stop();
+
+        _typingLoopSource = null;
+    }
+
     private string[] BuildDefaultLines()
     {
         return new[]
@@ -518,5 +560,7 @@ public class TutorialController : MonoBehaviour
 
         if (_cctvSeq != null && _cctvSeq.IsActive()) _cctvSeq.Kill();
         if (_rectSeq != null && _rectSeq.IsActive()) _rectSeq.Kill();
+
+        StopTypingLoopSfx();
     }
 }
