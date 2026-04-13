@@ -12,6 +12,8 @@ public class StageManager : Singleton<StageManager>
     public void Unregister(GameObject go) => _registry.Remove(go.name);
     public GameObject Get(string name) => _registry.GetValueOrDefault(name);
     public IReadOnlyDictionary<string, GameObject> All => _registry;
+    [SerializeField] private int normalEndingClearCount = 13;
+    private bool _normalEndingOpened;
 
 
     protected override void Init()
@@ -84,6 +86,12 @@ public class StageManager : Singleton<StageManager>
         ClearRegistry();
 
         int nextIndex = _currentStageIndex + 1;
+        if (!_normalEndingOpened && nextIndex >= normalEndingClearCount && nextIndex < Stages.Length) 
+        {
+            _normalEndingOpened = true;
+            if (UIManager_New.Instance != null)
+                UIManager_New.Instance.NormalEndingObjectOpen();
+        }
         while (nextIndex < Stages.Length && Stages[nextIndex] == null)
             nextIndex++;
 

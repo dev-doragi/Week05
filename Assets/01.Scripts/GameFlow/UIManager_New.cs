@@ -47,7 +47,11 @@ public class UIManager_New : Singleton<UIManager_New>
         ApplyImmediate(_isOpen);
         GameOverImage.SetActive(false);
         GameClearImage.SetActive(false);
-        NormalEndingObject.SetActive(false);
+        if(NormalEndingObject != null)
+        {
+            NormalEndingObject.SetActive(false);
+        }
+        Time.timeScale = 1f;
     }
 
     private void Update()
@@ -147,10 +151,14 @@ public class UIManager_New : Singleton<UIManager_New>
     public void NormalEndingObjectOpen()
     {
         NormalEndingObject.SetActive(true);
+        Time.timeScale = 0f; // 일시정지
     }
+
     public void NormalEndingObjectClose()
     {
         NormalEndingObject.SetActive(false);
+        Time.timeScale = 1f; // 재개
     }
+
     
 }
