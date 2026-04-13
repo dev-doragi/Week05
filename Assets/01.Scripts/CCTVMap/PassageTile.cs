@@ -22,6 +22,8 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 
     private bool _isHovered;
     private bool _isBlockedVisual;
+    private bool _tutorialVisualOverride;
+    private bool _tutorialBlockedVisual;
 
     public event Action<PassageTile, bool> BlockVisualChanged;
 
@@ -33,6 +35,7 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
 
     private void Update()
     {
+        if (_tutorialVisualOverride) return;
         RefreshVisualFromManager();
     }
 
@@ -87,13 +90,37 @@ public class PassageTile : MonoBehaviour, IMinimapHoverTarget
         _isHovered = hovered;
         RefreshVisual();
     }
+    public void SetTutorialBlockedVisual(bool blocked)
+    {
+        _tutorialVisualOverride = true;
+        _tutorialBlockedVisual = blocked;
+        _isHovered = false;
 
+        if (blocked)
+            HideGuide();
+
+        RefreshVisual();
+    }
+
+    public void ClearTutorialVisualOverride()
+    {
+        _tutorialVisualOverride = false;
+        _tutorialBlockedVisual = false;
+        RefreshVisualFromManager();
+        RefreshVisual();
+    }
     private void RefreshVisual()
     {
-        Material target =
-            _isBlockedVisual ? blockedMaterial :
-            (_isHovered && hoverMaterial != null) ? hoverMaterial :
-            openMaterial;
+        Material target;
+
+        if (_tutorialVisualOverride)
+        {
+            target = _tutorialBlockedVisual ? blockedMaterial : openMaterial;
+        }
+        else
+        {
+            target = _isBlockedVisual ? blockedMaterial : (_isHovered && hoverMaterial != null) ? hoverMaterial : openMaterial;
+        }
 
         ApplyMaterial(target);
     }

@@ -209,6 +209,7 @@ MonoBehaviour:
   _visibleX: 0
   _enterDuration: 0.5
   _exitDuration: 0.5
+  _swipeCloseThreshold: 150
   _bodyButton: {fileID: 4383665249422165802}
   _closeButton: {fileID: 2027135003769670869}
   _focusCoachRoomOnOpen: 1
@@ -252,7 +253,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7804967260044713291}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -793,7 +794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sungjin Im (\uC784\uC131\uC9C4)"
+  m_text: "Coach Nim (\uCF54\uCE58\uB2D8)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ec095ec781a93e488631f0ee250b679, type: 2}
   m_sharedMaterial: {fileID: -5796130669965295353, guid: 1ec095ec781a93e488631f0ee250b679, type: 2}

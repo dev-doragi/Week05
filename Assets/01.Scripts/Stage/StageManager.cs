@@ -38,6 +38,7 @@ public class StageManager : Singleton<StageManager>
         //StartStages();
     }
 
+    [ContextMenu("Start Stages")]
     // 스테이지 시작
     public void StartStages()
     {
