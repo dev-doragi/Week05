@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [DefaultExecutionOrder(-1000)]
@@ -12,31 +11,33 @@ public class GimmickManager : Singleton<GimmickManager>
     [Header("BlockPathCoolDown")]
     [SerializeField] private float _blockPathDuration = 5f;
     [SerializeField] private float _blockPathCooldown = 10f;
-    public float BlockPathCooldownDuration => _blockPathCooldown;
+
     private RoomID _activeTempTarget = RoomID.None;
     private Coroutine _tempTargetRoutine;
 
     private Coroutine _stayDelayRoutine;
-    private float _activeExtraStayTime = 0f;
-    private float _stayDelayEndTime = 0f;
-
-    public event Action OnStayDelayActivated;
-    public event Action<RoomID, RoomID> OnPathBlocked;
-
-    public RoomID ActiveTempTarget => _activeTempTarget;
-
-    public bool IsBlockPathCooldownReady => Time.time >= _nextBlockPathAvailableTime;
-    public float BlockPathCooldownRemaining => Mathf.Max(0f, _nextBlockPathAvailableTime - Time.time);
-
-    #region 1. Path Blocking
+    private float _activeExtraStayTime;
+    private float _stayDelayEndTime;
+    private GimmickType _activeStayDelayType = GimmickType.None;
 
     private bool _hasBlockedPath;
     private RoomID _blockedFrom = RoomID.None;
     private RoomID _blockedTo = RoomID.None;
-    private float _blockPathEndTime = 0f;
-    private float _nextBlockPathAvailableTime = 0f;
+    private float _blockPathEndTime;
+    private float _nextBlockPathAvailableTime;
 
+    public float BlockPathCooldownDuration => _blockPathCooldown;
+    public RoomID ActiveTempTarget => _activeTempTarget;
+    public bool IsBlockPathCooldownReady => Time.time >= _nextBlockPathAvailableTime;
+    public float BlockPathCooldownRemaining => Mathf.Max(0f, _nextBlockPathAvailableTime - Time.time);
     public bool HasBlockedPath => _hasBlockedPath && Time.time < _blockPathEndTime;
+    public bool HasActiveStayDelay => Time.time < _stayDelayEndTime;
+    public float ActiveExtraStayTime => HasActiveStayDelay ? _activeExtraStayTime : 0f;
+    public GimmickType ActiveStayDelayType => HasActiveStayDelay ? _activeStayDelayType : GimmickType.None;
+
+    public event Action<GimmickType> OnGimmickActivated;
+    public event Action<GimmickType> OnStayDelayActivated;
+    public event Action<RoomID, RoomID> OnPathBlocked;
 
     protected override void Init()
     {
@@ -56,6 +57,19 @@ public class GimmickManager : Singleton<GimmickManager>
         }
     }
 
+    public bool CanUseGimmick
+    {
+        get
+        {
+            if (_coachController != null && _coachController.IsTransitioning)
+                return false;
+
+            return true;
+        }
+    }
+
+    #region 1. Path Blocking
+
     public bool TryBlockPath(RoomID from, RoomID to)
     {
         if (CanUseBlockPath == false)
@@ -72,6 +86,8 @@ public class GimmickManager : Singleton<GimmickManager>
         _blockedTo = to;
         _blockPathEndTime = Time.time + _blockPathDuration;
         _nextBlockPathAvailableTime = Time.time + _blockPathCooldown;
+
+        ToastManager.Instance.SendBlockedPathNoticeToast(from, to);
 
         OnPathBlocked?.Invoke(from, to);
     }
@@ -101,33 +117,40 @@ public class GimmickManager : Singleton<GimmickManager>
 
     #endregion
 
-    #region 2. Temp Target (Interview)
+    #region 2. Temp Target
 
-    public void SetTempTarget(RoomID targetRoom, float duration)
+    public bool SetTempTarget(RoomID targetRoom, float duration)
     {
+        if (CanUseGimmick == false)
+            return false;
+
         if (_tempTargetRoutine != null)
             StopCoroutine(_tempTargetRoutine);
 
-        _tempTargetRoutine = StartCoroutine(Co_TempTarget(targetRoom, duration));
+        _tempTargetRoutine = StartCoroutine(CoTempTarget(targetRoom, duration));
+        OnGimmickActivated?.Invoke(GimmickType.RequestInterview);
+        return true;
     }
 
-    private IEnumerator Co_TempTarget(RoomID targetRoom, float duration)
+    private IEnumerator CoTempTarget(RoomID targetRoom, float duration)
     {
         _activeTempTarget = targetRoom;
+
         yield return new WaitForSeconds(duration);
+
         _activeTempTarget = RoomID.None;
         _tempTargetRoutine = null;
     }
 
     #endregion
 
-    #region 3. Stay Delay (Sound Lure)
+    #region 3. Stay Delay
 
-    public bool HasActiveStayDelay => Time.time < _stayDelayEndTime;
-    public float ActiveExtraStayTime => HasActiveStayDelay ? _activeExtraStayTime : 0f;
-
-    public bool ActivateStayDelay(RoomID targetRoom, float extraStayTime, float duration)
+    public bool ActivateStayDelay(GimmickType gimmickType, RoomID targetRoom, float extraStayTime, float duration)
     {
+        if (CanUseGimmick == false)
+            return false;
+
         if (_coachController == null)
             return false;
 
@@ -137,18 +160,22 @@ public class GimmickManager : Singleton<GimmickManager>
         if (_stayDelayRoutine != null)
             StopCoroutine(_stayDelayRoutine);
 
-        _stayDelayRoutine = StartCoroutine(Co_StayDelay(extraStayTime, duration));
-        OnStayDelayActivated?.Invoke();
+        _stayDelayRoutine = StartCoroutine(CoStayDelay(gimmickType, extraStayTime, duration));
+
+        OnGimmickActivated?.Invoke(gimmickType);
+        OnStayDelayActivated?.Invoke(gimmickType);
         return true;
     }
 
-    private IEnumerator Co_StayDelay(float extraStayTime, float duration)
+    private IEnumerator CoStayDelay(GimmickType gimmickType, float extraStayTime, float duration)
     {
+        _activeStayDelayType = gimmickType;
         _activeExtraStayTime = extraStayTime;
         _stayDelayEndTime = Time.time + duration;
 
         yield return new WaitForSeconds(duration);
 
+        _activeStayDelayType = GimmickType.None;
         _activeExtraStayTime = 0f;
         _stayDelayEndTime = 0f;
         _stayDelayRoutine = null;

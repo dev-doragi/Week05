@@ -21,7 +21,6 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     [SerializeField] private float _exitDuration = 0.5f;
 
     [SerializeField] private float _swipeCloseThreshold = 150f;
-    [SerializeField] private float _swipeReturnDuration = 0.2f;
 
     private bool _isDragging;
     private bool _isSwiped;
