@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class UI_SceneDropInput : MonoBehaviour
 {
@@ -33,7 +35,7 @@ public class UI_SceneDropInput : MonoBehaviour
         if (UI_DragContext.DraggedPlaceableRecipe == null)
             return false;
 
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUI())
             return false;
 
         if (_worldCamera == null || _controller == null)
@@ -54,5 +56,30 @@ public class UI_SceneDropInput : MonoBehaviour
             new Vector3(screenPosition.x, screenPosition.y, distance));
         worldPosition.z = _placementZ;
         return worldPosition;
+    }
+
+    private bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null) return false;
+
+        if (Mouse.current == null) return false;
+
+        Vector2 currentMousePosition = Mouse.current.position.ReadValue();
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current)
+        {
+            position = currentMousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+  
+        foreach (var result in results)
+        {
+            if (result.gameObject.layer == 5)
+                return true;
+        }
+        return false;
     }
 }
