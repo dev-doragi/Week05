@@ -265,26 +265,57 @@ public class UI_InGameEditorRuntimeState
 
     public bool TryRestoreReference(string ownerId, InspectorComponent inspectorComponent, string slotId)
     {
-        bool ownerWasBlocked = IsOwnerBlocked(ownerId);
-        var reference = FindReference(ownerId, inspectorComponent, slotId);
-        if (reference == null)
-            return false;
+        return RestoreReferenceCore(ownerId, inspectorComponent, slotId, notifyReferencesChanged: true);
+    }
 
-        bool hadError = reference.HasError();
-        bool changed =
-            reference.CurrentTargetId != reference.ExpectedTargetId ||
-            reference.CurrentTargetDisplayName != reference.ExpectedTargetDisplayName;
+    public int RestoreAllInvalidReferences()
+    {
+        var invalidKeys = new List<UI_RuntimeReferenceKey>();
 
-        reference.CurrentTargetId = reference.ExpectedTargetId;
-        reference.CurrentTargetDisplayName = reference.ExpectedTargetDisplayName;
+        foreach (var pair in _componentById)
+        {
+            var runtimeData = pair.Value;
+            if (runtimeData == null)
+                continue;
 
-        NotifyOwnerBlockStateChangedIfNeeded(ownerId, ownerWasBlocked);
+            foreach (var section in runtimeData.Sections)
+            {
+                if (section == null)
+                    continue;
 
-        if (changed)
+                foreach (var reference in section.References)
+                {
+                    if (reference == null || !reference.HasError())
+                        continue;
+
+                    invalidKeys.Add(new UI_RuntimeReferenceKey
+                    {
+                        OwnerId = runtimeData.Id,
+                        InspectorComponent = section.InspectorComponent,
+                        SlotId = reference.SlotId
+                    });
+                }
+            }
+        }
+
+        int restoredCount = 0;
+
+        foreach (var key in invalidKeys)
+        {
+            if (RestoreReferenceCore(
+                key.OwnerId,
+                key.InspectorComponent,
+                key.SlotId,
+                notifyReferencesChanged: false))
+            {
+                restoredCount++;
+            }
+        }
+
+        if (restoredCount > 0)
             NotifyReferencesChanged();
 
-        NotifyReferenceSolvedIfNeeded(hadError, ownerId, inspectorComponent, slotId, reference);
-        return true;
+        return restoredCount;
     }
 
     public bool TryAssignReference(string ownerId, InspectorComponent inspectorComponent, string slotId, string targetId)
@@ -509,6 +540,34 @@ public class UI_InGameEditorRuntimeState
         }
 
         return null;
+    }
+
+    private bool RestoreReferenceCore(
+        string ownerId,
+        InspectorComponent inspectorComponent,
+        string slotId,
+        bool notifyReferencesChanged)
+    {
+        bool ownerWasBlocked = IsOwnerBlocked(ownerId);
+        var reference = FindReference(ownerId, inspectorComponent, slotId);
+        if (reference == null)
+            return false;
+
+        bool hadError = reference.HasError();
+        bool changed =
+            reference.CurrentTargetId != reference.ExpectedTargetId ||
+            reference.CurrentTargetDisplayName != reference.ExpectedTargetDisplayName;
+
+        reference.CurrentTargetId = reference.ExpectedTargetId;
+        reference.CurrentTargetDisplayName = reference.ExpectedTargetDisplayName;
+
+        NotifyOwnerBlockStateChangedIfNeeded(ownerId, ownerWasBlocked);
+
+        if (changed && notifyReferencesChanged)
+            NotifyReferencesChanged();
+
+        NotifyReferenceSolvedIfNeeded(hadError, ownerId, inspectorComponent, slotId, reference);
+        return true;
     }
 
     private void RefreshAllReferenceDisplayNames()

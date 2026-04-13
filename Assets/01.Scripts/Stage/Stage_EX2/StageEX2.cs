@@ -28,6 +28,8 @@ public class StageEX2 : Stage
         BindRuntimeState();
         RefreshAllPlatforms();
 
+        _runtimeState?.RestoreAllInvalidReferences();
+
         if (_runtimeState == null)
             return;
 
