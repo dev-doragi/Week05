@@ -26,9 +26,13 @@ public struct RoomGimmickSetting
 public class GimmickController : MonoBehaviour
 {
     [Header("UI Components")]
+    [SerializeField] private GameObject _panelRoot;
     [SerializeField] private Button _interactionButton;
     [SerializeField] private TMP_Text _buttonLabel;
     [SerializeField] private RectTransform _cooldownGaugeRect;
+
+    [Header("References")]
+    [SerializeField] private CoachMovementController _coachMovementController;
 
     [Header("Settings")]
     [SerializeField] private List<RoomGimmickSetting> _settings = new();
@@ -43,6 +47,9 @@ public class GimmickController : MonoBehaviour
     private void Awake()
     {
         _cameraManager = FindAnyObjectByType<CameraManager>();
+
+        if (_coachMovementController == null)
+            _coachMovementController = FindAnyObjectByType<CoachMovementController>();
     }
 
     private void OnEnable()
@@ -55,6 +62,9 @@ public class GimmickController : MonoBehaviour
 
         if (_interactionButton != null)
             _interactionButton.onClick.AddListener(HandleButtonClick);
+
+        RefreshPanelVisibility();
+        RefreshButtonInteractable();
     }
 
     private void OnDisable()
@@ -69,6 +79,7 @@ public class GimmickController : MonoBehaviour
     private void Update()
     {
         UpdateCooldownUI();
+        RefreshPanelVisibility();
         RefreshButtonInteractable();
     }
 
@@ -93,12 +104,16 @@ public class GimmickController : MonoBehaviour
             SetGaugeWidth(0f);
         }
 
+        RefreshPanelVisibility();
         RefreshButtonInteractable();
     }
 
     private void HandleButtonClick()
     {
         if (_currentActiveSetting == null)
+            return;
+
+        if (IsPanelVisible() == false)
             return;
 
         RoomGimmickSetting data = _currentActiveSetting.Value;
@@ -123,6 +138,7 @@ public class GimmickController : MonoBehaviour
                 break;
         }
 
+        RefreshPanelVisibility();
         RefreshButtonInteractable();
     }
 
@@ -164,12 +180,31 @@ public class GimmickController : MonoBehaviour
         _cooldownGaugeRect.sizeDelta = new Vector2(width, _cooldownGaugeRect.sizeDelta.y);
     }
 
+    private void RefreshPanelVisibility()
+    {
+        if (_panelRoot == null)
+            return;
+
+        _panelRoot.SetActive(IsPanelVisible());
+    }
+
+    private bool IsPanelVisible()
+    {
+        if (_currentActiveSetting == null)
+            return false;
+
+        if (_coachMovementController != null && _coachMovementController.IsTransitioning)
+            return false;
+
+        return true;
+    }
+
     private void RefreshButtonInteractable()
     {
         if (_interactionButton == null)
             return;
 
-        if (_currentActiveSetting == null)
+        if (IsPanelVisible() == false)
         {
             _interactionButton.interactable = false;
             return;
