@@ -233,3 +233,25 @@ MonoBehaviour:
       _normalTargetId: MPController
       _canSpawnError: 1
       _isRequired: 1
+  - _objectId: Platform7
+    _componentData: {fileID: 11400000, guid: c7952780c8b923143a956c1d4b7e9093, type: 2}
+    _scene: 0
+    _references:
+    - _inspectorComponent: 18
+      _slotId: reference01
+      _label: Rigidbody
+      _normalTargetId: MPRigidbody
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 18
+      _slotId: reference02
+      _label: Collider
+      _normalTargetId: MPCollider
+      _canSpawnError: 1
+      _isRequired: 1
+    - _inspectorComponent: 18
+      _slotId: reference03
+      _label: Controller
+      _normalTargetId: MPController
+      _canSpawnError: 1
+      _isRequired: 1

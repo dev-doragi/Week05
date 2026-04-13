@@ -19301,9 +19301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29e1f9dacb443d4b8932b6ab9650480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GimmickController
+  _panelRoot: {fileID: 0}
   _interactionButton: {fileID: 1561323822}
   _buttonLabel: {fileID: 2025617338}
   _cooldownGaugeRect: {fileID: 273283153}
+  _coachMovementController: {fileID: 0}
   _settings:
   - Room: 11
     GimmickType: 1
@@ -35620,7 +35622,7 @@ PrefabInstance:
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3084598551848322865}
     - target: {fileID: 2936158478093498433, guid: 80c694719d523f94b82b056b73dae2e4, type: 3}
       propertyPath: 'Stages.Array.data[2]'
       value: 
@@ -38901,7 +38903,7 @@ PrefabInstance:
     - target: {fileID: 3618345775492974790, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: stage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3084598551848322865}
     - target: {fileID: 4667072216167157353, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       propertyPath: m_Color.b
       value: 0.078431375
@@ -39036,10 +39038,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3084598551848322863}
+      addedObject: {fileID: 3084598551848322865}
     - targetCorrespondingSourceObject: {fileID: 3425222142714145152, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3084598551848322865}
+      addedObject: {fileID: 3084598551848322863}
   m_SourcePrefab: {fileID: 100100000, guid: 1907df0eef150b24fa31de309bd4fa55, type: 3}
 --- !u!33 &1534047833868686013
 MeshFilter:
@@ -41870,7 +41872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31d87ebbac66ba4b841e8388a56dc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionClearer
-  stage: {fileID: 0}
+  stage: {fileID: 3084598551848322865}
   missionIndexToClear: 0
 --- !u!4 &3084598551848322864 stripped
 Transform:
@@ -43537,7 +43539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1617936673923350263, guid: e50b307de18fe7b4db8c94375a5dddbb, type: 3}
       propertyPath: distance
-      value: 4.6
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 5172701351128449062, guid: e50b307de18fe7b4db8c94375a5dddbb, type: 3}
       propertyPath: m_LocalScale.x
@@ -48031,7 +48033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8654436813143533035, guid: e50b307de18fe7b4db8c94375a5dddbb, type: 3}
       propertyPath: _componentId
-      value: Platform1
+      value: Platform7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
