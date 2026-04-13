@@ -34,21 +34,22 @@ public class GimmickController : MonoBehaviour
     [SerializeField] private List<RoomGimmickSetting> _settings = new();
     [SerializeField] private float _maxWidth = 1000f;
 
-    // 인스펙터 할당 대신 런타임 동적 할당 사용
     private CameraManager _cameraManager;
     private GimmickManager _gimmickManager;
 
     private RoomGimmickSetting? _currentActiveSetting;
-    private Dictionary<RoomID, float> _cooldownEndTimeMap = new();
+    private readonly Dictionary<RoomID, float> _cooldownEndTimeMap = new();
 
     private void Awake()
     {
         _cameraManager = FindAnyObjectByType<CameraManager>();
-        _gimmickManager = FindAnyObjectByType<GimmickManager>();
     }
 
     private void OnEnable()
     {
+        if (_gimmickManager == null)
+            _gimmickManager = GimmickManager.Instance;
+
         if (_cameraManager != null)
             _cameraManager.OnCameraSelected += UpdateUIByRoom;
 
@@ -72,7 +73,7 @@ public class GimmickController : MonoBehaviour
 
     private void UpdateUIByRoom(RoomID currentRoom)
     {
-        var setting = _settings.Find(s => s.Room == currentRoom);
+        RoomGimmickSetting setting = _settings.Find(s => s.Room == currentRoom);
 
         if (setting.GimmickType != GimmickType.None)
         {
@@ -83,7 +84,7 @@ public class GimmickController : MonoBehaviour
         else
         {
             _currentActiveSetting = null;
-            _buttonLabel.text = "";
+            _buttonLabel.text = string.Empty;
             _interactionButton.interactable = false;
             SetGaugeWidth(0f);
         }
@@ -91,10 +92,14 @@ public class GimmickController : MonoBehaviour
 
     private void HandleButtonClick()
     {
-        if (_currentActiveSetting == null || IsOnCooldown(_currentActiveSetting.Value.Room))
+        if (_currentActiveSetting == null)
             return;
 
         RoomGimmickSetting data = _currentActiveSetting.Value;
+
+        if (IsOnCooldown(data.Room))
+            return;
+
         _cooldownEndTimeMap[data.Room] = Time.time + data.Cooldown;
 
         switch (data.GimmickType)
@@ -110,18 +115,21 @@ public class GimmickController : MonoBehaviour
                     _gimmickManager.ActivateStayDelay(data.GimmickType, data.Room, data.Value, data.Duration);
                 break;
         }
+
+        RefreshButtonInteractable();
     }
 
     private void UpdateCooldownUI()
     {
-        if (_currentActiveSetting == null) return;
+        if (_currentActiveSetting == null)
+            return;
 
         RoomID currentRoom = _currentActiveSetting.Value.Room;
 
         if (_cooldownEndTimeMap.TryGetValue(currentRoom, out float endTime))
         {
             float remaining = endTime - Time.time;
-            if (remaining > 0)
+            if (remaining > 0f)
             {
                 float progress = remaining / _currentActiveSetting.Value.Cooldown;
                 SetGaugeWidth(progress * _maxWidth);
@@ -132,7 +140,7 @@ public class GimmickController : MonoBehaviour
             else
             {
                 SetGaugeWidth(0f);
-                if (!_interactionButton.interactable)
+                if (_interactionButton.interactable == false)
                     _interactionButton.interactable = true;
             }
         }
@@ -144,22 +152,25 @@ public class GimmickController : MonoBehaviour
 
     private void SetGaugeWidth(float width)
     {
-        if (_cooldownGaugeRect == null) return;
+        if (_cooldownGaugeRect == null)
+            return;
+
         _cooldownGaugeRect.sizeDelta = new Vector2(width, _cooldownGaugeRect.sizeDelta.y);
     }
 
     private void RefreshButtonInteractable()
     {
-        if (_currentActiveSetting == null) return;
-        _interactionButton.interactable = !IsOnCooldown(_currentActiveSetting.Value.Room);
+        if (_currentActiveSetting == null)
+            return;
+
+        _interactionButton.interactable = IsOnCooldown(_currentActiveSetting.Value.Room) == false;
     }
 
     private bool IsOnCooldown(RoomID room)
     {
         if (_cooldownEndTimeMap.TryGetValue(room, out float endTime))
-        {
             return Time.time < endTime;
-        }
+
         return false;
     }
 }

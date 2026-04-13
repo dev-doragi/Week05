@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324c42b73b00cbd4296ef2a7ec5f3e49, type: 3}
+  m_Name: SO_ElevatorSabotage
+  m_EditorClassIdentifier: Assembly-CSharp::SO_ToastData
+  profileIcon: {fileID: 21300000, guid: b25a32bb808449f44a5a37ffc9b48ad2, type: 3}
+  workspaceName: Krafton-aliens
+  senderName: "Coach Nim (\uCF54\uCE58\uB2D8)"
+  messageContext: "\uC544 \uBB50\uC57C \uC65C 3\uCE35 \uC548\uB20C\uB824?"
+  outlineColor: {r: 0, g: 1, b: 0.2463131, a: 1}
+  displayDuration: 3

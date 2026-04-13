@@ -14918,6 +14918,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 02420bda1e4bdfb48b8a1ddff4b06e40, type: 2}
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
+      propertyPath: _disableF3ButtonToast
+      value: 
+      objectReference: {fileID: 11400000, guid: b7a567d678c3e7d4e803f3507576b833, type: 2}
+    - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
+      propertyPath: _requestInterviewToast
+      value: 
+      objectReference: {fileID: 11400000, guid: bc712d640032ccd4b9166bde63aa9abe, type: 2}
+    - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
+      propertyPath: _promoteSpringMenuToast
+      value: 
+      objectReference: {fileID: 11400000, guid: 67f3aafbe80a9ef4dad9b390cdb24100, type: 2}
+    - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
       propertyPath: _randomToastMaxInterval
       value: 10
       objectReference: {fileID: 0}
@@ -18011,19 +18023,19 @@ MonoBehaviour:
   _cooldownGaugeRect: {fileID: 273283153}
   _settings:
   - Room: 11
-    GimmickType: 2
+    GimmickType: 1
     ButtonText: "\uCF54\uCE58\uB2D8 \uBA74\uB2F4 \uC2E0\uCCAD\uD558\uAE30"
     Duration: 30
     Value: 0
     Cooldown: 100
   - Room: 5
-    GimmickType: 1
+    GimmickType: 2
     ButtonText: "3\uCE35 \uBC84\uD2BC \uBA39\uD1B5 \uB9CC\uB4E4\uAE30"
     Duration: 10
     Value: 10
     Cooldown: 40
   - Room: 3
-    GimmickType: 1
+    GimmickType: 3
     ButtonText: "\uBD04 \uC2E0\uC0C1 \uBA54\uB274 \uD64D\uBCF4\uD558\uAE30"
     Duration: 10
     Value: 10

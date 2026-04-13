@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,13 +11,20 @@ public class ToastManager : Singleton<ToastManager>
     [SerializeField] private CoachMovementController _coachMovementController;
     [SerializeField] private GimmickManager _gimmickManager;
 
-    [Header("Toast Data Assets")]
+    [Header("Common Toast Data Assets")]
     [SerializeField] private SO_ToastData _introToast;
     [SerializeField] private List<SO_ToastData> _randomToasts;
     [SerializeField] private List<SO_ToastData> _blockedPathToasts;
+
+    [Header("Floor Toast Data Assets")]
     [SerializeField] private SO_ToastData _coachB1ToF1Toast;
     [SerializeField] private SO_ToastData _coachF1ToF3Toast;
     [SerializeField] private SO_ToastData _coachGoingDownToast;
+
+    [Header("Gimmick Toast Data Assets")]
+    [SerializeField] private SO_ToastData _requestInterviewToast;
+    [SerializeField] private SO_ToastData _disableF3ButtonToast;
+    [SerializeField] private SO_ToastData _promoteSpringMenuToast;
 
     [Header("Random Toast")]
     [SerializeField] private bool _useRandomToast = true;
@@ -25,15 +33,11 @@ public class ToastManager : Singleton<ToastManager>
 
     private bool _introShown;
     private Coroutine _randomToastRoutine;
-    private MapGraph _mapGraph;
 
     protected override void Init()
     {
         if (_toastSender == null)
-        {
             Debug.LogError("ToastSender가 할당되지 않았습니다.");
-            return;
-        }
     }
 
     protected override void Awake()
@@ -42,8 +46,6 @@ public class ToastManager : Singleton<ToastManager>
 
         if (_coachMovementController == null)
             _coachMovementController = FindFirstObjectByType<CoachMovementController>();
-
-        _mapGraph = new MapGraph();
     }
 
     private void OnEnable()
@@ -54,10 +56,13 @@ public class ToastManager : Singleton<ToastManager>
             _gimmickManager = GimmickManager.Instance;
 
         if (_gimmickManager != null)
-            _gimmickManager.OnPathBlocked += HandlePathBlocked;
+            _gimmickManager.OnGimmickActivated += HandleGimmickActivated;
 
         if (_coachMovementController != null)
+        {
             _coachMovementController.OnCoachMoved += HandleCoachMoved;
+            _coachMovementController.OnCoachPathBlocked += HandleCoachPathBlocked;
+        }
     }
 
     private void OnDisable()
@@ -65,10 +70,13 @@ public class ToastManager : Singleton<ToastManager>
         GameManager.OnGameStart -= HandleGameStart;
 
         if (_gimmickManager != null)
-            _gimmickManager.OnPathBlocked -= HandlePathBlocked;
+            _gimmickManager.OnGimmickActivated -= HandleGimmickActivated;
 
         if (_coachMovementController != null)
+        {
             _coachMovementController.OnCoachMoved -= HandleCoachMoved;
+            _coachMovementController.OnCoachPathBlocked -= HandleCoachPathBlocked;
+        }
     }
 
     private void HandleGameStart()
@@ -88,7 +96,7 @@ public class ToastManager : Singleton<ToastManager>
         _randomToastRoutine = StartCoroutine(CoRandomToastLoop());
     }
 
-    private System.Collections.IEnumerator CoRandomToastLoop()
+    private IEnumerator CoRandomToastLoop()
     {
         while (true)
         {
@@ -103,69 +111,28 @@ public class ToastManager : Singleton<ToastManager>
         }
     }
 
-    private void HandlePathBlocked(RoomID from, RoomID to)
+    private void HandleGimmickActivated(GimmickType gimmickType)
     {
-        if (_blockedPathToasts == null)
-            return;
-
-        if (_coachMovementController == null)
-            return;
-
-        RoomID coachRoom = _coachMovementController.CurrentRoomId;
-        if (coachRoom == RoomID.None)
-            return;
-
-        if (IsNearBlockedPath(coachRoom, from, to) == false)
-            return;
-
-        int index = Random.Range(0, _blockedPathToasts.Count);
-        EnqueueToast(_blockedPathToasts[index]);
-    }
-
-    private bool IsNearBlockedPath(RoomID coachRoom, RoomID from, RoomID to)
-    {
-        if (coachRoom == from || coachRoom == to)
-            return true;
-
-        if (_mapGraph == null)
-            return false;
-
-        IReadOnlyList<RoomID> neighbors = _mapGraph.GetNeighbors(coachRoom);
-        for (int i = 0; i < neighbors.Count; i++)
+        switch (gimmickType)
         {
-            if (neighbors[i] == from || neighbors[i] == to)
-                return true;
+            case GimmickType.RequestInterview:
+                EnqueueToast(_requestInterviewToast);
+                break;
+
+            case GimmickType.DisableF3Button:
+                EnqueueToast(_disableF3ButtonToast);
+                break;
+
+            case GimmickType.PromoteSpringMenu:
+                EnqueueToast(_promoteSpringMenuToast);
+                break;
         }
-
-        return false;
     }
 
-    public void SendIntroToast()
-    {
-        EnqueueToast(_introToast);
-    }
-
-    public void SendRandomToast()
-    {
-        if (_randomToasts == null || _randomToasts.Count == 0)
-            return;
-
-        int randomIndex = Random.Range(0, _randomToasts.Count);
-        EnqueueToast(_randomToasts[randomIndex]);
-    }
-
-    public void SendBlockedPathToast()
+    private void HandleCoachPathBlocked(RoomID from, RoomID to)
     {
         int index = Random.Range(0, _blockedPathToasts.Count);
         EnqueueToast(_blockedPathToasts[index]);
-    }
-
-    public void EnqueueToast(SO_ToastData data)
-    {
-        if (data == null || _toastSender == null)
-            return;
-
-        _toastSender.Show(data);
     }
 
     private void HandleCoachMoved(RoomID previousRoom, RoomID currentRoom)
@@ -196,6 +163,34 @@ public class ToastManager : Singleton<ToastManager>
         {
             EnqueueToast(_coachGoingDownToast);
         }
+    }
+
+    public void SendIntroToast()
+    {
+        EnqueueToast(_introToast);
+    }
+
+    public void SendRandomToast()
+    {
+        if (_randomToasts == null || _randomToasts.Count == 0)
+            return;
+
+        int randomIndex = Random.Range(0, _randomToasts.Count);
+        EnqueueToast(_randomToasts[randomIndex]);
+    }
+
+    public void SendBlockedPathToast()
+    {
+        int index = Random.Range(0, _blockedPathToasts.Count);
+        EnqueueToast(_blockedPathToasts[index]);
+    }
+
+    public void EnqueueToast(SO_ToastData data)
+    {
+        if (data == null || _toastSender == null)
+            return;
+
+        _toastSender.Show(data);
     }
 
     private bool HasFloorChanged(RoomID from, RoomID to)

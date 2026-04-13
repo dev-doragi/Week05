@@ -6,16 +6,16 @@ public class CoachDebugger : MonoBehaviour
 
     private GimmickManager _gimmickManager;
 
-    private void Start()
+    private void OnEnable()
     {
-        // 1. 모든 오브젝트의 Awake가 끝난 Start 시점에 싱글톤 참조
-        _gimmickManager = GimmickManager.Instance;
+        if (_gimmickManager == null)
+            _gimmickManager = GimmickManager.Instance;
 
-        // 2. 참조가 보장된 상태에서 이벤트 구독
         if (_coach != null)
         {
             _coach.OnCoachPreparingToMove += HandleCoachPreparing;
             _coach.OnCoachMoved += HandleCoachMoved;
+            _coach.OnCoachPathBlocked += HandleCoachPathBlocked;
             _coach.OnCoachReachedOffice += HandleCoachReachedOffice;
         }
 
@@ -23,13 +23,13 @@ public class CoachDebugger : MonoBehaviour
             _gimmickManager.OnStayDelayActivated += LogLureInfluence;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        // Start에서 구독한 이벤트는 오브젝트 파괴 시점에 해제
         if (_coach != null)
         {
             _coach.OnCoachPreparingToMove -= HandleCoachPreparing;
             _coach.OnCoachMoved -= HandleCoachMoved;
+            _coach.OnCoachPathBlocked -= HandleCoachPathBlocked;
             _coach.OnCoachReachedOffice -= HandleCoachReachedOffice;
         }
 
@@ -44,7 +44,15 @@ public class CoachDebugger : MonoBehaviour
 
     private void HandleCoachMoved(RoomID from, RoomID to)
     {
+        if (_coach == null)
+            return;
+
         Debug.Log($"[이동] 코치가 {from}에서 {to}(으)로 이동 완료. (현재 어그로: {_coach.CurrentAggro})");
+    }
+
+    private void HandleCoachPathBlocked(RoomID from, RoomID to)
+    {
+        Debug.Log($"[길막힘] 코치가 {from} -> {to} 경로로 이동하려 했지만 막혀서 실패.");
     }
 
     private void HandleCoachReachedOffice()
