@@ -33,6 +33,7 @@ public class CoachMovementController : MonoBehaviour
     public bool IsTransitioning => _isTransitioning;
     public float TransitionDuration => _transitionDuration;
     public float CurrentAggro => _coachBrain != null ? _coachBrain.CurrentAggro : 0f;
+    public CoachAggroState CurrentAggroState => _coachBrain != null ? _coachBrain.CurrentAggroState : CoachAggroState.None;
 
     public event Action<RoomID, RoomID> OnCoachMoved;
     public event Action<RoomID, RoomID> OnCoachPreparingToMove;

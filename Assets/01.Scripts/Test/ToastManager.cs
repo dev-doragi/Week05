@@ -14,7 +14,6 @@ public class ToastManager : Singleton<ToastManager>
     [Header("Common Toast Data Assets")]
     [SerializeField] private SO_ToastData _introToast;
     [SerializeField] private List<SO_ToastData> _randomToasts;
-    [SerializeField] private List<SO_ToastData> _blockedPathToasts;
 
     [Header("Floor Toast Data Assets")]
     [SerializeField] private SO_ToastData _coachB1ToF1Toast;
@@ -22,9 +21,12 @@ public class ToastManager : Singleton<ToastManager>
     [SerializeField] private SO_ToastData _coachGoingDownToast;
 
     [Header("Gimmick Toast Data Assets")]
+    [SerializeField] private List<SO_ToastData> _blockedPathToasts;
     [SerializeField] private SO_ToastData _requestInterviewToast;
     [SerializeField] private SO_ToastData _disableF3ButtonToast;
     [SerializeField] private SO_ToastData _promoteSpringMenuToast;
+
+    [SerializeField] private SO_ToastData _blockedPathNoticeToast;
 
     [Header("Random Toast")]
     [SerializeField] private bool _useRandomToast = true;
@@ -100,6 +102,9 @@ public class ToastManager : Singleton<ToastManager>
     {
         while (true)
         {
+            if (GameManager.Instance != null && GameManager.Instance.GameFinish)
+                yield break;
+
             float waitTime = Random.Range(_randomToastMinInterval, _randomToastMaxInterval);
             yield return new WaitForSeconds(waitTime);
 
@@ -165,6 +170,14 @@ public class ToastManager : Singleton<ToastManager>
         }
     }
 
+    private bool CanShowToast()
+    {
+        if (GameManager.Instance == null)
+            return true;
+
+        return GameManager.Instance.GameFinish == false;
+    }
+
     public void SendIntroToast()
     {
         EnqueueToast(_introToast);
@@ -179,18 +192,63 @@ public class ToastManager : Singleton<ToastManager>
         EnqueueToast(_randomToasts[randomIndex]);
     }
 
-    public void SendBlockedPathToast()
+    public void SendBlockedPathNoticeToast(RoomID fromRoom, RoomID toRoom)
     {
-        int index = Random.Range(0, _blockedPathToasts.Count);
-        EnqueueToast(_blockedPathToasts[index]);
+        EnqueueBlockedPathNoticeToast(_blockedPathNoticeToast, fromRoom, toRoom);
     }
 
     public void EnqueueToast(SO_ToastData data)
     {
+        if (CanShowToast() == false)
+            return;
+
         if (data == null || _toastSender == null)
             return;
 
         _toastSender.Show(data);
+    }
+
+    public void EnqueueBlockedPathNoticeToast(SO_ToastData data, RoomID fromRoom, RoomID toRoom)
+    {
+        if (CanShowToast() == false)
+            return;
+
+        if (data == null || _toastSender == null)
+            return;
+
+        SO_ToastData toastData = ScriptableObject.Instantiate(data);
+        toastData.messageContext = toastData.messageContext
+            .Replace("{FROM}", $"<color=#FFD54F>{GetRoomDisplayName(fromRoom)}</color>")
+            .Replace("{TO}", $"<color=#FFD54F>{GetRoomDisplayName(toRoom)}</color>");
+
+        _toastSender.Show(toastData);
+    }
+
+    private string GetRoomDisplayName(RoomID roomId)
+    {
+        switch (roomId)
+        {
+            case RoomID.B1F_Cafeteria: return "지하 1층 구내식당";
+            case RoomID.B1F_JungleStepLower: return "지하 1층 정글스텝";
+            case RoomID.B1F_Cafe: return "지하 1층 카페";
+            case RoomID.B1F_Stair: return "지하 1층 계단";
+
+            case RoomID.F1_Elevator: return "1층 엘리베이터";
+            case RoomID.F1_JungleStepUpper: return "1층 정글스텝";
+            case RoomID.F1_Lobby: return "1층 로비";
+            case RoomID.F1_Stair: return "1층 계단";
+
+            case RoomID.F3_Elevator: return "3층 엘리베이터";
+            case RoomID.F3_Lounge: return "3층 라운지";
+            case RoomID.F3_CoachingRoom: return "3층 코칭룸";
+            case RoomID.F3_Hallway: return "3층 복도";
+
+            case RoomID.Office: return "오피스";
+
+            case RoomID.None:
+            default:
+                return string.Empty;
+        }
     }
 
     private bool HasFloorChanged(RoomID from, RoomID to)

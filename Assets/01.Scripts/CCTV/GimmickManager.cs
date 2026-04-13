@@ -87,6 +87,8 @@ public class GimmickManager : Singleton<GimmickManager>
         _blockPathEndTime = Time.time + _blockPathDuration;
         _nextBlockPathAvailableTime = Time.time + _blockPathCooldown;
 
+        ToastManager.Instance.SendBlockedPathNoticeToast(from, to);
+
         OnPathBlocked?.Invoke(from, to);
     }
 

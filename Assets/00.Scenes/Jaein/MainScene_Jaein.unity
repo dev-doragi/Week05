@@ -12522,10 +12522,21 @@ MonoBehaviour:
   _timerVariability: 5
   _transitionDuration: 1.5
   _coachBrain:
-    _officeAggro: 1
-    _baseAggroMultiplier: 1.15
-    _aggroIncreasePerMove: 0.125
-  _currentRoomId: 0
+    _officeAggro: 0.1
+    _maxAggro: 1
+    _aggroIncreasePerMove: 0.1
+    _alertThreshold: 0.35
+    _chaseThreshold: 0.75
+    _wanderCloserBonus: 0.15
+    _wanderFartherPenalty: 0.05
+    _alertCloserBonus: 1.25
+    _alertFartherPenalty: 0.45
+    _chaseCloserBonus: 3.5
+    _chaseFartherPenalty: 1.2
+    _backtrackPenaltyMultiplier: 0.7
+    _tempTargetMultiplier: 1.5
+    _minimumScore: 0.2
+  _currentRoomId: 6
   _isActive: 1
 --- !u!114 &778841139
 MonoBehaviour:
@@ -14925,6 +14936,10 @@ PrefabInstance:
       propertyPath: _requestInterviewToast
       value: 
       objectReference: {fileID: 11400000, guid: bc712d640032ccd4b9166bde63aa9abe, type: 2}
+    - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
+      propertyPath: _blockedPathNoticeToast
+      value: 
+      objectReference: {fileID: 11400000, guid: 775aa2d6b6073cd4aa83f0f056f766cb, type: 2}
     - target: {fileID: 3855477382436511990, guid: 5db1a5ec35b13a6409d2766f208049b6, type: 3}
       propertyPath: _promoteSpringMenuToast
       value: 

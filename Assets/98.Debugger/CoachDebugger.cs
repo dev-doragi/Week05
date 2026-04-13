@@ -47,7 +47,7 @@ public class CoachDebugger : MonoBehaviour
         if (_coach == null)
             return;
 
-        Debug.Log($"[이동] 코치가 {from}에서 {to}(으)로 이동 완료. (현재 어그로: {_coach.CurrentAggro})");
+        Debug.Log($"[이동] 코치가 {from}에서 {to}(으)로 이동 완료. (현재 어그로: {_coach.CurrentAggro}, 현재 상태: {_coach.CurrentAggroState})");
     }
 
     private void HandleCoachPathBlocked(RoomID from, RoomID to)
