@@ -15,14 +15,10 @@ public class Blocked_Visual : MonoBehaviour
     [SerializeField] private float _minAlpha;
     [SerializeField] private float _maxAlpha;
 
-    private Color _originColor;
-
     private void Awake()
     {
         if (_platform == null) _platform = GetComponent<MovingPlatform>();
         if (_sprite == null) _sprite = GetComponent<SpriteRenderer>();
-
-        if (_sprite != null) _originColor = _sprite.color;
     }
 
     private void Update()
@@ -32,7 +28,7 @@ public class Blocked_Visual : MonoBehaviour
         
         if (_platform.canMove)      // 1. Normal State: Original color
         {
-            _sprite.color = _originColor;
+            _sprite.color = _normalColor;
         }
         else                        // 2. Blocked State: Pulse alpha
         {
