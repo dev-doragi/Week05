@@ -7723,17 +7723,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoachMovementController
   _initialSpawnDelay: 0
-  _timeToRoomChange: 7
-  _timerVariability: 2
+  _timeToRoomChange: 10
+  _timerVariability: 3
   _transitionDuration: 1.5
   _coachBrain:
     _officeAggro: 0
     _maxAggro: 1
-    _aggroIncreasePerMove: 0.125
-    _alertThreshold: 0.35
-    _chaseThreshold: 0.75
-    _wanderCloserBonus: 0.15
-    _wanderFartherPenalty: 0.05
+    _aggroIncreasePerMove: 0.1
+    _alertThreshold: 0.2
+    _chaseThreshold: 0.7
+    _wanderCloserBonus: 0.45
+    _wanderFartherPenalty: 0.2
     _alertCloserBonus: 1.25
     _alertFartherPenalty: 0.45
     _chaseCloserBonus: 3.5

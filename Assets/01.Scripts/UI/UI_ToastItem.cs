@@ -128,7 +128,7 @@ public class UI_ToastItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         _isDragging = false;
         _isSwiped = false;
 
-        _canvasGroup.alpha = 1f;
+        //_canvasGroup.alpha = 1f;
         _rectTransform.anchoredPosition = new Vector2(_hiddenX, _baseAnchoredY);
     }
 
