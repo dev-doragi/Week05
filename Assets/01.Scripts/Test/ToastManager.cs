@@ -27,6 +27,7 @@ public class ToastManager : Singleton<ToastManager>
     [SerializeField] private SO_ToastData _promoteSpringMenuToast;
 
     [SerializeField] private SO_ToastData _blockedPathNoticeToast;
+    [SerializeField] private SO_ToastData _fakeInterviewRevealedToast;
 
     [Header("Random Toast")]
     [SerializeField] private bool _useRandomToast = true;
@@ -58,7 +59,10 @@ public class ToastManager : Singleton<ToastManager>
             _gimmickManager = GimmickManager.Instance;
 
         if (_gimmickManager != null)
+        {
             _gimmickManager.OnGimmickActivated += HandleGimmickActivated;
+            _gimmickManager.OnFakeInterviewRevealed += HandleFakeInterviewRevealed;
+        }
 
         if (_coachMovementController != null)
         {
@@ -72,7 +76,10 @@ public class ToastManager : Singleton<ToastManager>
         GameManager.OnGameStart -= HandleGameStart;
 
         if (_gimmickManager != null)
+        {
             _gimmickManager.OnGimmickActivated -= HandleGimmickActivated;
+            _gimmickManager.OnFakeInterviewRevealed -= HandleFakeInterviewRevealed;
+        }
 
         if (_coachMovementController != null)
         {
@@ -168,6 +175,11 @@ public class ToastManager : Singleton<ToastManager>
         {
             EnqueueToast(_coachGoingDownToast);
         }
+    }
+
+    private void HandleFakeInterviewRevealed()
+    {
+        EnqueueToast(_fakeInterviewRevealedToast);
     }
 
     private bool CanShowToast()

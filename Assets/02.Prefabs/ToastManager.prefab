@@ -55,13 +55,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 166b7f866dbb85c4a8ab13105192e7db, type: 2}
   - {fileID: 11400000, guid: 5ebbce0f955806141942af47a7fc12bf, type: 2}
   - {fileID: 11400000, guid: 267327347d188f04a963247d1a971ebf, type: 2}
+  _coachB1ToF1Toast: {fileID: 11400000, guid: f950a0abf90ef784bbfe5de2506c0529, type: 2}
+  _coachF1ToF3Toast: {fileID: 11400000, guid: 3d8347e45815699419c24decef0b7081, type: 2}
+  _coachGoingDownToast: {fileID: 11400000, guid: 02420bda1e4bdfb48b8a1ddff4b06e40, type: 2}
   _blockedPathToasts:
   - {fileID: 11400000, guid: 0d5f971efdd95d74fb07b04268c41d55, type: 2}
   - {fileID: 11400000, guid: 8cf7ee7bb9ebcad488737608d94119bb, type: 2}
   - {fileID: 11400000, guid: 99014eebc21e3cc40be93a63c64efa92, type: 2}
-  _coachB1ToF1Toast: {fileID: 11400000, guid: f950a0abf90ef784bbfe5de2506c0529, type: 2}
-  _coachF1ToF3Toast: {fileID: 11400000, guid: 3d8347e45815699419c24decef0b7081, type: 2}
-  _coachGoingDownToast: {fileID: 11400000, guid: 02420bda1e4bdfb48b8a1ddff4b06e40, type: 2}
+  _requestInterviewToast: {fileID: 11400000, guid: bc712d640032ccd4b9166bde63aa9abe, type: 2}
+  _disableF3ButtonToast: {fileID: 11400000, guid: b7a567d678c3e7d4e803f3507576b833, type: 2}
+  _promoteSpringMenuToast: {fileID: 11400000, guid: 67f3aafbe80a9ef4dad9b390cdb24100, type: 2}
+  _blockedPathNoticeToast: {fileID: 11400000, guid: 775aa2d6b6073cd4aa83f0f056f766cb, type: 2}
   _useRandomToast: 1
   _randomToastMinInterval: 5
   _randomToastMaxInterval: 10
