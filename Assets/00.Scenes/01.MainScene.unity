@@ -4310,6 +4310,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1847272025}
     m_Modifications:
+    - target: {fileID: 95127444851755038, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
+      propertyPath: canJump
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 749503587351071925, guid: e805f869253d7b34a8c3e40d90a88159, type: 3}
       propertyPath: m_Camera
       value: 
@@ -6172,6 +6176,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1847272025}
     m_Modifications:
+    - target: {fileID: 2036586430539704840, guid: 10104147360faa1488b83093db77aab2, type: 3}
+      propertyPath: canJump
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4152429188606585899, guid: 10104147360faa1488b83093db77aab2, type: 3}
       propertyPath: m_Name
       value: Stage8_RGB
@@ -6485,6 +6493,10 @@ PrefabInstance:
     - target: {fileID: 1658197698016047524, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665955164708484999, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
+      propertyPath: canJump
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4836700965109433219, guid: 81ea515aef5620c46930123ce1900b8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7237,6 +7249,10 @@ PrefabInstance:
     - target: {fileID: 5948439288589993063, guid: 49aa1e222430a6f44a0cbc71484c8454, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605841009874207300, guid: 49aa1e222430a6f44a0cbc71484c8454, type: 3}
+      propertyPath: canJump
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10339,6 +10355,10 @@ PrefabInstance:
     - target: {fileID: 4323591473639976780, guid: d84a8b53ed6805944abd3f0a8a0c30bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620215962149182280, guid: d84a8b53ed6805944abd3f0a8a0c30bf, type: 3}
+      propertyPath: canJump
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7501880331717909867, guid: d84a8b53ed6805944abd3f0a8a0c30bf, type: 3}
       propertyPath: m_Name
@@ -14019,6 +14039,10 @@ PrefabInstance:
     - target: {fileID: 3718543444604182033, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784393619528968725, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
+      propertyPath: canJump
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7459817422992944182, guid: a80dc5aeb06d5f84381c3b7d7e3623c4, type: 3}
       propertyPath: m_Name
