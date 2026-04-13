@@ -69,6 +69,7 @@ public class GimmickController : MonoBehaviour
     private void Update()
     {
         UpdateCooldownUI();
+        RefreshButtonInteractable();
     }
 
     private void UpdateUIByRoom(RoomID currentRoom)
@@ -78,16 +79,21 @@ public class GimmickController : MonoBehaviour
         if (setting.GimmickType != GimmickType.None)
         {
             _currentActiveSetting = setting;
-            _buttonLabel.text = setting.ButtonText;
-            RefreshButtonInteractable();
+
+            if (_buttonLabel != null)
+                _buttonLabel.text = setting.ButtonText;
         }
         else
         {
             _currentActiveSetting = null;
-            _buttonLabel.text = string.Empty;
-            _interactionButton.interactable = false;
+
+            if (_buttonLabel != null)
+                _buttonLabel.text = string.Empty;
+
             SetGaugeWidth(0f);
         }
+
+        RefreshButtonInteractable();
     }
 
     private void HandleButtonClick()
@@ -100,19 +106,20 @@ public class GimmickController : MonoBehaviour
         if (IsOnCooldown(data.Room))
             return;
 
+        if (_gimmickManager == null || _gimmickManager.CanUseGimmick == false)
+            return;
+
         _cooldownEndTimeMap[data.Room] = Time.time + data.Cooldown;
 
         switch (data.GimmickType)
         {
             case GimmickType.RequestInterview:
-                if (_gimmickManager != null)
-                    _gimmickManager.SetTempTarget(data.Room, data.Duration);
+                _gimmickManager.SetTempTarget(data.Room, data.Duration);
                 break;
 
             case GimmickType.DisableF3Button:
             case GimmickType.PromoteSpringMenu:
-                if (_gimmickManager != null)
-                    _gimmickManager.ActivateStayDelay(data.GimmickType, data.Room, data.Value, data.Duration);
+                _gimmickManager.ActivateStayDelay(data.GimmickType, data.Room, data.Value, data.Duration);
                 break;
         }
 
@@ -122,26 +129,25 @@ public class GimmickController : MonoBehaviour
     private void UpdateCooldownUI()
     {
         if (_currentActiveSetting == null)
+        {
+            SetGaugeWidth(0f);
             return;
+        }
 
         RoomID currentRoom = _currentActiveSetting.Value.Room;
 
         if (_cooldownEndTimeMap.TryGetValue(currentRoom, out float endTime))
         {
             float remaining = endTime - Time.time;
+
             if (remaining > 0f)
             {
                 float progress = remaining / _currentActiveSetting.Value.Cooldown;
                 SetGaugeWidth(progress * _maxWidth);
-
-                if (_interactionButton.interactable)
-                    _interactionButton.interactable = false;
             }
             else
             {
                 SetGaugeWidth(0f);
-                if (_interactionButton.interactable == false)
-                    _interactionButton.interactable = true;
             }
         }
         else
@@ -160,8 +166,14 @@ public class GimmickController : MonoBehaviour
 
     private void RefreshButtonInteractable()
     {
-        if (_currentActiveSetting == null)
+        if (_interactionButton == null)
             return;
+
+        if (_currentActiveSetting == null)
+        {
+            _interactionButton.interactable = false;
+            return;
+        }
 
         if (_gimmickManager == null)
         {

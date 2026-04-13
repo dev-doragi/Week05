@@ -23,6 +23,7 @@ public class ToastManager : Singleton<ToastManager>
     [Header("Gimmick Toast Data Assets")]
     [SerializeField] private List<SO_ToastData> _blockedPathToasts;
     [SerializeField] private SO_ToastData _requestInterviewToast;
+    [SerializeField] private SO_ToastData _promoteInterviewToast;
     [SerializeField] private SO_ToastData _disableF3ButtonToast;
     [SerializeField] private SO_ToastData _promoteSpringMenuToast;
 
@@ -167,6 +168,7 @@ public class ToastManager : Singleton<ToastManager>
         if (previousFloor == "F1" && currentFloor == "F3")
         {
             EnqueueToast(_coachF1ToF3Toast);
+            EnqueueToast(_promoteInterviewToast);
             return;
         }
 
