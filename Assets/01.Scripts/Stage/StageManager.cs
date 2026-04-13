@@ -83,13 +83,7 @@ public class StageManager : Singleton<StageManager>
     {
         ClearRegistry();
 
-        if (RemainingStageCount() <= 0)
-        {
-            GameManager.Instance.GameClear();
-            return;
-        }
-
-        int nextIndex = ++_currentStageIndex;
+        int nextIndex = _currentStageIndex + 1;
         while (nextIndex < Stages.Length && Stages[nextIndex] == null)
             nextIndex++;
 
@@ -99,9 +93,11 @@ public class StageManager : Singleton<StageManager>
             return;
         }
 
+        _currentStageIndex = nextIndex;
         _currStage = Stages[_currentStageIndex];
         _currStage.StartStage();
     }
+
 
 
     private void ClearRegistry()
@@ -114,17 +110,20 @@ public class StageManager : Singleton<StageManager>
         }
         _registry.Clear();
     }
-    public int RemainingStageCount()
-    {
-        
-            if (Stages == null) return 0;
 
-            int count = 0;
-            for (int i = _currentStageIndex + 1; i < Stages.Length; i++)
-            {
-                if (Stages[i] != null) count++;
-            }
-            return count;
-        
+    public List<StageDefinition> GetUnclearedStageDefinitionsSnapshot()
+    {
+        List<StageDefinition> list = new List<StageDefinition>();
+        if (Stages == null) return list;
+
+        for (int i = _currentStageIndex; i < Stages.Length; i++)
+        {
+            Stage s = Stages[i];
+            if (s == null || s.StageSO == null) continue;
+            list.Add(s.StageSO);
+        }
+
+        return list;
     }
+
 }
