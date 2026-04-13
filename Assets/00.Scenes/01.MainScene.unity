@@ -15608,6 +15608,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3655070836737830730, guid: 10821b326b1bcfb4399b611e3f249a5a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4946544310935183257, guid: 10821b326b1bcfb4399b611e3f249a5a, type: 3}
       propertyPath: m_Name
       value: ToastContainer
@@ -18659,7 +18663,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767385281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fef1ec412f41d64db69d2844d7e2611, type: 3}
   m_Name: 
@@ -26101,7 +26105,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 12
   rotateStepIndex: 2
   selectionGroup: {fileID: 2145462790137721326}
@@ -30883,7 +30887,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 7
   rotateStepIndex: 2
   selectionGroup: {fileID: 2145462790137721326}
@@ -31170,7 +31174,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 5
   rotateStepIndex: 1
   selectionGroup: {fileID: 2145462790137721326}
@@ -35925,7 +35929,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 6
   rotateStepIndex: 0
   selectionGroup: {fileID: 2145462790137721326}
@@ -38613,7 +38617,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 4
   rotateStepIndex: 3
   selectionGroup: {fileID: 2145462790137721326}
@@ -38855,7 +38859,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 3
   rotateStepIndex: 2
   selectionGroup: {fileID: 2145462790137721326}
@@ -41038,7 +41042,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 11
   rotateStepIndex: 3
   selectionGroup: {fileID: 2145462790137721326}
@@ -42286,7 +42290,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 2
   rotateStepIndex: 0
   selectionGroup: {fileID: 2145462790137721326}
@@ -44112,7 +44116,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 1
   rotateStepIndex: 1
   selectionGroup: {fileID: 2145462790137721326}
@@ -44871,7 +44875,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 9
   rotateStepIndex: 1
   selectionGroup: {fileID: 2145462790137721326}
@@ -47907,7 +47911,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 10
   rotateStepIndex: 0
   selectionGroup: {fileID: 2145462790137721326}
@@ -47939,7 +47943,7 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: c3aa517a3fbe1e649aa4e80fb3e37231, type: 2}
   _cameraClickSfx: {fileID: 11400000, guid: f6cd7c02287a0a84197a67094e2761c2, type: 2}
   _sfxPlayer: {fileID: 725360198}
-  _clickVolume: 1
+  _clickVolume: 0.2
   roomId: 8
   rotateStepIndex: 3
   selectionGroup: {fileID: 2145462790137721326}
