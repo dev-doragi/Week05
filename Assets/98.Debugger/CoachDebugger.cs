@@ -53,7 +53,7 @@ public class CoachDebugger : MonoBehaviour
         GameManager.Instance.GameOver();
     }
 
-    private void LogLureInfluence()
+    private void LogLureInfluence(GimmickType gimmickType)
     {
         if (_coach == null || _gimmickManager == null)
             return;
@@ -61,6 +61,6 @@ public class CoachDebugger : MonoBehaviour
         RoomID coachRoom = _coach.CurrentRoomId;
         float extraStayTime = _gimmickManager.GetExtraStayTime();
 
-        Debug.Log($"[사운드 머무름] 코치 현재 방: {coachRoom} | 추가 체류 시간: {extraStayTime}초");
+        Debug.Log($"[기믹 발동] 타입: {gimmickType} | 코치 현재 방: {coachRoom} | 추가 체류 시간: {extraStayTime}초");
     }
 }

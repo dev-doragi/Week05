@@ -4,7 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GimmickType { None, SoundLure, RequestInterview }
+public enum GimmickType
+{
+    None,
+    RequestInterview,
+    DisableF3Button,
+    PromoteSpringMenu
+}
 
 [Serializable]
 public struct RoomGimmickSetting
@@ -85,24 +91,25 @@ public class GimmickController : MonoBehaviour
 
     private void HandleButtonClick()
     {
-        if (_currentActiveSetting == null || IsOnCooldown(_currentActiveSetting.Value.Room)) return;
+        if (_currentActiveSetting == null || IsOnCooldown(_currentActiveSetting.Value.Room))
+            return;
 
-        var data = _currentActiveSetting.Value;
+        RoomGimmickSetting data = _currentActiveSetting.Value;
         _cooldownEndTimeMap[data.Room] = Time.time + data.Cooldown;
 
         switch (data.GimmickType)
         {
-            case GimmickType.SoundLure:
-                if (_gimmickManager != null)
-                    _gimmickManager.ActivateStayDelay(data.Room, data.Value, data.Duration);
-                break;
             case GimmickType.RequestInterview:
                 if (_gimmickManager != null)
                     _gimmickManager.SetTempTarget(data.Room, data.Duration);
                 break;
-        }
 
-        RefreshButtonInteractable();
+            case GimmickType.DisableF3Button:
+            case GimmickType.PromoteSpringMenu:
+                if (_gimmickManager != null)
+                    _gimmickManager.ActivateStayDelay(data.GimmickType, data.Room, data.Value, data.Duration);
+                break;
+        }
     }
 
     private void UpdateCooldownUI()

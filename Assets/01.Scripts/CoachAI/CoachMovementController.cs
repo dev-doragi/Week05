@@ -181,7 +181,7 @@ public class CoachMovementController : MonoBehaviour
             OnCoachReachedOffice?.Invoke();
     }
 
-    private void HandleStayDelayActivated()
+    private void HandleStayDelayActivated(GimmickType gimmickType)
     {
         if (!_isActive || _isTransitioning || _isSpawnDelayed || _currentRoomId == RoomID.Office)
             return;

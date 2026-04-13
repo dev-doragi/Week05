@@ -20,10 +20,13 @@ public class GimmickManager : Singleton<GimmickManager>
     private float _activeExtraStayTime = 0f;
     private float _stayDelayEndTime = 0f;
 
-    public event Action OnStayDelayActivated;
+    private GimmickType _activeStayDelayType = GimmickType.None;
+
+    public event Action<GimmickType> OnStayDelayActivated;
     public event Action<RoomID, RoomID> OnPathBlocked;
 
     public RoomID ActiveTempTarget => _activeTempTarget;
+    public GimmickType ActiveStayDelayType => HasActiveStayDelay ? _activeStayDelayType : GimmickType.None;
 
     public bool IsBlockPathCooldownReady => Time.time >= _nextBlockPathAvailableTime;
     public float BlockPathCooldownRemaining => Mathf.Max(0f, _nextBlockPathAvailableTime - Time.time);
@@ -126,7 +129,7 @@ public class GimmickManager : Singleton<GimmickManager>
     public bool HasActiveStayDelay => Time.time < _stayDelayEndTime;
     public float ActiveExtraStayTime => HasActiveStayDelay ? _activeExtraStayTime : 0f;
 
-    public bool ActivateStayDelay(RoomID targetRoom, float extraStayTime, float duration)
+    public bool ActivateStayDelay(GimmickType gimmickType, RoomID targetRoom, float extraStayTime, float duration)
     {
         if (_coachController == null)
             return false;
@@ -137,18 +140,20 @@ public class GimmickManager : Singleton<GimmickManager>
         if (_stayDelayRoutine != null)
             StopCoroutine(_stayDelayRoutine);
 
-        _stayDelayRoutine = StartCoroutine(Co_StayDelay(extraStayTime, duration));
-        OnStayDelayActivated?.Invoke();
+        _stayDelayRoutine = StartCoroutine(CoStayDelay(gimmickType, extraStayTime, duration));
+        OnStayDelayActivated?.Invoke(gimmickType);
         return true;
     }
 
-    private IEnumerator Co_StayDelay(float extraStayTime, float duration)
+    private IEnumerator CoStayDelay(GimmickType gimmickType, float extraStayTime, float duration)
     {
+        _activeStayDelayType = gimmickType;
         _activeExtraStayTime = extraStayTime;
         _stayDelayEndTime = Time.time + duration;
 
         yield return new WaitForSeconds(duration);
 
+        _activeStayDelayType = GimmickType.None;
         _activeExtraStayTime = 0f;
         _stayDelayEndTime = 0f;
         _stayDelayRoutine = null;
