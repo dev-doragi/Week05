@@ -27,6 +27,7 @@ public class CoachMovementController : MonoBehaviour
     private MapGraph _mapGraph;
     private GimmickManager _gimmickManager;
 
+    public CoachBrain CoachBrain => _coachBrain;
     public RoomID CurrentRoomId => _currentRoomId;
     public RoomID NextRoomId => _nextRoomId;
     public MapGraph MapGraph => _mapGraph;
